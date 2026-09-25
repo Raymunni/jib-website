@@ -1,0 +1,85 @@
+---
+import Base from '../../layouts/Base.astro';
+import AppCta from '../../components/AppCta.astro';
+import { SITE } from '../../config';
+
+const tools = [
+  {
+    href: '/tools/diy-legality-checker/',
+    title: 'DIY or tradie? Legality checker',
+    body: 'Pick your state and the job to see whether you can legally do it yourself or need a licensed electrician, plumber or gasfitter, with the regulator that says so.',
+  },
+  {
+    href: '/tools/bathroom-floor-calculator/',
+    title: 'Bathroom floor calculator',
+    body: 'Tiles, adhesive, grout, waterproofing membrane, primer and silicone for your exact room, with wastage included.',
+  },
+  {
+    href: '/guides/home-maintenance/',
+    title: 'Home maintenance planner',
+    body: 'Tick what your home has and get a printable schedule of what to check, clean and service, and how often.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Free DIY tools',
+    itemListElement: tools.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}${t.href}`, name: t.title })),
+  },
+];
+---
+
+<Base title="Free DIY tools and calculators for Australian homes" description="Free tools for DIYers: check if a job is legal to DIY in your state, calculate bathroom tiling materials, and build a home maintenance schedule." jsonLd={jsonLd}>
+  <div class="wrap page">
+    <p class="eyebrow">Free tools</p>
+    <h1>Free DIY tools</h1>
+    <p class="lede muted">Quick answers before you start a job. No sign-up, nothing to install.</p>
+    <div class="grid grid-3 list">
+      {
+        tools.map((t) => (
+          <a class="card tool" href={t.href}>
+            <strong>{t.title}</strong>
+            <span class="muted">{t.body}</span>
+            <span class="more">Open →</span>
+          </a>
+        ))
+      }
+    </div>
+    <AppCta text="Want all of this for any job? Photograph it in Jib: steps, materials, tools, cost and a DIY-or-tradie verdict in seconds." campaign="tools" />
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding-top: 40px;
+  }
+  .lede {
+    font-size: 1.1rem;
+    max-width: 60ch;
+  }
+  .list {
+    margin: 28px 0 8px;
+  }
+  .tool {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .tool:hover {
+    border-color: var(--accent-2);
+    color: var(--text);
+  }
+  .tool strong {
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+  .more {
+    margin-top: auto;
+    color: var(--accent-2);
+    font-weight: 700;
+  }
+</style>

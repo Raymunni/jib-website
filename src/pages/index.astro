@@ -18,10 +18,11 @@ const wideWebp = await getImage({ src: heroWide, format: 'webp', width: 1376, qu
 const tallAvif = await getImage({ src: heroTall, format: 'avif', width: 768, quality: 60 });
 const tallWebp = await getImage({ src: heroTall, format: 'webp', width: 768, quality: 72 });
 
-const guides = (await getCollection('guides'))
-  .filter((g) => !g.data.pillar)
-  .sort((a, b) => b.data.published.getTime() - a.data.published.getTime())
-  .slice(0, 6);
+const allGuides = await getCollection('guides');
+// Newest guides with a hero image lead the home page as cards; the rest as links.
+const byNewest = allGuides.filter((g) => !g.data.pillar).sort((a, b) => b.data.published.getTime() - a.data.published.getTime() || a.data.order - b.data.order);
+const featured = byNewest.filter((g) => g.data.image).slice(0, 6);
+const guides = byNewest.filter((g) => !featured.includes(g)).slice(0, 8);
 
 const features = [
   {
@@ -193,6 +194,18 @@ const jsonLd = [
         ))
       }
     </div>
+    {
+      featured.length > 0 && (
+        <div class="grid grid-3 featured">
+          {featured.map((g) => (
+            <a class="card fcard" href={guideUrl(g)}>
+              <img src={g.data.image} alt="" width="1376" height="768" loading="lazy" decoding="async" />
+              <strong>{g.data.title}</strong>
+            </a>
+          ))}
+        </div>
+      )
+    }
     {
       guides.length > 0 && (
         <ul class="latest">
@@ -419,6 +432,32 @@ const jsonLd = [
   .more {
     color: var(--accent-2);
     font-weight: 700;
+  }
+  .featured {
+    margin-top: 24px;
+  }
+  .fcard {
+    padding: 0 0 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .fcard:hover {
+    border-color: var(--accent-2);
+    color: var(--ink);
+  }
+  .fcard img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .fcard strong {
+    padding: 0 16px;
+    line-height: 1.35;
   }
   .latest {
     margin-top: 24px;

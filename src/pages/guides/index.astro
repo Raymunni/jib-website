@@ -13,7 +13,7 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
 }));
 ---
 
-<Base title="DIY guides: what you can legally do, approvals and materials lists" description="Plain-English guides for DIYers: what electrical, plumbing and gas work you can legally do yourself, when you need council approval, and exactly what to buy.">
+<Base title="DIY guides for Australian homes: how-tos, rules, materials and maintenance" description="Plain-English DIY guides for Australian homes: step-by-step repairs, what you can legally do yourself, council approval, materials lists and home maintenance.">
   <div class="wrap page">
     <p class="eyebrow">Guides</p>
     <h1>Straight answers for real jobs</h1>
@@ -29,6 +29,7 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
           <div class="grid grid-2">
             {h.pillar && (
               <a class="card item pillar" href={guideUrl(h.pillar)}>
+                {h.pillar.data.image && <img class="thumb" src={h.pillar.data.image} alt="" width="1376" height="768" loading="lazy" decoding="async" />}
                 <span class="tag">Start here</span>
                 <strong>{h.pillar.data.title}</strong>
                 <span class="muted">{h.pillar.data.description}</span>
@@ -36,6 +37,7 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
             )}
             {h.items.map((g) => (
               <a class="card item" href={guideUrl(g)}>
+                {g.data.image && <img class="thumb" src={g.data.image} alt="" width="1376" height="768" loading="lazy" decoding="async" />}
                 {g.data.market !== 'AU' && <span class="tag">{g.data.market}</span>}
                 <strong>{g.data.title}</strong>
                 <span class="muted">{g.data.description}</span>
@@ -85,6 +87,15 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
   }
   .item span.muted {
     font-size: 0.92rem;
+  }
+  .thumb {
+    width: calc(100% + 44px);
+    max-width: none;
+    margin: -22px -22px 8px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius) var(--radius) 0 0;
   }
   .pillar {
     background: linear-gradient(135deg, rgba(39, 112, 218, 0.22), var(--surface));

@@ -5,7 +5,7 @@ import { SITE, STORES, anyStoreLive, iosUrl, androidUrl } from '../config';
 import { qrSvg } from '../lib/qr';
 
 const qr = await qrSvg(`${SITE.url}/app/`);
-const campaigns = ['home', 'diy-legal', 'council-approval', 'materials', 'features', 'home-maintenance', 'tools', 'general'] as const;
+const campaigns = ['home', 'diy-legal', 'council-approval', 'materials', 'features', 'home-maintenance', 'how-to', 'tools', 'general'] as const;
 const routes = {
   ios: STORES.ios.live ? Object.fromEntries(campaigns.map((c) => [c, iosUrl(c)])) : null,
   android: STORES.android.live ? Object.fromEntries(campaigns.map((c) => [c, androidUrl(c)])) : null,
