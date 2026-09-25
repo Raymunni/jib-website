@@ -15,6 +15,7 @@ import {
   type User,
 } from 'firebase/auth';
 import { getFirestore, doc, onSnapshot, runTransaction, type Unsubscribe } from 'firebase/firestore';
+import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
 import { demoData } from './demo';
 
 // ---------- Types (mirror lib/models.dart) ----------
@@ -58,6 +59,83 @@ const firebaseApp = initializeApp({
 });
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
+const storage = getStorage(firebaseApp);
+
+// ---------- Photos ----------
+// The download URLs saved in the cloud doc can carry stale access tokens:
+// re-uploading a photo to the same path from the phone mints a new token
+// and the old URL starts returning 403 (the phone never notices, since it
+// caches photos on the device). So the web never trusts the saved token —
+// it takes the storage path from the URL and asks Storage for a fresh
+// signed URL as the signed-in user. Grids use the small WebP thumbnail the
+// app uploads alongside each photo (users/<uid>/thumbs/<name>.webp),
+// falling back to the full photo for older uploads that have none.
+const resolved = new Map<string, string | null>();
+const pending = new Map<string, Promise<string | null>>();
+
+function storagePath(url: string): string | null {
+  const m = url.match(/firebasestorage\.googleapis\.com\/v0\/b\/[^/]+\/o\/([^?]+)/);
+  return m ? decodeURIComponent(m[1]) : null;
+}
+const thumbPathFor = (path: string) => path.replace('/photos/', '/thumbs/').replace(/\.[^./]+$/, '.webp');
+
+function resolvePath(path: string): Promise<string | null> {
+  if (resolved.has(path)) return Promise.resolve(resolved.get(path)!);
+  let p = pending.get(path);
+  if (!p) {
+    p = getDownloadURL(storageRef(storage, path))
+      .catch(() => null)
+      .then((u) => {
+        resolved.set(path, u);
+        pending.delete(path);
+        return u;
+      });
+    pending.set(path, p);
+  }
+  return p;
+}
+
+/** Best URL we already know for a photo, without waiting (null if none yet). */
+function knownUrl(url: string, thumb: boolean): string | null | undefined {
+  const path = storagePath(url);
+  if (!path || DEMO) return url;
+  if (thumb) {
+    const t = resolved.get(thumbPathFor(path));
+    if (t) return t;
+    if (t === null) return resolved.get(path);
+    return undefined;
+  }
+  return resolved.get(path);
+}
+
+async function resolvePhoto(url: string, thumb: boolean): Promise<string | null> {
+  const path = storagePath(url);
+  if (!path || DEMO) return url;
+  if (thumb) {
+    const t = await resolvePath(thumbPathFor(path));
+    if (t) return t;
+  }
+  return resolvePath(path);
+}
+
+/** An <img> for a stored photo; its src is filled in by hydratePhotos() after render. */
+function photo(url: string, opts: { thumb?: boolean; cls?: string; alt?: string; attrs?: string } = {}) {
+  const known = knownUrl(url, !!opts.thumb);
+  return `<img ${opts.cls ? `class="${opts.cls}"` : ''} alt="${esc(opts.alt ?? '')}" data-photo="${esc(url)}" ${opts.thumb ? 'data-thumb="1"' : ''} ${
+    known ? `src="${esc(known)}"` : ''
+  } ${opts.attrs ?? ''} />`;
+}
+
+function hydratePhotos() {
+  $app.querySelectorAll<HTMLImageElement>('img[data-photo]').forEach(async (img) => {
+    if (img.getAttribute('src')) return;
+    img.classList.add('loading-photo');
+    const u = await resolvePhoto(img.dataset.photo!, img.dataset.thumb === '1');
+    img.classList.remove('loading-photo');
+    if (u) img.src = u;
+    else img.classList.add('missing-photo');
+  });
+}
 
 // localStorage can throw (private mode, blocked storage) — never let that break the app.
 const store = {
@@ -320,7 +398,7 @@ function render() {
     else state.jobId = null;
   }
   if (state.newJob) html += viewNewJob(h);
-  if (state.lightbox) html += `<div class="w-lightbox" data-act="close-lightbox"><img src="${esc(state.lightbox)}" alt="Photo" /></div>`;
+  if (state.lightbox) html += `<div class="w-lightbox" data-act="close-lightbox">${photo(state.lightbox, { alt: 'Photo' })}</div>`;
 
   // Preserve focus and scroll across re-renders (snapshots arrive while typing).
   const active = document.activeElement as HTMLInputElement | null;
@@ -329,6 +407,7 @@ function render() {
   const sel = focusKey ? [active!.selectionStart, active!.selectionEnd] : null;
   const drawerScroll = document.querySelector('.w-drawer')?.scrollTop ?? 0;
   $app.innerHTML = html;
+  hydratePhotos();
   const drawer = document.querySelector('.w-drawer');
   if (drawer) drawer.scrollTop = drawerScroll;
   if (focusKey) {
@@ -409,7 +488,7 @@ function jobCard(h: House, j: Job) {
   const dueTxt = due == null ? '' : due < 0 ? `<span class="pill bad">Overdue ${-due}d</span>` : due <= 7 ? `<span class="pill warn">Due in ${due}d</span>` : '';
   return `
     <button class="job-card ${j.status === 'done' ? 'done' : ''}" data-act="open-job" data-id="${esc(j.id)}">
-      ${thumb ? `<img class="jc-thumb" src="${esc(thumb)}" alt="" loading="lazy" />` : `<span class="jc-thumb" aria-hidden="true">🔧</span>`}
+      ${thumb ? photo(thumb, { thumb: true, cls: 'jc-thumb' }) : `<span class="jc-thumb" aria-hidden="true">🔧</span>`}
       <span class="jc-body">
         <span class="jc-title">${j.priority ? '★ ' : ''}${esc(j.title)}</span>
         <span class="jc-meta">
@@ -452,7 +531,13 @@ function viewJobs(h: House) {
       <span class="w-spacer"></span>
       <button class="w-btn primary" data-act="new-job">+ New job</button>
     </div>
-    <p class="w-note">${open} open job${open === 1 ? '' : 's'} at ${esc(h.name)}${h.suburb ? ` · ${esc(h.suburb.name)}` : ''}</p>
+    <div class="w-home">
+      ${isUrl(h.photoPath as string) ? photo(h.photoPath as string, { cls: 'w-home-img', alt: h.name, attrs: `data-act="lightbox" data-src="${esc(h.photoPath as string)}"` }) : ''}
+      <div>
+        <strong>${esc(h.name)}</strong>
+        <span class="w-note">${h.suburb ? `${esc(h.suburb.name)}, ${esc(h.suburb.state)} · ` : ''}${open} open job${open === 1 ? '' : 's'} · ${h.rooms.length} room${h.rooms.length === 1 ? '' : 's'}</span>
+      </div>
+    </div>
     ${
       jobs.length === 0
         ? `<div class="w-empty">${f === 'done' ? 'No finished jobs yet.' : 'Nothing here. Add a job, or snap one in the app.'}</div>`
@@ -483,12 +568,12 @@ function viewJob(h: House, j: Job) {
           <button class="icon-btn" data-act="close-job" aria-label="Close">✕</button>
           <span class="w-note">${esc(roomName(h, j.roomId))}</span>
         </div>
-        ${photos.length ? `<img class="w-hero" src="${esc(photos[0])}" alt="Job photo" data-act="lightbox" data-src="${esc(photos[0])}" />` : ''}
+        ${photos.length ? photo(photos[0], { cls: 'w-hero', alt: 'Job photo', attrs: `data-act="lightbox" data-src="${esc(photos[0])}"` }) : ''}
         ${
           photos.length > 1
             ? `<div class="w-photos">${photos
                 .slice(1)
-                .map((p) => `<img src="${esc(p)}" alt="Job photo" loading="lazy" data-act="lightbox" data-src="${esc(p)}" />`)
+                .map((p) => photo(p, { thumb: true, alt: 'Job photo', attrs: `data-act="lightbox" data-src="${esc(p)}"` }))
                 .join('')}</div>`
             : ''
         }
@@ -723,7 +808,7 @@ function viewGallery(h: House) {
               ([room, ps]) => `<section class="w-group"><h2>${esc(room)}</h2><div class="w-gallery">${ps
                 .map(
                   (p) =>
-                    `<button data-act="lightbox" data-src="${esc(p.photoPath)}"><img src="${esc(p.photoPath)}" alt="${esc(p.note || room)}" loading="lazy" />${p.note ? `<span class="cap">${esc(p.note)}</span>` : ''}</button>`,
+                    `<button data-act="lightbox" data-src="${esc(p.photoPath)}">${photo(p.photoPath, { thumb: true, alt: p.note || room })}${p.note ? `<span class="cap">${esc(p.note)}</span>` : ''}</button>`,
                 )
                 .join('')}</div></section>`,
             )

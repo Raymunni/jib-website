@@ -378,6 +378,48 @@ import Logo from '../../components/Logo.astro';
     border-radius: var(--radius);
   }
 
+  .w-home {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px;
+  }
+  .w-home > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .w-home strong {
+    color: var(--ink);
+    font-size: 1.1rem;
+  }
+  .w-home-img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex: none;
+    cursor: zoom-in;
+    background: var(--surface-2);
+  }
+  img[data-photo]:not([src]) {
+    background: linear-gradient(100deg, var(--surface-2) 30%, #24405f 50%, var(--surface-2) 70%) 0 0 / 300% 100%;
+    animation: shimmer 1.2s linear infinite;
+  }
+  img.missing-photo {
+    animation: none;
+    background: var(--surface-2);
+  }
+  @keyframes shimmer {
+    to {
+      background-position: -150% 0;
+    }
+  }
+
   /* Drawer */
   .w-scrim {
     position: fixed;
