@@ -34,7 +34,7 @@ export const STORES = {
 // Campaigns are grouped by content cluster rather than per page: Apple only
 // reports a campaign once it reaches 5 installs, so per-page campaigns would
 // mostly never show up.
-export type Campaign = 'home' | 'diy-legal' | 'council-approval' | 'materials' | 'features' | 'tools' | 'general';
+export type Campaign = 'home' | 'diy-legal' | 'council-approval' | 'materials' | 'features' | 'home-maintenance' | 'tools' | 'general';
 
 export function iosUrl(campaign: Campaign = 'general'): string {
   const base = `https://apps.apple.com/app/apple-store/id${STORES.ios.appId}`;
@@ -62,6 +62,10 @@ export const HUBS = {
   materials: {
     title: 'What do I need to buy?',
     blurb: 'Exact materials lists and quantities for common DIY jobs, in Australian sizes.',
+  },
+  'home-maintenance': {
+    title: 'Home maintenance, made simple',
+    blurb: 'What to check, clean and service around your home — and how often — so small jobs never become big bills.',
   },
   features: {
     title: 'Jib features, explained',

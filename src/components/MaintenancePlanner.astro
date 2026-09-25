@@ -1,0 +1,313 @@
+---
+// Interactive home maintenance schedule. Every task is rendered server-side
+// (so the whole checklist is indexable and works without JS); the script
+// only filters by the home features the reader ticks and remembers ticks.
+type Tag = 'all' | 'pool' | 'gas' | 'aircon' | 'tank' | 'solar' | 'deck' | 'bushfire' | 'trees' | 'storage-hws';
+interface Task {
+  id: string;
+  name: string;
+  detail: string;
+  who: 'diy' | 'pro' | 'check';
+  tags: Tag[];
+  source?: string;
+}
+
+const features: { tag: Tag; label: string }[] = [
+  { tag: 'storage-hws', label: 'Hot water tank (gas, electric or solar)' },
+  { tag: 'gas', label: 'Gas heater or gas appliances' },
+  { tag: 'aircon', label: 'Air-conditioning' },
+  { tag: 'pool', label: 'Pool or spa' },
+  { tag: 'tank', label: 'Rainwater tank' },
+  { tag: 'solar', label: 'Solar panels' },
+  { tag: 'deck', label: 'Timber deck' },
+  { tag: 'trees', label: 'Big trees near the roof' },
+  { tag: 'bushfire', label: 'Bushfire-prone area' },
+];
+
+const FRNSW = 'https://www.fire.nsw.gov.au/page.php?id=444';
+const RCD = 'https://www.commerce.wa.gov.au/building-and-energy/testing-rcds';
+const RFS = 'https://www.rfs.nsw.gov.au/plan-and-prepare/prepare-your-property';
+const ESV = 'https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/heating-your-home-gas';
+const TANK = 'https://www.health.nsw.gov.au/environment/water/Pages/rainwater.aspx';
+
+const groups: { title: string; tasks: Task[] }[] = [
+  {
+    title: 'Every month',
+    tasks: [
+      { id: 'smoke-test', name: 'Test every smoke alarm', detail: 'Press and hold the test button until it sounds.', who: 'diy', tags: ['all'], source: FRNSW },
+      { id: 'pool-gate', name: 'Check the pool gate self-closes and latches', detail: 'From any open position, every time. Clear anything climbable away from the fence.', who: 'diy', tags: ['pool'] },
+      { id: 'solar-inverter', name: 'Glance at the solar inverter', detail: 'Look for fault lights or error codes, and compare generation with the same month last year.', who: 'diy', tags: ['solar'] },
+      { id: 'rangehood', name: 'Clean the rangehood filters', detail: 'Soak metal mesh filters in hot soapy water; replace charcoal filters as the manual says.', who: 'diy', tags: ['all'] },
+    ],
+  },
+  {
+    title: 'Every 3 months',
+    tasks: [
+      { id: 'rcd', name: 'Test your safety switches (RCDs)', detail: 'Press the "T" button on each one in the switchboard; it should trip. If one doesn’t, call a licensed electrician.', who: 'diy', tags: ['all'], source: RCD },
+      { id: 'aircon-filters', name: 'Clean air-con filters', detail: 'More often in peak summer or winter use. Check your manual.', who: 'diy', tags: ['aircon'] },
+      { id: 'gutters-trees', name: 'Clear gutters and downpipes', detail: 'Homes near big trees fill fast. Blocked gutters overflow into eaves and walls.', who: 'diy', tags: ['trees'] },
+    ],
+  },
+  {
+    title: 'Every 6 months',
+    tasks: [
+      { id: 'smoke-vacuum', name: 'Vacuum smoke alarms', detail: 'Dust and insects stop them working. Use the brush attachment around the vents.', who: 'diy', tags: ['all'], source: FRNSW },
+      { id: 'tpr', name: 'Ease the hot water relief valve', detail: 'Gently lift and lower the lever on the valve at the top of the tank so water flows, then stops. If it drips constantly or won’t flow, call a plumber.', who: 'diy', tags: ['storage-hws'] },
+      { id: 'gutters', name: 'Clear gutters and downpipes', detail: 'Late autumn after leaf fall, and early spring before storm and bushfire season.', who: 'diy', tags: ['all'], source: RFS },
+      { id: 'wet-areas', name: 'Check silicone and grout in wet areas', detail: 'Cracked or mouldy silicone lets water behind tiles. Re-silicone early; it’s cheap.', who: 'diy', tags: ['all'] },
+      { id: 'tank-screens', name: 'Clean rainwater tank screens and first-flush device', detail: 'Keep leaves and debris out of the tank.', who: 'diy', tags: ['tank'], source: TANK },
+    ],
+  },
+  {
+    title: 'Every year',
+    tasks: [
+      { id: 'termite', name: 'Termite inspection', detail: 'By a licensed timber pest inspector. The Australian Standard (AS 3660.2) recommends at least yearly, and every 3–6 months in high-risk areas.', who: 'pro', tags: ['all'] },
+      { id: 'smoke-battery', name: 'Replace smoke alarm batteries', detail: 'Only if they have replaceable batteries. Many people do it when daylight saving starts or ends.', who: 'diy', tags: ['all'], source: FRNSW },
+      { id: 'roof', name: 'Check the roof from the ground', detail: 'Use binoculars for cracked or slipped tiles, rusted sheets and lifted flashing. Leave roof work to a pro.', who: 'check', tags: ['all'] },
+      { id: 'aircon-service', name: 'Air-con service', detail: 'Before summer: coil clean, drain check and gas check by a licensed technician.', who: 'pro', tags: ['aircon'] },
+      { id: 'deck-oil', name: 'Clean and oil the deck', detail: 'Oil when water stops beading on the boards. Check for loose screws and soft boards.', who: 'diy', tags: ['deck'] },
+      { id: 'bushfire-prep', name: 'Bushfire season prep', detail: 'Early spring: clear gutters, trim branches over the roof, remove leaf litter and flammable items near the house.', who: 'diy', tags: ['bushfire'], source: RFS },
+      { id: 'pool-fence', name: 'Full pool fence check', detail: 'Gaps, height, climbable objects and gate hardware against your state’s pool safety rules.', who: 'check', tags: ['pool'] },
+    ],
+  },
+  {
+    title: 'Every 2–3 years',
+    tasks: [
+      { id: 'gas-service', name: 'Gas heater service', detail: 'At least every 2 years by a licensed gasfitter, including a carbon monoxide spillage test.', who: 'pro', tags: ['gas'], source: ESV },
+      { id: 'tank-sludge', name: 'Check the rainwater tank for sludge', detail: 'Remove built-up sludge from the bottom of the tank. Tank cleaning is confined-space work; use a professional tank cleaner.', who: 'pro', tags: ['tank'], source: TANK },
+    ],
+  },
+  {
+    title: 'Every 5–10 years',
+    tasks: [
+      { id: 'tpr-replace', name: 'Replace the hot water relief valve', detail: 'Around every 5 years for many systems. Check your manual. Licensed plumber.', who: 'pro', tags: ['storage-hws'] },
+      { id: 'smoke-replace', name: 'Replace smoke alarms', detail: 'Every smoke alarm, at least every 10 years (check the date on the back).', who: 'check', tags: ['all'], source: FRNSW },
+    ],
+  },
+];
+
+const whoLabel = { diy: 'DIY', pro: 'Book a pro', check: 'DIY check' } as const;
+---
+
+<section class="planner card" id="planner" aria-labelledby="planner-title">
+  <h2 id="planner-title">Build your home’s maintenance schedule</h2>
+  <p class="muted">Tick what your home has. The list below updates to just the jobs that apply to you. Tick jobs off as you go; your ticks are saved in this browser.</p>
+  <fieldset class="features">
+    <legend class="sr-only">Your home has</legend>
+    {
+      features.map((f) => (
+        <label>
+          <input type="checkbox" value={f.tag} data-feature checked />
+          <span>{f.label}</span>
+        </label>
+      ))
+    }
+  </fieldset>
+  <div class="actions">
+    <span class="count" id="planner-count"></span>
+    <button type="button" class="btn btn-ghost small" id="planner-print">Print checklist</button>
+  </div>
+  {
+    groups.map((g) => (
+      <div class="group" data-group>
+        <h3>{g.title}</h3>
+        <ul>
+          {g.tasks.map((t) => (
+            <li data-tags={t.tags.join(' ')}>
+              <label class="task">
+                <input type="checkbox" data-task={t.id} />
+                <span class="body">
+                  <strong>{t.name}</strong>
+                  <span class="detail">
+                    {t.detail}
+                    {t.source && (
+                      <>
+                        {' '}
+                        <a href={t.source} rel="noopener">
+                          Source
+                        </a>
+                      </>
+                    )}
+                  </span>
+                </span>
+                <span class={`who ${t.who}`}>{whoLabel[t.who]}</span>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</section>
+
+<script>
+  const root = document.getElementById('planner');
+  if (root) {
+    const KEY = 'jib-maintenance-v1';
+    let saved: { features?: string[]; done?: string[] } = {};
+    try {
+      saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    } catch {}
+    const featureBoxes = [...root.querySelectorAll<HTMLInputElement>('[data-feature]')];
+    const taskBoxes = [...root.querySelectorAll<HTMLInputElement>('[data-task]')];
+    if (saved.features) featureBoxes.forEach((b) => (b.checked = saved.features!.includes(b.value)));
+    if (saved.done) taskBoxes.forEach((b) => (b.checked = saved.done!.includes(b.dataset.task!)));
+
+    const save = () => {
+      try {
+        localStorage.setItem(
+          KEY,
+          JSON.stringify({
+            features: featureBoxes.filter((b) => b.checked).map((b) => b.value),
+            done: taskBoxes.filter((b) => b.checked).map((b) => b.dataset.task),
+          }),
+        );
+      } catch {}
+    };
+
+    const apply = () => {
+      const on = new Set(['all', ...featureBoxes.filter((b) => b.checked).map((b) => b.value)]);
+      let shown = 0;
+      root.querySelectorAll<HTMLElement>('[data-tags]').forEach((li) => {
+        const show = li.dataset.tags!.split(' ').some((t) => on.has(t));
+        li.hidden = !show;
+        if (show) shown++;
+      });
+      root.querySelectorAll<HTMLElement>('[data-group]').forEach((g) => {
+        g.hidden = !g.querySelector('li:not([hidden])');
+      });
+      const done = taskBoxes.filter((b) => b.checked && !b.closest('li')!.hidden).length;
+      document.getElementById('planner-count')!.textContent = `${shown} jobs for your home · ${done} ticked off`;
+    };
+
+    root.addEventListener('change', () => {
+      apply();
+      save();
+    });
+    document.getElementById('planner-print')!.addEventListener('click', () => window.print());
+    apply();
+  }
+</script>
+
+<style>
+  .planner {
+    margin: 2em 0;
+  }
+  .planner h2 {
+    margin-top: 0;
+  }
+  .features {
+    border: 0;
+    padding: 0;
+    margin: 0 0 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .features label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .features input {
+    accent-color: var(--accent);
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .count {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .small {
+    padding: 6px 14px;
+    font-size: 0.88rem;
+  }
+  .group[hidden],
+  li[hidden] {
+    display: none;
+  }
+  .group h3 {
+    margin: 1.4em 0 0.5em;
+    font-size: 1.05rem;
+  }
+  .group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .task {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 12px;
+    cursor: pointer;
+  }
+  .task input {
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    flex: none;
+    accent-color: var(--ok);
+  }
+  .task input:checked + .body strong {
+    text-decoration: line-through;
+    color: var(--dim);
+  }
+  .body {
+    flex: 1;
+    min-width: 0;
+  }
+  .body strong {
+    display: block;
+    color: var(--ink);
+  }
+  .detail {
+    font-size: 0.9rem;
+    color: var(--dim);
+  }
+  .who {
+    flex: none;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 999px;
+    padding: 2px 9px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .who.diy {
+    color: #7ee2a2;
+    border-color: rgba(63, 185, 107, 0.5);
+  }
+  .who.pro {
+    color: #ffb4ae;
+    border-color: rgba(255, 90, 82, 0.5);
+  }
+  .who.check {
+    color: #ffd27a;
+    border-color: rgba(242, 179, 61, 0.5);
+  }
+  @media print {
+    .features,
+    .actions button {
+      display: none;
+    }
+    .task {
+      break-inside: avoid;
+    }
+  }
+</style>

@@ -8,7 +8,7 @@ const guides = defineCollection({
     title: z.string(),
     // Shown in search results; keep under ~155 characters.
     description: z.string().max(170),
-    hub: z.enum(['diy-legal', 'council-approval', 'materials', 'features']),
+    hub: z.enum(['diy-legal', 'council-approval', 'materials', 'features', 'home-maintenance']),
     pillar: z.boolean().default(false),
     market: z.enum(['AU', 'UK', 'NZ', 'US', 'global']).default('AU'),
     published: z.coerce.date(),
