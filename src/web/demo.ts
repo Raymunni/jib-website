@@ -28,10 +28,10 @@ export function demoData(): UserDoc {
         name: 'Paddington Queenslander',
         suburb: { name: 'Paddington', state: 'QLD', postcode: '4064' },
         rooms: [
-          { id: 'r1', name: 'Kitchen' },
-          { id: 'r2', name: 'Bathroom' },
+          { id: 'r1', name: 'Kitchen', photoPath: `${IMG}/kitchen-appliances.jpg` },
+          { id: 'r2', name: 'Bathroom', photoPath: `${IMG}/bathroom-mould.jpg` },
           { id: 'r3', name: 'Garage' },
-          { id: 'r4', name: 'Backyard' },
+          { id: 'r4', name: 'Backyard', photoPath: `${IMG}/garden-bed.jpg` },
         ],
         inventory: ['Cordless drill', 'Spirit level', 'Claw hammer', 'Tape measure', 'Stud finder', 'Caulking gun', 'Step ladder', 'Utility knife'].map(
           (name, i) => ({ id: `i${i}`, name, createdAt: t - i * day }),
@@ -40,6 +40,8 @@ export function demoData(): UserDoc {
         galleryPhotos: [
           { id: 'g1', roomId: 'r3', photoPath: `${IMG}/toolbox-garage-scan.jpg`, note: 'Garage wall scan', createdAt: t - 2 * day },
           { id: 'g2', roomId: 'r1', photoPath: `${IMG}/diy-or-tradie-flag.jpg`, note: 'Power point before', createdAt: t - 5 * day },
+          { id: 'g3', roomId: 'r2', photoPath: `${IMG}/bathroom-reno.jpg`, pairedPhotoPath: `${IMG}/bathroom-mould.jpg`, note: 'Before & After', createdAt: t - 1 * day },
+          { id: 'g4', roomId: 'r4', photoPath: `${IMG}/garden-bed.jpg`, note: 'Veggie patch', createdAt: t - 30 * day },
         ],
         jobs: [
           {
@@ -120,6 +122,18 @@ export function demoData(): UserDoc {
             createdAt: t - 20 * day,
             updatedAt: t - 3 * day,
           },
+        ],
+      },
+      {
+        id: 'demo2',
+        name: 'Beach house',
+        suburb: { name: 'Noosa Heads', state: 'QLD', postcode: '4567' },
+        rooms: [{ id: 'b1', name: 'Whole house' }, { id: 'b2', name: 'Deck', photoPath: `${IMG}/deck-council.jpg` }],
+        inventory: [],
+        extraShopping: [],
+        galleryPhotos: [],
+        jobs: [
+          { ...base, id: 'bj1', roomId: 'b2', title: 'Oil the deck before summer', recurrence: 'yearly', lastDone: t - 340 * day, verdict: 'diy_safe', createdAt: t - 400 * day, updatedAt: t - 340 * day },
         ],
       },
     ],
