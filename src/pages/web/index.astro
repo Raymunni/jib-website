@@ -21,9 +21,21 @@ import Logo from '../../components/Logo.astro';
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
   <body class="webapp">
-    <header class="w-top">
-      <a class="w-brand" href="/web/" aria-label="Jib on the web"><Logo size={34} color="#ffffff" /><span>web</span></a>
-      <div id="w-top-slot" class="w-top-slot"></div>
+    <header class="w-header">
+      <div class="w-top">
+        <a class="w-brand" href="/" aria-label="Jib home"><Logo size={34} color="#ffffff" /></a>
+        <nav class="w-site" aria-label="Jib website">
+          <a href="/">Home</a>
+          <a href="/guides/">Guides</a>
+          <a href="/guides/features/">Features</a>
+          <a href="/tools/diy-legality-checker/">DIY checker</a>
+          <a href="/tools/bathroom-floor-calculator/">Calculator</a>
+          <a href="/about/">About</a>
+          <a href="/web/" aria-current="page">My Jib</a>
+        </nav>
+        <div id="w-top-slot" class="w-top-slot"></div>
+      </div>
+      <div id="w-tabs-bar" class="w-subbar" hidden></div>
     </header>
     <main id="app" class="w-main" aria-live="polite">
       <div class="w-loading"><span class="spinner" aria-hidden="true"></span> Loading…</div>
@@ -40,17 +52,52 @@ import Logo from '../../components/Logo.astro';
     min-height: 100vh;
     background: var(--bg);
   }
-  .w-top {
+  .w-header {
     position: sticky;
     top: 0;
     z-index: 20;
+    background: rgba(14, 24, 36, 0.94);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .w-top {
     display: flex;
     align-items: center;
     gap: 16px;
     padding: 10px 16px;
-    background: rgba(14, 24, 36, 0.92);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
+  }
+  .w-site {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    min-width: 0;
+  }
+  .w-site a {
+    color: var(--dim);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 6px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+  .w-site a:hover {
+    color: #fff;
+    background: var(--surface);
+  }
+  .w-site a[aria-current='page'] {
+    color: #fff;
+  }
+  .w-subbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 16px 8px;
+    border-top: 1px solid var(--border);
+  }
+  .w-subbar[hidden] {
+    display: none;
   }
   .w-brand {
     display: flex;
@@ -773,13 +820,17 @@ import Logo from '../../components/Logo.astro';
     overflow: hidden;
     clip: rect(0 0 0 0);
   }
-  @media (max-width: 640px) {
+  @media (max-width: 760px) {
     .w-top {
       flex-wrap: wrap;
+      gap: 8px 12px;
     }
-    .w-top-slot {
+    .w-site {
       order: 3;
       flex-basis: 100%;
+    }
+    .w-top-slot {
+      justify-content: flex-end;
     }
     .hide-sm {
       display: none !important;

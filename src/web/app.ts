@@ -172,6 +172,7 @@ let unsubDoc: Unsubscribe | null = null;
 // ---------- Helpers ----------
 const $app = document.getElementById('app')!;
 const $top = document.getElementById('w-top-slot')!;
+const $tabs = document.getElementById('w-tabs-bar')!;
 const $toast = document.getElementById('w-toast')!;
 
 const esc = (s: unknown) =>
@@ -423,9 +424,18 @@ function render() {
   }
 }
 
+// The top row (site links) is static in the page; this fills the right-hand
+// account area and the app's own tab row underneath.
 function renderTop() {
-  if (!state.user || !state.dataReady || !state.data) {
-    $top.innerHTML = state.user ? `<span class="w-spacer"></span><button class="w-btn small" data-act="signout">Sign out</button>` : '';
+  if (!state.user) {
+    $top.innerHTML = state.authReady ? `<span class="w-spacer"></span><a class="w-btn small primary" href="/app/" data-get-app>Get the app</a>` : '';
+    $tabs.hidden = true;
+    $tabs.innerHTML = '';
+    return;
+  }
+  $top.innerHTML = `<span class="w-spacer"></span><button class="w-btn small" data-act="signout">Sign out</button>`;
+  if (!state.dataReady || !state.data) {
+    $tabs.hidden = true;
     return;
   }
   const hs = state.data.houses;
@@ -437,15 +447,16 @@ function renderTop() {
     ['gallery', 'Gallery'],
     ['account', 'Account'],
   ];
-  $top.innerHTML = `
-    <nav class="w-tabs" aria-label="Sections">
+  $tabs.hidden = false;
+  $tabs.innerHTML = `
+    <nav class="w-tabs" aria-label="Your Jib">
       ${tabs.map(([v, l]) => `<button data-act="view" data-v="${v}" ${state.view === v ? 'aria-current="page"' : ''}>${l}</button>`).join('')}
     </nav>
     <span class="w-spacer"></span>
     ${
       hs.length > 1
         ? `<label class="sr-only" for="w-house">Home</label>
-           <select id="w-house" class="w-select hide-sm" data-change="house">
+           <select id="w-house" class="w-select" data-change="house">
              ${hs.map((x) => `<option value="${esc(x.id)}" ${x.id === h?.id ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}
            </select>`
         : `<span class="w-note hide-sm">${esc(h?.name ?? '')}</span>`
@@ -453,7 +464,6 @@ function renderTop() {
 }
 
 function renderSignIn() {
-  $top.innerHTML = '';
   $app.innerHTML = `
     <section class="w-auth">
       <h1>Sign in to Jib</h1>
