@@ -57,6 +57,81 @@ const features = [
   },
 ];
 
+const spots = [
+  {
+    href: '/guides/features/photo-to-job-plan/',
+    img: '/images/blog/photo-to-plan.jpg',
+    alt: 'A parent holding a toddler snaps a photo of a crooked cupboard door',
+    eyebrow: 'Photo → full job plan',
+    title: 'Toddler on your hip? Just snap it.',
+    body: 'See something that needs fixing, take a photo, get on with your day. Jib’s AI names the job, files it under the right room and writes the steps, materials, tools, time and cost.',
+    more: 'How snap-it-now works',
+  },
+  {
+    href: '/guides/features/quick-home-jobs-by-time/',
+    img: '/images/blog/quick-jobs.jpg',
+    alt: 'A dad tightening a cupboard hinge while a child plays nearby',
+    eyebrow: 'Pick a job that fits',
+    title: 'Got 30 minutes? There’s a job for that.',
+    body: 'Every job shows how long it takes. When a spare half hour turns up, scroll your list and pick something you can actually finish before the kids wake up.',
+    more: 'Quick jobs by time',
+  },
+  {
+    href: '/guides/features/home-to-do-list-no-time/',
+    img: '/images/blog/home-todo-list.jpg',
+    alt: 'A parent scrolling a list of home jobs on the couch with a sleeping child',
+    eyebrow: 'Your home to-do list',
+    title: 'A to-do list you never have to write.',
+    body: 'Every photo becomes a planned job, grouped by room, with one shopping list for the lot. The list builds itself while you live your life.',
+    more: 'The snap-it method',
+  },
+  {
+    href: '/guides/features/garage-tool-inventory/',
+    img: '/images/blog/toolbox-garage-scan.jpg',
+    alt: 'Holding a phone up to a garage pegboard while the app outlines each tool it recognises',
+    eyebrow: 'AI Toolbox',
+    title: 'One photo of your shed. Every tool, remembered.',
+    body: 'Scan your garage, shed or a hardware receipt and Jib lists every tool it sees. Every job after that knows what you own, and asks before adding the tools you’re missing to your shopping list.',
+    more: 'How the AI Toolbox works',
+  },
+  {
+    href: '/guides/features/diy-or-tradie-verdict/',
+    img: '/images/blog/diy-or-tradie-flag.jpg',
+    alt: 'A phone with a red corner flag held up in front of an opened power point',
+    eyebrow: 'DIY safe · Tradie required',
+    title: 'A legal verdict in the corner of every job.',
+    body: 'Green means it’s yours to do. Red means a step legally needs a licensed electrician, plumber or gasfitter where you live, and Jib tells you exactly which one.',
+    more: 'How the verdict works',
+  },
+  {
+    href: '/guides/home-maintenance/',
+    img: '/images/blog/home-maintenance-checklist.jpg',
+    alt: 'A phone showing a maintenance checklist in front of an Australian home in spring',
+    eyebrow: 'Reminders',
+    title: 'The jobs that come back, on autopilot.',
+    body: 'Smoke alarms monthly, gutters every autumn and spring, termites yearly. Set a job to repeat and Jib reminds you when it’s due. Build your schedule with our free planner.',
+    more: 'Home maintenance planner',
+  },
+  {
+    href: '/guides/how-to/renovations-before-selling/',
+    img: '/images/blog/before-after-sale.jpg',
+    alt: 'A phone showing before and after photos of a renovated living room',
+    eyebrow: 'Before & after',
+    title: 'Every room’s glow-up, on record.',
+    body: 'Before and after photos land in a gallery and a timeline for each room, the record of what you’ve done, and gold when it’s time to sell.',
+    more: 'Getting ready to sell',
+  },
+  {
+    href: '/web/?demo',
+    img: '/images/blog/web-app.jpg',
+    alt: 'A laptop showing Jib on the web next to a phone on a kitchen bench',
+    eyebrow: 'Jib on the web',
+    title: 'Your jobs, on the big screen too.',
+    body: 'Sign in on your computer to manage jobs, tools, the shopping list and your Toolbox, with the same account as the app. Try the demo, no sign-up needed.',
+    more: 'Try the web demo',
+  },
+];
+
 const faqs = [
   {
     q: 'Is Jib free?',
@@ -133,25 +208,25 @@ const jsonLd = [
     <div class="card strip-item"><strong>Before &amp; after</strong><span class="muted">A timeline of your home</span></div>
   </section>
 
-  <section class="wrap spotlight" aria-label="New in Jib">
-    <a class="card spot" href="/guides/features/garage-tool-inventory/">
-      <img src="/images/blog/toolbox-garage-scan.jpg" alt="Holding a phone up to a garage pegboard while the app outlines each tool it recognises" width="1376" height="768" loading="lazy" decoding="async" />
-      <div class="spot-copy">
-        <p class="eyebrow">AI Toolbox</p>
-        <h2>One photo of your shed. Every tool, remembered.</h2>
-        <p>Scan your garage, shed or a hardware receipt and Jib lists every tool it sees. Every job after that knows what you own — and asks before adding the tools you’re missing to your shopping list.</p>
-        <span class="more">How the AI Toolbox works →</span>
-      </div>
-    </a>
-    <a class="card spot" href="/guides/features/diy-or-tradie-verdict/">
-      <img src="/images/blog/diy-or-tradie-flag.jpg" alt="A phone with a red corner flag held up in front of an opened power point" width="1376" height="768" loading="lazy" decoding="async" />
-      <div class="spot-copy">
-        <p class="eyebrow">DIY safe · Tradie required</p>
-        <h2>A legal verdict in the corner of every job.</h2>
-        <p>Green means it’s yours to do. Red means a step legally needs a licensed electrician, plumber or gasfitter where you live — and Jib tells you exactly which one.</p>
-        <span class="more">How the verdict works →</span>
-      </div>
-    </a>
+  <section class="wrap spotlight-head">
+    <p class="eyebrow">Built for people with no time</p>
+    <h2 class="section-title">Snap it now. Plan it later. Do it when you’ve got a spare hour.</h2>
+    <p class="muted">Jib was made by a parent who kept seeing jobs around the house and never had time to write them down. Here’s how it fits into a busy life.</p>
+  </section>
+  <section class="wrap spotlight" aria-label="How Jib works">
+    {
+      spots.map((sp) => (
+        <a class="card spot" href={sp.href}>
+          <img src={sp.img} alt={sp.alt} width="1376" height="768" loading="lazy" decoding="async" />
+          <div class="spot-copy">
+            <p class="eyebrow">{sp.eyebrow}</p>
+            <h2>{sp.title}</h2>
+            <p>{sp.body}</p>
+            <span class="more">{sp.more} →</span>
+          </div>
+        </a>
+      ))
+    }
   </section>
 
   <section class="wrap features" aria-label="What Jib does">
@@ -314,8 +389,17 @@ const jsonLd = [
   .strip-item span {
     font-size: 0.9rem;
   }
+  .spotlight-head {
+    margin-top: 72px;
+  }
+  .spotlight-head .section-title {
+    max-width: 26ch;
+  }
+  .spotlight-head p.muted {
+    max-width: 60ch;
+  }
   .spotlight {
-    margin-top: 56px;
+    margin-top: 24px;
     display: grid;
     gap: 20px;
   }
