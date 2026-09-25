@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><rect width="1024" height="1024" rx="200" fill="#2770DA"/><g transform="translate(512 512) scale(0.82) translate(-512 -490)">
+  <path d="M180 500 512 222 844 500" stroke="#ffffff" stroke-width="54" fill="none"/>
+  <rect x="664" y="262" width="82" height="112" fill="#ffffff"/>
+  <path d="M250 460v285M774 460v285" stroke="#ffffff" stroke-width="44"/>
+  <rect x="170" y="722" width="684" height="48" fill="#ffffff"/>
+  <text x="512" y="672" text-anchor="middle" font-family="Arial Black, Arial, Helvetica, sans-serif" font-weight="900" font-size="300" fill="#ffffff" letter-spacing="-6">JIB</text></g></svg>

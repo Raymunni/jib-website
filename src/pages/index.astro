@@ -1,0 +1,394 @@
+---
+import { getImage, Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import StoreButtons from '../components/StoreButtons.astro';
+import { SITE, HUBS } from '../config';
+import heroWide from '../assets/hero/a.jpg';
+import heroTall from '../assets/hero/b.jpg';
+import shotPlan from '../assets/screens/01-plan.png';
+import shotTrack from '../assets/screens/02-track.png';
+import shotCatch from '../assets/screens/03-catch.png';
+import shotShop from '../assets/screens/04-shop.png';
+import shotSee from '../assets/screens/05-see.png';
+import { guideUrl } from '../lib/guides';
+
+const wideAvif = await getImage({ src: heroWide, format: 'avif', width: 1376, quality: 60 });
+const wideWebp = await getImage({ src: heroWide, format: 'webp', width: 1376, quality: 72 });
+const tallAvif = await getImage({ src: heroTall, format: 'avif', width: 768, quality: 60 });
+const tallWebp = await getImage({ src: heroTall, format: 'webp', width: 768, quality: 72 });
+
+const guides = (await getCollection('guides'))
+  .filter((g) => !g.data.pillar)
+  .sort((a, b) => b.data.published.getTime() - a.data.published.getTime())
+  .slice(0, 6);
+
+const features = [
+  {
+    shot: shotPlan,
+    eyebrow: 'Plan',
+    title: 'Snap a photo, get the full job',
+    body: 'Photograph the job and Jib drafts the steps, the materials list and a cost range — so you know what you are signing up for before the first trip to the hardware store.',
+  },
+  {
+    shot: shotCatch,
+    eyebrow: 'Catch',
+    title: 'Know when you legally need a tradie',
+    body: 'Jib flags the parts of a job that need a licensed electrician, plumber or gasfitter — in plain English — so you do the bits you can and book a pro for the bits you can’t.',
+  },
+  {
+    shot: shotShop,
+    eyebrow: 'Shop',
+    title: 'One shopping list for every job',
+    body: 'Every job’s materials roll into a single shopping list, grouped by store. Tick things off in the aisle.',
+  },
+  {
+    shot: shotTrack,
+    eyebrow: 'Track',
+    title: 'Every job, every room, one glance',
+    body: 'Keep jobs organised by room, set reminders for the recurring ones, and see what’s done and what’s next.',
+  },
+  {
+    shot: shotSee,
+    eyebrow: 'See',
+    title: 'Before and after, room by room',
+    body: 'Photos land in a gallery and a timeline of your home — the record of what you’ve changed, handy when you sell.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Is Jib free?',
+    a: 'Jib is free to download, and you can track jobs, rooms, reminders and photos for free. The AI features — turning a photo into a full plan, materials list and cost estimate, and asking follow-up questions — are part of Jib’s paid plans, which come with a 7-day free trial.',
+  },
+  {
+    q: 'Does Jib tell me if a job is legal to DIY?',
+    a: 'Jib flags the parts of a job that typically need a licensed tradesperson — electrical, plumbing, gas, waterproofing and structural work. It’s general guidance, not legal advice: always confirm with your state regulator or council. Our free DIY legality checker shows the rules for common jobs by state, with links to the regulator.',
+  },
+  {
+    q: 'Is Jib only for Australia?',
+    a: 'No — Jib works anywhere and supports AUD, USD, GBP, EUR, NZD and CAD. Our guides start with Australian rules because they vary so much between states, with UK and New Zealand guides alongside.',
+  },
+  {
+    q: 'What phones does Jib run on?',
+    a: 'iPhone (App Store) and Android (Google Play).',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Jib: Home Improvement Planner',
+    operatingSystem: 'iOS, Android',
+    applicationCategory: 'LifestyleApplication',
+    description: SITE.description,
+    url: SITE.url,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'AUD' },
+    publisher: { '@id': `${SITE.url}/#org` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base
+  title="Jib — Snap a photo, get the full DIY job plan"
+  description="Photograph any home job and Jib drafts the steps, materials list and cost — and flags the parts that legally need a licensed tradie in your state."
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <picture class="hero-img">
+      <source media="(max-width: 719px)" srcset={tallAvif.src} type="image/avif" />
+      <source media="(max-width: 719px)" srcset={tallWebp.src} type="image/webp" />
+      <source srcset={wideAvif.src} type="image/avif" />
+      <img src={wideWebp.src} alt="Holding a phone up in front of a Queenslander house at golden hour, with a paintbrush and spirit level on the deck" width="1376" height="768" fetchpriority="high" decoding="async" />
+    </picture>
+    <div class="hero-shade"></div>
+    <div class="wrap hero-copy">
+      <p class="eyebrow">The DIY job planner</p>
+      <h1>Can you DIY it?<br /><span>Snap a photo and find out.</span></h1>
+      <p class="lede">
+        Jib turns a photo of any home job into a full plan — steps, materials and cost — and flags the parts that legally need a licensed tradie in your state.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="/app/" data-get-app>Get Jib free</a>
+        <a class="btn btn-ghost" href="/tools/diy-legality-checker/">Try the free DIY checker</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap strip">
+    <div class="card strip-item"><strong>Photo → plan</strong><span class="muted">Steps, materials &amp; cost in seconds</span></div>
+    <div class="card strip-item"><strong>Tradie flags</strong><span class="muted">Know what needs a licence</span></div>
+    <div class="card strip-item"><strong>Shopping list</strong><span class="muted">Every job, one list</span></div>
+    <div class="card strip-item"><strong>Before &amp; after</strong><span class="muted">A timeline of your home</span></div>
+  </section>
+
+  <section class="wrap features" aria-label="What Jib does">
+    {
+      features.map((f, i) => (
+        <article class={`feature ${i % 2 ? 'flip' : ''}`}>
+          <div class="feature-copy">
+            <p class="eyebrow">{f.eyebrow}</p>
+            <h2>{f.title}</h2>
+            <p>{f.body}</p>
+          </div>
+          <Image src={f.shot} alt={`Jib app screen: ${f.title}`} widths={[320, 480]} sizes="(max-width: 719px) 70vw, 320px" loading="lazy" class="shot" />
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="wrap tool-promo">
+    <div class="card promo">
+      <div>
+        <p class="eyebrow">Free tool</p>
+        <h2>DIY or tradie? Check the rules for your state.</h2>
+        <p>Pick your state and the job. We’ll tell you whether you can legally do it yourself, whether you need a licence or a compliance certificate — and link the regulator that says so.</p>
+      </div>
+      <a class="btn btn-primary" href="/tools/diy-legality-checker/">Open the DIY checker</a>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <p class="eyebrow">Guides</p>
+    <h2 class="section-title">Straight answers for real jobs</h2>
+    <div class="grid grid-3 hubs">
+      {
+        Object.entries(HUBS).map(([key, hub]) => (
+          <a class="card hub" href={`/guides/${key}/`}>
+            <h3>{hub.title}</h3>
+            <p class="muted">{hub.blurb}</p>
+            <span class="more">Browse guides →</span>
+          </a>
+        ))
+      }
+    </div>
+    {
+      guides.length > 0 && (
+        <ul class="latest">
+          {guides.map((g) => (
+            <li>
+              <a href={guideUrl(g)}>{g.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+
+  <section class="wrap faq">
+    <h2 class="section-title">Questions</h2>
+    {
+      faqs.map((f) => (
+        <details class="card">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))
+    }
+  </section>
+
+  <section class="wrap final">
+    <div class="card final-card">
+      <h2>Your next job, planned properly.</h2>
+      <p class="muted">Snap it, plan it, buy what you need, and know when to call a pro.</p>
+      <StoreButtons campaign="home" size="lg" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: min(88vh, 760px);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-img,
+  .hero-img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(14, 24, 36, 0.1) 0%, rgba(14, 24, 36, 0.35) 40%, rgba(14, 24, 36, 0.95) 100%);
+  }
+  @media (min-width: 720px) {
+    .hero {
+      align-items: center;
+    }
+    .hero-shade {
+      background: linear-gradient(90deg, rgba(14, 24, 36, 0.95) 0%, rgba(14, 24, 36, 0.75) 40%, rgba(14, 24, 36, 0.1) 75%),
+        linear-gradient(180deg, transparent 70%, var(--bg) 100%);
+    }
+  }
+  .hero-copy {
+    position: relative;
+    padding-top: 120px;
+    padding-bottom: 56px;
+    width: 100%;
+  }
+  .hero h1 {
+    max-width: 14ch;
+    font-size: clamp(2.3rem, 6vw, 3.8rem);
+  }
+  .hero h1 span {
+    color: #9cc2ff;
+  }
+  .lede {
+    font-size: 1.15rem;
+    color: #e3eaf2;
+    max-width: 46ch;
+  }
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+  @media (min-width: 900px) {
+    .strip {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .strip-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 16px 18px;
+  }
+  .strip-item span {
+    font-size: 0.9rem;
+  }
+  .features {
+    margin-top: 72px;
+    display: grid;
+    gap: 72px;
+  }
+  .feature {
+    display: grid;
+    gap: 28px;
+    align-items: center;
+  }
+  @media (min-width: 720px) {
+    .feature {
+      grid-template-columns: 1fr 320px;
+      gap: 64px;
+    }
+    .feature.flip {
+      grid-template-columns: 320px 1fr;
+    }
+    .feature.flip .feature-copy {
+      order: 2;
+    }
+  }
+  .feature h2 {
+    margin-top: 0;
+  }
+  .feature-copy p:last-child {
+    max-width: 48ch;
+  }
+  :global(.shot) {
+    width: 70%;
+    max-width: 320px;
+    margin: 0 auto;
+    border-radius: 22px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  }
+  .tool-promo {
+    margin-top: 96px;
+  }
+  .promo {
+    display: grid;
+    gap: 20px;
+    align-items: center;
+    padding: 32px;
+    background: linear-gradient(135deg, var(--accent-deep), #173a6b);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  @media (min-width: 720px) {
+    .promo {
+      grid-template-columns: 1fr auto;
+    }
+  }
+  .promo h2 {
+    margin-top: 0;
+  }
+  .promo p {
+    color: #dbe7f7;
+    margin-bottom: 0;
+  }
+  .section-title {
+    margin-top: 0;
+  }
+  .wrap > .eyebrow {
+    margin-top: 96px;
+  }
+  .hubs {
+    margin-top: 20px;
+  }
+  .hub {
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s ease;
+  }
+  .hub:hover {
+    border-color: var(--accent-2);
+    color: var(--text);
+  }
+  .hub h3 {
+    margin: 0 0 8px;
+  }
+  .more {
+    color: var(--accent-2);
+    font-weight: 700;
+  }
+  .latest {
+    margin-top: 24px;
+    columns: 2 280px;
+    padding-left: 1.2em;
+  }
+  .faq {
+    margin-top: 96px;
+    display: grid;
+    gap: 12px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  details p {
+    margin: 12px 0 0;
+  }
+  .final {
+    margin-top: 96px;
+  }
+  .final-card {
+    text-align: center;
+    padding: 44px 24px;
+  }
+  .final-card h2 {
+    margin-top: 0;
+  }
+  .final-card :global(.stores) {
+    justify-content: center;
+    margin-top: 20px;
+  }
+</style>

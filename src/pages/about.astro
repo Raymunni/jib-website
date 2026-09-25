@@ -1,0 +1,47 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../config';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About Jib',
+    url: `${SITE.url}/about/`,
+    mainEntity: {
+      '@type': 'Person',
+      name: SITE.author.name,
+      jobTitle: SITE.author.role,
+      address: { '@type': 'PostalAddress', addressRegion: 'QLD', addressCountry: 'AU' },
+      worksFor: { '@id': `${SITE.url}/#org` },
+    },
+  },
+];
+---
+
+<Page title="About Jib" description="Who builds Jib, why it exists, and how we research and check the rules in our DIY guides.">
+  <h1>About Jib</h1>
+
+  <p>Jib is built by <strong>{SITE.author.name}</strong>, an independent developer in Queensland, Australia.</p>
+
+  <p>
+    It started with a simple frustration: every home job begins with the same questions. <em>Can I do this myself? Am I even allowed to? What do I need to buy, and how much of it?</em> The answers were scattered across tradie blogs trying to sell a call-out, hardware-store guides that say “check your state’s rules”, and forum threads from 2014.
+  </p>
+
+  <p>
+    Jib puts the answers in one place. Photograph a job and the app drafts the steps, the materials list and a cost range, and flags the parts that need a licensed tradie. Then it keeps every job, shopping list and before-and-after photo organised by room.
+  </p>
+
+  <h2>How we write our guides</h2>
+  <ul>
+    <li><strong>Official sources first.</strong> Rules about licensing and approvals come from the state regulator, the legislation or the official planning portal — and every guide lists those sources at the bottom.</li>
+    <li><strong>Dated.</strong> Every guide shows the date its rules were last checked against those sources. Legal guides are re-checked regularly.</li>
+    <li><strong>Honest about the limits.</strong> Where the answer is “you need a licensed tradie”, we say so plainly, even though it means you won’t do that part yourself.</li>
+    <li><strong>No paid placements.</strong> No sponsored products, no affiliate links, no ads.</li>
+  </ul>
+
+  <h2>Spotted a mistake?</h2>
+  <p>Rules change. If something on this site is out of date or wrong, please email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> with a link to the source and we’ll fix it quickly.</p>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd[0])} />
+</Page>

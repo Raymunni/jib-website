@@ -1,0 +1,311 @@
+---
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import StoreButtons from '../components/StoreButtons.astro';
+import { SITE, STORES, anyStoreLive } from '../config';
+import { qrSvg } from '../lib/qr';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonLd?: Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const { title, description, ogImage = '/og/default.png', ogType = 'website', jsonLd = [], noindex = false } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE.url).toString();
+const ogImageUrl = new URL(ogImage, SITE.url).toString();
+const fullTitle = title.includes('Jib') ? title : `${title} | Jib`;
+
+const siteLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#org`,
+    name: 'Jib',
+    url: SITE.url,
+    logo: `${SITE.url}/icon-512.png`,
+    email: SITE.email,
+    founder: { '@type': 'Person', name: SITE.author.name },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
+    name: 'Jib',
+    url: SITE.url,
+    publisher: { '@id': `${SITE.url}/#org` },
+    inLanguage: 'en-AU',
+  },
+];
+
+const qr = await qrSvg(`${SITE.url}/app/`);
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#0e1824" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:site_name" content="Jib" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_AU" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {STORES.ios.live && <meta name="apple-itunes-app" content={`app-id=${STORES.ios.appId}`} />}
+
+    {[...siteLd, ...jsonLd].map((ld) => <script type="application/ld+json" set:html={JSON.stringify(ld)} />)}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="brand" href="/" aria-label="Jib home">
+          <Logo size={34} color="#ffffff" />
+        </a>
+        <nav aria-label="Main">
+          <a href="/guides/">Guides</a>
+          <a href="/tools/diy-legality-checker/">DIY checker</a>
+          <a href="/about/" class="hide-sm">About</a>
+          <a href="/app/" class="btn btn-primary nav-cta" data-get-app>Get the app</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap foot">
+        <div>
+          <a class="brand" href="/" aria-label="Jib home"><Logo size={40} color="#ffffff" /></a>
+          <p class="muted">{SITE.tagline} The home-improvement planner that tells you what you can legally DIY, what to buy, and what it'll cost.</p>
+        </div>
+        <div>
+          <h2>Guides</h2>
+          <a href="/guides/diy-legal/">Can I legally DIY it?</a>
+          <a href="/guides/council-approval/">Council approval</a>
+          <a href="/guides/materials/">Materials lists</a>
+          <a href="/tools/diy-legality-checker/">DIY legality checker</a>
+        </div>
+        <div>
+          <h2>Jib</h2>
+          <a href="/app/" data-get-app>Get the app</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+          <a href="/privacy/">Privacy</a>
+          <a href="/terms/">Terms</a>
+        </div>
+      </div>
+      <div class="wrap fine">
+        <p class="muted">
+          Guides are general information, not legal or professional advice. Rules change and vary by council — always confirm with your state regulator or council before starting work. © {new Date().getFullYear()} Jib.
+        </p>
+      </div>
+    </footer>
+
+    <dialog class="get-app" id="get-app" aria-labelledby="get-app-title">
+      <button class="close" type="button" aria-label="Close" data-close>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" /></svg>
+      </button>
+      <h2 id="get-app-title">{anyStoreLive ? 'Get Jib on your phone' : 'Jib is launching soon'}</h2>
+      <p class="muted">
+        {
+          anyStoreLive
+            ? 'Scan with your phone camera — it opens the right store for your phone.'
+            : 'Jib is in final App Store and Google Play review. Scan to open this page on your phone, or ask us to email you the day it goes live.'
+        }
+      </p>
+      <div class="qr" set:html={qr} aria-label="QR code linking to jibapp.xyz/app" role="img" />
+      <StoreButtons campaign="general" />
+      {
+        !anyStoreLive && (
+          <a class="btn btn-ghost notify" href={`mailto:${SITE.email}?subject=${encodeURIComponent('Tell me when Jib launches')}&body=${encodeURIComponent('Please email me when Jib is on the App Store / Google Play. My phone is: iPhone / Android')}`}>
+            Email me when it's live
+          </a>
+        )
+      }
+    </dialog>
+
+    <script>
+      // Desktop readers can't install a phone app from here, so "Get the app"
+      // opens a QR code instead of navigating away. On phones the link goes
+      // to /app/, which forwards to the right store.
+      const isPhone = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      const dialog = document.getElementById('get-app') as HTMLDialogElement | null;
+      if (dialog && !isPhone) {
+        document.addEventListener('click', (e) => {
+          const link = (e.target as HTMLElement).closest('[data-get-app]');
+          if (!link) return;
+          e.preventDefault();
+          dialog.showModal();
+        });
+        dialog.addEventListener('click', (e) => {
+          if (e.target === dialog || (e.target as HTMLElement).closest('[data-close]')) dialog.close();
+        });
+      }
+    </script>
+
+    <style>
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(14, 24, 36, 0.86);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+      .bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+      }
+      .brand {
+        display: inline-flex;
+        color: #fff;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      nav a:not(.btn) {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+      nav a:not(.btn):hover {
+        color: #fff;
+      }
+      .nav-cta {
+        min-height: 40px;
+        padding: 0 16px;
+        font-size: 0.92rem;
+      }
+      @media (max-width: 560px) {
+        .hide-sm {
+          display: none;
+        }
+        nav {
+          gap: 12px;
+        }
+        nav a:not(.btn) {
+          font-size: 0.88rem;
+        }
+      }
+      .site-footer {
+        margin-top: 96px;
+        border-top: 1px solid var(--border);
+        background: var(--bg-2);
+        padding: 48px 0 24px;
+      }
+      .foot {
+        display: grid;
+        gap: 28px;
+      }
+      @media (min-width: 720px) {
+        .foot {
+          grid-template-columns: 2fr 1fr 1fr;
+        }
+      }
+      .foot h2 {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin: 0 0 12px;
+        color: var(--dim);
+      }
+      .foot a:not(.brand) {
+        display: block;
+        color: var(--text);
+        text-decoration: none;
+        margin-bottom: 8px;
+      }
+      .foot a:not(.brand):hover {
+        color: #fff;
+      }
+      .foot p {
+        max-width: 40ch;
+        margin-top: 14px;
+      }
+      .fine {
+        margin-top: 24px;
+        font-size: 0.85rem;
+      }
+      .get-app {
+        width: min(420px, calc(100vw - 32px));
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        background: var(--bg-2);
+        color: var(--text);
+        padding: 28px 24px 24px;
+        text-align: center;
+      }
+      .get-app::backdrop {
+        background: rgba(5, 10, 16, 0.72);
+        backdrop-filter: blur(4px);
+      }
+      .get-app h2 {
+        margin: 0 0 8px;
+        font-size: 1.4rem;
+      }
+      .get-app :global(.stores) {
+        justify-content: center;
+        margin-top: 18px;
+      }
+      .qr {
+        width: 200px;
+        margin: 18px auto 0;
+        background: #fff;
+        border-radius: 14px;
+        padding: 10px;
+      }
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 0;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+      }
+      .notify {
+        margin-top: 16px;
+        width: 100%;
+      }
+    </style>
+  </body>
+</html>

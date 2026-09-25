@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { HUBS, type HubKey } from '../../config';
+import { guideUrl } from '../../lib/guides';
+
+const guides = await getCollection('guides');
+const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
+  key,
+  ...HUBS[key],
+  pillar: guides.find((g) => g.data.hub === key && g.data.pillar),
+  items: guides.filter((g) => g.data.hub === key && !g.data.pillar).sort((a, b) => a.data.order - b.data.order),
+}));
+---
+
+<Base title="DIY guides: what you can legally do, approvals and materials lists" description="Plain-English guides for DIYers: what electrical, plumbing and gas work you can legally do yourself, when you need council approval, and exactly what to buy.">
+  <div class="wrap page">
+    <p class="eyebrow">Guides</p>
+    <h1>Straight answers for real jobs</h1>
+    <p class="lede muted">Every guide cites the regulator or standard it’s based on, and shows the date the rules were last checked.</p>
+
+    {
+      hubs.map((h) => (
+        <section class="hub">
+          <h2>
+            {h.pillar ? <a href={guideUrl(h.pillar)}>{h.title}</a> : h.title}
+          </h2>
+          <p class="muted">{h.blurb}</p>
+          <div class="grid grid-2">
+            {h.pillar && (
+              <a class="card item pillar" href={guideUrl(h.pillar)}>
+                <span class="tag">Start here</span>
+                <strong>{h.pillar.data.title}</strong>
+                <span class="muted">{h.pillar.data.description}</span>
+              </a>
+            )}
+            {h.items.map((g) => (
+              <a class="card item" href={guideUrl(g)}>
+                {g.data.market !== 'AU' && <span class="tag">{g.data.market}</span>}
+                <strong>{g.data.title}</strong>
+                <span class="muted">{g.data.description}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding-top: 40px;
+  }
+  .lede {
+    max-width: 60ch;
+    font-size: 1.1rem;
+  }
+  .hub {
+    margin-top: 56px;
+  }
+  .hub h2 {
+    margin: 0 0 6px;
+  }
+  .hub h2 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .hub > p {
+    margin-bottom: 20px;
+  }
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .item:hover {
+    border-color: var(--accent-2);
+    color: var(--text);
+  }
+  .item strong {
+    font-size: 1.05rem;
+  }
+  .item span.muted {
+    font-size: 0.92rem;
+  }
+  .pillar {
+    background: linear-gradient(135deg, rgba(39, 112, 218, 0.22), var(--surface));
+  }
+  .tag {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-2);
+  }
+</style>

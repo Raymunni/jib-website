@@ -1,0 +1,15 @@
+---
+interface Props {
+  size?: number;
+  color?: string;
+}
+const { size = 34, color = 'currentColor' } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="140 170 744 620" role="img" aria-label="Jib" fill="none">
+  <path d="M180 500 512 222 844 500" stroke={color} stroke-width="54" stroke-linejoin="miter" />
+  <rect x="664" y="262" width="82" height="112" fill={color} />
+  <path d="M250 460v285M774 460v285" stroke={color} stroke-width="44" />
+  <rect x="170" y="722" width="684" height="48" fill={color} />
+  <text x="512" y="672" text-anchor="middle" font-family="Arial Black, Arial, Helvetica, sans-serif" font-weight="900" font-size="300" fill={color} letter-spacing="-6">JIB</text>
+</svg>

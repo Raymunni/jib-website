@@ -1,0 +1,14 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../config';
+---
+
+<Page title="Contact Jib" description="Get in touch with Jib — support, corrections to a guide, or feedback on the app.">
+  <h1>Contact</h1>
+  <p>Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> — a real person reads every message.</p>
+  <ul>
+    <li><strong>App support:</strong> tell us your phone (iPhone or Android) and what happened.</li>
+    <li><strong>A rule in a guide is wrong or out of date:</strong> include a link to the official source, and we’ll correct it.</li>
+    <li><strong>Deleting your account or data:</strong> you can do this yourself in the app under Settings, or email us from the address on your account.</li>
+  </ul>
+</Page>

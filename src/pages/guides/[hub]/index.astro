@@ -1,0 +1,69 @@
+---
+// Fallback listing for a hub that doesn't have its pillar guide written
+// yet. Once <hub>/index.mdx exists, the pillar page is served at this URL
+// instead (this route stops generating it), so the two never collide.
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import { HUBS, type HubKey } from '../../../config';
+import { guideUrl } from '../../../lib/guides';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return (Object.keys(HUBS) as HubKey[])
+    .filter((hub) => !guides.some((g) => g.data.hub === hub && g.data.pillar))
+    .map((hub) => ({ params: { hub }, props: { hub } }));
+}
+
+const { hub } = Astro.props as { hub: HubKey };
+const info = HUBS[hub];
+const items = (await getCollection('guides')).filter((g) => g.data.hub === hub).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title={info.title} description={info.blurb}>
+  <div class="wrap page">
+    <nav class="crumbs"><a href="/guides/">Guides</a></nav>
+    <h1>{info.title}</h1>
+    <p class="lede muted">{info.blurb}</p>
+    {
+      items.length ? (
+        <div class="grid grid-2">
+          {items.map((g) => (
+            <a class="card item" href={guideUrl(g)}>
+              <strong>{g.data.title}</strong>
+              <span class="muted">{g.data.description}</span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p>New guides in this series are on the way. In the meantime, try the <a href="/guides/">other guides</a>.</p>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding-top: 40px;
+  }
+  .crumbs a {
+    color: var(--dim);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  .lede {
+    font-size: 1.1rem;
+    max-width: 60ch;
+    margin-bottom: 28px;
+  }
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .item:hover {
+    border-color: var(--accent-2);
+    color: var(--text);
+  }
+</style>

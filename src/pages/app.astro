@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import StoreButtons from '../components/StoreButtons.astro';
+import { SITE, STORES, anyStoreLive, iosUrl, androidUrl } from '../config';
+import { qrSvg } from '../lib/qr';
+
+const qr = await qrSvg(`${SITE.url}/app/`);
+const campaigns = ['home', 'diy-legal', 'council-approval', 'materials', 'tools', 'general'] as const;
+const routes = {
+  ios: STORES.ios.live ? Object.fromEntries(campaigns.map((c) => [c, iosUrl(c)])) : null,
+  android: STORES.android.live ? Object.fromEntries(campaigns.map((c) => [c, androidUrl(c)])) : null,
+};
+---
+
+<Base title="Get the Jib app" description="Download Jib for iPhone or Android — snap a photo of any home job and get the full plan, materials list and cost.">
+  <div class="wrap page">
+    <h1>{anyStoreLive ? 'Get Jib on your phone' : 'Jib is launching soon'}</h1>
+    <p class="lede">
+      {
+        anyStoreLive
+          ? 'Snap a photo of any home job and get the steps, materials list and cost — plus a flag on anything that legally needs a licensed tradie.'
+          : 'Jib is in final review on the App Store and Google Play. Leave your email and we’ll tell you the day it’s live.'
+      }
+    </p>
+    <StoreButtons campaign="general" size="lg" />
+    {
+      !anyStoreLive && (
+        <p>
+          <a class="btn btn-ghost" href={`mailto:${SITE.email}?subject=${encodeURIComponent('Tell me when Jib launches')}&body=${encodeURIComponent('Please email me when Jib is on the App Store / Google Play. My phone is: iPhone / Android')}`}>
+            Email me when it’s live
+          </a>
+        </p>
+      )
+    }
+    <div class="desktop-only card qr-card">
+      <div class="qr" set:html={qr} role="img" aria-label="QR code linking to this page" />
+      <p class="muted">On a computer? Scan this with your phone camera to open this page on your phone.</p>
+    </div>
+  </div>
+</Base>
+
+<script is:inline define:vars={{ routes }}>
+  // Phones are forwarded straight to their own store, keeping the campaign
+  // from the link they clicked, so installs can be traced to the guide.
+  (function () {
+    var ua = navigator.userAgent;
+    var c = new URLSearchParams(location.search).get('c') || 'general';
+    var store = /iPhone|iPad|iPod/.test(ua) ? routes.ios : /Android/.test(ua) ? routes.android : null;
+    if (store) location.replace(store[c] || store.general);
+  })();
+</script>
+
+<style>
+  .page {
+    padding-top: 56px;
+    max-width: 720px;
+  }
+  .lede {
+    font-size: 1.15rem;
+    margin-bottom: 28px;
+  }
+  p .btn {
+    margin-top: 20px;
+  }
+  .qr-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 40px;
+  }
+  .qr {
+    width: 150px;
+    flex: none;
+    background: #fff;
+    padding: 8px;
+    border-radius: 12px;
+  }
+  .qr-card p {
+    margin: 0;
+  }
+  @media (hover: none) and (pointer: coarse) {
+    .desktop-only {
+      display: none;
+    }
+  }
+</style>

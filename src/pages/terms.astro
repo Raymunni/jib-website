@@ -1,0 +1,62 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../config';
+---
+
+<Page title="Terms of Service" description="The terms for using the Jib app, web app and website.">
+  <h1>Terms of Service</h1>
+  <p><strong>Last updated: 25 September 2026</strong></p>
+  <p>These Terms govern your use of the Jib mobile app (<code>com.jibjobs.app</code>), the Jib web app and the {SITE.domain} website (together, “Jib”), provided by Thomas Horsey (“we”, “us”). By using Jib you agree to these Terms. If you don’t agree, please don’t use Jib.</p>
+
+  <h2>1. What Jib is</h2>
+  <p>Jib is a home-improvement companion. It helps you plan, track and manage jobs across the spaces in your house, including AI-assisted job planning, material and shopping suggestions, step-by-step directions, cost estimates and a photo record of your progress. The website also publishes general guides and free tools.</p>
+
+  <h2>2. Accounts</h2>
+  <p>You can use core features of the mobile app without an account, with your data stored only on your device. Signing in — with Google, Apple or an email/password account — enables cloud sync and the web app. You’re responsible for keeping your account (and any Google or Apple account you sign in with) secure, and for activity that happens through it.</p>
+
+  <h2>3. Your content</h2>
+  <p>You own the photos, notes, descriptions and other content you add (“Your Content”). If you use cloud sync, you give us the limited right to store, process and transmit Your Content only to provide Jib to you. We don’t use it for anything else and don’t sell it. Don’t upload anything you don’t have the right to, or anything unlawful, harmful or infringing.</p>
+
+  <h2>4. AI-generated content</h2>
+  <p>Jib uses AI (Anthropic’s Claude API) to generate job plans, steps, material and shopping suggestions, cost estimates and safety warnings from the information and photos you provide.</p>
+  <h3>4.1 This is not professional advice</h3>
+  <p>AI-generated content is produced automatically from general knowledge and whatever you’ve entered. It is <strong>not</strong> a substitute for advice from a licensed tradesperson, engineer or other qualified professional. The AI doesn’t inspect your property and can’t verify what it’s told or shown.</p>
+  <h3>4.2 Safety warnings are a prompt, not a guarantee</h3>
+  <p>Jib may show warnings, for example about live wiring, hazardous chemicals, or work that legally requires a licensed tradesperson in your area. <strong>These warnings are not exhaustive, and the absence of a warning does not mean a job is safe or legal.</strong> You are solely responsible for deciding whether a job is safe for you to do, and for engaging a licensed professional for electrical, gas, plumbing, structural, working-at-height, hazardous-material or any other work that legally or practically requires one where you live.</p>
+  <h3>4.3 Use your own judgment</h3>
+  <p>Always check AI-generated steps, materials and costs against your own knowledge, local rules, manufacturer instructions and, where appropriate, professional advice before acting on them. Costs, availability and product details are estimates and may be wrong or out of date.</p>
+
+  <h2>5. Guides and tools on the website</h2>
+  <p>Our guides and the DIY legality checker are general information based on the official sources we cite, checked on the date shown on each page. Rules change and can differ by council, property and circumstance, so they are not legal advice. Confirm with your state regulator or council before starting work.</p>
+
+  <h2>6. Disclaimer of warranties and limitation of liability</h2>
+  <p><strong>To the fullest extent permitted by law:</strong></p>
+  <p>Jib and all AI-generated and published content are provided “as is” and “as available”, without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose and non-infringement.</p>
+  <p>We are not liable for any injury, property damage, financial loss or other harm arising from your use of Jib or reliance on its content, including harm from doing a home-improvement job, using tools or materials, or exposure to hazards (including electrical, chemical or structural hazards) that Jib did or did not warn you about.</p>
+  <p>To the maximum extent permitted by law, our total liability to you for any claim is limited to the amount you paid us in the twelve months before the claim arose (for most users, nothing).</p>
+  <p><strong>Nothing in these Terms excludes, restricts or modifies any consumer guarantee, right or remedy that can’t lawfully be excluded, restricted or modified — including guarantees under the Australian Consumer Law.</strong> Where liability can’t lawfully be excluded, it is limited (at our option, where permitted) to supplying the relevant service again.</p>
+
+  <h2>7. Subscriptions and payments</h2>
+  <p>Some features need a paid subscription or a one-off AI credit top-up, billed and processed entirely through Google Play or the Apple App Store — we never collect or store your payment details. Subscriptions auto-renew at the price and interval shown at purchase unless you cancel before renewal in your Google Play or Apple ID settings. Refunds are handled under Google’s and Apple’s own refund policies.</p>
+
+  <h2>8. Acceptable use</h2>
+  <p>Don’t use Jib for anything unlawful; don’t try to reverse-engineer or extract its source code except where the law allows; don’t interfere with its operation or servers; and don’t use it to create or store illegal, abusive or infringing content. We may suspend or end your access if you break these Terms.</p>
+
+  <h2>9. Intellectual property</h2>
+  <p>Jib’s design, code, content and branding are owned by us and protected by intellectual property law. These Terms don’t give you any rights to them beyond what’s needed to use Jib as intended.</p>
+
+  <h2>10. Third-party services</h2>
+  <p>Jib relies on third-party services, including Google Firebase, Apple (Sign in with Apple), Anthropic, Google Places/geocoding, RevenueCat and GitHub Pages. Your use is also subject to their terms where applicable. We aren’t responsible for their availability or performance.</p>
+
+  <h2>11. Termination</h2>
+  <p>You can stop using Jib at any time and delete your account and cloud data from within the app. We may suspend or end access if you breach these Terms, or discontinue Jib or any feature, with reasonable notice where practical.</p>
+
+  <h2>12. Changes to these Terms</h2>
+  <p>We may update these Terms. Continuing to use Jib after changes take effect means you accept them. Material changes will be shown by updating the “Last updated” date above.</p>
+
+  <h2>13. Governing law</h2>
+  <p>These Terms are governed by the laws of Queensland, Australia.</p>
+
+  <h2>14. Contact us</h2>
+  <p>Questions about these Terms: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+</Page>

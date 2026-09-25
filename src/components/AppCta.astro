@@ -1,0 +1,59 @@
+---
+import type { Campaign } from '../config';
+import { anyStoreLive } from '../config';
+
+interface Props {
+  text: string;
+  campaign?: Campaign;
+  variant?: 'inline' | 'end';
+}
+
+const { text, campaign = 'general', variant = 'inline' } = Astro.props;
+---
+
+<aside class={`cta cta-${variant}`} aria-label="Jib app">
+  <div class="cta-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 3 7.2 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.2L15 3H9Zm3 4.5a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
+  </div>
+  <div class="cta-body">
+    <p>{text}</p>
+    <a class="btn btn-primary" href={`/app/?c=${campaign}`} data-get-app>
+      {anyStoreLive ? 'Get Jib free' : 'Get Jib — launching soon'}
+    </a>
+  </div>
+</aside>
+
+<style>
+  .cta {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin: 2em 0;
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(39, 112, 218, 0.18), rgba(39, 112, 218, 0.06));
+    border: 1px solid rgba(79, 143, 240, 0.45);
+  }
+  .cta-icon {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    color: #fff;
+  }
+  .cta-body p {
+    margin: 0 0 12px;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .cta-body .btn {
+    min-height: 44px;
+    font-size: 0.95rem;
+  }
+  .cta-end {
+    margin-top: 3em;
+  }
+</style>

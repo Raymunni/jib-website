@@ -1,0 +1,92 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../config';
+---
+
+<Page title="Privacy Policy" description="What the Jib website and app collect, how it's used, and your choices.">
+  <h1>Privacy Policy</h1>
+  <p><strong>Last updated: 25 September 2026</strong></p>
+  <p>This policy explains what information Jib (“we”, “us”) collects through the Jib website ({SITE.domain}) and the Jib mobile app (<code>com.jibjobs.app</code>), how it’s used, and the choices you have.</p>
+
+  <h2>The website</h2>
+  <p>Reading guides and using the free tools on this website doesn’t require an account. The website doesn’t use advertising, cookies for tracking, or third-party trackers. Our hosting provider (GitHub Pages) keeps standard server logs, such as IP address and pages requested, for security and operating the service. The DIY legality checker runs entirely in your browser; your answers aren’t sent to us.</p>
+  <p>If you sign in to the Jib web app, the sections below about the app apply in the same way.</p>
+
+  <h2>1. Who we are</h2>
+  <p>Jib is developed by Thomas Horsey. For any privacy questions or requests, contact <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+
+  <h2>2. Information we collect in the app</h2>
+  <h3>2.1 Account information</h3>
+  <p>Jib offers three ways to sign in: Google, Apple, and email/password.</p>
+  <ul>
+    <li><strong>Google or Apple Sign-In:</strong> we receive your name and email address from Google or Apple (and a profile photo, for Google), and a unique account identifier (via Firebase Authentication).</li>
+    <li><strong>Email/password:</strong> we receive the email address and password you provide; the password is stored and verified by Firebase Authentication, not by us directly, and we never see it in plain text.</li>
+  </ul>
+  <p>You can also use the app without signing in; in that case your data stays only on your device and is not backed up to the cloud.</p>
+
+  <h3>2.2 Content you create</h3>
+  <ul>
+    <li>House, space and job details you enter (names, descriptions, notes, recurrence schedules)</li>
+    <li>Photos you take or upload of your house, spaces and jobs, including before-and-after photo pairs</li>
+    <li>Shopping list items, including any retailer names or links you enter</li>
+    <li>Your suburb/location, entered manually or resolved from your device’s location (used for location-aware advice — see section 4)</li>
+    <li>Questions and messages you send to the AI planning feature, and the AI’s responses</li>
+  </ul>
+
+  <h3>2.3 Automatically collected information</h3>
+  <ul>
+    <li>Basic device and app information needed for the app to function (for example crash logs, if enabled)</li>
+    <li>Location data, only if you grant location permission, and only to resolve your suburb — we don’t track or store precise ongoing location</li>
+  </ul>
+
+  <h3>2.4 Purchases and subscriptions</h3>
+  <p>If you buy a subscription or AI credit top-up, the purchase is handled entirely by Google Play or the Apple App Store — we never see or store your payment card details. To manage what you’ve bought, we use RevenueCat, which receives your purchase status and a device identifier from the store, not your card details. See <a href="https://www.revenuecat.com/privacy">RevenueCat’s Privacy Policy</a>.</p>
+
+  <h2>3. How we use your information</h2>
+  <ul>
+    <li>To provide the app — storing your houses, spaces, jobs, photos and shopping lists, and syncing them across your devices when you’re signed in</li>
+    <li>To generate AI job plans, steps, shopping suggestions and safety warnings (see section 4)</li>
+    <li>To generate a general climate and building-context summary for your suburb</li>
+    <li>To maintain and improve the app, including diagnosing bugs</li>
+    <li>To reply to you if you contact us</li>
+  </ul>
+  <p>We don’t sell your personal information and don’t use it for advertising. Jib doesn’t show ads.</p>
+
+  <h2>4. AI features and third-party processing</h2>
+  <p>Jib uses Anthropic’s Claude API to power job planning, steps, shopping suggestions and follow-up questions. When you use these features, the relevant job details (title, description, room and, where relevant, a photo you’ve attached) are sent to Anthropic to generate a response. See <a href="https://www.anthropic.com/legal/privacy">Anthropic’s Privacy Policy</a>.</p>
+  <p><strong>AI-generated content is not professional advice.</strong> Steps, material suggestions, cost estimates and safety warnings are generated automatically and may be incomplete or inaccurate, or miss risks specific to your property.</p>
+
+  <h2>5. Where your information is stored</h2>
+  <ul>
+    <li><strong>On your device:</strong> house, space, job and shopping data, and photos, are stored locally.</li>
+    <li><strong>In the cloud (only if signed in):</strong> the same data is synced to Google Firebase (Firestore and Firebase Storage) so it’s available across devices and on the web app. It’s tied to your account and not visible to other users.</li>
+    <li><strong>Location lookups:</strong> resolving a suburb uses Google’s geocoding and Places services and, for AI-assisted matching, Anthropic’s API. Neither keeps this beyond what’s needed to return a result.</li>
+  </ul>
+
+  <h2>6. Sharing your information</h2>
+  <p>We don’t sell or rent your information. We share it only with the service providers needed to run Jib: Google Firebase (sign-in and sync), Apple (Sign in with Apple, if you use it), Anthropic (AI features), Google Places/geocoding (location) and RevenueCat (purchases). We may disclose information if required by law, or to protect the rights, safety or property of Jib, our users or others.</p>
+
+  <h2>7. Your choices and rights</h2>
+  <ul>
+    <li><strong>Access and correction:</strong> you can view and edit almost all your data in the app at any time.</li>
+    <li><strong>Deletion:</strong> you can delete individual jobs, photos, spaces or houses, or delete your entire account (which permanently removes your cloud-synced data) from Settings.</li>
+    <li><strong>Local-only use:</strong> you can use the app without signing in, in which case no data leaves your device.</li>
+    <li><strong>Location:</strong> you can decline or revoke location permission at any time; the app falls back to manual suburb search.</li>
+  </ul>
+  <p>If you’re in the EU or UK, you have rights under the GDPR (access, rectification, erasure, portability and objection) — contact us to exercise them. In Australia, we aim to handle your information consistently with the Australian Privacy Principles.</p>
+
+  <h2>8. Data retention</h2>
+  <p>We keep your account data while your account is active. If you delete your account, your cloud-synced data is permanently removed. Data stored only on your device stays until you delete the app or clear its data.</p>
+
+  <h2>9. Children’s privacy</h2>
+  <p>Jib isn’t directed at children and we don’t knowingly collect information from anyone under 16. If you believe a child has given us personal information, contact us and we’ll remove it.</p>
+
+  <h2>10. Security</h2>
+  <p>We use industry-standard measures, including Firebase’s built-in security, to protect your information. No method of transmission or storage is completely secure.</p>
+
+  <h2>11. Changes to this policy</h2>
+  <p>We may update this policy. Material changes will be shown by updating the “Last updated” date above and, where the law requires, with additional notice.</p>
+
+  <h2>12. Contact us</h2>
+  <p>Questions about this policy or your data: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+</Page>

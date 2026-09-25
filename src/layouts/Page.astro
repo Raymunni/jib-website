@@ -1,0 +1,22 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+const { title, description, noindex } = Astro.props;
+---
+
+<Base title={title} description={description} noindex={noindex}>
+  <div class="wrap page prose">
+    <slot />
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding-top: 48px;
+  }
+</style>

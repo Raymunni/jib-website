@@ -1,0 +1,286 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import AppCta from '../../components/AppCta.astro';
+import { SITE, HUBS, type Campaign } from '../../config';
+import { guideSlug, guideUrl, formatDate, type Guide } from '../../lib/guides';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((g) => ({ params: { slug: guideSlug(g) }, props: { guide: g, all: guides } }));
+}
+
+interface Props {
+  guide: Guide;
+  all: Guide[];
+}
+
+const { guide, all } = Astro.props;
+const { Content, headings } = await render(guide);
+const d = guide.data;
+const hub = HUBS[d.hub];
+const campaign = d.hub as Campaign;
+const url = new URL(guideUrl(guide), SITE.url).toString();
+
+// Pillar: list every guide in the hub. Cluster page: explicit related
+// guides first, then the pillar, then siblings — so no page is an orphan.
+const siblings = all.filter((g) => g.data.hub === d.hub && g.id !== guide.id);
+const pillar = siblings.find((g) => g.data.pillar);
+const explicit = d.related.map((id) => all.find((g) => g.id === id)).filter((g): g is Guide => Boolean(g));
+const related = d.pillar
+  ? siblings.sort((a, b) => a.data.order - b.data.order)
+  : [...new Set([...explicit, ...(pillar ? [pillar] : []), ...siblings.filter((g) => !g.data.pillar)])].slice(0, 5);
+
+const toc = headings.filter((h) => h.depth === 2);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: d.title,
+    description: d.description,
+    datePublished: d.published.toISOString(),
+    dateModified: d.lastChecked.toISOString(),
+    mainEntityOfPage: url,
+    image: `${SITE.url}/og/default.png`,
+    author: { '@type': 'Person', name: SITE.author.name, url: `${SITE.url}${SITE.author.url}` },
+    publisher: { '@id': `${SITE.url}/#org` },
+    inLanguage: d.market === 'UK' ? 'en-GB' : d.market === 'NZ' ? 'en-NZ' : d.market === 'US' ? 'en-US' : 'en-AU',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Guides', item: `${SITE.url}/guides/` },
+      ...(d.pillar
+        ? [{ '@type': 'ListItem', position: 2, name: hub.title, item: url }]
+        : [
+            { '@type': 'ListItem', position: 2, name: hub.title, item: `${SITE.url}/guides/${d.hub}/` },
+            { '@type': 'ListItem', position: 3, name: d.title, item: url },
+          ]),
+    ],
+  },
+];
+---
+
+<Base title={d.title} description={d.description} ogType="article" jsonLd={jsonLd}>
+  <article class="wrap guide">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/guides/">Guides</a>
+      {
+        !d.pillar && (
+          <>
+            <span aria-hidden="true">›</span>
+            <a href={`/guides/${d.hub}/`}>{hub.title}</a>
+          </>
+        )
+      }
+    </nav>
+
+    <header class="guide-head">
+      <h1>{d.title}</h1>
+      <p class="meta muted">
+        By <a href="/about/">{SITE.author.name}</a> · Rules last checked <time datetime={d.lastChecked.toISOString()}>{formatDate(d.lastChecked)}</time>
+        {d.market !== 'global' && <span class="market">{d.market}</span>}
+      </p>
+      <div class="answer">
+        <p class="answer-label">Short answer</p>
+        <p set:html={d.answer} />
+      </div>
+    </header>
+
+    <div class="layout">
+      {
+        toc.length > 2 && (
+          <nav class="toc" aria-label="On this page">
+            <p>On this page</p>
+            <ol>
+              {toc.map((h) => (
+                <li>
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
+
+      <div class="prose body">
+        <Content components={{ AppCta }} />
+
+        <AppCta text={d.cta} campaign={campaign} variant="end" />
+
+        {
+          d.sources.length > 0 && (
+            <section class="sources" aria-labelledby="sources">
+              <h2 id="sources">Sources</h2>
+              <p class="muted">Every rule on this page is taken from these official sources. If a rule has changed, please <a href="/contact/">tell us</a> and we’ll fix it.</p>
+              <ol>
+                {d.sources.map((s) => (
+                  <li>
+                    <a href={s.url} rel="noopener">
+                      {s.title}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )
+        }
+
+        <p class="disclaimer muted">
+          This guide is general information, not legal or professional advice. Rules differ between states, councils and individual properties, and they change. Confirm with your state regulator or council before starting work, and if in doubt, get a licensed tradesperson.
+        </p>
+      </div>
+    </div>
+
+    {
+      related.length > 0 && (
+        <section class="related" aria-labelledby="related">
+          <h2 id="related">{d.pillar ? 'Guides in this series' : 'Related guides'}</h2>
+          <div class="grid grid-2">
+            {related.map((g) => (
+              <a class="card rel" href={guideUrl(g)}>
+                <strong>{g.data.title}</strong>
+                <span class="muted">{g.data.description}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </article>
+</Base>
+
+<style>
+  .guide {
+    padding-top: 28px;
+  }
+  .crumbs {
+    display: flex;
+    gap: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+  }
+  .crumbs a {
+    color: var(--dim);
+    text-decoration: none;
+  }
+  .crumbs a:hover {
+    color: #fff;
+  }
+  .guide-head {
+    max-width: 820px;
+  }
+  .guide-head h1 {
+    font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  }
+  .meta {
+    font-size: 0.92rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .market {
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 1px 8px;
+  }
+  .answer {
+    margin-top: 22px;
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+  }
+  .answer-label {
+    margin: 0 0 6px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-2);
+  }
+  .answer p:last-child {
+    margin: 0;
+    color: var(--ink);
+    font-size: 1.08rem;
+  }
+  .layout {
+    display: grid;
+    gap: 32px;
+    margin-top: 32px;
+  }
+  @media (min-width: 1000px) {
+    .layout {
+      grid-template-columns: 1fr 240px;
+    }
+    .toc {
+      order: 2;
+      position: sticky;
+      top: 88px;
+      align-self: start;
+    }
+  }
+  .toc {
+    font-size: 0.92rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+  }
+  .toc p {
+    margin: 0 0 8px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .toc ol {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  .toc a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .toc a:hover {
+    color: #fff;
+  }
+  .body :global(h2) {
+    scroll-margin-top: 84px;
+  }
+  .sources {
+    margin-top: 3em;
+    font-size: 0.95rem;
+  }
+  .sources li {
+    word-break: break-word;
+  }
+  .disclaimer {
+    margin-top: 2em;
+    font-size: 0.88rem;
+  }
+  .related {
+    margin-top: 64px;
+  }
+  .rel {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .rel:hover {
+    border-color: var(--accent-2);
+    color: var(--text);
+  }
+  .rel strong {
+    font-size: 1.05rem;
+  }
+  .rel span {
+    font-size: 0.9rem;
+  }
+</style>
