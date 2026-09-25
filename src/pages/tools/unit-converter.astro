@@ -1,0 +1,144 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'How many centimetres in an inch?', a: 'One inch is exactly 2.54 cm (25.4 mm). To convert inches to cm, multiply by 2.54. To convert cm to inches, divide by 2.54.' },
+  { q: 'How do I convert mm to inches?', a: 'Divide millimetres by 25.4. For example, 100 mm ÷ 25.4 = 3.94 inches.' },
+  { q: 'How many square feet in a square metre?', a: 'One square metre is about 10.764 square feet. One square foot is 0.0929 m².' },
+  { q: 'What is a "square" in Australian house sizes?', a: 'An old imperial building measure still used in real estate: one square is 100 square feet, or about 9.29 m². A 25-square house is about 232 m².' },
+  { q: 'What is 3/8 of an inch in mm?', a: '3/8" is 9.525 mm, usually rounded to 9.5 mm. The table on this page lists every fraction from 1/16" to 1".' },
+];
+const fractions = Array.from({ length: 16 }, (_, i) => i + 1).map((n) => {
+  let a = n, b = 16;
+  while (a % 2 === 0 && b > 1) { a /= 2; b /= 2; }
+  return { label: b === 1 ? `${a}"` : `${a}/${b}"`, mm: (n / 16) * 25.4 };
+});
+const inches = Array.from({ length: 12 }, (_, i) => i + 1);
+---
+
+<CalcShell
+  title="Inches to cm, mm to inches & more: unit converter for DIY and trades"
+  description="Convert inches to cm and mm (including fractions like 3/8 inch), feet to metres, square feet to m², litres to gallons, pounds to kg and °F to °C. Built for DIY and trades."
+  heading="Unit converter for DIY and trades"
+  lede="Convert length, area, volume, weight and temperature instantly. Type fractions like 3/8 or 1 1/2 for inches."
+  path="/tools/unit-converter/"
+  appName="DIY unit converter"
+  cta="Planning a job with imperial measurements? Snap it in Jib and get the materials list in metric, sized for your job."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <div class="g3">
+      <label><span>Convert</span>
+        <select id="cat">
+          <option value="length">Length</option>
+          <option value="area">Area</option>
+          <option value="volume">Volume</option>
+          <option value="weight">Weight</option>
+          <option value="temp">Temperature</option>
+        </select>
+      </label>
+      <label><span>Value <small>(fractions OK, e.g. 1 3/8)</small></span><input type="text" id="value" value="1" inputmode="decimal" autocomplete="off" /></label>
+      <label><span>From</span><select id="from"></select></label>
+    </div>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>Fractional inches to millimetres</h2>
+    <p>Handy for drill bits, sockets, spanners and plumbing fittings sold in imperial sizes.</p>
+    <table>
+      <thead><tr><th>Inches</th><th>Millimetres</th><th>Inches</th><th>Millimetres</th></tr></thead>
+      <tbody>
+        {
+          fractions.slice(0, 8).map((f, i) => (
+            <tr>
+              <td>{f.label}</td>
+              <td>{f.mm.toFixed(2)} mm</td>
+              <td>{fractions[i + 8].label}</td>
+              <td>{fractions[i + 8].mm.toFixed(2)} mm</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+
+    <h2>Inches to centimetres (1–12 inches)</h2>
+    <table>
+      <thead><tr><th>Inches</th><th>cm</th><th>mm</th></tr></thead>
+      <tbody>
+        {
+          inches.map((n) => (
+            <tr>
+              <td>{n}"</td>
+              <td>{(n * 2.54).toFixed(2)} cm</td>
+              <td>{(n * 25.4).toFixed(1)} mm</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+
+    <h2>Common building conversions</h2>
+    <ul>
+      <li><strong>Timber sizes:</strong> the old "4 × 2" is sold in Australia as 90 × 45 mm (dressed), and "3 × 2" as 70 × 35 mm.</li>
+      <li><strong>Plasterboard sheets:</strong> 2400 × 1200 mm is close to the imperial 8 × 4 ft (2438 × 1219 mm), but not identical.</li>
+      <li><strong>House size:</strong> 1 "square" = 100 ft² = 9.29 m².</li>
+      <li><strong>Pipe sizes:</strong> nominal pipe sizes aren't exact measurements. A "½ inch" pipe fitting is DN15 in metric plumbing.</li>
+    </ul>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { $, fmt, live, val } from '../../scripts/calc';
+
+  const UNITS: Record<string, [string, string, number][]> = {
+    length: [['mm', 'millimetres (mm)', 1], ['cm', 'centimetres (cm)', 10], ['m', 'metres (m)', 1000], ['km', 'kilometres (km)', 1e6], ['in', 'inches (in)', 25.4], ['ft', 'feet (ft)', 304.8], ['yd', 'yards (yd)', 914.4], ['mi', 'miles', 1609344]],
+    area: [['m2', 'square metres (m²)', 1], ['cm2', 'square centimetres (cm²)', 1e-4], ['mm2', 'square millimetres (mm²)', 1e-6], ['ha', 'hectares', 1e4], ['ft2', 'square feet (ft²)', 0.09290304], ['in2', 'square inches (in²)', 0.00064516], ['yd2', 'square yards (yd²)', 0.83612736], ['acre', 'acres', 4046.8564224], ['sq', 'squares (100 ft²)', 9.290304]],
+    volume: [['L', 'litres (L)', 1], ['mL', 'millilitres (mL)', 0.001], ['m3', 'cubic metres (m³)', 1000], ['usgal', 'US gallons', 3.785411784], ['ukgal', 'UK gallons', 4.54609], ['ft3', 'cubic feet (ft³)', 28.316846592], ['yd3', 'cubic yards (yd³)', 764.554857984], ['cup', 'cups (metric)', 0.25]],
+    weight: [['kg', 'kilograms (kg)', 1], ['g', 'grams (g)', 0.001], ['t', 'tonnes', 1000], ['lb', 'pounds (lb)', 0.45359237], ['oz', 'ounces (oz)', 0.028349523125], ['st', 'stone', 6.35029318]],
+    temp: [['C', '°C (Celsius)', 1], ['F', '°F (Fahrenheit)', 1]],
+  };
+  const DEFAULT_FROM: Record<string, string> = { length: 'in', area: 'ft2', volume: 'usgal', weight: 'lb', temp: 'F' };
+
+  /** Accepts 12, 12.5, 3/8, 1 3/8 and 1-3/8. */
+  function parse(s: string): number {
+    const t = s.trim().replace(/[″"]/g, '').replace(/-/g, ' ');
+    const mixed = t.match(/^(-?\d+(?:\.\d+)?)\s+(\d+)\/(\d+)$/);
+    if (mixed) return parseFloat(mixed[1]) + parseInt(mixed[2]) / parseInt(mixed[3]);
+    const frac = t.match(/^(-?\d+)\/(\d+)$/);
+    if (frac) return parseInt(frac[1]) / parseInt(frac[2]);
+    return parseFloat(t);
+  }
+
+  const cat = $<HTMLSelectElement>('cat');
+  const from = $<HTMLSelectElement>('from');
+  function fillFrom() {
+    from.innerHTML = UNITS[cat.value].map(([k, l]) => `<option value="${k}">${l}</option>`).join('');
+    from.value = DEFAULT_FROM[cat.value];
+  }
+  cat.addEventListener('change', fillFrom);
+  fillFrom();
+
+  live(() => {
+    const v = parse(val('value'));
+    const units = UNITS[cat.value];
+    const out = $('calc-out');
+    if (!Number.isFinite(v)) {
+      out.innerHTML = '<p class="muted">Enter a number, e.g. 12, 2.5 or 3/8.</p>';
+      $('calc-summary').textContent = '';
+      return;
+    }
+    let list: [string, number][];
+    if (cat.value === 'temp') {
+      const c = from.value === 'C' ? v : ((v - 32) * 5) / 9;
+      list = [['°C (Celsius)', c], ['°F (Fahrenheit)', (c * 9) / 5 + 32], ['K (Kelvin)', c + 273.15]];
+    } else {
+      const base = v * units.find(([k]) => k === from.value)![2];
+      list = units.filter(([k]) => k !== from.value).map(([, l, f]) => [l, base / f]);
+    }
+    const label = units.find(([k]) => k === from.value)?.[1] ?? '';
+    $('calc-summary').textContent = `${fmt(v, 4)} ${label} equals:`;
+    out.innerHTML = `<table><tbody>${list
+      .map(([l, n]) => `<tr><th scope="row">${l}</th><td><strong>${Math.abs(n) >= 1000 ? fmt(n, 2) : Math.abs(n) >= 1 ? fmt(n, 3) : fmt(n, 5)}</strong></td></tr>`)
+      .join('')}</tbody></table>`;
+  });
+</script>

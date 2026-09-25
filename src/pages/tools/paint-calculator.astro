@@ -1,0 +1,103 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'How much paint do I need for a room?', a: 'Work out the wall area (perimeter × height), subtract doors and windows, multiply by the number of coats, and divide by the paint’s coverage (often around 14–16 m² per litre per coat for interior acrylic — check the tin). A typical 4 × 3.5 m bedroom with 2.4 m ceilings, one door and one window, needs roughly 5 litres for two coats on the walls, plus about 2 litres for the ceiling.' },
+  { q: 'How many coats of paint do I need?', a: 'Two coats is standard for walls. You may need a primer or sealer first on new plasterboard, patched areas, bare timber, or when changing from a dark colour to a light one.' },
+  { q: 'How much does a 10 litre tin of paint cover?', a: 'At about 14 m² per litre, a 10 L tin covers roughly 140 m² for one coat, or 70 m² for two coats. Coverage varies with the product and the surface.' },
+  { q: 'Should I buy extra paint?', a: 'Yes, about 10% for touch-ups and absorbent surfaces. Keep leftover paint, labelled with the room, for future repairs.' },
+];
+---
+
+<CalcShell
+  title="Paint calculator: how much paint do I need for a room?"
+  description="Free paint calculator: enter your room size, doors, windows and coats to see how many litres of paint you need for walls and ceiling, and which tin sizes to buy."
+  heading="Paint calculator"
+  lede="Enter the room and we’ll work out how many litres you need for walls and ceiling, and the tins to buy."
+  path="/tools/paint-calculator/"
+  appName="Paint calculator"
+  cta="Painting more than one room? Snap each one in Jib and get the full plan: prep, steps, paint, primer and tools, on one shopping list."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <fieldset>
+      <legend>The room</legend>
+      <div class="g3">
+        <label><span>Length (m)</span><input type="number" id="len" value="4" min="0.5" step="0.1" /></label>
+        <label><span>Width (m)</span><input type="number" id="wid" value="3.5" min="0.5" step="0.1" /></label>
+        <label><span>Ceiling height (m)</span><input type="number" id="ht" value="2.4" min="1.8" step="0.05" /></label>
+      </div>
+      <div class="g3">
+        <label><span>Doors</span><input type="number" id="doors" value="1" min="0" step="1" /></label>
+        <label><span>Windows</span><input type="number" id="windows" value="1" min="0" step="1" /></label>
+        <label><span>Coats</span><select id="coats"><option>1</option><option selected>2</option><option>3</option></select></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>What you’re painting</legend>
+      <label class="check"><input type="checkbox" id="walls" checked /> Walls</label>
+      <label class="check"><input type="checkbox" id="ceiling" /> Ceiling</label>
+      <label class="check"><input type="checkbox" id="primer" /> Include primer/sealer (new plasterboard, patches or a big colour change)</label>
+      <label><span>Coverage <small>(m² per litre per coat, check your tin)</small></span><input type="number" id="cover" value="14" min="5" max="25" step="0.5" /></label>
+    </fieldset>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>How the numbers work</h2>
+    <p><strong>Wall area</strong> = 2 × (length + width) × height, minus about 1.7 m² per standard door (2040 × 820 mm) and 1.5 m² per typical window. <strong>Ceiling area</strong> = length × width.</p>
+    <p><strong>Litres</strong> = area × coats ÷ coverage, plus 10% for touch-ups and absorbent surfaces. We use 14 m² per litre by default, a slightly conservative figure for interior acrylic; many tins quote 14–16 m². Textured, porous or dark surfaces use more.</p>
+    <p><strong>Tins:</strong> we suggest the combination of 10 L, 4 L and 1 L tins that covers what you need with the least left over.</p>
+    <h2>Don’t forget</h2>
+    <ul>
+      <li>Trims and doors usually use a separate enamel or semi-gloss, about 1 L per door for two coats.</li>
+      <li>Patch holes and cracks first (see <a href="/guides/how-to/how-to-patch-a-hole-in-plasterboard/">how to patch plasterboard</a>), then spot-prime the patches.</li>
+      <li>Bathrooms and laundries need a paint made for wet areas; ceilings often use a flat ceiling white.</li>
+      <li>Painting is DIY-legal everywhere, but homes built before 1970 may have lead paint. Don’t sand or scrape old layers until you’ve checked.</li>
+    </ul>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { $, num, fmt, rows, summary, live } from '../../scripts/calc';
+
+  // Least-waste combination of 10/4/1 L tins covering `need` litres.
+  function tins(need: number) {
+    let best: [number, number, number] = [Math.ceil(need / 10), 0, 0];
+    let bestWaste = best[0] * 10 - need;
+    for (let a = 0; a <= Math.ceil(need / 10); a++)
+      for (let b = 0; b <= 3; b++) {
+        const rest = need - a * 10 - b * 4;
+        const c = Math.max(0, Math.ceil(rest));
+        if (c > 3) continue;
+        const waste = a * 10 + b * 4 + c - need;
+        if (waste >= 0 && (waste < bestWaste || (waste === bestWaste && a + b + c < best[0] + best[1] + best[2]))) {
+          best = [a, b, c];
+          bestWaste = waste;
+        }
+      }
+    return best.map((n, i) => (n ? `${n} × ${[10, 4, 1][i]} L` : '')).filter(Boolean).join(' + ') || '1 × 1 L';
+  }
+
+  live(() => {
+    const L = num('len'), W = num('wid'), H = num('ht');
+    const coats = num('coats');
+    const cover = num('cover') || 14;
+    const walls = ($('walls') as HTMLInputElement).checked;
+    const ceiling = ($('ceiling') as HTMLInputElement).checked;
+    const primer = ($('primer') as HTMLInputElement).checked;
+    const wallArea = Math.max(0, 2 * (L + W) * H - num('doors') * 1.7 - num('windows') * 1.5);
+    const ceilArea = L * W;
+    const out: [string, string, string?][] = [];
+    const wl = walls ? ((wallArea * coats) / cover) * 1.1 : 0;
+    const cl = ceiling ? ((ceilArea * coats) / cover) * 1.1 : 0;
+    if (walls) out.push(['Wall paint', `${fmt(wl)} L`, `${fmt(wallArea)} m² × ${coats} coat${coats === 1 ? '' : 's'} · buy ${tins(wl)}`]);
+    if (ceiling) out.push(['Ceiling paint', `${fmt(cl)} L`, `${fmt(ceilArea)} m² × ${coats} coat${coats === 1 ? '' : 's'} · buy ${tins(cl)}`]);
+    if (primer) {
+      const pl = (((walls ? wallArea : 0) + (ceiling ? ceilArea : 0)) / 12) * 1.1;
+      out.push(['Primer / sealer', `${fmt(pl)} L`, `one coat at about 12 m² per litre · buy ${tins(pl)}`]);
+    }
+    if (!out.length) out.push(['Nothing selected', '–', 'Tick walls or ceiling']);
+    summary(`${fmt(L)} × ${fmt(W)} m room, ${fmt(H)} m ceilings`);
+    rows(out);
+  });
+</script>

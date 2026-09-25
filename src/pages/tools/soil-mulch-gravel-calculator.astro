@@ -1,0 +1,84 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'How much mulch do I need?', a: 'Multiply the garden bed area by the depth. Mulch is usually spread 50–100 mm deep; at 75 mm, each 10 m² of garden needs 0.75 m³, or about 15 × 50 L bags.' },
+  { q: 'How many bags of soil make a cubic metre?', a: 'A cubic metre is 1,000 litres: 40 × 25 L bags or 20 × 50 L bags. For more than about 1 m³, buying in bulk from a landscape supplier is usually much cheaper.' },
+  { q: 'How much does a cubic metre of gravel weigh?', a: 'Roughly 1.5–1.7 tonnes, depending on the stone. Road base is about 1.8–2.0 tonnes per m³, sand about 1.6, garden soil about 1.3, and mulch much lighter at around 0.3–0.4 tonnes.' },
+  { q: 'Can I carry a cubic metre in a box trailer?', a: 'Often not safely. A cubic metre of gravel or road base weighs 1.5–2 tonnes, more than many trailers are rated to carry. Check your trailer’s aggregate trailer mass (ATM) and your car’s towing limit, or get it delivered.' },
+];
+---
+
+<CalcShell
+  title="Soil, mulch & gravel calculator: m³, tonnes and bags"
+  description="How much soil, mulch, gravel, sand or road base do you need? Enter the area and depth to get cubic metres, tonnes and bags, with typical depths for each material."
+  heading="Soil, mulch & gravel calculator"
+  lede="Enter the area and depth to see how many cubic metres, tonnes and bags you need of soil, mulch, gravel, sand or road base."
+  path="/tools/soil-mulch-gravel-calculator/"
+  appName="Soil, mulch and gravel calculator"
+  cta="Doing the garden? Snap it in Jib and get the plan, the materials sized to your beds, and one shopping list for the landscape yard and the hardware store."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <label><span>Material</span>
+      <select id="mat">
+        <option value="mulch" data-d="0.35" data-depth="75">Mulch (typical depth 50–100 mm)</option>
+        <option value="soil" data-d="1.3" data-depth="200">Garden soil (raised beds 200–300 mm)</option>
+        <option value="turf" data-d="1.3" data-depth="100">Turf underlay (typical 100 mm)</option>
+        <option value="compost" data-d="0.6" data-depth="50">Compost (typical 50 mm)</option>
+        <option value="gravel" data-d="1.6" data-depth="50">Gravel / pebbles (typical 50 mm)</option>
+        <option value="sand" data-d="1.6" data-depth="30">Bedding sand (typical 20–30 mm)</option>
+        <option value="roadbase" data-d="1.9" data-depth="100" data-compact="1.25">Road base (compacted 75–100 mm)</option>
+      </select>
+    </label>
+    <div class="g4">
+      <label><span>Length (m)</span><input type="number" id="len" value="5" min="0" step="0.1" /></label>
+      <label><span>Width (m)</span><input type="number" id="wid" value="2" min="0" step="0.1" /></label>
+      <label><span>or area (m²)</span><input type="number" id="area" placeholder="optional" min="0" step="0.5" /></label>
+      <label><span>Depth (mm)</span><input type="number" id="depth" value="75" min="10" step="5" /></label>
+    </div>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>How it’s worked out</h2>
+    <p><strong>Volume (m³) = area (m²) × depth (m).</strong> Road base is ordered about 25% over the compacted volume, because it shrinks when compacted. <strong>Tonnes</strong> = volume × the material’s density; landscape suppliers usually sell stone, sand and road base by the tonne, and soil and mulch by the cubic metre.</p>
+    <table>
+      <thead><tr><th>Material</th><th>Approx. tonnes per m³</th><th>Typical depth</th></tr></thead>
+      <tbody>
+        <tr><td>Mulch</td><td>0.3–0.4</td><td>50–100 mm</td></tr>
+        <tr><td>Garden soil</td><td>about 1.3</td><td>200–300 mm for raised beds</td></tr>
+        <tr><td>Compost</td><td>about 0.6</td><td>50 mm dug in</td></tr>
+        <tr><td>Gravel and pebbles</td><td>1.5–1.7</td><td>50 mm for paths</td></tr>
+        <tr><td>Bedding sand</td><td>about 1.6</td><td>20–30 mm under pavers</td></tr>
+        <tr><td>Road base</td><td>1.8–2.0</td><td>75–100 mm compacted for paths</td></tr>
+      </tbody>
+    </table>
+    <p>Densities vary with moisture and the product, so ask your supplier for theirs. Building a raised bed? See <a href="/guides/materials/how-many-sleepers-raised-garden-bed/">how many sleepers you need</a>. Paving? See <a href="/guides/materials/paver-base-road-base-and-sand/">road base and sand for pavers</a>.</p>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { $, num, fmt, rows, summary, live } from '../../scripts/calc';
+
+  const mat = $<HTMLSelectElement>('mat');
+  mat.addEventListener('change', () => {
+    ($('depth') as HTMLInputElement).value = mat.selectedOptions[0].dataset.depth ?? '75';
+  });
+
+  live(() => {
+    const opt = mat.selectedOptions[0];
+    const density = parseFloat(opt.dataset.d ?? '1');
+    const compact = parseFloat(opt.dataset.compact ?? '1');
+    const area = num('area') || num('len') * num('wid');
+    const vol = area * (num('depth') / 1000) * compact;
+    const tonnes = vol * density;
+    const out: [string, string, string?][] = [
+      ['Volume', `${fmt(vol, 2)} m³`, compact > 1 ? `includes ${Math.round((compact - 1) * 100)}% extra for compaction` : `${fmt(area, 2)} m² × ${num('depth')} mm`],
+      ['Weight', `${fmt(tonnes, 2)} tonnes`, `at about ${density} t/m³`],
+      ['Bags', `${Math.ceil((vol * 1000) / 50)} × 50 L or ${Math.ceil((vol * 1000) / 25)} × 25 L`, vol > 1 ? 'Over 1 m³, bulk delivery is usually far cheaper than bags.' : 'Good for small jobs; bulk is cheaper for bigger ones.'],
+    ];
+    if (tonnes > 0.75) out.push(['Trailer?', 'Probably get it delivered', `${fmt(tonnes, 1)} t is more than many box trailers are rated to carry. Check your trailer’s ATM and towing limit.`]);
+    summary(`${opt.textContent?.split(' (')[0]} · ${fmt(area, 2)} m² at ${num('depth')} mm`);
+    rows(out);
+  });
+</script>

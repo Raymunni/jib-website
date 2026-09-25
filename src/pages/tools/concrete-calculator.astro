@@ -1,0 +1,95 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'How many bags of concrete do I need per cubic metre?', a: 'A 20 kg bag of concrete mix typically makes about 0.01 m³, so roughly 100–110 bags per cubic metre. Check the yield printed on the bag, as it varies by product.' },
+  { q: 'How many bags of concrete for a fence post?', a: 'It depends on the hole. A 300 mm wide, 600 mm deep hole holds about 0.042 m³, or about 0.036 m³ once a 100 × 100 mm post is in it, which is roughly 4 × 20 kg bags. Smaller holes for light posts may need only 2.' },
+  { q: 'When should I order premixed concrete instead of bags?', a: 'Once you need more than about 1 m³ (100+ bags), a premix truck is usually cheaper and far less work. Many suppliers have a minimum order and charge extra for small loads.' },
+  { q: 'How thick should a concrete slab be?', a: 'Garden shed and path slabs are commonly 75–100 mm, and driveways around 100–125 mm with reinforcing mesh. Anything structural, or a slab for a building that needs approval, must follow the engineer’s or building approval’s specification.' },
+];
+---
+
+<CalcShell
+  title="Concrete calculator: m³ and bags for slabs, footings and post holes"
+  description="Free concrete calculator for Australia: work out cubic metres and 20 kg bags for a slab, strip footing or post holes, with extra for waste. Plus when to order premix."
+  heading="Concrete calculator"
+  lede="Work out how much concrete you need, in cubic metres and 20 kg bags, for a slab, a footing or post holes."
+  path="/tools/concrete-calculator/"
+  appName="Concrete calculator"
+  cta="Pouring a slab or setting posts? Snap the job in Jib and get the steps, materials and tools, plus a check on whether it needs council approval."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <label><span>What are you pouring?</span>
+      <select id="shape">
+        <option value="slab">Slab (path, shed base, patio)</option>
+        <option value="footing">Strip footing</option>
+        <option value="holes">Post holes</option>
+      </select>
+    </label>
+    <div class="g3" id="rect">
+      <label><span>Length (m)</span><input type="number" id="len" value="3" min="0.1" step="0.1" /></label>
+      <label><span>Width (m)</span><input type="number" id="wid" value="3" min="0.1" step="0.05" /></label>
+      <label><span>Thickness / depth (mm)</span><input type="number" id="thick" value="100" min="25" step="5" /></label>
+    </div>
+    <div class="g4" id="holes" hidden>
+      <label><span>Number of posts</span><input type="number" id="count" value="6" min="1" step="1" /></label>
+      <label><span>Hole diameter (mm)</span><input type="number" id="dia" value="300" min="100" step="10" /></label>
+      <label><span>Hole depth (mm)</span><input type="number" id="depth" value="600" min="200" step="50" /></label>
+      <label><span>Post size (mm)</span><input type="number" id="post" value="100" min="0" step="5" /></label>
+    </div>
+    <div class="g2">
+      <label><span>Extra for waste</span><select id="waste"><option value="0.05">5%</option><option value="0.1" selected>10%</option><option value="0.15">15%</option></select></label>
+      <label><span>Bag yield <small>(m³ per 20 kg bag, check the bag)</small></span><input type="number" id="yield" value="0.0095" min="0.005" max="0.02" step="0.0005" /></label>
+    </div>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>How it’s worked out</h2>
+    <p><strong>Slab or footing:</strong> length × width × thickness (converted to metres). <strong>Post holes:</strong> π × radius² × depth for each hole, minus the volume of the post. Then we add your waste allowance, because ground is never perfectly level and holes are never perfectly round.</p>
+    <p><strong>Bags:</strong> volume ÷ the bag’s yield. We default to 0.0095 m³ per 20 kg bag, slightly under the 0.01 m³ many bags quote, so you don’t run short. Rapid-set post mixes often yield a little less; check the bag.</p>
+    <h2>Before you pour</h2>
+    <ul>
+      <li>Check whether the structure needs council approval, such as <a href="/guides/council-approval/shed-without-council-approval/">sheds</a> or <a href="/guides/council-approval/deck-council-approval-nsw/">decks</a>.</li>
+      <li>Call Before You Dig Australia (1100) before digging post holes or footings to locate underground services.</li>
+      <li>Wear gloves and eye protection: wet cement is caustic and can burn skin.</li>
+      <li>For paths and driveways, you’ll also need road base under the slab. See <a href="/tools/soil-mulch-gravel-calculator/">the soil, mulch and gravel calculator</a>.</li>
+    </ul>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { $, num, val, fmt, rows, summary, live } from '../../scripts/calc';
+
+  live(() => {
+    const shape = val('shape');
+    ($('rect') as HTMLElement).hidden = shape === 'holes';
+    ($('holes') as HTMLElement).hidden = shape !== 'holes';
+    const waste = parseFloat(val('waste')) || 0;
+    const yieldM3 = num('yield') || 0.0095;
+    let vol = 0;
+    let desc = '';
+    if (shape === 'holes') {
+      const n = num('count');
+      const r = num('dia') / 2000;
+      const d = num('depth') / 1000;
+      const p = num('post') / 1000;
+      const each = Math.max(0, Math.PI * r * r * d - p * p * d);
+      vol = each * n;
+      desc = `${n} holes, ${num('dia')} mm × ${num('depth')} mm deep (${fmt(each, 3)} m³ each)`;
+    } else {
+      vol = num('len') * num('wid') * (num('thick') / 1000);
+      desc = `${fmt(num('len'), 2)} × ${fmt(num('wid'), 2)} m, ${num('thick')} mm ${shape === 'slab' ? 'thick' : 'deep'}`;
+    }
+    const total = vol * (1 + waste);
+    const bags = Math.ceil(total / yieldM3);
+    const out: [string, string, string?][] = [
+      ['Concrete', `${fmt(total, 2)} m³`, `${fmt(vol, 2)} m³ plus ${Math.round(waste * 100)}% waste`],
+      ['20 kg bags', `${bags.toLocaleString('en-AU')} bags`, `at ${yieldM3} m³ per bag, about ${fmt(bags * 20 / 1000, 2)} tonnes to carry`],
+    ];
+    if (shape === 'holes') out.push(['Per post', `${fmt(bags / Math.max(1, num('count')), 1)} bags`, 'rounded up across all posts']);
+    if (total >= 1) out.push(['Premix?', 'Consider a premix truck', 'Over about 1 m³, ordering premixed concrete is usually cheaper and much less work than bags.']);
+    summary(desc);
+    rows(out);
+  });
+</script>

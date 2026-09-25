@@ -1,0 +1,203 @@
+---
+// Shared page shell for the free calculators: heading, a form slot, a
+// results panel the page's script fills (#calc-out / #calc-summary), an
+// app CTA, an explanation slot, and FAQ with FAQPage structured data.
+import Base from '../layouts/Base.astro';
+import AppCta from './AppCta.astro';
+import { SITE } from '../config';
+
+interface Props {
+  title: string; // <title> and search result title
+  description: string;
+  heading: string;
+  lede: string;
+  path: string; // e.g. /tools/paint-calculator/
+  appName: string; // name used in WebApplication schema
+  cta: string;
+  faqs: { q: string; a: string }[];
+}
+const { title, description, heading, lede, path, appName, cta, faqs } = Astro.props;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: appName,
+    url: `${SITE.url}${path}`,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'AUD' },
+    publisher: { '@id': `${SITE.url}/#org` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base title={title} description={description} jsonLd={jsonLd}>
+  <div class="wrap calc-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/tools/">Free tools</a></nav>
+    <p class="eyebrow">Free tool</p>
+    <h1>{heading}</h1>
+    <p class="lede muted">{lede}</p>
+
+    <form class="calc card" id="calc" onsubmit="return false">
+      <slot name="form" />
+    </form>
+
+    <section class="card results" aria-live="polite">
+      <h2>Result</h2>
+      <p class="muted" id="calc-summary"></p>
+      <div id="calc-out"></div>
+      <slot name="note" />
+    </section>
+
+    <AppCta text={cta} campaign="tools" />
+
+    <article class="prose explain">
+      <slot name="explain" />
+      <h2>Questions</h2>
+      {
+        faqs.map((f) => (
+          <>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </>
+        ))
+      }
+      <p class="muted fine">Estimates only. Check the product label and your measurements before you buy. More free tools: <a href="/tools/">see them all</a>.</p>
+    </article>
+  </div>
+</Base>
+
+<style is:global>
+  .calc-page {
+    padding-top: 32px;
+  }
+  .calc-page .crumbs {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  .calc-page .crumbs a {
+    color: var(--dim);
+    text-decoration: none;
+  }
+  .calc-page .lede {
+    font-size: 1.1rem;
+    max-width: 62ch;
+  }
+  .calc {
+    margin-top: 22px;
+    max-width: 860px;
+    display: grid;
+    gap: 16px;
+  }
+  .calc fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .calc legend {
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+  }
+  .calc .g2,
+  .calc .g3,
+  .calc .g4 {
+    display: grid;
+    gap: 12px;
+  }
+  @media (min-width: 560px) {
+    .calc .g2 { grid-template-columns: 1fr 1fr; }
+    .calc .g3 { grid-template-columns: 1fr 1fr 1fr; }
+    .calc .g4 { grid-template-columns: repeat(4, 1fr); }
+  }
+  .calc label > span {
+    display: block;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+    font-size: 0.92rem;
+  }
+  .calc label small {
+    font-weight: 400;
+    color: var(--dim);
+  }
+  .calc input[type='number'],
+  .calc input[type='text'],
+  .calc select {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--ink);
+    font: inherit;
+  }
+  .calc .check {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .calc .check input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+  }
+  .calc [hidden] {
+    display: none !important;
+  }
+  .calc-page .results {
+    margin-top: 18px;
+    max-width: 860px;
+    border-left: 4px solid var(--ok);
+  }
+  .calc-page .results h2 {
+    margin-top: 0;
+  }
+  .calc-page .results table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .calc-page .results th,
+  .calc-page .results td {
+    text-align: left;
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .calc-page .results th {
+    color: var(--ink);
+    width: 42%;
+    padding-right: 12px;
+  }
+  .calc-page .results td strong {
+    display: block;
+    color: var(--ink);
+    font-size: 1.08rem;
+  }
+  .calc-page .results td span {
+    color: var(--dim);
+    font-size: 0.9rem;
+  }
+  .calc-page .big {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 4px 0;
+  }
+  .calc-page .explain {
+    margin-top: 44px;
+  }
+  .calc-page .fine {
+    font-size: 0.88rem;
+  }
+</style>

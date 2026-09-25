@@ -1,0 +1,88 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'How many palings do I need per metre?', a: 'For 150 mm palings butted with no gap, about 6.7 per metre. For 100 mm palings, 10 per metre. Lapped-and-capped fences use about 20% more, because palings on both faces overlap each other by about 25 mm.' },
+  { q: 'How far apart should fence posts be?', a: 'Timber paling fences in Australia commonly use posts at about 2.4 m centres, which matches standard 2.4 m rail lengths. Windy sites, taller fences or heavier designs may need closer spacing. Check the product or supplier’s span guidance.' },
+  { q: 'How many rails does a paling fence need?', a: 'Two rails for fences up to about 1.5 m high, and three rails for 1.8 m fences, so the palings don’t bow or twist.' },
+  { q: 'Do I need approval for a new fence?', a: 'Many boundary fences are exempt from approval up to a set height, but limits vary by state and council, and you may need to talk to your neighbour about sharing costs. See our fence height guide.' },
+];
+---
+
+<CalcShell
+  title="Fence calculator: palings, rails, posts and concrete"
+  description="Free timber paling fence calculator: enter the fence length and height to get the number of palings, rails, posts, concrete bags and nails, for butted or lapped fences."
+  heading="Fence calculator"
+  lede="Enter your fence line and we’ll count the palings, rails, posts, concrete and nails for a timber paling fence."
+  path="/tools/fence-calculator/"
+  appName="Fence calculator"
+  cta="Replacing a fence? Snap it in Jib and get the plan, the materials, a check on approval, and one shopping list."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <div class="g3">
+      <label><span>Fence length (m)</span><input type="number" id="len" value="20" min="1" step="0.5" /></label>
+      <label><span>Height</span><select id="ht"><option value="1.2">1.2 m</option><option value="1.5">1.5 m</option><option value="1.8" selected>1.8 m</option><option value="2.1">2.1 m</option></select></label>
+      <label><span>Style</span><select id="style"><option value="butted">Butted palings</option><option value="lapped">Lapped and capped</option></select></label>
+    </div>
+    <div class="g4">
+      <label><span>Paling width (mm)</span><select id="pw"><option>100</option><option>125</option><option selected>150</option></select></label>
+      <label><span>Gap between palings (mm)</span><input type="number" id="gap" value="0" min="0" step="5" /></label>
+      <label><span>Post spacing (m)</span><input type="number" id="span" value="2.4" min="1.2" max="3" step="0.1" /></label>
+      <label><span>Gates</span><input type="number" id="gates" value="0" min="0" step="1" /></label>
+    </div>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>How it’s worked out</h2>
+    <ul>
+      <li><strong>Posts:</strong> fence length ÷ post spacing, rounded up, plus one, plus an extra post per gate.</li>
+      <li><strong>Rails:</strong> one rail per bay per row: two rows up to 1.5 m, three rows above that.</li>
+      <li><strong>Palings (butted):</strong> fence length ÷ (paling width + gap), plus 5% spare for splits and offcuts. <strong>Lapped and capped:</strong> palings on both faces, each overlapping about 25 mm, plus a capping rail along the top.</li>
+      <li><strong>Concrete:</strong> a 300 mm hole at least 600 mm deep (deeper for taller fences), less the post, at about 0.0095 m³ per 20 kg bag. Use the <a href="/tools/concrete-calculator/">concrete calculator</a> for other hole sizes.</li>
+      <li><strong>Nails:</strong> two galvanised nails per paling per rail, plus 10%.</li>
+    </ul>
+    <h2>Before you build</h2>
+    <ul>
+      <li>Check height limits and whether you need approval: <a href="/guides/council-approval/fence-height-without-council-approval/">how high a fence can be without approval</a>.</li>
+      <li>Talk to your neighbour. Dividing fence laws in each state set out how costs are shared.</li>
+      <li>Call Before You Dig Australia (1100) before digging post holes.</li>
+      <li>Use H4 treated or naturally durable posts in the ground, or galvanised steel posts, and H3 for rails and palings.</li>
+    </ul>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { num, val, fmt, rows, summary, live } from '../../scripts/calc';
+
+  live(() => {
+    const L = num('len');
+    const H = parseFloat(val('ht'));
+    const lapped = val('style') === 'lapped';
+    const pw = num('pw');
+    const gap = lapped ? 0 : num('gap');
+    const span = num('span') || 2.4;
+    const gates = num('gates');
+    const bays = Math.ceil(L / span);
+    const posts = bays + 1 + gates;
+    const railRows = H <= 1.5 ? 2 : 3;
+    const rails = bays * railRows;
+    const cover = lapped ? (pw * 2 - 50) / 2 : pw + gap; // lapped: two layers, 25 mm overlap each side
+    const palings = Math.ceil(((L * 1000) / cover) * 1.05);
+    const depth = Math.max(0.6, H / 3); // at least 600 mm in the ground
+    const postLen = H + depth;
+    const holeVol = Math.PI * 0.15 * 0.15 * depth - 0.1 * 0.1 * depth;
+    const bags = Math.ceil((holeVol * posts * 1.1) / 0.0095);
+    const nails = Math.ceil(palings * railRows * 2 * 1.1);
+    const out: [string, string, string?][] = [
+      ['Palings', `${palings.toLocaleString('en-AU')}`, `${pw} mm, ${lapped ? 'lapped and capped' : gap ? `${gap} mm gaps` : 'butted'} · ${fmt(H, 1)} m long, incl. 5% spare`],
+      ['Rails', `${rails}`, `${railRows} rows × ${bays} bays, about ${fmt(span, 1)} m long`],
+      ['Posts', `${posts}`, `about ${fmt(postLen, 1)} m long, ${fmt(depth * 1000, 0)} mm in the ground${gates ? `, incl. ${gates} extra for gates` : ''}`],
+      ['Concrete', `${bags} × 20 kg bags`, 'for 300 mm post holes'],
+      ['Nails', `${nails.toLocaleString('en-AU')}`, 'galvanised, 2 per paling per rail'],
+    ];
+    if (lapped) out.push(['Capping', `${fmt(L * 1.05, 1)} m`, 'timber capping along the top']);
+    summary(`${fmt(L, 1)} m of ${fmt(H, 1)} m fence, posts at ${fmt(span, 1)} m`);
+    rows(out);
+  });
+</script>

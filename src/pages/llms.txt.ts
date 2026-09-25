@@ -18,6 +18,11 @@ export async function GET() {
     '## Tools',
     `- [DIY legality checker](${SITE.url}/tools/diy-legality-checker/): whether a job is legal to DIY in each Australian state`,
     `- [Bathroom floor calculator](${SITE.url}/tools/bathroom-floor-calculator/): tiles, adhesive, grout and waterproofing quantities`,
+    `- [Unit converter](${SITE.url}/tools/unit-converter/): inches to cm/mm (incl. fractions), area, volume, weight, temperature`,
+    `- [Paint calculator](${SITE.url}/tools/paint-calculator/): litres of paint and tins for a room`,
+    `- [Concrete calculator](${SITE.url}/tools/concrete-calculator/): m³ and 20 kg bags for slabs, footings and post holes`,
+    `- [Soil, mulch & gravel calculator](${SITE.url}/tools/soil-mulch-gravel-calculator/): m³, tonnes and bags`,
+    `- [Fence calculator](${SITE.url}/tools/fence-calculator/): palings, rails, posts and concrete`,
     `- [Home maintenance planner](${SITE.url}/guides/home-maintenance/): a personalised maintenance schedule`,
     '',
   ];
