@@ -1,0 +1,333 @@
+---
+import Base from '../../layouts/Base.astro';
+import AppCta from '../../components/AppCta.astro';
+import { SITE } from '../../config';
+
+const faqs = [
+  {
+    q: 'How much extra tile should I buy for a bathroom floor?',
+    a: 'Add about 10% for a straight lay, and 15% for diagonal or herringbone patterns, small rooms with lots of cuts, or large-format tiles. Buy everything from the same batch, and keep a few spare tiles for future repairs.',
+  },
+  {
+    q: 'How much tile adhesive do I need per square metre?',
+    a: 'Roughly 3.5 kg/m² with a 6 mm notched trowel, 5.5 kg/m² with a 10 mm notch and 7 kg/m² with a 12 mm notch, before back-buttering large tiles. Bigger tiles need a bigger notch. Always check the coverage figure on your adhesive bag.',
+  },
+  {
+    q: 'How is grout quantity calculated?',
+    a: 'Grout (kg per m²) = (tile length + tile width) ÷ (tile length × tile width) × joint width × tile thickness × 1.6, with all sizes in millimetres. Smaller tiles and wider joints use much more grout.',
+  },
+  {
+    q: 'Do I need to waterproof the whole bathroom floor?',
+    a: 'Under the National Construction Code (Housing Provisions Part 10.2), the shower area must be waterproof, including the shower walls to 1800 mm. Outside the shower, a concrete or fibre-cement floor must be at least water resistant, and a timber-based floor (particleboard, plywood) must be waterproof. Many waterproofers membrane the whole floor anyway. Rules on who can do the work vary by state.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Bathroom floor tile calculator (Australia)',
+    url: `${SITE.url}/tools/bathroom-floor-calculator/`,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    description: 'Work out tiles, tile adhesive, grout, waterproofing membrane, primer and silicone for a bathroom floor in one go.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'AUD' },
+    publisher: { '@id': `${SITE.url}/#org` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base
+  title="Bathroom floor tile calculator: tiles, adhesive, grout & waterproofing"
+  description="Free calculator for tiling a bathroom floor in Australia: how many tiles, bags of adhesive and grout, litres of waterproofing membrane and primer — in one go."
+  jsonLd={jsonLd}
+>
+  <div class="wrap page">
+    <p class="eyebrow">Free tool</p>
+    <h1>Bathroom floor calculator</h1>
+    <p class="lede muted">Enter the room and your tile. You’ll get the whole shopping list: tiles, adhesive, grout, waterproofing membrane, primer and silicone, with wastage included.</p>
+
+    <form class="calc card" id="calc" onsubmit="return false">
+      <fieldset>
+        <legend>The floor</legend>
+        <div class="grid2">
+          <label><span>Length (m)</span><input type="number" id="len" value="2.4" min="0.3" max="30" step="0.01" inputmode="decimal" /></label>
+          <label><span>Width (m)</span><input type="number" id="wid" value="1.8" min="0.3" max="30" step="0.01" inputmode="decimal" /></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>The tile</legend>
+        <div class="grid2">
+          <label><span>Tile size</span>
+            <select id="size">
+              <option value="300x300">300 × 300 mm</option>
+              <option value="450x450">450 × 450 mm</option>
+              <option value="300x600" selected>300 × 600 mm</option>
+              <option value="600x600">600 × 600 mm</option>
+              <option value="600x1200">600 × 1200 mm</option>
+              <option value="200x200">200 × 200 mm</option>
+              <option value="100x100">100 × 100 mm (mosaic sheet)</option>
+              <option value="custom">Custom…</option>
+            </select>
+          </label>
+          <label><span>Laying pattern</span>
+            <select id="pattern">
+              <option value="0.10">Straight / brick bond (+10%)</option>
+              <option value="0.15">Diagonal (+15%)</option>
+              <option value="0.15">Herringbone (+15%)</option>
+            </select>
+          </label>
+        </div>
+        <div class="grid2" id="custom" hidden>
+          <label><span>Tile length (mm)</span><input type="number" id="tl" value="300" min="20" max="3000" /></label>
+          <label><span>Tile width (mm)</span><input type="number" id="tw" value="300" min="20" max="3000" /></label>
+        </div>
+        <div class="grid3">
+          <label><span>Tile thickness (mm)</span><input type="number" id="thick" value="9" min="3" max="30" step="0.5" /></label>
+          <label><span>Grout joint (mm)</span><input type="number" id="joint" value="2" min="1" max="15" step="0.5" /></label>
+          <label><span>m² per box <small>(optional)</small></span><input type="number" id="box" placeholder="e.g. 1.44" min="0.1" max="10" step="0.01" /></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Waterproofing</legend>
+        <label class="check"><input type="checkbox" id="wp" checked /> Include waterproofing membrane and primer</label>
+        <label class="check"><input type="checkbox" id="shower" checked /> There’s a shower on this floor</label>
+        <div class="grid2" id="showerDims">
+          <label><span>Shower length (m)</span><input type="number" id="sl" value="0.9" min="0.5" max="5" step="0.05" /></label>
+          <label><span>Shower width (m)</span><input type="number" id="sw" value="0.9" min="0.5" max="5" step="0.05" /></label>
+        </div>
+      </fieldset>
+    </form>
+
+    <section class="card results" aria-live="polite">
+      <h2>Your shopping list</h2>
+      <p class="muted" id="summary"></p>
+      <table>
+        <tbody id="out"></tbody>
+      </table>
+      <p class="fine muted">Estimates only. Coverage varies by product, trowel and substrate — check each product’s data sheet and buy tiles from one batch.</p>
+    </section>
+
+    <AppCta text="Doing the whole bathroom? Photograph it in Jib: you get this list plus the steps, the cost, and a flag on anything that needs a licensed tradie in your state." campaign="tools" />
+
+    <article class="prose explain">
+      <h2>How the numbers are worked out</h2>
+      <h3>Tiles</h3>
+      <p>Floor area × (1 + wastage) ÷ the area of one tile, rounded up. Wastage covers cuts, breakages and a few spares: about 10% for a straight lay and 15% for diagonal or herringbone. Small bathrooms have a high share of cut tiles, so don’t skimp.</p>
+      <h3>Tile adhesive</h3>
+      <p>Cement-based adhesive at roughly 3.5 kg/m² with a 6 mm notched trowel (tiles under 300 mm), 5.5 kg/m² with a 10 mm notch (tiles up to about 450 × 450 or 300 × 600 mm) and 7 kg/m² with a 12 mm notch (600 × 600 mm and larger). Large tiles also need back-buttering for full coverage, which is why we add 15% for them. Sold in 20 kg bags.</p>
+      <h3>Grout</h3>
+      <p>The standard manufacturer formula: <strong>kg/m² = (L + W) ÷ (L × W) × joint × depth × 1.6</strong>, with tile length L, width W, joint width and depth (tile thickness) in mm. Plus 10% for waste. Cement grout usually comes in 5 kg bags.</p>
+      <h3>Waterproofing membrane and primer</h3>
+      <p>Under the National Construction Code (<a href="https://ncc.abcb.gov.au/editions/ncc-2022/adopted/housing-provisions/10-health-and-amenity/part-102-wet-area-waterproofing" rel="noopener">Housing Provisions Part 10.2</a>, which draws on <strong>AS 3740</strong>), the shower area must be waterproof, walls included to 1800 mm high. Outside the shower, a concrete or fibre-cement floor must be at least water resistant, and a timber-based floor such as particleboard or plywood must be waterproof. Most people membrane the whole floor with an upturn at the walls, so that’s what this calculator assumes: the full floor, a 150 mm upturn around the room, and 1800 mm up two walls of the shower. Liquid membranes need about 1.4 L/m² across two coats (check your product) and primer about 0.15 L/m².</p>
+      <p>Whether you can apply the membrane yourself depends on your state and the size of the job. Read <a href="/guides/diy-legal/can-i-waterproof-my-own-bathroom/">can I waterproof my own bathroom?</a> before you buy it.</p>
+      <h3>Silicone</h3>
+      <p>Wall–floor junctions and the shower hob or screen line are sealed with flexible silicone, not grout. One 300 mL cartridge does about 8 m of joint.</p>
+      <h3>Not included</h3>
+      <ul>
+        <li>Sand and cement screed for falls to the waste (depends on your floor)</li>
+        <li>Floor waste, puddle flange and any plumbing — that’s licensed work</li>
+        <li>Wall tiles (work each wall out as a separate area)</li>
+        <li>Tile levelling clips, spacers, sealer and tools</li>
+      </ul>
+      <p>Want the full list with quantities for other materials? Read <a href="/guides/materials/what-do-you-need-to-tile-a-bathroom-floor/">what you need to tile a bathroom floor</a>.</p>
+
+      <h2>Questions</h2>
+      {
+        faqs.map((f) => (
+          <>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </>
+        ))
+      }
+    </article>
+  </div>
+</Base>
+
+<script>
+  const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const num = (id: string) => parseFloat(($<HTMLInputElement>(id)).value) || 0;
+  const bags = (n: number, unit: string) => `${n} × ${unit}${n === 1 ? "" : "s"}`;
+  const fmt = (n: number, d = 1) => (Math.round(n * 10 ** d) / 10 ** d).toLocaleString('en-AU');
+
+  function calc() {
+    const size = $<HTMLSelectElement>('size').value;
+    $('custom').hidden = size !== 'custom';
+    const showerOn = $<HTMLInputElement>('shower').checked;
+    $('showerDims').hidden = !showerOn;
+    const wpOn = $<HTMLInputElement>('wp').checked;
+
+    const L = num('len');
+    const W = num('wid');
+    const area = L * W;
+    const perim = 2 * (L + W);
+    const [tl, tw] = size === 'custom' ? [num('tl'), num('tw')] : size.split('x').map(Number);
+    const waste = parseFloat($<HTMLSelectElement>('pattern').value);
+    const thick = num('thick');
+    const joint = num('joint');
+    const boxM2 = num('box');
+
+    if (!area || !tl || !tw) return;
+
+    const tileM2 = (tl / 1000) * (tw / 1000);
+    const orderM2 = area * (1 + waste);
+    const tiles = Math.ceil(orderM2 / tileM2);
+    const longSide = Math.max(tl, tw);
+
+    // Adhesive: notch chosen by tile size; back-buttering for large format.
+    const large = tileM2 >= 0.3; // 600 x 600 mm and bigger
+    const [notch, rate] = longSide < 300 ? [6, 3.5] : large ? [12, 7] : [10, 5.5];
+    const adhesiveKg = area * rate * (large ? 1.15 : 1) * 1.05;
+    const groutKg = area * ((tl + tw) / (tl * tw)) * joint * thick * 1.6 * 1.1;
+
+    const shower = showerOn ? (num('sl') + num('sw')) * 1.8 : 0;
+    const membraneM2 = area + perim * 0.15 + shower;
+    const membraneL = membraneM2 * 1.4;
+    const primerL = membraneM2 * 0.15;
+    const siliconeM = perim + (showerOn ? num('sl') + num('sw') : 0);
+
+    const rows: [string, string, string][] = [
+      ['Floor tiles', `${tiles.toLocaleString('en-AU')} tiles`, `${fmt(orderM2, 2)} m² incl. ${Math.round(waste * 100)}% wastage${boxM2 ? ` · ${Math.ceil(orderM2 / boxM2)} boxes` : ''}`],
+      ['Tile adhesive', `${bags(Math.ceil(adhesiveKg / 20), "20 kg bag")}`, `${fmt(adhesiveKg)} kg · ${notch} mm notched trowel${large ? ', back-butter tiles' : ''}`],
+      ['Grout', `${bags(Math.max(1, Math.ceil(groutKg / 5)), "5 kg bag")}`, `${fmt(groutKg, 2)} kg for ${fmt(joint)} mm joints`],
+    ];
+    if (wpOn) {
+      rows.push(['Waterproofing membrane', `${fmt(membraneL)} L`, `${fmt(membraneM2, 2)} m² incl. upturns${showerOn ? ' and shower walls to 1800 mm' : ''} · 2 coats`]);
+      rows.push(['Membrane primer', `${fmt(primerL)} L`, 'Check it’s compatible with your membrane']);
+    }
+    rows.push(['Silicone (wet-area, mould-resistant)', `${Math.max(1, Math.ceil(siliconeM / 8))} × 300 mL`, `About ${fmt(siliconeM)} m of movement joints`]);
+
+    $('summary').textContent = `${fmt(area, 2)} m² floor · ${tl} × ${tw} mm tiles · ${fmt(perim, 2)} m perimeter`;
+    $('out').innerHTML = rows.map(([a, b, c]) => `<tr><th scope="row">${a}</th><td><strong>${b}</strong><span>${c}</span></td></tr>`).join('');
+  }
+
+  $('calc').addEventListener('input', calc);
+  $('calc').addEventListener('change', calc);
+  calc();
+</script>
+
+<style>
+  .page {
+    padding-top: 40px;
+  }
+  .lede {
+    font-size: 1.1rem;
+    max-width: 60ch;
+  }
+  .calc {
+    margin-top: 24px;
+    max-width: 820px;
+    display: grid;
+    gap: 18px;
+  }
+  fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+  }
+  legend {
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+  }
+  .grid2,
+  .grid3 {
+    display: grid;
+    gap: 12px;
+  }
+  @media (min-width: 560px) {
+    .grid2 {
+      grid-template-columns: 1fr 1fr;
+    }
+    .grid3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  [hidden] {
+    display: none !important;
+  }
+  label span {
+    display: block;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+    font-size: 0.92rem;
+  }
+  label small {
+    font-weight: 400;
+    color: var(--dim);
+  }
+  input[type='number'],
+  select {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--ink);
+    font: inherit;
+  }
+  .check {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--text);
+  }
+  .check input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+  }
+  .results {
+    margin-top: 18px;
+    max-width: 820px;
+    border-left: 4px solid var(--ok);
+  }
+  .results h2 {
+    margin-top: 0;
+  }
+  .results table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .results :global(th),
+  .results :global(td) {
+    text-align: left;
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .results :global(th) {
+    color: var(--ink);
+    width: 42%;
+    padding-right: 12px;
+  }
+  .results :global(td strong) {
+    display: block;
+    color: var(--ink);
+    font-size: 1.08rem;
+  }
+  .results :global(td span) {
+    color: var(--dim);
+    font-size: 0.9rem;
+  }
+  .fine {
+    font-size: 0.88rem;
+    margin-bottom: 0;
+  }
+  .explain {
+    margin-top: 48px;
+  }
+</style>
