@@ -1,11 +1,11 @@
 {
-  "name": "jibhome-website",
+  "name": "jib-website",
   "type": "module",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/check-links.mjs",
     "preview": "astro preview",
     "check-links": "node scripts/check-links.mjs"
   },

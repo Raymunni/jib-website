@@ -1,6 +1,125 @@
 {
   "lastChecked": "2026-09-25",
-  "states": [],
-  "jobs": [],
-  "verdicts": {}
+  "states": [
+    { "code": "NSW", "name": "New South Wales", "regulator": { "name": "NSW Government — trade licensing", "url": "https://www.nsw.gov.au/business-and-economy/licences-and-credentials/building-and-trade-licences-and-registrations/plumbing-draining-and-gasfitting" } },
+    { "code": "VIC", "name": "Victoria", "regulator": { "name": "Energy Safe Victoria", "url": "https://www.energysafe.vic.gov.au/electrical-ddiy-dont-do-it-yourself" } },
+    { "code": "QLD", "name": "Queensland", "regulator": { "name": "QBCC / Electrical Safety Office", "url": "https://www.qbcc.qld.gov.au/news/unregulated-plumbing-guide" } },
+    { "code": "WA", "name": "Western Australia", "regulator": { "name": "WA Building and Energy", "url": "https://www.wa.gov.au/government/multi-step-guides/electrical-safety-home/having-electrical-work-done" } },
+    { "code": "SA", "name": "South Australia", "regulator": { "name": "SA Office of the Technical Regulator", "url": "https://www.sa.gov.au/topics/energy-and-environment/safe-energy-use/certificates-of-compliance" } },
+    { "code": "TAS", "name": "Tasmania", "regulator": { "name": "CBOS Tasmania", "url": "https://www.cbos.tas.gov.au/__data/assets/pdf_file/0004/404941/Fact-Sheet-Consumer-guide-to-low-risk-building-and-plumbing-work.pdf" } },
+    { "code": "ACT", "name": "Australian Capital Territory", "regulator": { "name": "Access Canberra", "url": "https://www.accesscanberra.act.gov.au/business-and-work/building-and-construction/plumber-notes" } },
+    { "code": "NT", "name": "Northern Territory", "regulator": { "name": "NT WorkSafe", "url": "https://worksafe.nt.gov.au/laws-and-compliance/electrical-safety-laws" } }
+  ],
+  "jobs": [
+    { "id": "light-globe", "name": "Change a light globe", "trade": "electrical", "guide": "diy-legal/can-i-install-a-ceiling-fan-or-light-fitting-myself" },
+    { "id": "battery-smoke-alarm", "name": "Replace a battery-only smoke alarm", "trade": "electrical", "guide": "diy-legal" },
+    { "id": "plug-in-appliance", "name": "Plug an appliance into an existing power point", "trade": "electrical", "guide": "diy-legal/can-i-connect-a-dishwasher-or-rangehood-myself" },
+    { "id": "power-point", "name": "Replace or add a power point", "trade": "electrical", "guide": "diy-legal/can-i-replace-a-power-point-myself" },
+    { "id": "light-switch", "name": "Replace a light switch", "trade": "electrical", "guide": "diy-legal/can-i-replace-a-power-point-myself" },
+    { "id": "light-fitting", "name": "Replace a light fitting or downlight", "trade": "electrical", "guide": "diy-legal/can-i-install-a-ceiling-fan-or-light-fitting-myself" },
+    { "id": "ceiling-fan", "name": "Install a ceiling fan", "trade": "electrical", "guide": "diy-legal/can-i-install-a-ceiling-fan-or-light-fitting-myself" },
+    { "id": "hardwired-smoke-alarm", "name": "Install a hardwired smoke alarm", "trade": "electrical", "guide": "diy-legal" },
+    { "id": "oven-cooktop", "name": "Connect a hardwired oven, cooktop or rangehood", "trade": "electrical", "guide": "diy-legal/can-i-connect-a-dishwasher-or-rangehood-myself" },
+    { "id": "plug-on-lead", "name": "Replace the plug on an appliance or extension lead", "trade": "electrical", "guide": "diy-legal" },
+    { "id": "tap-washer", "name": "Change a tap washer or jumper valve", "trade": "plumbing", "guide": "diy-legal/can-i-replace-a-tap-myself" },
+    { "id": "whole-tap", "name": "Replace a whole tap or mixer", "trade": "plumbing", "guide": "diy-legal/can-i-replace-a-tap-myself" },
+    { "id": "showerhead", "name": "Replace a screw-on showerhead", "trade": "plumbing", "guide": "diy-legal/can-i-replace-a-tap-myself" },
+    { "id": "cistern-washer", "name": "Replace washers inside a toilet cistern", "trade": "plumbing", "guide": "diy-legal/can-i-replace-a-toilet-myself" },
+    { "id": "toilet-suite", "name": "Replace a toilet suite", "trade": "plumbing", "guide": "diy-legal/can-i-replace-a-toilet-myself" },
+    { "id": "dishwasher-plumbing", "name": "Connect a dishwasher to water and drain", "trade": "plumbing", "guide": "diy-legal/can-i-connect-a-dishwasher-or-rangehood-myself" },
+    { "id": "plunger", "name": "Clear a blocked sink or drain with a plunger", "trade": "plumbing", "guide": "diy-legal/queensland-diy-plumbing" },
+    { "id": "hot-water", "name": "Replace a hot water system", "trade": "plumbing", "guide": "diy-legal" },
+    { "id": "gas-appliance", "name": "Install or move a gas appliance or bayonet", "trade": "gas", "guide": "diy-legal" },
+    { "id": "gas-bayonet-portable", "name": "Plug a portable gas heater into an existing bayonet", "trade": "gas", "guide": "diy-legal" }
+  ],
+  "verdicts": {
+    "light-globe": {
+      "default": { "v": "diy", "note": "Changing a globe is normal use of the fitting, not electrical work. Switch off at the wall and let hot globes cool first." }
+    },
+    "battery-smoke-alarm": {
+      "default": { "v": "diy", "note": "A battery-only alarm isn't connected to mains wiring, so you can fit or replace it yourself. Check your state's smoke-alarm rules for rentals and sales — some require interconnected hardwired alarms." }
+    },
+    "plug-in-appliance": {
+      "default": { "v": "diy", "note": "Plugging an appliance into an existing power point is normal use. Adding or moving the power point is licensed electrical work." }
+    },
+    "power-point": {
+      "default": { "v": "licensed", "note": "Replacing or adding a power point — even like-for-like — is electrical installation work that needs a licensed electrician in every state and territory." },
+      "VIC": { "v": "licensed", "note": "Energy Safe Victoria: electrical work isn't a DIY job, even for small jobs such as changing power points or light switches.", "source": "https://www.energysafe.vic.gov.au/electrical-ddiy-dont-do-it-yourself" },
+      "QLD": { "v": "licensed", "note": "Queensland's Electrical Safety Office lists installing a power point as licensed electrical work. Fines for individuals can reach $40,000.", "source": "https://www.electricalsafety.qld.gov.au/electrical-safety-home/dont-do-your-own-electrical-work" },
+      "NSW": { "v": "licensed", "note": "In NSW a licence is needed for any electrical wiring work, regardless of cost or type. Your electrician lodges a CCEW when finished.", "source": "https://www.nsw.gov.au/housing-and-construction/compliance-and-regulation/electricians" },
+      "WA": { "v": "licensed", "note": "WA's advice is 'never replace fittings and switches yourself'. Use a licensed electrician.", "source": "https://www.wa.gov.au/government/multi-step-guides/electrical-safety-home/having-electrical-work-done" }
+    },
+    "light-switch": {
+      "default": { "v": "licensed", "note": "Replacing a light switch is electrical installation work that needs a licensed electrician in every state and territory." },
+      "VIC": { "v": "licensed", "note": "Energy Safe Victoria names changing light switches as work that isn't DIY.", "source": "https://www.energysafe.vic.gov.au/electrical-ddiy-dont-do-it-yourself" },
+      "QLD": { "v": "licensed", "note": "Queensland's Electrical Safety Office lists replacing a switch as licensed electrical work.", "source": "https://www.electricalsafety.qld.gov.au/electrical-safety-home/dont-do-your-own-electrical-work" },
+      "WA": { "v": "licensed", "note": "WA: 'never replace fittings and switches yourself'.", "source": "https://www.wa.gov.au/government/multi-step-guides/electrical-safety-home/having-electrical-work-done" }
+    },
+    "light-fitting": {
+      "default": { "v": "licensed", "note": "Light fittings and downlights are wired into the lighting circuit, so replacing them needs a licensed electrician in every state." },
+      "QLD": { "v": "licensed", "note": "Queensland's Electrical Safety Office lists replacing a batten holder with a light fitting as licensed electrical work.", "source": "https://www.electricalsafety.qld.gov.au/electrical-safety-home/dont-do-your-own-electrical-work" }
+    },
+    "ceiling-fan": {
+      "default": { "v": "licensed", "note": "Installing a ceiling fan connects to fixed wiring and needs a licensed electrician in every state. You can assemble it before the electrician arrives." },
+      "QLD": { "v": "licensed", "note": "Queensland's Electrical Safety Office lists replacing a light fitting with a ceiling fan as licensed electrical work.", "source": "https://www.electricalsafety.qld.gov.au/electrical-safety-home/dont-do-your-own-electrical-work" }
+    },
+    "hardwired-smoke-alarm": {
+      "default": { "v": "licensed", "note": "Hardwired (mains-powered) smoke alarms connect to fixed wiring, so they must be installed by a licensed electrician." }
+    },
+    "oven-cooktop": {
+      "default": { "v": "licensed", "note": "Hardwired appliances must be connected by a licensed electrician. You can position and fit the appliance — just not make the connection." },
+      "QLD": { "v": "licensed", "note": "Queensland's Electrical Safety Office: hardwired appliances must be connected by a licensed electrician. Fitting a wall oven into its cabinet without connecting it is not electrical work.", "source": "https://www.electricalsafety.qld.gov.au/electrical-safety-home/dont-do-your-own-electrical-work" }
+    },
+    "plug-on-lead": {
+      "default": { "v": "depends", "note": "We couldn't confirm your state's position from the regulator. Don't assume it's allowed — ask your electrical regulator, or have an electrician do it." },
+      "QLD": { "v": "licensed", "note": "Queensland's Electrical Safety Office lists replacing a plug on the end of an extension lead, and constructing an extension lead, as licensed electrical work.", "source": "https://www.electricalsafety.qld.gov.au/electrical-safety-home/dont-do-your-own-electrical-work" }
+    },
+    "tap-washer": {
+      "default": { "v": "depends", "note": "We couldn't confirm a homeowner exemption from your regulator. Check with them before doing any plumbing work yourself." },
+      "QLD": { "v": "diy", "note": "Replacing a jumper valve or washer in a tap is on the QBCC's list of unregulated plumbing work.", "source": "https://www.qbcc.qld.gov.au/news/unregulated-plumbing-guide" },
+      "WA": { "v": "diy", "note": "Since March 2024, owners can maintain or repair a tap (not thermostatic mixing taps).", "source": "https://www.wa.gov.au/government/announcements/tap-new-plumbing-rules-industry-and-homeowners" },
+      "VIC": { "v": "diy", "note": "Tap washers and other minor tap repairs in a home are exempt from Victoria's plumbing licensing rules.", "source": "https://www.legislation.vic.gov.au/in-force/statutory-rules/plumbing-regulations-2018" },
+      "NSW": { "v": "diy", "note": "An owner-occupier may repair a tap in their home (not thermostatic mixing or tempering valves).", "source": "https://www.nsw.gov.au/business-and-economy/licences-and-credentials/building-and-trade-licences-and-registrations/plumbing-draining-and-gasfitting" },
+      "TAS": { "v": "diy", "note": "Repairing tapware on your own property is low-risk work owners can do.", "source": "https://www.cbos.tas.gov.au/__data/assets/pdf_file/0004/404941/Fact-Sheet-Consumer-guide-to-low-risk-building-and-plumbing-work.pdf" }
+    },
+    "whole-tap": {
+      "default": { "v": "licensed", "note": "Replacing a whole tap or mixer means disconnecting and reconnecting the water supply — licensed plumbing work. The homeowner exemptions cover repair only." },
+      "TAS": { "v": "diy", "note": "Tasmania lets owners repair or replace tapware like-for-like on their own property as low-risk work (vegetable-spray mixers excluded).", "source": "https://www.cbos.tas.gov.au/__data/assets/pdf_file/0004/404941/Fact-Sheet-Consumer-guide-to-low-risk-building-and-plumbing-work.pdf" }
+    },
+    "showerhead": {
+      "default": { "v": "depends", "note": "We couldn't confirm a homeowner exemption from your regulator. Check with them first." },
+      "QLD": { "v": "diy", "note": "Replacing a shower head is on the QBCC's unregulated plumbing work list.", "source": "https://www.qbcc.qld.gov.au/news/unregulated-plumbing-guide" },
+      "WA": { "v": "diy", "note": "Owners can maintain, repair or replace a showerhead.", "source": "https://www.wa.gov.au/government/announcements/tap-new-plumbing-rules-industry-and-homeowners" },
+      "VIC": { "v": "diy", "note": "Changing over a water-efficient showerhead is exempt from Victoria's plumbing licensing rules.", "source": "https://www.legislation.vic.gov.au/in-force/statutory-rules/plumbing-regulations-2018" },
+      "NSW": { "v": "depends", "note": "NSW lets an owner-occupier repair a showerhead. Replacing one outright isn't clearly covered — check with NSW Fair Trading.", "source": "https://www.nsw.gov.au/business-and-economy/licences-and-credentials/building-and-trade-licences-and-registrations/plumbing-draining-and-gasfitting" },
+      "TAS": { "v": "diy", "note": "Owners can replace showerheads and shower hoses like-for-like on their own property.", "source": "https://www.cbos.tas.gov.au/__data/assets/pdf_file/0004/404941/Fact-Sheet-Consumer-guide-to-low-risk-building-and-plumbing-work.pdf" }
+    },
+    "cistern-washer": {
+      "default": { "v": "depends", "note": "We couldn't confirm a homeowner exemption from your regulator — treat it as licensed work unless they confirm otherwise." },
+      "QLD": { "v": "diy", "note": "Repairing or replacing the drop-valve washer, float-valve washer or suction-cup rubber in a toilet cistern is unregulated work.", "source": "https://www.qbcc.qld.gov.au/news/unregulated-plumbing-guide" },
+      "WA": { "v": "diy", "note": "Owners can replace a cistern washer.", "source": "https://www.wa.gov.au/government/announcements/tap-new-plumbing-rules-industry-and-homeowners" }
+    },
+    "toilet-suite": {
+      "default": { "v": "licensed", "note": "Replacing a toilet suite involves the water supply and the sewer connection — licensed plumbing work in every state." },
+      "NSW": { "v": "licensed", "note": "NSW requires a licence for any plumbing work regardless of cost; individuals face fines of up to $22,000.", "source": "https://www.nsw.gov.au/business-and-economy/licences-and-credentials/building-and-trade-licences-and-registrations/plumbing-draining-and-gasfitting" }
+    },
+    "dishwasher-plumbing": {
+      "default": { "v": "licensed", "note": "Connecting a dishwasher to the water supply and drain isn't on any state's homeowner exemption list we could confirm — use a licensed plumber." }
+    },
+    "plunger": {
+      "default": { "v": "diy", "note": "Using a plunger on a blocked sink or basin is normal household maintenance. Opening up drains or using drain machines is licensed work." },
+      "WA": { "v": "diy", "note": "WA owners can clear a blocked fixture or waste pipe with a plunger.", "source": "https://www.wa.gov.au/government/announcements/tap-new-plumbing-rules-industry-and-homeowners" },
+      "QLD": { "v": "diy", "note": "Plunging is normal maintenance, and cleaning a ground-level trap grate is on the QBCC's unregulated list. Anything beyond the grate needs a plumber.", "source": "https://www.qbcc.qld.gov.au/news/unregulated-plumbing-guide" }
+    },
+    "hot-water": {
+      "default": { "v": "licensed", "note": "Replacing a hot water system is licensed plumbing work everywhere — and gas units also need a licensed gasfitter." }
+    },
+    "gas-appliance": {
+      "default": { "v": "licensed", "note": "All gasfitting — pipework, installing or moving gas appliances, and installing a bayonet point — needs a licensed gasfitter in every state." },
+      "VIC": { "v": "licensed", "note": "In Victoria, installing, moving or replacing a gas appliance needs a licensed gasfitter and always needs a compliance certificate." }
+    },
+    "gas-bayonet-portable": {
+      "default": { "v": "depends", "note": "Plugging a portable appliance into an existing bayonet is what bayonets are designed for. Installing the bayonet is licensed gasfitting. Some states restrict unflued gas heaters — check the heater is legal to use where you live." }
+    }
+  }
 }
