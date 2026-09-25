@@ -8,7 +8,7 @@ const guides = defineCollection({
     title: z.string(),
     // Shown in search results; keep under ~155 characters.
     description: z.string().max(170),
-    hub: z.enum(['diy-legal', 'council-approval', 'materials']),
+    hub: z.enum(['diy-legal', 'council-approval', 'materials', 'features']),
     pillar: z.boolean().default(false),
     market: z.enum(['AU', 'UK', 'NZ', 'US', 'global']).default('AU'),
     published: z.coerce.date(),
@@ -23,6 +23,9 @@ const guides = defineCollection({
       .array(z.object({ title: z.string(), url: z.string().url() }))
       .default([]),
     related: z.array(z.string()).default([]),
+    // Optional hero image under public/, e.g. /images/blog/toolbox.jpg (1200px+ wide).
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
     order: z.number().default(100),
   }),
 });

@@ -33,14 +33,14 @@ const features = [
   {
     shot: shotCatch,
     eyebrow: 'Catch',
-    title: 'Know when you legally need a tradie',
-    body: 'Jib flags the parts of a job that need a licensed electrician, plumber or gasfitter — in plain English — so you do the bits you can and book a pro for the bits you can’t.',
+    title: 'DIY safe, or tradie required?',
+    body: 'Every job gets a verdict in its corner: green for DIY safe, red when a step legally needs a licensed electrician, plumber or gasfitter where you live — so you do the bits you can and book a pro for the bits you can’t.',
   },
   {
     shot: shotShop,
     eyebrow: 'Shop',
-    title: 'One shopping list for every job',
-    body: 'Every job’s materials roll into a single shopping list, grouped by store. Tick things off in the aisle.',
+    title: 'Only buy the tools you don’t own',
+    body: 'Jib knows what’s in your Toolbox, so every job shows which tools you already have and which you’d need to buy. Missing tools and materials roll into one shopping list, grouped by store.',
   },
   {
     shot: shotTrack,
@@ -63,7 +63,11 @@ const faqs = [
   },
   {
     q: 'Does Jib tell me if a job is legal to DIY?',
-    a: 'Jib flags the parts of a job that typically need a licensed tradesperson — electrical, plumbing, gas, waterproofing and structural work. It’s general guidance, not legal advice: always confirm with your state regulator or council. Our free DIY legality checker shows the rules for common jobs by state, with links to the regulator.',
+    a: 'Yes. On Jib’s paid plans, every job gets a corner flag: DIY safe (green) or tradie required (red), based on the licensing rules where your house is, with the exact step that needs a licence. It’s general guidance, not legal advice: always confirm with your state regulator or council. Our free DIY legality checker shows the rules for common jobs by state, with links to the regulator.',
+  },
+  {
+    q: 'What is the AI Toolbox?',
+    a: 'Photograph your garage, shed or a hardware receipt and Jib lists every tool it can see. After that, every job you plan checks your Toolbox, ticks off the tools you already own, and asks before adding any you’re missing to your shopping list. The AI Toolbox is part of Jib’s paid plans.',
   },
   {
     q: 'Is Jib only for Australia?',
@@ -123,9 +127,30 @@ const jsonLd = [
 
   <section class="wrap strip">
     <div class="card strip-item"><strong>Photo → plan</strong><span class="muted">Steps, materials &amp; cost in seconds</span></div>
-    <div class="card strip-item"><strong>Tradie flags</strong><span class="muted">Know what needs a licence</span></div>
-    <div class="card strip-item"><strong>Shopping list</strong><span class="muted">Every job, one list</span></div>
+    <div class="card strip-item"><strong>DIY or tradie</strong><span class="muted">A legal verdict on every job</span></div>
+    <div class="card strip-item"><strong>AI Toolbox</strong><span class="muted">Scan your shed, buy only what’s missing</span></div>
     <div class="card strip-item"><strong>Before &amp; after</strong><span class="muted">A timeline of your home</span></div>
+  </section>
+
+  <section class="wrap spotlight" aria-label="New in Jib">
+    <a class="card spot" href="/guides/features/garage-tool-inventory/">
+      <img src="/images/blog/toolbox-garage-scan.jpg" alt="Holding a phone up to a garage pegboard while the app outlines each tool it recognises" width="1376" height="768" loading="lazy" decoding="async" />
+      <div class="spot-copy">
+        <p class="eyebrow">AI Toolbox</p>
+        <h2>One photo of your shed. Every tool, remembered.</h2>
+        <p>Scan your garage, shed or a hardware receipt and Jib lists every tool it sees. Every job after that knows what you own — and asks before adding the tools you’re missing to your shopping list.</p>
+        <span class="more">How the AI Toolbox works →</span>
+      </div>
+    </a>
+    <a class="card spot" href="/guides/features/diy-or-tradie-verdict/">
+      <img src="/images/blog/diy-or-tradie-flag.jpg" alt="A phone with a red corner flag held up in front of an opened power point" width="1376" height="768" loading="lazy" decoding="async" />
+      <div class="spot-copy">
+        <p class="eyebrow">DIY safe · Tradie required</p>
+        <h2>A legal verdict in the corner of every job.</h2>
+        <p>Green means it’s yours to do. Red means a step legally needs a licensed electrician, plumber or gasfitter where you live — and Jib tells you exactly which one.</p>
+        <span class="more">How the verdict works →</span>
+      </div>
+    </a>
   </section>
 
   <section class="wrap features" aria-label="What Jib does">
@@ -275,6 +300,42 @@ const jsonLd = [
   }
   .strip-item span {
     font-size: 0.9rem;
+  }
+  .spotlight {
+    margin-top: 56px;
+    display: grid;
+    gap: 20px;
+  }
+  @media (min-width: 900px) {
+    .spotlight {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .spot {
+    padding: 0;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.15s ease;
+  }
+  .spot:hover {
+    border-color: var(--accent-2);
+    color: var(--text);
+  }
+  .spot img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .spot-copy {
+    padding: 22px 24px 26px;
+  }
+  .spot-copy h2 {
+    margin: 0 0 10px;
+    font-size: clamp(1.35rem, 2.6vw, 1.7rem);
   }
   .features {
     margin-top: 72px;

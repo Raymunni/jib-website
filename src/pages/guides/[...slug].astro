@@ -42,7 +42,7 @@ const jsonLd = [
     datePublished: d.published.toISOString(),
     dateModified: d.lastChecked.toISOString(),
     mainEntityOfPage: url,
-    image: `${SITE.url}/og/default.png`,
+    image: `${SITE.url}${d.image ?? '/og/default.png'}`,
     author: { '@type': 'Person', name: SITE.author.name, url: `${SITE.url}${SITE.author.url}` },
     publisher: { '@id': `${SITE.url}/#org` },
     inLanguage: d.market === 'UK' ? 'en-GB' : d.market === 'NZ' ? 'en-NZ' : d.market === 'US' ? 'en-US' : 'en-AU',
@@ -63,7 +63,7 @@ const jsonLd = [
 ];
 ---
 
-<Base title={d.title} description={d.description} ogType="article" jsonLd={jsonLd}>
+<Base title={d.title} description={d.description} ogType="article" ogImage={d.image} jsonLd={jsonLd}>
   <article class="wrap guide">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href="/guides/">Guides</a>
@@ -83,6 +83,11 @@ const jsonLd = [
         By <a href="/about/">{SITE.author.name}</a> · Rules last checked <time datetime={d.lastChecked.toISOString()}>{formatDate(d.lastChecked)}</time>
         {d.market !== 'global' && <span class="market">{d.market}</span>}
       </p>
+      {
+        d.image && (
+          <img class="hero" src={d.image} alt={d.imageAlt ?? ''} width="1376" height="768" fetchpriority="high" decoding="async" />
+        )
+      }
       <div class="answer">
         <p class="answer-label">Short answer</p>
         <p set:html={d.answer} />
@@ -188,6 +193,15 @@ const jsonLd = [
     border: 1px solid var(--border);
     border-radius: 999px;
     padding: 1px 8px;
+  }
+  .hero {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-top: 18px;
+    border: 1px solid var(--border);
   }
   .answer {
     margin-top: 22px;
