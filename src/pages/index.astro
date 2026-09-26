@@ -3,7 +3,8 @@ import { getImage, Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import StoreButtons from '../components/StoreButtons.astro';
-import { SITE, HUBS } from '../config';
+import ToolIcon from '../components/ToolIcon.astro';
+import { SITE, HUBS, anyStoreLive } from '../config';
 import heroWide from '../assets/hero/a.jpg';
 import heroTall from '../assets/hero/b.jpg';
 import shotPlan from '../assets/screens/01-plan.png';
@@ -150,6 +151,24 @@ const spots = [
   },
 ];
 
+// Every feature, sold as a benefit — the first thing visitors see under the hero.
+const featureTiles = [
+  { icon: 'snap', star: true, href: '/guides/features/photo-to-job-plan/', title: 'Snap it, AI plans it', body: 'One photo becomes a named job with steps, materials, tools, time and cost. No typing.' },
+  { icon: 'checker', star: true, href: '/guides/features/diy-or-tradie-verdict/', title: 'DIY safe or tradie required', body: 'A legal verdict on every job, for your state, and the exact step that needs a licence.' },
+  { icon: 'steps', href: '/guides/features/ai-step-by-step-directions/', title: 'Step-by-step directions', body: 'The steps for your exact job, with drying times and safety. No YouTube rabbit hole.' },
+  { icon: 'cart', href: '/guides/features/ai-shopping-list/', title: 'A shopping list that writes itself', body: 'Every job’s materials on one list, by store, with what each item is for.' },
+  { icon: 'toolbox', href: '/guides/features/garage-tool-inventory/', title: 'AI Toolbox', body: 'Scan your shed once. Jobs know what you own, so you only buy what’s missing.' },
+  { icon: 'clock', href: '/guides/features/quick-home-jobs-by-time/', title: 'Jobs that fit your time', body: 'Every job shows how long it takes. Got 30 minutes? Pick one you’ll finish.' },
+  { icon: 'cost', href: '/guides/features/home-repair-cost-estimates/', title: 'Know the cost first', body: 'A realistic cost range before you start, including when a tradie adds a call-out.' },
+  { icon: 'bell', href: '/guides/features/home-maintenance-reminders/', title: 'Reminders on autopilot', body: 'Smoke alarms, gutters, filters, termites: set them to repeat and get reminded.' },
+  { icon: 'chat', href: '/guides/features/ai-step-by-step-directions/', title: 'Ask AI about any job', body: 'Stuck on a step? Ask, and the answer knows your job, photo and plan.' },
+  { icon: 'rooms', href: '/guides/features/home-to-do-list-no-time/', title: 'Every room, organised', body: 'Jobs sorted by space, with a to-do list you never have to write.' },
+  { icon: 'beforeafter', href: '/guides/features/before-and-after-photos/', title: 'Before & after, on record', body: 'A gallery and timeline for every room. Gold when you sell or claim insurance.' },
+  { icon: 'homes', href: '/guides/features/', title: 'Every property you look after', body: 'Your home, a rental, the beach house or Mum’s place, each with its own jobs.' },
+  { icon: 'climate', href: '/guides/features/', title: 'Built for your home and climate', body: 'Plans and rules for where your house is, not generic advice from overseas.' },
+  { icon: 'web', href: '/web/?demo', title: 'On your phone and computer', body: 'Snap on your phone, plan on the big screen. Everything syncs.' },
+];
+
 const faqs = [
   {
     q: 'Is Jib free?',
@@ -207,24 +226,75 @@ const jsonLd = [
     </picture>
     <div class="hero-shade"></div>
     <div class="wrap hero-copy">
-      <p class="eyebrow">The DIY job planner</p>
-      <h1>Can you DIY it?<br /><span>Snap a photo and find out.</span></h1>
+      <p class="eyebrow">The home jobs app for people with no time</p>
+      <h1>See a job. Snap it.<br /><span>Jib does the rest.</span></h1>
       <p class="lede">
-        Jib turns a photo of any home job into a full plan — steps, materials and cost — and flags the parts that legally need a licensed tradie in your state.
+        Photograph anything around the house that needs doing. Jib’s AI writes the plan, the shopping list and the cost, and tells you if it’s DIY-legal or needs a tradie. Then pick a job whenever you’ve got a spare hour.
       </p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="/app/" data-get-app>Get Jib free</a>
-        <a class="btn btn-ghost" href="/tools/diy-legality-checker/">Try the free DIY checker</a>
+        {
+          anyStoreLive ? (
+            <StoreButtons campaign="home" size="lg" />
+          ) : (
+            <>
+              <a class="btn btn-primary" href="/web/?demo">Try Jib free on the web</a>
+              <a class="btn btn-ghost" href="/app/" data-get-app>Get it on your phone</a>
+            </>
+          )
+        }
       </div>
+      <ul class="trust">
+        <li>✓ Free to download</li>
+        <li>✓ 7-day free trial of every AI feature</li>
+        <li>✓ Built for Australian homes and rules</li>
+      </ul>
     </div>
   </section>
 
-  <section class="wrap strip">
-    <div class="card strip-item"><strong>Photo → plan</strong><span class="muted">Steps, materials &amp; cost in seconds</span></div>
-    <div class="card strip-item"><strong>DIY or tradie</strong><span class="muted">A legal verdict on every job</span></div>
-    <div class="card strip-item"><strong>AI Toolbox</strong><span class="muted">Scan your shed, buy only what’s missing</span></div>
-    <div class="card strip-item"><strong>Before &amp; after</strong><span class="muted">A timeline of your home</span></div>
+  <section class="wrap everything" aria-labelledby="everything-title">
+    <div class="everything-head">
+      <p class="eyebrow">Everything your home needs, in one app</p>
+      <h2 id="everything-title">From “that needs fixing” to done, without the research, the lists or the guesswork.</h2>
+    </div>
+    <div class="feat-grid">
+      {
+        featureTiles.map((f) => (
+          <a class={`feat ${f.star ? 'star' : ''}`} href={f.href}>
+            <ToolIcon name={f.icon} size={52} />
+            <span class="feat-copy">
+              <strong>{f.title}</strong>
+              <span>{f.body}</span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
   </section>
+
+  <section class="wrap how" aria-labelledby="how-title">
+    <h2 id="how-title" class="sr-only">How Jib works</h2>
+    <ol class="how-steps">
+      <li><span class="how-n">1</span><strong>Snap it</strong><span>See something that needs doing? Take a photo and get on with your day.</span></li>
+      <li><span class="how-n">2</span><strong>Jib plans it</strong><span>AI writes the job, steps, materials, tools, cost and a DIY-or-tradie verdict.</span></li>
+      <li><span class="how-n">3</span><strong>Do it when you can</strong><span>Got a spare hour? Pick a job that fits, with everything on one shopping list.</span></li>
+    </ol>
+    <div class="how-cta">
+      {
+        anyStoreLive ? (
+          <StoreButtons campaign="home" size="lg" />
+        ) : (
+          <>
+            <a class="btn btn-primary" href="/web/?demo">Try the free web demo</a>
+            <a class="btn btn-ghost" href={`mailto:${SITE.email}?subject=${encodeURIComponent('Tell me when Jib launches')}&body=${encodeURIComponent('Please email me when Jib is on the App Store / Google Play. My phone is: iPhone / Android')}`}>Tell me when it’s on the App Store</a>
+          </>
+        )
+      }
+    </div>
+  </section>
+
+  <a class="mobile-cta" href={anyStoreLive ? '/app/?c=home' : '/web/?demo'} data-get-app>
+    <span>{anyStoreLive ? 'Get Jib free' : 'Try Jib free'}</span><small>{anyStoreLive ? 'iPhone & Android' : 'on the web, no sign-up'}</small>
+  </a>
 
   <section class="wrap spotlight-head">
     <p class="eyebrow">Built for people with no time</p>
@@ -336,7 +406,7 @@ const jsonLd = [
 <style>
   .hero {
     position: relative;
-    min-height: min(88vh, 760px);
+    min-height: min(70vh, 620px);
     display: flex;
     align-items: flex-end;
     overflow: hidden;
@@ -365,13 +435,13 @@ const jsonLd = [
   }
   .hero-copy {
     position: relative;
-    padding-top: 120px;
-    padding-bottom: 56px;
+    padding-top: 84px;
+    padding-bottom: 110px;
     width: 100%;
   }
   .hero h1 {
-    max-width: 14ch;
-    font-size: clamp(2.3rem, 6vw, 3.8rem);
+    max-width: 20ch;
+    font-size: clamp(2.2rem, 5.2vw, 3.5rem);
   }
   .hero h1 span {
     color: #9cc2ff;
@@ -387,25 +457,193 @@ const jsonLd = [
     gap: 12px;
     margin-top: 22px;
   }
-  .strip {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 20px;
+  .trust {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    padding: 0;
+    margin: 18px 0 0;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #d7e6fb;
   }
-  @media (min-width: 900px) {
-    .strip {
+
+  /* Everything Jib does: overlaps the hero so it's on the first screen */
+  .everything {
+    position: relative;
+    z-index: 2;
+    margin-top: -90px;
+  }
+  .everything-head {
+    background: linear-gradient(180deg, rgba(14, 24, 36, 0.2), var(--bg) 70%);
+    padding-top: 8px;
+  }
+  .everything-head h2 {
+    margin: 4px 0 18px;
+    font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+    max-width: 34ch;
+  }
+  .feat-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 620px) {
+    .feat-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 980px) {
+    .feat-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 1180px) {
+    .feat-grid {
       grid-template-columns: repeat(4, 1fr);
     }
   }
-  .strip-item {
+  .feat {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 16px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .feat:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-2);
+    color: var(--text);
+  }
+  .feat.star {
+    background: linear-gradient(135deg, rgba(39, 112, 218, 0.28), var(--surface) 70%);
+    border-color: rgba(79, 143, 240, 0.45);
+  }
+  @media (min-width: 1180px) {
+    .feat.star {
+      grid-column: span 2;
+      padding: 20px 22px;
+    }
+    .feat.star .feat-copy strong {
+      font-size: 1.25rem;
+    }
+    .feat.star .feat-copy span {
+      font-size: 0.98rem;
+    }
+  }
+  .feat-copy {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    padding: 16px 18px;
+    gap: 4px;
+    min-width: 0;
   }
-  .strip-item span {
+  .feat-copy strong {
+    color: var(--ink);
+    font-size: 1.02rem;
+    line-height: 1.25;
+  }
+  .feat-copy span {
+    color: var(--dim);
     font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  /* How it works */
+  .how {
+    margin-top: 40px;
+    background: linear-gradient(135deg, var(--accent-deep), #173a6b);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius);
+    padding: 26px;
+  }
+  .how-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  @media (min-width: 760px) {
+    .how-steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .how-steps li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 12px;
+    align-items: start;
+  }
+  .how-steps strong {
+    color: #fff;
+    font-size: 1.15rem;
+  }
+  .how-steps li > span:last-child {
+    grid-column: 2;
+    color: #dbe7f7;
+    font-size: 0.95rem;
+  }
+  .how-n {
+    grid-row: span 2;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--accent-deep);
+    font-weight: 900;
+    display: grid;
+    place-items: center;
+  }
+  .how-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .how-cta .btn-ghost {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+  }
+
+  /* Sticky call to action on phones */
+  .mobile-cta {
+    display: none;
+  }
+  @media (max-width: 719px) {
+    .mobile-cta {
+      position: fixed;
+      z-index: 30;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 16px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    }
+    .mobile-cta small {
+      font-weight: 600;
+      opacity: 0.85;
+    }
+    .mobile-cta:hover {
+      color: #fff;
+    }
+    :global(body) {
+      padding-bottom: 76px;
+    }
   }
   .spotlight-head {
     margin-top: 72px;

@@ -1,71 +1,85 @@
 ---
 import Base from '../../layouts/Base.astro';
 import AppCta from '../../components/AppCta.astro';
+import ToolIcon from '../../components/ToolIcon.astro';
 import { SITE } from '../../config';
 
 const tools = [
   {
     href: '/tools/diy-legality-checker/',
+    icon: 'checker',
     title: 'DIY or tradie? Legality checker',
     body: 'Pick your state and the job to see whether you can legally do it yourself or need a licensed electrician, plumber or gasfitter, with the regulator that says so.',
   },
   {
     href: '/tools/bathroom-floor-calculator/',
+    icon: 'bathroom',
     title: 'Bathroom floor calculator',
     body: 'Tiles, adhesive, grout, waterproofing membrane, primer and silicone for your exact room, with wastage included.',
   },
   {
     href: '/tools/unit-converter/',
+    icon: 'units',
     title: 'Unit converter (inches to cm & more)',
     body: 'Inches to cm and mm, including fractions like 3/8 inch, feet to metres, square feet to m², gallons to litres, pounds to kg.',
   },
   {
     href: '/tools/paint-calculator/',
+    icon: 'paint',
     title: 'Paint calculator',
     body: 'How many litres for your walls and ceiling, allowing for doors, windows and coats, and which tin sizes to buy.',
   },
   {
     href: '/tools/concrete-calculator/',
+    icon: 'concrete',
     title: 'Concrete calculator',
     body: 'Cubic metres and 20 kg bags for slabs, footings and post holes, plus when a premix truck makes more sense.',
   },
   {
     href: '/tools/soil-mulch-gravel-calculator/',
+    icon: 'soil',
     title: 'Soil, mulch & gravel calculator',
     body: 'Cubic metres, tonnes and bags of soil, mulch, gravel, sand or road base for your area and depth.',
   },
   {
     href: '/tools/fence-calculator/',
+    icon: 'fence',
     title: 'Fence calculator',
     body: 'Palings, rails, posts, concrete and nails for a timber paling fence, butted or lapped and capped.',
   },
   {
     href: '/tools/wall-tile-calculator/',
+    icon: 'walltile',
     title: 'Wall tile calculator',
     body: 'Tiles, boxes, adhesive, grout and trim for splashbacks, showers and feature walls.',
   },
   {
     href: '/tools/plasterboard-calculator/',
+    icon: 'plaster',
     title: 'Plasterboard calculator',
     body: 'Sheets for walls and ceilings in every standard length, plus screws, joint tape and cornice.',
   },
   {
     href: '/tools/decking-calculator/',
+    icon: 'decking',
     title: 'Decking calculator',
     body: 'Lineal metres, boards to buy, joists and decking screws for your deck size.',
   },
   {
     href: '/tools/stair-calculator/',
+    icon: 'stairs',
     title: 'Stair calculator',
     body: 'Number of steps, riser and going sizes, run and stringer length, checked against the NCC rules.',
   },
   {
     href: '/tools/roof-pitch-calculator/',
+    icon: 'roof',
     title: 'Roof pitch calculator',
     body: 'Convert degrees, x:12 ratio and percent, and turn a plan area into real roof area.',
   },
   {
     href: '/guides/home-maintenance/',
+    icon: 'planner',
     title: 'Home maintenance planner',
     body: 'Tick what your home has and get a printable schedule of what to check, clean and service, and how often.',
   },
@@ -81,7 +95,7 @@ const jsonLd = [
 ];
 ---
 
-<Base title="Free DIY tools and calculators for Australian homes" description="Free tools for DIYers: check if a job is legal to DIY in your state, calculate bathroom tiling materials, and build a home maintenance schedule." jsonLd={jsonLd}>
+<Base title="Free DIY tools and calculators for Australian homes" description="12 free DIY calculators and tools: paint, concrete, tiles, plasterboard, decking, fencing, stairs, roof pitch, unit conversion, and a DIY legality checker for your state." jsonLd={jsonLd}>
   <div class="wrap page">
     <p class="eyebrow">Free tools</p>
     <h1>Free DIY tools</h1>
@@ -90,7 +104,7 @@ const jsonLd = [
       {
         tools.map((t) => (
           <a class="card tool" href={t.href}>
-            <strong>{t.title}</strong>
+            <span class="tool-top"><ToolIcon name={t.icon} size={56} /><strong>{t.title}</strong></span>
             <span class="muted">{t.body}</span>
             <span class="more">Open →</span>
           </a>
@@ -122,6 +136,11 @@ const jsonLd = [
   .tool:hover {
     border-color: var(--accent-2);
     color: var(--text);
+  }
+  .tool-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
   }
   .tool strong {
     font-size: 1.1rem;
