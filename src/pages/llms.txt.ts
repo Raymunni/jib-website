@@ -23,6 +23,11 @@ export async function GET() {
     `- [Concrete calculator](${SITE.url}/tools/concrete-calculator/): m³ and 20 kg bags for slabs, footings and post holes`,
     `- [Soil, mulch & gravel calculator](${SITE.url}/tools/soil-mulch-gravel-calculator/): m³, tonnes and bags`,
     `- [Fence calculator](${SITE.url}/tools/fence-calculator/): palings, rails, posts and concrete`,
+    `- [Wall tile calculator](${SITE.url}/tools/wall-tile-calculator/): tiles, adhesive, grout and trim for walls and splashbacks`,
+    `- [Plasterboard calculator](${SITE.url}/tools/plasterboard-calculator/): plasterboard sheets, screws, tape and cornice`,
+    `- [Decking calculator](${SITE.url}/tools/decking-calculator/): decking boards, joists and screws`,
+    `- [Stair calculator](${SITE.url}/tools/stair-calculator/): risers, goings and stringer length checked against the NCC`,
+    `- [Roof pitch calculator](${SITE.url}/tools/roof-pitch-calculator/): degrees, ratio and percent, rafter length and roof area`,
     `- [Home maintenance planner](${SITE.url}/guides/home-maintenance/): a personalised maintenance schedule`,
     '',
   ];

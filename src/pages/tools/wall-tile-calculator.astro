@@ -1,0 +1,90 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'How many wall tiles do I need?', a: 'Measure each wall (width × height of the tiled area), add them up, subtract windows and doors, add 10% for cuts (15% for patterned layouts or lots of cuts), then divide by the area of one tile.' },
+  { q: 'How much tile adhesive for a splashback?', a: 'Wall tiles usually go on with a 6 mm notched trowel for small tiles and 10 mm for larger ones, using roughly 3.5–5.5 kg per m². A typical 3 × 0.6 m splashback (1.8 m²) needs well under one 20 kg bag, and pre-mixed tubs are handy for small jobs.' },
+  { q: 'Do I need to waterproof before tiling walls?', a: 'In a shower, the walls must be waterproofed to at least 1800 mm under the NCC before tiling. Kitchen splashbacks and most other walls don’t need a membrane.' },
+  { q: 'What size tile trim do I need?', a: 'Match the trim to the tile thickness, and measure every exposed tile edge and external corner. The calculator adds 10% to the trim length for cuts and joins.' },
+];
+---
+
+<CalcShell
+  title="Wall tile calculator: tiles, adhesive, grout and trim (splashbacks & bathrooms)"
+  description="Free wall tile calculator for splashbacks, showers and feature walls: tiles and boxes, tile adhesive, grout and trim, with windows and wastage allowed for."
+  heading="Wall tile calculator"
+  lede="Add up to four walls and we’ll work out the tiles, boxes, adhesive, grout and trim, for a splashback, a shower or a feature wall."
+  path="/tools/wall-tile-calculator/"
+  appName="Wall tile calculator"
+  cta="Tiling a splashback or bathroom? Snap it in Jib and get the steps, the materials list, and a check on which parts need a licensed trade."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <fieldset>
+      <legend>Walls to tile (width × tiled height, in metres)</legend>
+      <div class="g4">
+        <label><span>Wall 1</span><input type="text" id="w1" value="3 x 0.6" /></label>
+        <label><span>Wall 2</span><input type="text" id="w2" placeholder="e.g. 2.4 x 2.1" /></label>
+        <label><span>Wall 3</span><input type="text" id="w3" placeholder="optional" /></label>
+        <label><span>Wall 4</span><input type="text" id="w4" placeholder="optional" /></label>
+      </div>
+      <div class="g2">
+        <label><span>Subtract (m²) <small>windows, doors, a mirror</small></span><input type="number" id="minus" value="0" min="0" step="0.1" /></label>
+        <label><span>Trim / edging (m) <small>exposed edges and corners</small></span><input type="number" id="trim" value="0.6" min="0" step="0.1" /></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>The tile</legend>
+      <div class="g4">
+        <label><span>Tile length (mm)</span><input type="number" id="tl" value="300" min="20" /></label>
+        <label><span>Tile width (mm)</span><input type="number" id="tw" value="100" min="20" /></label>
+        <label><span>Grout joint (mm)</span><input type="number" id="joint" value="2" min="1" step="0.5" /></label>
+        <label><span>Tile thickness (mm)</span><input type="number" id="thick" value="7" min="3" step="0.5" /></label>
+      </div>
+      <div class="g2">
+        <label><span>Layout</span><select id="waste"><option value="0.1">Straight or brick (+10%)</option><option value="0.15">Herringbone or diagonal (+15%)</option></select></label>
+        <label><span>m² per box <small>optional</small></span><input type="number" id="box" placeholder="e.g. 1.08" min="0.1" step="0.01" /></label>
+      </div>
+    </fieldset>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>How it’s worked out</h2>
+    <ul>
+      <li><strong>Area</strong> = the sum of width × height for each wall, minus anything not tiled.</li>
+      <li><strong>Tiles</strong> = area × (1 + wastage) ÷ one tile’s area. Walls have more cuts than floors around outlets, windows and edges, so don’t skimp on the 10%.</li>
+      <li><strong>Adhesive</strong>: about 3.5 kg/m² with a 6 mm notch (tiles up to ~300 mm) or 5.5 kg/m² with a 10 mm notch (larger tiles).</li>
+      <li><strong>Grout</strong> = (L + W) ÷ (L × W) × joint × depth × 1.6 kg per m², plus 10%.</li>
+    </ul>
+    <p>Tiling a floor too? Use the <a href="/tools/bathroom-floor-calculator/">bathroom floor calculator</a>. Tiling is DIY-legal everywhere, but moving taps or power points behind the tiles is licensed work, and shower walls must be waterproofed first (<a href="/guides/diy-legal/can-i-waterproof-my-own-bathroom/">who can do that</a>).</p>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { num, val, fmt, rows, summary, live } from '../../scripts/calc';
+
+  const wallArea = (id: string) => {
+    const m = val(id).toLowerCase().match(/([\d.]+)\s*[x×*by]+\s*([\d.]+)/);
+    return m ? parseFloat(m[1]) * parseFloat(m[2]) : 0;
+  };
+  live(() => {
+    const area = Math.max(0, ['w1', 'w2', 'w3', 'w4'].reduce((s, id) => s + wallArea(id), 0) - num('minus'));
+    const tl = num('tl'), tw = num('tw');
+    const waste = parseFloat(val('waste'));
+    const orderM2 = area * (1 + waste);
+    const tiles = Math.ceil(orderM2 / ((tl / 1000) * (tw / 1000)));
+    const big = Math.max(tl, tw) > 300;
+    const adhesive = area * (big ? 5.5 : 3.5) * 1.05;
+    const grout = area * ((tl + tw) / (tl * tw)) * num('joint') * num('thick') * 1.6 * 1.1;
+    const box = num('box');
+    const out: [string, string, string?][] = [
+      ['Wall tiles', `${tiles.toLocaleString('en-AU')} tiles`, `${fmt(orderM2, 2)} m² incl. ${Math.round(waste * 100)}% wastage${box ? ` · ${Math.ceil(orderM2 / box)} boxes` : ''}`],
+      ['Tile adhesive', `${fmt(adhesive, 1)} kg`, `${big ? '10' : '6'} mm notched trowel · ${adhesive <= 15 ? 'a pre-mixed tub may do' : `${Math.ceil(adhesive / 20)} × 20 kg bag${Math.ceil(adhesive / 20) === 1 ? '' : 's'}`}`],
+      ['Grout', `${fmt(grout, 2)} kg`, `${Math.max(1, Math.ceil(grout / 5))} × 5 kg bag (or a small tub for splashbacks)`],
+    ];
+    if (num('trim')) out.push(['Tile trim', `${Math.ceil((num('trim') * 1.1) / 2.4)} × 2.4 m lengths`, `${fmt(num('trim') * 1.1, 1)} m incl. 10%`]);
+    out.push(['Silicone', '1 × 300 mL', 'for the joint where the tiles meet the benchtop, bath or shower base']);
+    summary(`${fmt(area, 2)} m² of wall · ${tl} × ${tw} mm tiles`);
+    rows(out);
+  });
+</script>

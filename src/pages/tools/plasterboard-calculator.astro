@@ -1,0 +1,83 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'How many plasterboard sheets do I need for a room?', a: 'Work out the wall area (perimeter × height) and ceiling area, subtract large openings, add about 10% for cuts, then divide by the area of one sheet. A 2400 × 1200 mm sheet covers 2.88 m².' },
+  { q: 'What thickness plasterboard for walls and ceilings?', a: 'In Australian homes, 10 mm is standard for walls and commonly used for ceilings on battens at standard spacings; 13 mm is used for ceilings with wider framing spacings or where more sag resistance is needed. Wet areas need wet-area (water-resistant) board. Check the manufacturer’s span and fixing tables.' },
+  { q: 'What sheet length should I buy?', a: 'Pick a length that spans the wall with the fewest butt joints. Sheets are usually laid horizontally on walls, so a 3600 mm sheet along a 3.6 m wall avoids a join entirely.' },
+  { q: 'Is plasterboard sheeting DIY-legal?', a: 'Yes, hanging and setting plasterboard is DIY-legal. Anything behind it isn’t: moving power points, switches or cables needs a licensed electrician, and plumbing needs a licensed plumber. Homes built before 1990 may have asbestos sheeting, so get older sheet material tested before removing it.' },
+];
+---
+
+<CalcShell
+  title="Plasterboard calculator: sheets, screws, joint tape and cornice"
+  description="Free plasterboard calculator for walls and ceilings: number of sheets for 2400, 2700, 3000 or 3600 mm boards, plus screws, joint tape and cornice for your room."
+  heading="Plasterboard calculator"
+  lede="Enter your room and sheet size to see how many plasterboard sheets you need for the walls and ceiling, plus screws, joint tape and cornice."
+  path="/tools/plasterboard-calculator/"
+  appName="Plasterboard calculator"
+  cta="Re-sheeting a room? Snap it in Jib and get the steps, the full materials list, and a flag on anything behind the wall that needs a licensed tradie."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <fieldset>
+      <legend>The room</legend>
+      <div class="g3">
+        <label><span>Length (m)</span><input type="number" id="len" value="4" min="0.5" step="0.1" /></label>
+        <label><span>Width (m)</span><input type="number" id="wid" value="3.6" min="0.5" step="0.1" /></label>
+        <label><span>Wall height (m)</span><input type="number" id="ht" value="2.4" min="1.8" step="0.05" /></label>
+      </div>
+      <div class="g3">
+        <label><span>Doors</span><input type="number" id="doors" value="1" min="0" step="1" /></label>
+        <label><span>Windows</span><input type="number" id="windows" value="1" min="0" step="1" /></label>
+        <label><span>Sheet length</span><select id="sheet"><option value="2.4">2400 × 1200 mm</option><option value="2.7">2700 × 1200 mm</option><option value="3">3000 × 1200 mm</option><option value="3.6" selected>3600 × 1200 mm</option><option value="4.8">4800 × 1200 mm</option></select></label>
+      </div>
+      <label class="check"><input type="checkbox" id="walls" checked /> Walls</label>
+      <label class="check"><input type="checkbox" id="ceiling" checked /> Ceiling</label>
+      <label class="check"><input type="checkbox" id="cornice" checked /> Cornice</label>
+    </fieldset>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>How it’s worked out</h2>
+    <ul>
+      <li><strong>Wall area</strong> = 2 × (length + width) × height, less about 1.7 m² per door and 1.5 m² per window. We don’t subtract small openings, because the offcuts rarely get used.</li>
+      <li><strong>Sheets</strong> = area × 1.1 ÷ sheet area (1.2 m × sheet length), rounded up, with walls and ceiling counted separately.</li>
+      <li><strong>Screws</strong>: a rough allowance of about 10 per m² on walls and 12 per m² on ceilings. Fixing patterns vary by product and whether you also use adhesive, so follow the manufacturer’s fixing guide.</li>
+      <li><strong>Joint tape</strong>: about one metre of recessed-edge joint for every 1.2 m² of board, plus 15% for butt joints and corners.</li>
+      <li><strong>Cornice</strong> = the room’s perimeter plus 10%, in standard lengths.</li>
+    </ul>
+    <p>Patching rather than re-sheeting? See <a href="/guides/how-to/how-to-patch-a-hole-in-plasterboard/">how to patch a hole in plasterboard</a>. Painting afterwards? Use the <a href="/tools/paint-calculator/">paint calculator</a>.</p>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { $, num, val, fmt, rows, summary, live } from '../../scripts/calc';
+
+  live(() => {
+    const L = num('len'), W = num('wid'), H = num('ht');
+    const sheetLen = parseFloat(val('sheet'));
+    const sheetArea = sheetLen * 1.2;
+    const walls = ($('walls') as HTMLInputElement).checked;
+    const ceiling = ($('ceiling') as HTMLInputElement).checked;
+    const wallArea = walls ? Math.max(0, 2 * (L + W) * H - num('doors') * 1.7 - num('windows') * 1.5) : 0;
+    const ceilArea = ceiling ? L * W : 0;
+    const wallSheets = Math.ceil((wallArea * 1.1) / sheetArea);
+    const ceilSheets = Math.ceil((ceilArea * 1.1) / sheetArea);
+    const area = wallArea + ceilArea;
+    const out: [string, string, string?][] = [];
+    if (walls) out.push(['Wall sheets', `${wallSheets} sheets`, `${fmt(wallArea, 1)} m² of wall · 10 mm board is standard`]);
+    if (ceiling) out.push(['Ceiling sheets', `${ceilSheets} sheets`, `${fmt(ceilArea, 1)} m² of ceiling · 10 or 13 mm depending on framing`]);
+    if (area) {
+      out.push(['Screws', `about ${Math.ceil((wallArea * 10 + ceilArea * 12) / 50) * 50}`, 'rough allowance; follow the fixing guide']);
+      out.push(['Joint tape', `${fmt((area / 1.2) * 1.15, 0)} m`, 'paper or mesh tape for joints and corners']);
+    }
+    if (($('cornice') as HTMLInputElement).checked) {
+      const c = 2 * (L + W) * 1.1;
+      out.push(['Cornice', `${Math.ceil(c / 4.8)} × 4.8 m lengths`, `${fmt(c, 1)} m incl. 10%`]);
+    }
+    if (!out.length) out.push(['Nothing selected', '–']);
+    summary(`${fmt(L, 1)} × ${fmt(W, 1)} m room, ${fmt(H, 2)} m walls, ${val('sheet')} m sheets`);
+    rows(out);
+  });
+</script>

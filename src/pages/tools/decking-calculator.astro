@@ -1,0 +1,74 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'How many decking boards do I need?', a: 'Divide 1 by the board width plus gap (in metres) to get lineal metres per m², multiply by the deck area, and add 10%. For 86 mm boards with 5 mm gaps that’s about 11 m per m², so a 4 × 3 m deck needs about 145 lineal metres.' },
+  { q: 'How many decking screws per square metre?', a: 'About 50 for 86 mm boards on joists at 450 mm centres: two screws at every joist crossing, plus 10% spare.' },
+  { q: 'What joist spacing for decking?', a: '450 mm centres is standard for 19 mm hardwood decking. Composite and thinner boards often need 400 mm or less. Follow the board manufacturer’s spacing.' },
+  { q: 'Which way should decking boards run?', a: 'Usually across the joists, parallel to the house wall. Board joins must land on a joist, so buy lengths that suit your joist layout.' },
+];
+---
+
+<CalcShell
+  title="Decking calculator: boards, joists and screws for your deck"
+  description="Free decking calculator: enter your deck size and board width to get lineal metres of decking, how many boards to buy in each length, joists and decking screws."
+  heading="Decking calculator"
+  lede="Enter the deck size and board, and we’ll work out the lineal metres, boards to buy, joists and screws."
+  path="/tools/decking-calculator/"
+  appName="Decking calculator"
+  cta="Building or re-boarding a deck? Snap it in Jib and get the plan, the materials, and a check on whether it needs council approval."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <div class="g3">
+      <label><span>Deck length (m) <small>along the house</small></span><input type="number" id="len" value="4" min="0.5" step="0.1" /></label>
+      <label><span>Deck depth (m) <small>out from the house</small></span><input type="number" id="dep" value="3" min="0.5" step="0.1" /></label>
+      <label><span>Board length to buy (m)</span><select id="blen"><option>2.4</option><option>3.6</option><option>4.2</option><option selected>5.4</option><option>6.0</option></select></label>
+    </div>
+    <div class="g3">
+      <label><span>Board width (mm)</span><select id="bw"><option>70</option><option selected>86</option><option>90</option><option>137</option><option>140</option></select></label>
+      <label><span>Gap between boards (mm)</span><input type="number" id="gap" value="5" min="0" max="10" step="1" /></label>
+      <label><span>Joist spacing (mm)</span><select id="js"><option>400</option><option selected>450</option></select></label>
+    </div>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>How it’s worked out</h2>
+    <ul>
+      <li><strong>Lineal metres per m²</strong> = 1 ÷ (board width + gap, in metres). For 86 mm + 5 mm that’s about 11.</li>
+      <li><strong>Boards</strong>: rows of boards across the deck depth, each row covering the deck length in your chosen board length, plus 10% for offcuts and defects.</li>
+      <li><strong>Joists</strong> run from the house outwards at your spacing: deck length ÷ spacing + 1.</li>
+      <li><strong>Screws</strong>: two per board at every joist crossing, plus 10%.</li>
+    </ul>
+    <p>This covers the decking and joists. Bearers, posts and footings must be sized from span tables. See the full <a href="/guides/materials/timber-deck-materials-list/">timber deck materials list</a>, and check <a href="/guides/council-approval/deck-council-approval-nsw/">whether your deck needs approval</a>. Adding steps? Use the <a href="/tools/stair-calculator/">stair calculator</a>.</p>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { num, val, fmt, rows, summary, live } from '../../scripts/calc';
+
+  live(() => {
+    const L = num('len'), D = num('dep');
+    const bw = num('bw'), gap = num('gap');
+    const blen = parseFloat(val('blen'));
+    const js = num('js') / 1000;
+    const perM2 = 1 / ((bw + gap) / 1000);
+    const lineal = L * D * perM2 * 1.1;
+    const rowsN = Math.ceil((D * 1000) / (bw + gap));
+    const boards = Math.ceil(rowsN * Math.ceil(L / blen) * 1.1);
+    const joists = Math.ceil(L / js) + 1;
+    const screws = Math.ceil(rowsN * joists * 2 * 1.1);
+    // Suggest the stock length that wastes least across one row.
+    const lengths = [2.4, 3.0, 3.6, 4.2, 4.8, 5.4, 6.0];
+    const waste = (len: number) => Math.ceil(L / len) * len - L;
+    const best = lengths.reduce((a, b) => (waste(b) < waste(a) - 0.01 ? b : a), blen);
+    summary(`${fmt(L, 1)} × ${fmt(D, 1)} m deck (${fmt(L * D, 1)} m²) · ${bw} mm boards`);
+    rows([
+      ['Decking', `${fmt(lineal, 0)} lineal m`, `about ${fmt(perM2, 1)} m per m², incl. 10% extra`],
+      ['Boards to buy', `${boards} × ${blen} m`, `${rowsN} rows of boards; joins must land on a joist${best !== blen ? ` · ${best} m boards would waste less (${fmt(waste(best), 1)} m vs ${fmt(waste(blen), 1)} m offcut per row)` : ''}`],
+      ['Joists', `${joists} × ${fmt(D, 1)} m`, `at ${num('js')} mm centres, sized from span tables`],
+      ['Decking screws', `about ${screws.toLocaleString('en-AU')}`, 'stainless near the coast; 2 per board per joist'],
+      ['Deck oil', `about ${fmt((L * D * 2) / 10, 1)} L`, 'rough guide for two coats; check the tin’s coverage'],
+    ]);
+  });
+</script>

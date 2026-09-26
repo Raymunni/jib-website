@@ -1,0 +1,100 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'How do I convert roof pitch to degrees?', a: 'Degrees = tan⁻¹(rise ÷ run). A 6:12 pitch (6 up for every 12 across) is 26.6°, and a 22.5° roof rises about 414 mm per metre.' },
+  { q: 'What is a common roof pitch in Australia?', a: 'Australian homes are usually described in degrees: 22.5° is very common for tiled roofs, with lower pitches of 5–15° typical for metal skillion and flat-look roofs. Minimum pitches depend on the roofing product, so check the manufacturer’s specifications.' },
+  { q: 'How do I work out the actual roof area from the floor plan?', a: 'Multiply the plan area (including eaves) by the pitch factor, 1 ÷ cos(pitch). For a 22.5° roof that’s about 1.08, so a 200 m² plan area has roughly 216 m² of roof surface.' },
+  { q: 'Is roof pitch the same as slope percentage?', a: 'They describe the same thing differently. Percentage = rise ÷ run × 100, so a 22.5° roof is about a 41% slope, and 45° is 100%.' },
+];
+---
+
+<CalcShell
+  title="Roof pitch calculator: degrees, ratio (x:12), percent and roof area"
+  description="Convert roof pitch between degrees, x:12 ratio, percentage slope and rise per metre, and get the pitch factor to turn a floor plan area into actual roof area."
+  heading="Roof pitch calculator"
+  lede="Enter the pitch any way you know it and get every other format, plus the rafter length and actual roof area."
+  path="/tools/roof-pitch-calculator/"
+  appName="Roof pitch calculator"
+  cta="Roof or gutter job coming up? Snap it in Jib and get the plan, and a clear flag on anything that needs a licensed roofer or plumber."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <div class="g2">
+      <label><span>I know the pitch as</span>
+        <select id="mode">
+          <option value="deg">Degrees</option>
+          <option value="ratio">Ratio (x in 12)</option>
+          <option value="pct">Percent slope</option>
+          <option value="rr">Rise and run (mm)</option>
+        </select>
+      </label>
+      <label id="w-v"><span id="v-label">Degrees</span><input type="number" id="v" value="22.5" min="0" step="0.5" /></label>
+    </div>
+    <div class="g2" id="w-rr" hidden>
+      <label><span>Rise (mm)</span><input type="number" id="rise" value="1000" min="0" step="10" /></label>
+      <label><span>Run (mm)</span><input type="number" id="run" value="2400" min="1" step="10" /></label>
+    </div>
+    <div class="g2">
+      <label><span>Half span / run for rafter (m) <small>optional</small></span><input type="number" id="half" value="4" min="0" step="0.1" /></label>
+      <label><span>Plan area incl. eaves (m²) <small>optional</small></span><input type="number" id="plan" value="200" min="0" step="1" /></label>
+    </div>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>Common roof pitches</h2>
+    <table>
+      <thead><tr><th>Degrees</th><th>Ratio (x:12)</th><th>Percent</th><th>Pitch factor</th></tr></thead>
+      <tbody>
+        {
+          [5, 10, 15, 20, 22.5, 25, 30, 35, 40, 45].map((d) => {
+            const t = Math.tan((d * Math.PI) / 180);
+            return (
+              <tr>
+                <td>{d}°</td>
+                <td>{(t * 12).toFixed(1)}:12</td>
+                <td>{(t * 100).toFixed(0)}%</td>
+                <td>{(1 / Math.cos((d * Math.PI) / 180)).toFixed(3)}</td>
+              </tr>
+            );
+          })
+        }
+      </tbody>
+    </table>
+    <p><strong>Pitch factor</strong> turns a flat plan area into the real, sloping roof area. It’s what you need to estimate roofing sheets, tiles, sarking or paint.</p>
+    <h2>Stay off the roof</h2>
+    <p>Working on a roof is high-risk. In Australia, many roof jobs also involve licensed work, such as roof plumbing (gutters and downpipes connected to stormwater) and anything electrical like solar. For gutters, see <a href="/guides/home-maintenance/how-to-clean-gutters/">how to clean gutters safely</a>.</p>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { $, num, val, fmt, rows, summary, live } from '../../scripts/calc';
+
+  const labels: Record<string, string> = { deg: 'Degrees', ratio: 'Rise per 12 (e.g. 6 for 6:12)', pct: 'Percent slope' };
+  live(() => {
+    const mode = val('mode');
+    ($('w-rr') as HTMLElement).hidden = mode !== 'rr';
+    ($('w-v') as HTMLElement).hidden = mode === 'rr';
+    if (mode !== 'rr') $('v-label').textContent = labels[mode];
+    let t = 0; // tan(pitch) = rise / run
+    if (mode === 'deg') t = Math.tan((num('v') * Math.PI) / 180);
+    else if (mode === 'ratio') t = num('v') / 12;
+    else if (mode === 'pct') t = num('v') / 100;
+    else t = num('rise') / (num('run') || 1);
+    const deg = (Math.atan(t) * 180) / Math.PI;
+    const factor = 1 / Math.cos(Math.atan(t));
+    const out: [string, string, string?][] = [
+      ['Degrees', `${fmt(deg, 1)}°`],
+      ['Ratio', `${fmt(t * 12, 2)} : 12`, 'rise for every 12 units across'],
+      ['Percent slope', `${fmt(t * 100, 1)}%`],
+      ['Rise per metre', `${fmt(t * 1000, 0)} mm`, 'for every 1,000 mm across'],
+      ['Pitch factor', fmt(factor, 3), 'roof area = plan area × this'],
+    ];
+    const half = num('half');
+    if (half) out.push(['Rafter length', `${fmt(half * factor, 2)} m`, `for a ${fmt(half, 2)} m run, before overhang and cuts`]);
+    const plan = num('plan');
+    if (plan) out.push(['Roof area', `${fmt(plan * factor, 1)} m²`, `from ${fmt(plan, 0)} m² plan area`]);
+    summary(`Pitch ${fmt(deg, 1)}°`);
+    rows(out);
+  });
+</script>

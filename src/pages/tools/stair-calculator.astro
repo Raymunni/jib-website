@@ -1,0 +1,80 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'What is the maximum stair riser height in Australia?', a: 'For stairs in houses, the NCC Housing Provisions (Part 11.2) set a riser between 115 and 190 mm and a going between 240 and 355 mm, with 2R + G (two risers plus one going) between 550 and 700 mm.' },
+  { q: 'How many steps do I need?', a: 'Divide the total rise (floor to floor, or ground to deck) by your target riser height and round up. For a 1,000 mm rise, 6 risers gives 167 mm each, which is comfortable and within the code.' },
+  { q: 'How many risers can one flight have?', a: 'Between 2 and 18 risers per flight under the NCC. Longer stairs need a landing.' },
+  { q: 'Do all risers have to be the same height?', a: 'Near enough: the NCC limits adjacent risers (and goings) to within 5 mm of each other, and the largest and smallest across a flight to within 10 mm. Uneven steps are a major trip hazard.' },
+];
+---
+
+<CalcShell
+  title="Stair calculator (Australia): risers, goings and stringer length"
+  description="Free stair calculator using the NCC rules: enter the total rise to get the number of steps, riser and going sizes, the 2R+G check, total run, stringer length and angle."
+  heading="Stair calculator"
+  lede="Enter the total height to climb and we’ll work out the number of steps, each riser and going, the total run and the stringer length, checked against the National Construction Code."
+  path="/tools/stair-calculator/"
+  appName="Stair calculator"
+  cta="Building deck or garden stairs? Snap the spot in Jib and get the steps, materials and tools, plus a flag if any part needs approval or a licensed trade."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <div class="g3">
+      <label><span>Total rise (mm) <small>floor to floor, or ground to deck</small></span><input type="number" id="rise" value="1000" min="100" max="6000" step="10" /></label>
+      <label><span>Target riser (mm) <small>115–190</small></span><input type="number" id="target" value="175" min="115" max="190" step="1" /></label>
+      <label><span>Going / tread depth (mm) <small>240–355</small></span><input type="number" id="going" value="260" min="200" max="400" step="5" /></label>
+    </div>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>The rules this checks (NCC Housing Provisions Part 11.2)</h2>
+    <table>
+      <thead><tr><th></th><th>Minimum</th><th>Maximum</th></tr></thead>
+      <tbody>
+        <tr><td>Riser (R)</td><td>115 mm</td><td>190 mm</td></tr>
+        <tr><td>Going (G)</td><td>240 mm</td><td>355 mm</td></tr>
+        <tr><td>2R + G</td><td>550 mm</td><td>700 mm</td></tr>
+        <tr><td>Risers per flight</td><td>2</td><td>18</td></tr>
+      </tbody>
+    </table>
+    <p>Other requirements this calculator doesn’t cover include handrails, balustrades (generally required where you could fall more than 1 m), openings between treads, slip resistance, and headroom. Read the <a href="https://ncc.abcb.gov.au/editions/ncc-2022/adopted/housing-provisions/11-safe-movement-and-access/part-112-stairway-and-ramp-construction" rel="noopener">NCC Part 11.2</a> or ask your certifier.</p>
+    <h2>How it’s worked out</h2>
+    <ul>
+      <li><strong>Risers</strong> = total rise ÷ target riser, rounded up. Each riser = total rise ÷ that number, so every step is identical.</li>
+      <li><strong>Treads</strong> = risers − 1 (the top step is the floor or deck).</li>
+      <li><strong>Total run</strong> = treads × going. <strong>Stringer length</strong> = √(run² + rise²), plus extra for cuts and the bottom seat.</li>
+      <li><strong>Angle</strong> = tan⁻¹(riser ÷ going).</li>
+    </ul>
+    <p>Stairs attached to a deck or a building can form part of work that needs approval. Check <a href="/guides/council-approval/deck-council-approval-nsw/">deck approval rules</a> before you build.</p>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { num, fmt, rows, summary, live } from '../../scripts/calc';
+
+  live(() => {
+    const rise = num('rise');
+    const target = Math.min(190, Math.max(115, num('target') || 175));
+    const going = num('going');
+    const n = Math.max(2, Math.ceil(rise / target));
+    const r = rise / n;
+    const treads = n - 1;
+    const run = treads * going;
+    const stringer = Math.sqrt(run * run + rise * rise);
+    const angle = (Math.atan(r / going) * 180) / Math.PI;
+    const rule = 2 * r + going;
+    const ok = (b: boolean) => (b ? '✓ within the NCC' : '✗ outside the NCC');
+    const flights = Math.ceil(n / 18);
+    rows([
+      ['Steps', `${n} risers, ${treads} treads`, flights > 1 ? `More than 18 risers: you need ${flights} flights with a landing between` : 'one flight'],
+      ['Each riser', `${fmt(r, 1)} mm`, ok(r >= 115 && r <= 190)],
+      ['Each going', `${fmt(going, 0)} mm`, ok(going >= 240 && going <= 355)],
+      ['2R + G', `${fmt(rule, 0)} mm`, ok(rule >= 550 && rule <= 700) + ' (550–700 mm)'],
+      ['Total run', `${fmt(run / 1000, 2)} m`, 'horizontal distance from the first riser to the top'],
+      ['Stringer length', `${fmt(stringer / 1000, 2)} m`, 'along the slope; buy longer to allow for cuts'],
+      ['Angle', `${fmt(angle, 1)}°`, angle > 40 ? 'steep; a longer going makes it more comfortable' : 'comfortable range is roughly 30–37°'],
+    ]);
+    summary(`${fmt(rise, 0)} mm total rise`);
+  });
+</script>
