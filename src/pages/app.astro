@@ -46,7 +46,13 @@ const routes = {
     var ua = navigator.userAgent;
     var c = new URLSearchParams(location.search).get('c') || 'general';
     var store = /iPhone|iPad|iPod/.test(ua) ? routes.ios : /Android/.test(ua) ? routes.android : null;
-    if (store) location.replace(store[c] || store.general);
+    if (store) {
+      // Record the redirect before leaving (store installs can't be seen from here).
+      var dest = store[c] || store.general;
+      var go = function () { location.replace(dest); };
+      if (window.gtag) window.gtag('event', 'store_redirect', { store: /iPhone|iPad|iPod/.test(ua) ? 'ios' : 'android', campaign: c, event_callback: go });
+      setTimeout(go, 600);
+    }
   })();
 </script>
 

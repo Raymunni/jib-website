@@ -66,6 +66,11 @@ const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 const storage = getStorage(firebaseApp);
 const DEMO = new URLSearchParams(location.search).has('demo');
+/** Analytics (GA4, same property as the app): see components/Analytics.astro. */
+const track = (name: string, params: Record<string, unknown> = {}) => {
+  const w = window as unknown as { jibTrack?: (n: string, p: Record<string, unknown>) => void };
+  w.jibTrack?.(name, { surface: DEMO ? 'web_demo' : 'web_app', ...params });
+};
 
 // ---------- Photos ----------
 // Saved download URLs can carry stale tokens (re-uploading from the phone
@@ -192,6 +197,7 @@ async function withUpload(files: File[], then: (urls: string[]) => Promise<void>
   try {
     const urls: string[] = [];
     for (const f of files) urls.push(await uploadPhoto(f));
+    track('photo_upload', { count: urls.length });
     await then(urls);
   } catch (e) {
     console.error(e);
@@ -453,6 +459,7 @@ if (DEMO) {
   state.user = { uid: 'demo', email: 'demo@jibapp.xyz', providerData: [{ providerId: 'google.com' }] } as unknown as User;
   state.data = normalise(demoData());
   state.dataReady = true;
+  track('web_demo_start');
 } else {
   onAuthStateChanged(auth, (user) => {
     state.user = user;
@@ -463,6 +470,7 @@ if (DEMO) {
     state.dataReady = false;
     state.loadError = '';
     if (user) {
+      (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag?.('set', { user_id: user.uid });
       unsubDoc = onSnapshot(
         doc(db, 'users', user.uid),
         (snap) => {
@@ -1264,6 +1272,7 @@ function viewLightbox(lb: { src: string } | { before: string; after: string }) {
 // ---------- Actions ----------
 function setView(v: View) {
   state.view = v;
+  track('web_screen', { screen: v });
   state.jobId = null;
   state.selecting = false;
   state.selected.clear();
@@ -1300,6 +1309,7 @@ function toggleDone(jobId: string) {
     },
     wasDone ? undefined : 'Nice work — job done 🎉',
   );
+  if (!wasDone) track('job_complete', { recurring: !!j.recurrence });
   if (!wasDone && !j.afterPhotoPath && state.data?.afterPhotoPromptEnabled !== false) {
     state.modal = {
       kind: 'confirm',
@@ -1359,6 +1369,7 @@ document.addEventListener('click', async (ev) => {
       render();
       try {
         await signInWithPopup(auth, new GoogleAuthProvider());
+        track('login', { method: 'google' });
       } catch (e) {
         state.authError = authMessage(e);
       }
@@ -1760,6 +1771,7 @@ document.addEventListener('submit', async (ev) => {
     render();
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      track('login', { method: 'email' });
     } catch (e) {
       state.authError = authMessage(e);
     }
@@ -1857,6 +1869,7 @@ document.addEventListener('submit', async (ev) => {
     state.newJob = false;
     state.draftPhotos = [];
     state.jobId = job.id;
+    track('job_create', { method: 'manual', has_photo: photos.length > 0, recurring: !!job.recurrence });
     return mutate((hh) => {
       hh.jobs = [...hh.jobs, structuredClone(job)];
       for (const p of photos) addToGallery(hh, job.roomId, p, job.title);

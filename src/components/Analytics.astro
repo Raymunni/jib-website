@@ -1,0 +1,62 @@
+---
+// Google Analytics 4 (the same property as the Jib app, via Firebase).
+// Consent Mode: visitors in the EEA, UK and Switzerland default to
+// "denied" (cookieless, anonymous pings only); everyone else is measured
+// normally. Custom events are documented in jib_jobs/ANALYTICS.md.
+const GA_ID = 'G-PGQC8CB3NC';
+const denyRegions = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IS','IE','IT','LV','LI','LT','LU','MT','NL','NO','PL','PT','RO','SK','SI','ES','SE','GB','CH'];
+---
+
+<script is:inline define:vars={{ GA_ID, denyRegions }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  window.gtag = gtag;
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', region: denyRegions });
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('js', new Date());
+  gtag('config', GA_ID, { anonymize_ip: true });
+</script>
+<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+<script is:inline>
+  // Site-wide conversion tracking: one delegated listener, no per-page code.
+  (function () {
+    var send = function (name, params) {
+      if (window.gtag) window.gtag('event', name, Object.assign({ page: location.pathname }, params || {}));
+    };
+    window.jibTrack = send;
+    document.addEventListener(
+      'click',
+      function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a') : null;
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        var where = a.closest('header') ? 'nav' : a.closest('footer') ? 'footer' : a.closest('.cta') ? 'guide_cta' : a.closest('.hero') ? 'hero' : a.closest('.how') ? 'how_it_works' : a.closest('.feat, .spot') ? 'feature_tile' : a.classList.contains('mobile-cta') ? 'mobile_bar' : 'body';
+        if (a.dataset.store) send('store_click', { store: a.dataset.store, location: where });
+        else if (a.hasAttribute('data-get-app') || /^\/app\//.test(href)) {
+          var m = href.match(/[?&]c=([^&]+)/);
+          send('get_app_click', { location: where, campaign: m ? m[1] : 'general' });
+        } else if (href.indexOf('/web/?demo') === 0) send('web_demo_click', { location: where });
+        else if (href.indexOf('mailto:') === 0) send(/launch/i.test(href) ? 'launch_alert_click' : 'email_click', { location: where });
+        else if (/^\/tools\/./.test(href)) send('tool_click', { tool: href.split('/')[2], location: where });
+      },
+      true,
+    );
+    // First interaction with any calculator, checker or planner = a "tool_use".
+    var used = false;
+    document.addEventListener(
+      'input',
+      function (e) {
+        if (used) return;
+        var el = e.target;
+        if (!el || !el.closest) return;
+        var tool = el.closest('#calc') ? location.pathname.split('/')[2] : el.closest('#checker') ? 'diy-legality-checker' : el.closest('#planner') ? 'maintenance-planner' : null;
+        if (!tool) return;
+        used = true;
+        send('tool_use', { tool: tool });
+      },
+      true,
+    );
+  })();
+</script>
