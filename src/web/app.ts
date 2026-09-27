@@ -1,9 +1,9 @@
-// Jib on the web — mirrors the phone app (jib_jobs/lib/screens): Home with
+// Jib on the web, mirrors the phone app (jib_jobs/lib/screens): Home with
 // the spaces slider, Shopping, Gallery (grid + timeline), Toolbox and
 // Settings (houses, house details, spaces). Reads and writes the same
 // users/{uid} document the app syncs. Writes only touch `houses`,
 // `updatedAt` and two display preferences (currencyCode,
-// afterPhotoPromptEnabled) — never premium, tier or credit fields — and
+// afterPhotoPromptEnabled), never premium, tier or credit fields, and
 // run in a transaction against the latest cloud copy, so a web edit can't
 // clobber a change the phone pushed a moment earlier.
 import { initializeApp } from 'firebase/app';
@@ -201,14 +201,14 @@ async function withUpload(files: File[], then: (urls: string[]) => Promise<void>
     await then(urls);
   } catch (e) {
     console.error(e);
-    toast('Couldn’t upload that photo — try again');
+    toast('Couldn’t upload that photo, try again');
   } finally {
     state.uploading = 0;
     render();
   }
 }
 
-// localStorage can throw (private mode, blocked storage) — never let that break the app.
+// localStorage can throw (private mode, blocked storage), never let that break the app.
 const store = {
   get(k: string) {
     try { return localStorage.getItem(k); } catch { return null; }
@@ -401,7 +401,7 @@ async function mutateDoc(change: (d: UserDoc) => void, okMsg?: string) {
     if (okMsg) toast(okMsg);
   } catch (e) {
     console.error(e);
-    toast('Couldn’t save that — check your connection and try again');
+    toast('Couldn’t save that, check your connection and try again');
   }
 }
 /** Applies [change] to the current house only. */
@@ -494,9 +494,9 @@ function authMessage(e: unknown) {
   if (code.includes('popup-closed') || code.includes('cancelled-popup')) return '';
   if (code.includes('invalid-credential') || code.includes('wrong-password') || code.includes('user-not-found'))
     return 'That email and password don’t match a Jib account.';
-  if (code.includes('too-many-requests')) return 'Too many attempts — wait a minute and try again.';
+  if (code.includes('too-many-requests')) return 'Too many attempts, wait a minute and try again.';
   if (code.includes('popup-blocked')) return 'Your browser blocked the sign-in popup. Allow popups for jibapp.xyz and try again.';
-  if (code.includes('network')) return 'No connection — check your internet and try again.';
+  if (code.includes('network')) return 'No connection, check your internet and try again.';
   return 'Sign-in didn’t work. Please try again.';
 }
 
@@ -518,7 +518,7 @@ function render() {
     $app.innerHTML = `
       <div class="w-empty">
         <h2>No home set up yet</h2>
-        <p>Open Jib on your phone, sign in with <strong>${esc(state.user.email ?? 'this account')}</strong> and set up your home — it’ll appear here straight away.</p>
+        <p>Open Jib on your phone, sign in with <strong>${esc(state.user.email ?? 'this account')}</strong> and set up your home, it’ll appear here straight away.</p>
         <p><a class="w-btn primary" href="/app/">Get the Jib app</a></p>
       </div>`;
     return;
@@ -619,7 +619,7 @@ function renderSignIn() {
         ${state.authError ? `<p class="w-err" role="alert">${esc(state.authError)}</p>` : ''}
         <p class="w-note"><button type="button" class="w-link" data-act="reset">Forgot your password?</button></p>
       </form>
-      <p class="w-note">Signed up with Apple? Sign in with Apple is coming to the web soon — until then, manage your jobs in the app.</p>
+      <p class="w-note">Signed up with Apple? Sign in with Apple is coming to the web soon, until then, manage your jobs in the app.</p>
       <p class="w-note">New to Jib? Create your account in the app first: <a href="/app/">get Jib for iPhone or Android</a>. Or <a href="/web/?demo">try the web demo</a>.</p>
     </section>`;
 }
@@ -738,7 +738,7 @@ function viewHome(h: House) {
       </section>
       <section class="card group">
         <h2><span class="gi">☰</span> All jobs <span class="count">${active.length}</span></h2>
-        ${active.length ? active.map((j) => jobTile(h, j, showRoom)).join('') : `<p class="faint">Nothing on the list${room ? ` for ${esc(room.name)}` : ''} yet — add a job, or snap one in the app.</p>`}
+        ${active.length ? active.map((j) => jobTile(h, j, showRoom)).join('') : `<p class="faint">Nothing on the list${room ? ` for ${esc(room.name)}` : ''} yet, add a job, or snap one in the app.</p>`}
       </section>
       ${
         completed.length
@@ -1307,7 +1307,7 @@ function toggleDone(jobId: string) {
         jj.lastDone = now();
       }
     },
-    wasDone ? undefined : 'Nice work — job done 🎉',
+    wasDone ? undefined : 'Nice work, job done 🎉',
   );
   if (!wasDone) track('job_complete', { recurring: !!j.recurrence });
   if (!wasDone && !j.afterPhotoPath && state.data?.afterPhotoPromptEnabled !== false) {
@@ -1360,7 +1360,7 @@ document.addEventListener('click', async (ev) => {
     case 'view':
       return setView(t.dataset.v as View);
     case 'signout':
-      if (DEMO) return toast('This is the demo — nothing to sign out of');
+      if (DEMO) return toast('This is the demo, nothing to sign out of');
       await signOut(auth);
       return;
     case 'google':
@@ -1383,7 +1383,7 @@ document.addEventListener('click', async (ev) => {
       }
       try {
         await sendPasswordResetEmail(auth, email);
-        toast('Password reset email sent — check your inbox');
+        toast('Password reset email sent, check your inbox');
       } catch (e) {
         state.authError = authMessage(e);
         render();

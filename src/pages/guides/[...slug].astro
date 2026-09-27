@@ -23,7 +23,7 @@ const campaign = d.hub as Campaign;
 const url = new URL(guideUrl(guide), SITE.url).toString();
 
 // Pillar: list every guide in the hub. Cluster page: explicit related
-// guides first, then the pillar, then siblings — so no page is an orphan.
+// guides first, then the pillar, then siblings, so no page is an orphan.
 const siblings = all.filter((g) => g.data.hub === d.hub && g.id !== guide.id);
 const pillar = siblings.find((g) => g.data.pillar);
 const explicit = d.related.map((id) => all.find((g) => g.id === id)).filter((g): g is Guide => Boolean(g));

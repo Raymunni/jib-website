@@ -1,6 +1,6 @@
 import QRCode from 'qrcode';
 
-// Rendered at build time so the page ships a plain inline SVG — no QR
+// Rendered at build time so the page ships a plain inline SVG, no QR
 // library in the browser. Scanning lands on /app/, which sends each phone
 // to its own store.
 export async function qrSvg(text: string): Promise<string> {

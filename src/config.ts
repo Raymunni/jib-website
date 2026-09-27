@@ -4,7 +4,7 @@ export const SITE = {
   url: 'https://jibapp.xyz',
   tagline: 'Snap a photo, get the full job.',
   description:
-    'Jib is the home-improvement planner that tells you what you can legally DIY, what you need to buy, and what it will cost — then helps you plan and track the job.',
+    'Jib is the home-improvement planner that tells you what you can legally DIY, what you need to buy, and what it will cost, then helps you plan and track the job.',
   email: 'hello@jibapp.xyz',
   author: {
     name: 'Thomas Horsey',
@@ -53,7 +53,7 @@ export const anyStoreLive = STORES.ios.live || STORES.android.live;
 export const HUBS = {
   'diy-legal': {
     title: 'Can I legally DIY it?',
-    blurb: 'What electrical, plumbing, gas and waterproofing work you can legally do yourself — and what needs a licensed tradie.',
+    blurb: 'What electrical, plumbing, gas and waterproofing work you can legally do yourself, and what needs a licensed tradie.',
   },
   'council-approval': {
     title: 'Do I need council approval?',
@@ -69,7 +69,7 @@ export const HUBS = {
   },
   'home-maintenance': {
     title: 'Home maintenance, made simple',
-    blurb: 'What to check, clean and service around your home — and how often — so small jobs never become big bills.',
+    blurb: 'What to check, clean and service around your home, and how often, so small jobs never become big bills.',
   },
   features: {
     title: 'Jib features, explained',

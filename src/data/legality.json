@@ -5,7 +5,7 @@
       "code": "NSW",
       "name": "New South Wales",
       "regulator": {
-        "name": "NSW Government — trade licensing",
+        "name": "NSW Government, trade licensing",
         "url": "https://www.nsw.gov.au/business-and-economy/licences-and-credentials/building-and-trade-licences-and-registrations/plumbing-draining-and-gasfitting"
       }
     },
@@ -216,7 +216,7 @@
     "battery-smoke-alarm": {
       "default": {
         "v": "diy",
-        "note": "A battery-only alarm isn't connected to mains wiring, so you can fit or replace it yourself. Check your state's smoke-alarm rules for rentals and sales — some require interconnected hardwired alarms."
+        "note": "A battery-only alarm isn't connected to mains wiring, so you can fit or replace it yourself. Check your state's smoke-alarm rules for rentals and sales, some require interconnected hardwired alarms."
       },
       "QLD": {
         "v": "diy",
@@ -233,7 +233,7 @@
     "power-point": {
       "default": {
         "v": "licensed",
-        "note": "Replacing or adding a power point — even like-for-like — is electrical installation work that needs a licensed electrician in every state and territory."
+        "note": "Replacing or adding a power point, even like-for-like, is electrical installation work that needs a licensed electrician in every state and territory."
       },
       "VIC": {
         "v": "licensed",
@@ -308,7 +308,7 @@
     "oven-cooktop": {
       "default": {
         "v": "licensed",
-        "note": "Hardwired appliances must be connected by a licensed electrician. You can position and fit the appliance — just not make the connection."
+        "note": "Hardwired appliances must be connected by a licensed electrician. You can position and fit the appliance, just not make the connection."
       },
       "QLD": {
         "v": "licensed",
@@ -319,7 +319,7 @@
     "plug-on-lead": {
       "default": {
         "v": "depends",
-        "note": "We couldn't confirm your state's position from the regulator. Don't assume it's allowed — ask your electrical regulator, or have an electrician do it."
+        "note": "We couldn't confirm your state's position from the regulator. Don't assume it's allowed, ask your electrical regulator, or have an electrician do it."
       },
       "QLD": {
         "v": "licensed",
@@ -361,7 +361,7 @@
     "whole-tap": {
       "default": {
         "v": "licensed",
-        "note": "Replacing a whole tap or mixer means disconnecting and reconnecting the water supply — licensed plumbing work. The homeowner exemptions cover repair only."
+        "note": "Replacing a whole tap or mixer means disconnecting and reconnecting the water supply, licensed plumbing work. The homeowner exemptions cover repair only."
       },
       "TAS": {
         "v": "diy",
@@ -391,7 +391,7 @@
       },
       "NSW": {
         "v": "depends",
-        "note": "NSW lets an owner-occupier repair a showerhead. Replacing one outright isn't clearly covered — check with NSW Fair Trading.",
+        "note": "NSW lets an owner-occupier repair a showerhead. Replacing one outright isn't clearly covered, check with NSW Fair Trading.",
         "source": "https://www.nsw.gov.au/business-and-economy/licences-and-credentials/building-and-trade-licences-and-registrations/plumbing-draining-and-gasfitting"
       },
       "TAS": {
@@ -403,7 +403,7 @@
     "cistern-washer": {
       "default": {
         "v": "depends",
-        "note": "We couldn't confirm a homeowner exemption from your regulator — treat it as licensed work unless they confirm otherwise."
+        "note": "We couldn't confirm a homeowner exemption from your regulator, treat it as licensed work unless they confirm otherwise."
       },
       "QLD": {
         "v": "diy",
@@ -419,7 +419,7 @@
     "toilet-suite": {
       "default": {
         "v": "licensed",
-        "note": "Replacing a toilet suite involves the water supply and the sewer connection — licensed plumbing work in every state."
+        "note": "Replacing a toilet suite involves the water supply and the sewer connection, licensed plumbing work in every state."
       },
       "NSW": {
         "v": "licensed",
@@ -430,7 +430,7 @@
     "dishwasher-plumbing": {
       "default": {
         "v": "licensed",
-        "note": "Connecting a dishwasher to the water supply and drain isn't on any state's homeowner exemption list we could confirm — use a licensed plumber."
+        "note": "Connecting a dishwasher to the water supply and drain isn't on any state's homeowner exemption list we could confirm, use a licensed plumber."
       }
     },
     "plunger": {
@@ -452,13 +452,13 @@
     "hot-water": {
       "default": {
         "v": "licensed",
-        "note": "Replacing a hot water system is licensed plumbing work everywhere — and gas units also need a licensed gasfitter."
+        "note": "Replacing a hot water system is licensed plumbing work everywhere, and gas units also need a licensed gasfitter."
       }
     },
     "gas-appliance": {
       "default": {
         "v": "licensed",
-        "note": "All gasfitting — pipework, installing or moving gas appliances, and installing a bayonet point — needs a licensed gasfitter in every state."
+        "note": "All gasfitting, pipework, installing or moving gas appliances, and installing a bayonet point, needs a licensed gasfitter in every state."
       },
       "VIC": {
         "v": "licensed",
@@ -468,7 +468,7 @@
     "gas-bayonet-portable": {
       "default": {
         "v": "depends",
-        "note": "Plugging a portable appliance into an existing bayonet is what bayonets are designed for. Installing the bayonet is licensed gasfitting. Some states restrict unflued gas heaters — check the heater is legal to use where you live."
+        "note": "Plugging a portable appliance into an existing bayonet is what bayonets are designed for. Installing the bayonet is licensed gasfitting. Some states restrict unflued gas heaters, check the heater is legal to use where you live."
       }
     },
     "waterproofing": {

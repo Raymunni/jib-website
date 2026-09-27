@@ -1,4 +1,4 @@
-// Sample data for /web/?demo — lets the web app be tried (and tested)
+// Sample data for /web/?demo, lets the web app be tried (and tested)
 // without an account. Nothing here is ever written anywhere.
 import type { UserDoc } from './app';
 
@@ -52,7 +52,7 @@ export function demoData(): UserDoc {
             description: 'Double GPO next to the kettle is cracked. Want one with USB-C.',
             photoPath: `${IMG}/diy-or-tradie-flag.jpg`,
             verdict: 'tradie_required',
-            verdictReason: 'Replacing a power point is licensed electrical work in Queensland — even like-for-like. You can buy the fitting; a licensed electrician must install it.',
+            verdictReason: 'Replacing a power point is licensed electrical work in Queensland, even like-for-like. You can buy the fitting; a licensed electrician must install it.',
             difficulty: 'trade_required',
             timeEstimate: '30 min (electrician)',
             costLow: 120,
@@ -60,7 +60,7 @@ export function demoData(): UserDoc {
             costNote: 'Mostly the electrician’s call-out fee. Batch other electrical jobs into the same visit.',
             priority: true,
             shoppingList: [item('Double GPO with USB-C', 'Bunnings')],
-            criticalFlags: ['Do not remove the cover plate — the terminals behind it are live even with the switch off.'],
+            criticalFlags: ['Do not remove the cover plate, the terminals behind it are live even with the switch off.'],
             createdAt: t - 5 * day,
             updatedAt: t - 1 * day,
           },
@@ -90,7 +90,7 @@ export function demoData(): UserDoc {
               'Sponge off the haze after 20 minutes, then leave to cure.',
               'Re-silicone the internal corners and floor junction.',
             ],
-            criticalFlags: ['Wear a P2 mask while raking out grout — the dust contains silica.'],
+            criticalFlags: ['Wear a P2 mask while raking out grout, the dust contains silica.'],
             createdAt: t - 9 * day,
             updatedAt: t - 2 * day,
           },

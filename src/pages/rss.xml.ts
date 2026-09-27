@@ -7,7 +7,7 @@ import { guideUrl } from '../lib/guides';
 export async function GET(context: APIContext) {
   const guides = (await getCollection('guides')).sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
   return rss({
-    title: 'Jib — DIY guides for Australian homes',
+    title: 'Jib, DIY guides for Australian homes',
     description: SITE.description,
     site: context.site ?? SITE.url,
     items: guides.map((g) => ({
