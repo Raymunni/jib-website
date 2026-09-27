@@ -1,36 +1,48 @@
 ---
-// Jib logo: the house-and-tick mark with the Jib wordmark beside it.
+// Jib logo: the house-and-tick mark plus the "jib" wordmark, drawn with the
+// same soft, even strokes as the app icon. The roof over the j and i echoes
+// the icon's roof.
 interface Props {
   size?: number;
   color?: string;
   wordmark?: boolean;
 }
 const { size = 34, color = '#ffffff', wordmark = true } = Astro.props;
+const markW = Math.round(size * (546 / 512));
+const wordH = Math.round(size * 1.02);
+const wordW = Math.round(wordH * (268 / 264));
 ---
 
 <span class="jib-logo" role="img" aria-label="Jib" style={`--logo-size:${size}px;color:${color}`}>
-  <img src="/images/jib-mark.png" width={size} height={size} alt="" />
-  {wordmark && <span class="jib-wordmark" aria-hidden="true">Jib</span>}
+  <img src="/images/jib-mark.png" width={markW} height={size} alt="" />
+  {
+    wordmark && (
+      <svg class="jib-wordmark" width={wordW} height={wordH} viewBox="-39 -89 268 264" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 0 0 V 138 Q 0 162 -26 162" />
+        <path d="M 58 0 V 100" />
+        <path d="M 116 -50 V 100" />
+        <circle cx="166" cy="50" r="50" />
+        <path d="M -10 -26 L 29 -65 L 68 -26" />
+      </svg>
+    )
+  }
 </span>
 
 <style>
   .jib-logo {
     display: inline-flex;
     align-items: center;
-    gap: calc(var(--logo-size) * 0.28);
+    gap: calc(var(--logo-size) * 0.3);
     text-decoration: none;
+    line-height: 0;
   }
   .jib-logo img {
     display: block;
-    width: var(--logo-size);
     height: var(--logo-size);
+    width: auto;
   }
   .jib-wordmark {
-    font-weight: 800;
-    font-size: calc(var(--logo-size) * 0.72);
-    letter-spacing: -0.02em;
-    line-height: 1;
-    text-decoration: none;
-    display: inline-block;
+    display: block;
+    margin-top: calc(var(--logo-size) * 0.12);
   }
 </style>
