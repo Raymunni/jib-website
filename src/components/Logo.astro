@@ -1,7 +1,6 @@
 ---
-// Jib logo: the house-and-tick mark plus the "jib" wordmark, drawn with the
-// same soft, even strokes as the app icon. The roof over the j and i echoes
-// the icon's roof.
+// Jib logo: the house-and-tick mark and "Jib" set in Nunito ExtraBold,
+// whose rounded ends match the icon's soft strokes.
 interface Props {
   size?: number;
   color?: string;
@@ -9,32 +8,25 @@ interface Props {
 }
 const { size = 34, color = '#ffffff', wordmark = true } = Astro.props;
 const markW = Math.round(size * (546 / 512));
-const wordH = Math.round(size * 1.02);
-const wordW = Math.round(wordH * (268 / 264));
 ---
 
 <span class="jib-logo" role="img" aria-label="Jib" style={`--logo-size:${size}px;color:${color}`}>
   <img src="/images/jib-mark.png" width={markW} height={size} alt="" />
-  {
-    wordmark && (
-      <svg class="jib-wordmark" width={wordW} height={wordH} viewBox="-39 -89 268 264" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M 0 0 V 138 Q 0 162 -26 162" />
-        <path d="M 58 0 V 100" />
-        <path d="M 116 -50 V 100" />
-        <circle cx="166" cy="50" r="50" />
-        <path d="M -10 -26 L 29 -65 L 68 -26" />
-      </svg>
-    )
-  }
+  {wordmark && <span class="jib-wordmark" aria-hidden="true">Jib</span>}
 </span>
 
 <style>
+  :global(a:has(.jib-logo)) {
+    text-decoration: none;
+  }
   .jib-logo {
     display: inline-flex;
-    align-items: center;
-    gap: calc(var(--logo-size) * 0.3);
+    /* baseline: the image sits on the text baseline, so the bottom of
+       "Jib" lines up exactly with the bottom of the house */
+    align-items: baseline;
+    gap: calc(var(--logo-size) * 0.26);
     text-decoration: none;
-    line-height: 0;
+    line-height: 1;
   }
   .jib-logo img {
     display: block;
@@ -42,7 +34,14 @@ const wordW = Math.round(wordH * (268 / 264));
     width: auto;
   }
   .jib-wordmark {
-    display: block;
-    margin-top: calc(var(--logo-size) * 0.12);
+    font-family: 'Nunito', ui-rounded, system-ui, sans-serif;
+    font-weight: 800;
+    font-size: calc(var(--logo-size) * 0.92);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    /* Nunito's letters sit 0.011em below the baseline; lift them so the
+       bottom of "Jib" meets the bottom of the house exactly */
+    position: relative;
+    top: -0.011em;
   }
 </style>
