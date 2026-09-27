@@ -1,15 +1,36 @@
 ---
+// Jib logo: the house-and-tick mark with the Jib wordmark beside it.
 interface Props {
   size?: number;
   color?: string;
+  wordmark?: boolean;
 }
-const { size = 34, color = 'currentColor' } = Astro.props;
+const { size = 34, color = '#ffffff', wordmark = true } = Astro.props;
 ---
 
-<svg width={size} height={size} viewBox="140 170 744 620" role="img" aria-label="Jib" fill="none">
-  <path d="M180 500 512 222 844 500" stroke={color} stroke-width="54" stroke-linejoin="miter" />
-  <rect x="664" y="262" width="82" height="112" fill={color} />
-  <path d="M250 460v285M774 460v285" stroke={color} stroke-width="44" />
-  <rect x="170" y="722" width="684" height="48" fill={color} />
-  <text x="512" y="672" text-anchor="middle" font-family="Arial Black, Arial, Helvetica, sans-serif" font-weight="900" font-size="300" fill={color} textLength="430" lengthAdjust="spacingAndGlyphs">JIB</text>
-</svg>
+<span class="jib-logo" role="img" aria-label="Jib" style={`--logo-size:${size}px;color:${color}`}>
+  <img src="/images/jib-mark.png" width={size} height={size} alt="" />
+  {wordmark && <span class="jib-wordmark" aria-hidden="true">Jib</span>}
+</span>
+
+<style>
+  .jib-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--logo-size) * 0.28);
+    text-decoration: none;
+  }
+  .jib-logo img {
+    display: block;
+    width: var(--logo-size);
+    height: var(--logo-size);
+  }
+  .jib-wordmark {
+    font-weight: 800;
+    font-size: calc(var(--logo-size) * 0.72);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-decoration: none;
+    display: inline-block;
+  }
+</style>
