@@ -5,7 +5,7 @@ import { SITE } from '../config';
 
 <Page title="Privacy Policy" description="What the Jib website and app collect, how it's used, and your choices.">
   <h1>Privacy Policy</h1>
-  <p><strong>Last updated: 25 September 2026</strong></p>
+  <p><strong>Last updated: 27 September 2026</strong></p>
   <p>This policy explains what information Jib (“we”, “us”) collects through the Jib website ({SITE.domain}) and the Jib mobile app (<code>com.jibjobs.app</code>), how it’s used, and the choices you have.</p>
 
   <h2>The website</h2>
@@ -29,8 +29,11 @@ import { SITE } from '../config';
     <li>House, space and job details you enter (names, descriptions, notes, recurrence schedules)</li>
     <li>Photos you take or upload of your house, spaces and jobs, including before-and-after photo pairs</li>
     <li>Shopping list items, including any retailer names or links you enter</li>
+    <li>Your inventory: the tools and materials you list, or that the AI lists from a photo of your garage, shed or a receipt</li>
     <li>Your suburb/location, entered manually or resolved from your device’s location (used for location-aware advice — see section 4)</li>
     <li>Questions and messages you send to the AI planning feature, and the AI’s responses</li>
+    <li>Jobs you add by voice: your phone’s own speech recognition (Apple’s on iPhone, Google’s on Android) turns what you say into text. Jib receives only that text, never a recording</li>
+    <li>Tradie briefs the AI writes for you to send when asking for quotes. A brief only goes to anyone when you choose to share or copy it</li>
   </ul>
 
   <h3>2.3 Automatically collected information</h3>
@@ -53,18 +56,27 @@ import { SITE } from '../config';
   <p>We don’t sell your personal information and don’t use it for advertising. Jib doesn’t show ads.</p>
 
   <h2>4. AI features and third-party processing</h2>
-  <p>Jib uses Anthropic’s Claude API to power job planning, steps, shopping suggestions and follow-up questions. When you use these features, the relevant job details (title, description, room and, where relevant, a photo you’ve attached) are sent to Anthropic to generate a response. See <a href="https://www.anthropic.com/legal/privacy">Anthropic’s Privacy Policy</a>.</p>
+  <p>Jib uses Anthropic’s Claude API to power job planning, steps, shopping suggestions, follow-up questions, reading photos of your tools, writing tradie briefs and turning jobs you add by voice into job entries. When you use these features, the relevant details (such as a job’s title, description, room and house details, the text of what you said and, where relevant, a photo you’ve attached) are sent to Anthropic to generate a response. See <a href="https://www.anthropic.com/legal/privacy">Anthropic’s Privacy Policy</a>.</p>
   <p><strong>AI-generated content is not professional advice.</strong> Steps, material suggestions, cost estimates and safety warnings are generated automatically and may be incomplete or inaccurate, or miss risks specific to your property.</p>
 
   <h2>5. Where your information is stored</h2>
   <ul>
     <li><strong>On your device:</strong> house, space, job and shopping data, and photos, are stored locally.</li>
-    <li><strong>In the cloud (only if signed in):</strong> the same data is synced to Google Firebase (Firestore and Firebase Storage) so it’s available across devices and on the web app. It’s tied to your account and not visible to other users.</li>
+    <li><strong>In the cloud (only if signed in):</strong> the same data is synced to Google Firebase (Firestore and Firebase Storage) so it’s available across devices and on the web app. It’s tied to your account and not visible to other users, except people you choose to share a house with (see section 6.1).</li>
     <li><strong>Location lookups:</strong> resolving a suburb uses Google’s geocoding and Places services and, for AI-assisted matching, Anthropic’s API. Neither keeps this beyond what’s needed to return a result.</li>
   </ul>
 
   <h2>6. Sharing your information</h2>
   <p>We don’t sell or rent your information. We share it only with the service providers needed to run Jib: Google Firebase (sign-in, sync, Google Analytics and Crashlytics), Apple (Sign in with Apple, if you use it), Anthropic (AI features), Google Places/geocoding (location) and RevenueCat (purchases). We may disclose information if required by law, or to protect the rights, safety or property of Jib, our users or others.</p>
+
+  <h3>6.1 Shared houses</h3>
+  <p>You can share a house with people you choose, such as a partner or housemate, by sending them an invite code. Codes expire after 7 days.</p>
+  <ul>
+    <li><strong>What they see:</strong> everyone in a shared house can see and edit everything in that house: its details, spaces, jobs, photos, shopping list and inventory, plus the first name on each member’s account. Nothing from your other houses is shared.</li>
+    <li><strong>Where it’s kept:</strong> in Google Firebase (Firestore and Storage) so every member can reach it, with a copy on each member’s phone.</li>
+    <li><strong>Leaving and removing:</strong> any member can leave, and the person who shared the house can remove members or stop sharing at any time. Whoever leaves or is removed loses access straight away; jobs and photos they added stay in the house. If the person who shared it stops sharing, they keep the house and everyone else loses it.</li>
+    <li><strong>Deleting your account</strong> takes you out of every shared house and ends sharing for any house you shared.</li>
+  </ul>
 
   <h2>7. Your choices and rights</h2>
   <ul>
@@ -72,6 +84,8 @@ import { SITE } from '../config';
     <li><strong>Deletion:</strong> you can delete individual jobs, photos, spaces or houses, or delete your entire account (which permanently removes your cloud-synced data) from Settings.</li>
     <li><strong>Local-only use:</strong> you can use the app without signing in, in which case no data leaves your device.</li>
     <li><strong>Location:</strong> you can decline or revoke location permission at any time; the app falls back to manual suburb search.</li>
+    <li><strong>Microphone:</strong> only needed to add jobs by voice. You can decline or revoke it at any time; everything else works without it.</li>
+    <li><strong>Shared houses:</strong> leave a shared house, or stop sharing one, from Settings at any time.</li>
   </ul>
   <p>If you’re in the EU or UK, you have rights under the GDPR (access, rectification, erasure, portability and objection) — contact us to exercise them. In Australia, we aim to handle your information consistently with the Australian Privacy Principles.</p>
 
