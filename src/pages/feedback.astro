@@ -1,0 +1,39 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../config';
+
+// The app's "Send feedback" button opens this page, so the form behind it
+// can change without an app update.
+const FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSeSC82M8EosEuVNZxLcc2If-D1Y2jfUc0aB4LYVXu3iKB39wg/viewform';
+---
+
+<Page title="Send feedback" description="Tell us what's working in Jib, what isn't, and what you'd like it to do next.">
+  <h1>Send feedback</h1>
+  <p>
+    Found a bug, got an idea, or something just didn’t make sense? Tell us here. Every message is read by the person who builds Jib, and it genuinely shapes what gets built next.
+  </p>
+  <p><a class="btn btn-primary" href={FORM} rel="noopener">Open the feedback form</a></p>
+
+  <div class="form-wrap">
+    <iframe src={`${FORM}?embedded=true`} title="Jib feedback form" loading="lazy">Loading…</iframe>
+  </div>
+
+  <p class="muted">
+    Prefer email? Write to <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Jib feedback')}`}>{SITE.email}</a>. For a problem with a purchase, see our <a href="/terms/">Terms</a>; to delete your account, see <a href="/delete-account/">delete your account</a>.
+  </p>
+</Page>
+
+<style>
+  .form-wrap {
+    margin: 18px 0 22px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .form-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 1100px;
+    border: 0;
+  }
+</style>
