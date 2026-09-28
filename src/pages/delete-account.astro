@@ -23,7 +23,17 @@ const body = encodeURIComponent('Please delete my Jib account and all its data.\
     Email <a href={`mailto:${SITE.email}?subject=${subject}&body=${body}`}>{SITE.email}</a> with the subject “Delete my Jib account”, ideally from the email address you use for Jib. We’ll confirm it’s your account, delete it within 30 days, and let you know when it’s done.
   </p>
 
-  <h2>What gets deleted</h2>
+  <h2 id="delete-some-data">Delete some data, keep your account</h2>
+  <p>You don’t have to delete your account to remove data:</p>
+  <ul>
+    <li><strong>A job, photo or shopping item:</strong> open it in the app and tap the bin.</li>
+    <li><strong>A space or a whole house:</strong> delete it from the app, which removes everything in it.</li>
+    <li><strong>Your inventory:</strong> remove items from the Toolbox list.</li>
+    <li><strong>Anything else</strong>, or if you’d rather we did it: email <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Delete some of my Jib data')}`}>{SITE.email}</a> saying what to delete, and we’ll do it within 30 days.</li>
+  </ul>
+  <p>Deleted items are removed from your phone and from the cloud straight away.</p>
+
+  <h2>What gets deleted with your account</h2>
   <ul>
     <li>Your account and sign-in</li>
     <li>Every house, space and job you created, with its photos, shopping list, inventory and AI conversations</li>
