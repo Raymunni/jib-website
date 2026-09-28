@@ -139,8 +139,8 @@ const jsonLd = [
             <StoreButtons campaign="home" size="lg" />
           ) : (
             <>
-              <a class="btn btn-primary" href="/web/?demo">Try Jib free on the web</a>
-              <a class="btn btn-ghost" href="/app/" data-get-app>Get it on your phone</a>
+              <a class="btn btn-primary" href="/app/" data-get-app>Get it on your phone</a>
+              <a class="btn btn-ghost" href={`mailto:${SITE.email}?subject=${encodeURIComponent('Tell me when Jib launches')}&body=${encodeURIComponent('Please email me when Jib is on the App Store / Google Play. My phone is: iPhone / Android')}`}>Tell me when it launches</a>
             </>
           )
         }
@@ -197,7 +197,7 @@ const jsonLd = [
           <StoreButtons campaign="home" size="lg" />
         ) : (
           <>
-            <a class="btn btn-light" href="/web/?demo">Try the free web demo</a>
+            <a class="btn btn-light" href="/app/" data-get-app>Get it on your phone</a>
             <a class="btn btn-ghost" href={`mailto:${SITE.email}?subject=${encodeURIComponent('Tell me when Jib launches')}&body=${encodeURIComponent('Please email me when Jib is on the App Store / Google Play. My phone is: iPhone / Android')}`}>Tell me when it’s on the App Store</a>
           </>
         )
@@ -205,8 +205,8 @@ const jsonLd = [
     </div>
   </section>
 
-  <a class="mobile-cta" href={anyStoreLive ? '/app/?c=home' : '/web/?demo'} data-get-app>
-    <span>{anyStoreLive ? 'Get Jib free' : 'Try Jib free'}</span><small>{anyStoreLive ? 'iPhone & Android' : 'on the web, no sign-up'}</small>
+  <a class="mobile-cta" href="/app/?c=home" data-get-app>
+    <span>Get Jib free</span><small>{anyStoreLive ? 'iPhone & Android' : 'Coming to iPhone & Android'}</small>
   </a>
 
   <!-- 4. Built for real life: three moments, side by side. -->

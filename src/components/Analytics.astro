@@ -37,8 +37,7 @@ const denyRegions = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR'
         else if (a.hasAttribute('data-get-app') || /^\/app\//.test(href)) {
           var m = href.match(/[?&]c=([^&]+)/);
           send('get_app_click', { location: where, campaign: m ? m[1] : 'general' });
-        } else if (href.indexOf('/web/?demo') === 0) send('web_demo_click', { location: where });
-        else if (href.indexOf('mailto:') === 0) send(/launch/i.test(href) ? 'launch_alert_click' : 'email_click', { location: where });
+        } else if (href.indexOf('mailto:') === 0) send(/launch/i.test(href) ? 'launch_alert_click' : 'email_click', { location: where });
         else if (/^\/tools\/./.test(href)) send('tool_click', { tool: href.split('/')[2], location: where });
       },
       true,

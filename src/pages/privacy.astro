@@ -10,7 +10,6 @@ import { SITE } from '../config';
 
   <h2>The website</h2>
   <p>Reading guides and using the free tools on this website doesn’t require an account. The website doesn’t show advertising. We use Google Analytics to understand how the site is used (for example which pages and tools are popular, and how many people click through to the app). It records pages viewed, approximate location (city level), device and browser type, how you arrived, and actions such as clicking a download button or using a calculator; IP addresses are anonymised. For visitors in the European Economic Area, the UK and Switzerland, analytics cookies are off by default and only anonymous, cookieless measurements are sent. You can opt out everywhere with Google’s <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Analytics opt-out add-on</a>. Our hosting provider (GitHub Pages) keeps standard server logs, such as IP address and pages requested, for security and operating the service. The calculators and DIY legality checker run entirely in your browser; the numbers and answers you enter aren’t sent to us.</p>
-  <p>If you sign in to the Jib web app, the sections below about the app apply in the same way.</p>
 
   <h2>1. Who we are</h2>
   <p>Jib is developed by Thomas Horsey. For any privacy questions or requests, contact <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
@@ -62,7 +61,7 @@ import { SITE } from '../config';
   <h2>5. Where your information is stored</h2>
   <ul>
     <li><strong>On your device:</strong> house, space, job and shopping data, and photos, are stored locally.</li>
-    <li><strong>In the cloud (only if signed in):</strong> the same data is synced to Google Firebase (Firestore and Firebase Storage) so it’s available across devices and on the web app. It’s tied to your account and not visible to other users, except people you choose to share a house with (see section 6.1).</li>
+    <li><strong>In the cloud (only if signed in):</strong> the same data is synced to Google Firebase (Firestore and Firebase Storage) so it’s available across your devices. It’s tied to your account and not visible to other users, except people you choose to share a house with (see section 6.1).</li>
     <li><strong>Location lookups:</strong> resolving a suburb uses Google’s geocoding and Places services and, for AI-assisted matching, Anthropic’s API. Neither keeps this beyond what’s needed to return a result.</li>
   </ul>
 
