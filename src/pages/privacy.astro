@@ -5,14 +5,14 @@ import { SITE } from '../config';
 
 <Page title="Privacy Policy" description="What the Jib website and app collect, how it's used, and your choices.">
   <h1>Privacy Policy</h1>
-  <p><strong>Last updated: 27 September 2026</strong></p>
+  <p><strong>Last updated: 29 September 2026</strong></p>
   <p>This policy explains what information Jib (“we”, “us”) collects through the Jib website ({SITE.domain}) and the Jib mobile app (<code>com.jibjobs.app</code>), how it’s used, and the choices you have.</p>
 
   <h2>The website</h2>
   <p>Reading guides and using the free tools on this website doesn’t require an account. The website doesn’t show advertising. We use Google Analytics to understand how the site is used (for example which pages and tools are popular, and how many people click through to the app). It records pages viewed, approximate location (city level), device and browser type, how you arrived, and actions such as clicking a download button or using a calculator; IP addresses are anonymised. For visitors in the European Economic Area, the UK and Switzerland, analytics cookies are off by default and only anonymous, cookieless measurements are sent. You can opt out everywhere with Google’s <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Analytics opt-out add-on</a>. Our hosting provider (GitHub Pages) keeps standard server logs, such as IP address and pages requested, for security and operating the service. The calculators and DIY legality checker run entirely in your browser; the numbers and answers you enter aren’t sent to us.</p>
 
   <h2>1. Who we are</h2>
-  <p>Jib is developed by Thomas Horsey. For any privacy questions or requests, contact <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+  <p>Jib is developed by Thomas Horsey (ABN {SITE.abn}), Queensland, Australia. For any privacy questions or requests, contact <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
 
   <h2>2. Information we collect in the app</h2>
   <h3>2.1 Account information</h3>
@@ -64,6 +64,8 @@ import { SITE } from '../config';
     <li><strong>In the cloud (only if signed in):</strong> the same data is synced to Google Firebase (Firestore and Firebase Storage) so it’s available across your devices. It’s tied to your account and not visible to other users, except people you choose to share a house with (see section 6.1).</li>
     <li><strong>Location lookups:</strong> resolving a suburb uses Google’s geocoding and Places services and, for AI-assisted matching, Anthropic’s API. Neither keeps this beyond what’s needed to return a result.</li>
   </ul>
+  <h3>5.1 Storage outside Australia</h3>
+  <p>The services we use to run Jib (Google Firebase and Google Analytics, Anthropic, RevenueCat and GitHub) are based overseas, so your information may be stored and processed outside Australia, mainly in the United States. We only use providers that protect data with industry-standard security, and we share only what each one needs to do its job.</p>
 
   <h2>6. Sharing your information</h2>
   <p>We don’t sell or rent your information. We share it only with the service providers needed to run Jib: Google Firebase (sign-in, sync, Google Analytics and Crashlytics), Apple (Sign in with Apple, if you use it), Anthropic (AI features), Google Places/geocoding (location) and RevenueCat (purchases). We may disclose information if required by law, or to protect the rights, safety or property of Jib, our users or others.</p>
@@ -87,9 +89,12 @@ import { SITE } from '../config';
     <li><strong>Shared houses:</strong> leave a shared house, or stop sharing one, from Settings at any time.</li>
   </ul>
   <p>If you’re in the EU or UK, you have rights under the GDPR (access, rectification, erasure, portability and objection), contact us to exercise them. In Australia, we aim to handle your information consistently with the Australian Privacy Principles.</p>
+  <h3>7.1 Complaints</h3>
+  <p>If you’re unhappy with how we’ve handled your information, email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we’ll respond within 30 days. If you’re not satisfied with our response, you can complain to the <a href="https://www.oaic.gov.au/privacy/privacy-complaints" rel="noopener">Office of the Australian Information Commissioner (OAIC)</a>.</p>
 
   <h2>8. Data retention</h2>
-  <p>We keep your account data while your account is active. If you delete your account, your cloud-synced data is permanently removed. Data stored only on your device stays until you delete the app or clear its data.</p>
+  <p>We keep your account data while your account is active. If you delete your account, your account and cloud-synced data (houses, jobs, photos, shopping lists and inventory) are permanently removed. Data stored only on your device stays until you delete the app or clear its data.</p>
+  <p>Anonymous usage and crash data (section 2.3) isn’t linked to your name or email, so it isn’t removed when you delete your account. It’s kept for up to 14 months and then deleted automatically. Purchase records are kept by Apple, Google and RevenueCat as their own policies and the law require. You can also <a href="/delete-account/">request deletion without the app</a>.</p>
 
   <h2>9. Children’s privacy</h2>
   <p>Jib isn’t directed at children and we don’t knowingly collect information from anyone under 16. If you believe a child has given us personal information, contact us and we’ll remove it.</p>

@@ -1,0 +1,51 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../config';
+
+const subject = encodeURIComponent('Delete my Jib account');
+const body = encodeURIComponent('Please delete my Jib account and all its data.\n\nThe email address on my Jib account is: \n\n(Please send this from that email address if you can.)');
+---
+
+<Page title="Delete your Jib account" description="How to delete your Jib account and data, in the app or by request, and what gets deleted.">
+  <h1>Delete your Jib account</h1>
+  <p>You can delete your Jib account and its data at any time, in the app or by asking us.</p>
+
+  <h2>In the app (quickest)</h2>
+  <ol>
+    <li>Open Jib and tap the <strong>settings</strong> button (the cog, top right of the home screen).</li>
+    <li>Scroll to the bottom and tap <strong>Delete account</strong>.</li>
+    <li>Tap <strong>Yes, delete</strong>.</li>
+  </ol>
+  <p>If the app asks you to sign in again first, that’s a security check: sign out, sign back in, then delete again.</p>
+
+  <h2>Without the app</h2>
+  <p>
+    Email <a href={`mailto:${SITE.email}?subject=${subject}&body=${body}`}>{SITE.email}</a> with the subject “Delete my Jib account”, ideally from the email address you use for Jib. We’ll confirm it’s your account, delete it within 30 days, and let you know when it’s done.
+  </p>
+
+  <h2>What gets deleted</h2>
+  <ul>
+    <li>Your account and sign-in</li>
+    <li>Every house, space and job you created, with its photos, shopping list, inventory and AI conversations</li>
+    <li>Your membership of any shared house. Houses you shared stop being shared; other members lose access to them.</li>
+    <li>Any unused AI credits</li>
+  </ul>
+  <p>This can’t be undone.</p>
+
+  <h2>What’s kept</h2>
+  <ul>
+    <li><strong>Anonymous usage and crash data</strong>, which isn’t linked to your name or email, is kept for up to 14 months and then deleted automatically.</li>
+    <li><strong>Purchase records</strong> are kept by Apple, Google and RevenueCat as their own policies and the law require.</li>
+    <li><strong>Data only on your phone</strong> (if you used Jib without signing in) stays until you delete the app.</li>
+  </ul>
+
+  <h2>Cancel your subscription separately</h2>
+  <p>
+    Deleting your account doesn’t cancel a subscription, because Apple and Google bill it. Cancel it in your
+    <a href="https://apps.apple.com/account/subscriptions" rel="noopener">Apple subscriptions</a> or
+    <a href="https://play.google.com/store/account/subscriptions" rel="noopener">Google Play subscriptions</a>,
+    ideally before you delete your account.
+  </p>
+
+  <p>More detail is in our <a href="/privacy/">Privacy Policy</a>.</p>
+</Page>

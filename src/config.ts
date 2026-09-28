@@ -6,6 +6,7 @@ export const SITE = {
   description:
     'Jib is the home-improvement planner that tells you what you can legally DIY, what you need to buy, and what it will cost, then helps you plan and track the job.',
   email: 'hello@jibapp.xyz',
+  abn: '32 407 565 881',
   author: {
     name: 'Thomas Horsey',
     role: 'Founder of Jib',
