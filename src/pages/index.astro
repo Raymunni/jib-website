@@ -24,6 +24,14 @@ const allGuides = await getCollection('guides');
 const byNewest = allGuides.filter((g) => !g.data.pillar).sort((a, b) => b.data.published.getTime() - a.data.published.getTime() || a.data.order - b.data.order);
 const featured = byNewest.filter((g) => g.data.image).slice(0, 3);
 
+const popular = [
+  { href: '/guides/diy-legal/can-i-replace-a-tap-myself/', title: 'How to change a tap washer (and is it legal?)' },
+  { href: '/guides/council-approval/fence-height-without-council-approval/', title: 'How high can a fence be without council approval?' },
+  { href: '/guides/council-approval/shed-without-council-approval/', title: 'How big can a shed be without council approval?' },
+  { href: '/guides/council-approval/deck-council-approval-nsw/', title: 'Do you need council approval for a deck or pergola in NSW?' },
+  { href: '/guides/materials/timber-deck-materials-list/', title: 'Timber deck materials list, joist sizes included' },
+];
+
 
 // The six things that sell Jib. Everything else lives in the features guide.
 const featureTiles = [
@@ -255,6 +263,10 @@ const jsonLd = [
         ))
       }
     </div>
+    <!-- Direct links to the guides Google has started showing in search. -->
+    <ul class="popular" aria-label="Popular answers">
+      {popular.map((p) => <li><a href={p.href}>{p.title}</a></li>)}
+    </ul>
     {
       featured.length > 0 && (
         <div class="grid grid-3 featured">
@@ -292,6 +304,16 @@ const jsonLd = [
 </Base>
 
 <style>
+  .popular {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0;
+    display: grid;
+    gap: 8px;
+  }
+  .popular a {
+    font-weight: 600;
+  }
   .ios-notify {
     display: block;
     width: 100%;
