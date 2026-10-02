@@ -24,6 +24,14 @@ const routes = {
     </p>
     <StoreButtons campaign="general" size="lg" />
     {
+      anyStoreLive && !STORES.ios.live && (
+        <p class="muted">
+          Live on Google Play now. The iPhone version is in final App Store review.{' '}
+          <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Tell me when Jib is on iPhone')}&body=${encodeURIComponent('Please email me when Jib is on the App Store.')}`}>Email me when it’s on iPhone</a>
+        </p>
+      )
+    }
+    {
       !anyStoreLive && (
         <p>
           <a class="btn btn-ghost" href={`mailto:${SITE.email}?subject=${encodeURIComponent('Tell me when Jib launches')}&body=${encodeURIComponent('Please email me when Jib is on the App Store / Google Play. My phone is: iPhone / Android')}`}>

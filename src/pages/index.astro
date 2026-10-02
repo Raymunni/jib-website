@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import StoreButtons from '../components/StoreButtons.astro';
 import ToolIcon from '../components/ToolIcon.astro';
-import { SITE, HUBS, anyStoreLive } from '../config';
+import { SITE, HUBS, STORES, anyStoreLive } from '../config';
 import heroWide from '../assets/hero/a.jpg';
 import heroTall from '../assets/hero/b.jpg';
 import shotPlan from '../assets/screens/01-plan.png';
@@ -136,7 +136,12 @@ const jsonLd = [
       <div class="hero-ctas">
         {
           anyStoreLive ? (
-            <StoreButtons campaign="home" size="lg" />
+            <>
+              <StoreButtons campaign="home" size="lg" />
+              {!STORES.ios.live && (
+                <a class="ios-notify" href={`mailto:${SITE.email}?subject=${encodeURIComponent('Tell me when Jib is on iPhone')}&body=${encodeURIComponent('Please email me when Jib is on the App Store.')}`}>On iPhone? Get an email when it’s on the App Store</a>
+              )}
+            </>
           ) : (
             <>
               <a class="btn btn-primary" href="/app/" data-get-app>Get it on your phone</a>
@@ -206,7 +211,7 @@ const jsonLd = [
   </section>
 
   <a class="mobile-cta" href="/app/?c=home" data-get-app>
-    <span>Get Jib free</span><small>{anyStoreLive ? 'iPhone & Android' : 'Coming to iPhone & Android'}</small>
+    <span>Get Jib free</span><small>{STORES.ios.live && STORES.android.live ? 'iPhone & Android' : STORES.android.live ? 'On Android, iPhone soon' : 'Coming to iPhone & Android'}</small>
   </a>
 
   <!-- 4. Built for real life: three moments, side by side. -->
@@ -287,6 +292,13 @@ const jsonLd = [
 </Base>
 
 <style>
+  .ios-notify {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 0.92rem;
+    opacity: 0.85;
+  }
   .hero {
     position: relative;
     min-height: min(70vh, 620px);

@@ -27,7 +27,7 @@ export const STORES = {
     providerToken: '',
   },
   android: {
-    live: false,
+    live: true,
     packageName: 'com.jibjobs.app',
   },
 };

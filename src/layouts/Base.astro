@@ -148,7 +148,9 @@ const qr = await qrSvg(`${SITE.url}/app/`);
       <p class="muted">
         {
           anyStoreLive
-            ? 'Scan with your phone camera, it opens the right store for your phone.'
+            ? STORES.ios.live
+              ? 'Scan with your phone camera, it opens the right store for your phone.'
+              : 'Scan with your phone camera to get it on Android. The iPhone version is coming soon to the App Store.'
             : 'Jib is in final App Store and Google Play review. Scan to open this page on your phone, or ask us to email you the day it goes live.'
         }
       </p>
