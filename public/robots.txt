@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://jibapp.xyz/sitemap-index.xml

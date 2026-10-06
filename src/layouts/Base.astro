@@ -27,6 +27,7 @@ const siteLd = [
     '@type': 'Organization',
     '@id': `${SITE.url}/#org`,
     name: 'Jib',
+    alternateName: SITE.alternateNames,
     url: SITE.url,
     logo: `${SITE.url}/icon-512.png`,
     email: SITE.email,
@@ -37,6 +38,7 @@ const siteLd = [
     '@type': 'WebSite',
     '@id': `${SITE.url}/#website`,
     name: 'Jib',
+    alternateName: SITE.alternateNames,
     url: SITE.url,
     publisher: { '@id': `${SITE.url}/#org` },
     inLanguage: 'en-AU',
@@ -54,6 +56,7 @@ const qr = await qrSvg(`${SITE.url}/app/`);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {!noindex && SITE.alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.url + Astro.url.pathname} />)}
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#0e1824" />
     <Analytics />
@@ -61,8 +64,10 @@ const qr = await qrSvg(`${SITE.url}/app/`);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@550&text=Jib&display=swap" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-96.png?v=2" sizes="96x96" type="image/png" />
+    <link rel="icon" href="/favicon-48.png?v=2" sizes="48x48" type="image/png" />
+    <link rel="icon" href="/favicon-32.png?v=2" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -154,7 +159,7 @@ const qr = await qrSvg(`${SITE.url}/app/`);
             : 'Jib is in final App Store and Google Play review. Scan to open this page on your phone, or ask us to email you the day it goes live.'
         }
       </p>
-      <div class="qr" set:html={qr} aria-label="QR code linking to jibapp.xyz/app" role="img" />
+      <div class="qr" set:html={qr} aria-label={`QR code linking to ${SITE.domain}/app`} role="img" />
       <StoreButtons campaign="general" />
       {
         !anyStoreLive && (

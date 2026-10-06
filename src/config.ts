@@ -1,7 +1,18 @@
+// Which copy of the site this build is (set by SITE_URL in astro.config).
+const siteUrl = (import.meta.env.SITE || 'https://jibapp.xyz').replace(/\/$/, '');
+
 export const SITE = {
   name: 'Jib',
-  domain: 'jibapp.xyz',
-  url: 'https://jibapp.xyz',
+  domain: new URL(siteUrl).host,
+  url: siteUrl,
+  // Both copies of the site, so Google shows jibapp.com.au to Australians
+  // and jibapp.xyz to everyone else (hreflang in Base.astro).
+  alternates: [
+    { hreflang: 'en-AU', url: 'https://jibapp.com.au' },
+    { hreflang: 'x-default', url: 'https://jibapp.xyz' },
+  ],
+  // Other names people search for, so "jibapp" as one word finds the site.
+  alternateNames: ['Jib app', 'jibapp', 'Jib: Home Improvement Planner'],
   tagline: 'Snap a photo, get the full job.',
   description:
     'Jib is the home-improvement planner that tells you what you can legally DIY, what you need to buy, and what it will cost, then helps you plan and track the job.',
@@ -45,7 +56,7 @@ export function iosUrl(campaign: Campaign = 'general'): string {
 }
 
 export function androidUrl(campaign: Campaign = 'general'): string {
-  const referrer = `utm_source=jibapp.xyz&utm_medium=web&utm_campaign=${campaign}`;
+  const referrer = `utm_source=${SITE.domain}&utm_medium=web&utm_campaign=${campaign}`;
   return `https://play.google.com/store/apps/details?id=${STORES.android.packageName}&referrer=${encodeURIComponent(referrer)}`;
 }
 
