@@ -109,19 +109,30 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     position: absolute;
     z-index: 1;
     right: 5%;
-    top: 9%;
-    width: 27%;
-    max-width: 200px;
-    border-radius: 24px;
-    padding: 6px;
-    background: #05080c;
-    box-shadow: 0 24px 44px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.16);
-    transform: rotate(4deg);
+    top: 7%;
+    width: 23%;
+    max-width: 190px;
+    /* The screen's corners run exactly parallel to the body's: inner
+       radius = outer radius - bezel. Kept upright so edges and the app's
+       text stay pixel-sharp. */
+    --bezel: 6px;
+    --r: 26px;
+    border-radius: var(--r);
+    padding: var(--bezel);
+    background: linear-gradient(145deg, #2a2f36, #0a0c10 40%, #050608);
+    box-shadow:
+      0 26px 46px -14px rgba(0, 0, 0, 0.85),
+      0 0 0 1px rgba(255, 255, 255, 0.18),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08);
   }
   .phone img {
     display: block;
     width: 100%;
-    border-radius: 19px;
+    /* The whole screen, exactly as rendered (status bar to navigation). */
+    aspect-ratio: 1019 / 2151;
+    object-fit: cover;
+    border-radius: calc(var(--r) - var(--bezel));
+    background: #0e1824;
   }
 
   /* Words and the button. */
@@ -250,11 +261,11 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     border-radius: 0;
   }
   .ad-inline .phone {
-    top: 9%;
-    width: 25%;
+    top: 8%;
+    width: 22%;
   }
   .ad-inline.ad-shot .ad-body {
-    padding-right: calc(5% + min(25%, 200px) + 14px);
+    padding-right: calc(5% + min(22%, 190px) + 14px);
   }
   .ad-inline .ad-media::after {
     background: linear-gradient(180deg, rgba(17, 29, 44, 0) 70%, rgba(17, 29, 44, 0.6) 100%);
@@ -272,13 +283,10 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     }
     .ad-inline .phone,
     .phone {
-      top: 7%;
-      width: 29%;
-      border-radius: 18px;
-      padding: 4px;
-    }
-    .phone img {
-      border-radius: 15px;
+      top: 6%;
+      width: 25%;
+      --bezel: 4px;
+      --r: 18px;
     }
     .ad-headline {
       font-size: 1.15rem;
