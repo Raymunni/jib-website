@@ -27,5 +27,8 @@ const out = `public/images/ads/${name}.jpg`;
 let img = sharp(join(dl, newest.f)).resize(wide ? 1600 : 1376, wide ? 728 : 768, { fit: 'cover' });
 if (flip) img = img.flop();
 const info = await img.jpeg({ quality: 80, mozjpeg: true }).toFile(out);
-writeFileSync('.images-used', [...used, newest.f].filter(Boolean).join('\n'));
+// Every download present now counts as used, so a stray duplicate can't be
+// filed as the next image.
+const all = readdirSync(dl).filter((f) => /^Gemini_Generated_Image_/.test(f));
+writeFileSync('.images-used', [...new Set([...used, newest.f, ...all])].filter(Boolean).join('\n'));
 console.log(`${newest.f} -> ${out}${flip ? ' (mirrored)' : ''} (${info.size} bytes)`);
