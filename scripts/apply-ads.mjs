@@ -48,7 +48,7 @@ for (const p of plans) {
       // second section when the first ad sits late, or well after the
       // first ad when it sits early.
       const tag = [
-        `<AppCta slot="extra"`,
+        `<AppCta place="extra"`,
         `headline="${attr(ad.headline)}"`,
         `text="${attr(ad.text)}"`,
         have(image) && `image="${image}"`,
@@ -56,15 +56,15 @@ for (const p of plans) {
         have(shot) && `shot="${shot}"`,
         `campaign="${p.guide.split('/')[0]}"`,
       ].filter(Boolean).join(' ') + ' />';
-      const old = s.match(/<AppCta slot="extra"[^>]*\/>\n\n/);
+      const old = s.match(/<AppCta place="extra"[^>]*\/>\n\n/);
       if (old) {
-        s = s.replace(/<AppCta slot="extra"[^>]*\/>/, tag);
+        s = s.replace(/<AppCta place="extra"[^>]*\/>/, tag);
         continue;
       }
       const lines = s.split('\n');
       const body = lines.findIndex((l, i) => i > 0 && l === '---') + 1;
       const h2 = lines.map((l, i) => (i >= body && l.startsWith('## ') ? i : -1)).filter((i) => i >= 0);
-      const first = lines.findIndex((l) => l.startsWith('<AppCta') && !l.includes('slot="extra"'));
+      const first = lines.findIndex((l) => l.startsWith('<AppCta') && !l.includes('place="extra"'));
       let at = -1;
       if (ad.position === 'early') {
         const before = h2.filter((i) => i < first);
@@ -84,7 +84,7 @@ for (const p of plans) {
 
     if (slot === 'inline') {
       // Rebuild the guide's own mid-article ad, keeping its pitch.
-      const m = s.match(/<AppCta(?![^>]*slot="extra")\b[^>]*\/>/);
+      const m = s.match(/<AppCta(?![^>]*place="extra")\b[^>]*\/>/);
       if (!m) continue;
       const text = m[0].match(/text="([^"]*)"/)[1];
       const campaign = m[0].match(/campaign="([^"]*)"/)?.[1] ?? p.guide.split('/')[0];
