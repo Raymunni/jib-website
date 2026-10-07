@@ -55,7 +55,7 @@ const overlay = `
   <text x="72" y="300" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="68" fill="#ffffff">Can you DIY it?</text>
   <text x="72" y="382" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="68" fill="#9cc2ff">Snap a photo, find out.</text>
   <text x="72" y="460" font-family="Segoe UI, Arial, sans-serif" font-weight="500" font-size="30" fill="#d6dee8">Plans, materials, costs — and when you need a tradie.</text>
-  <text x="72" y="560" font-family="Segoe UI, Arial, sans-serif" font-weight="700" font-size="30" fill="#4f8ff0">jibapp.xyz</text>
+  <text x="72" y="560" font-family="Segoe UI, Arial, sans-serif" font-weight="700" font-size="30" fill="#4f8ff0">jibapp.com.au</text>
 </svg>`;
 await sharp(hero).composite([{ input: Buffer.from(overlay) }]).png({ quality: 85 }).toFile('public/og/default.png');
 

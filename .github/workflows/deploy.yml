@@ -24,10 +24,15 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # The real site is served at jibapp.com.au by the Raymunni/jibapp-com-au
+      # repo. This repo's Pages (jibapp.xyz) serves only redirects to it.
       - run: npm run build
+        env:
+          SITE_URL: https://jibapp.com.au
+      - run: node scripts/redirect-site.mjs dist dist-xyz
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: dist-xyz
 
   deploy:
     needs: build
@@ -39,14 +44,3 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
 
-  # Ping Bing/Yandex via IndexNow once the new version is live.
-  indexnow:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: node scripts/indexnow.mjs
-        continue-on-error: true

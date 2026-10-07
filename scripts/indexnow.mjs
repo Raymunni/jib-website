@@ -4,7 +4,7 @@
 // `node scripts/indexnow.mjs`.
 import { readdirSync } from 'node:fs';
 
-const HOST = 'jibapp.xyz';
+const HOST = process.env.INDEXNOW_HOST || 'jibapp.com.au';
 const keyFile = readdirSync('public').find((f) => /^[0-9a-f]{32}\.txt$/.test(f));
 if (!keyFile) throw new Error('No IndexNow key file in public/');
 const key = keyFile.replace('.txt', '');

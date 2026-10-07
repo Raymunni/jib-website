@@ -1,16 +1,10 @@
 // Which copy of the site this build is (set by SITE_URL in astro.config).
-const siteUrl = (import.meta.env.SITE || 'https://jibapp.xyz').replace(/\/$/, '');
+const siteUrl = (import.meta.env.SITE || 'https://jibapp.com.au').replace(/\/$/, '');
 
 export const SITE = {
   name: 'Jib',
   domain: new URL(siteUrl).host,
   url: siteUrl,
-  // Both copies of the site, so Google shows jibapp.com.au to Australians
-  // and jibapp.xyz to everyone else (hreflang in Base.astro).
-  alternates: [
-    { hreflang: 'en-AU', url: 'https://jibapp.com.au' },
-    { hreflang: 'x-default', url: 'https://jibapp.xyz' },
-  ],
   // Other names people search for, so "jibapp" as one word finds the site.
   alternateNames: ['Jib app', 'jibapp', 'Jib: Home Improvement Planner'],
   tagline: 'Snap a photo, get the full job.',

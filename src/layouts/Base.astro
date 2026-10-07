@@ -56,7 +56,6 @@ const qr = await qrSvg(`${SITE.url}/app/`);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {!noindex && SITE.alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.url + Astro.url.pathname} />)}
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#0e1824" />
     <Analytics />
