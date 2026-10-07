@@ -1,4 +1,4 @@
-// Moves the newest Gemini download into public/images/ads/<name>.jpg at
+// Moves the newest Gemini download into public/images/jib/<name>.jpg at
 // 1376x768, for the in-guide ads. --flip mirrors it, so the subject sits
 // on the left and the phone (overlaid on the right) doesn't cover them.
 // Usage: node scripts/take-ad.mjs <name> [--flip] [--wide]
@@ -22,8 +22,8 @@ if (!newest || used.has(newest.f)) {
   console.error('NO NEW DOWNLOAD (newest is ' + (newest?.f ?? 'none') + ')');
   process.exit(1);
 }
-mkdirSync('public/images/ads', { recursive: true });
-const out = `public/images/ads/${name}.jpg`;
+mkdirSync('public/images/jib', { recursive: true });
+const out = `public/images/jib/${name}.jpg`;
 let img = sharp(join(dl, newest.f)).resize(wide ? 1600 : 1376, wide ? 728 : 768, { fit: 'cover' });
 if (flip) img = img.flop();
 const info = await img.jpeg({ quality: 80, mozjpeg: true }).toFile(out);

@@ -1,8 +1,10 @@
 ---
+// Class names use a neutral "jp" prefix: ad blockers hide anything named
+// like ".ad-*", which would remove these for many visitors.
 // An ad for the Jib app inside a guide. Every placement is its own ad:
-// its own photo of that exact situation (Nano Banana, public/images/ads/),
+// its own photo of that exact situation (Nano Banana, public/images/jib/),
 // its own pitch, and a real screenshot of that job in the Jib app
-// (public/images/ads/shots/) on a phone over the photo. Labelled "Ad".
+// (public/images/jib/shots/) on a phone over the photo. Labelled "Ad".
 // Without a photo it still renders, as a text-only card.
 import type { Campaign } from '../config';
 import { STORES, anyStoreLive } from '../config';
@@ -24,11 +26,11 @@ const href = `/app/?c=${campaign}&p=${variant}`;
 const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : STORES.android.live ? 'Android now, iPhone soon' : 'Launching soon';
 ---
 
-<aside class={`ad ad-${variant}${image ? '' : ' ad-plain'}${shot ? ' ad-shot' : ''}`} aria-label="Ad for the Jib app">
+<aside class={`jp jp-${variant}${image ? '' : ' jp-plain'}${shot ? ' jp-shot' : ''}`} aria-label="From Jib">
   {
     image && (
-      <a class="ad-media" href={href} data-get-app tabindex="-1" aria-hidden="true">
-        <img class="ad-photo" src={image} alt={imageAlt} loading="lazy" decoding="async" width="1376" height="768" />
+      <a class="jp-media" href={href} data-get-app tabindex="-1" aria-hidden="true">
+        <img class="jp-photo" src={image} alt={imageAlt} loading="lazy" decoding="async" width="1376" height="768" />
         {shot && (
           <span class="phone">
             <img src={shot} alt="" loading="lazy" decoding="async" />
@@ -37,26 +39,26 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
       </a>
     )
   }
-  <div class="ad-body">
-    <div class="ad-brand">
+  <div class="jp-body">
+    <div class="jp-brand">
       <img src="/icon-192.png" alt="" width="28" height="28" />
-      <span class="ad-name">Jib</span>
-      <span class="ad-tag">Home jobs, planned by AI</span>
-      <span class="ad-label">Ad</span>
+      <span class="jp-name">Jib</span>
+      <span class="jp-tag">Home jobs, planned by AI</span>
+      <span class="jp-label">Ad</span>
     </div>
-    {headline && <p class="ad-headline">{headline}</p>}
-    <p class="ad-text">{text}</p>
-    <a class="ad-btn" href={href} data-get-app>
-      <span class="ad-btn-main">{anyStoreLive ? 'Get Jib free' : 'Get Jib'}</span>
-      <span class="ad-btn-sub">{where}</span>
-      <svg class="ad-btn-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M13.2 5.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H4a1 1 0 1 1 0-2h13.5l-4.3-4.3a1 1 0 0 1 0-1.4Z" /></svg>
+    {headline && <p class="jp-headline">{headline}</p>}
+    <p class="jp-text">{text}</p>
+    <a class="jp-btn" href={href} data-get-app>
+      <span class="jp-btn-main">{anyStoreLive ? 'Get Jib free' : 'Get Jib'}</span>
+      <span class="jp-btn-sub">{where}</span>
+      <svg class="jp-btn-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M13.2 5.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H4a1 1 0 1 1 0-2h13.5l-4.3-4.3a1 1 0 0 1 0-1.4Z" /></svg>
     </a>
   </div>
 </aside>
 
 <style>
-  .ad {
-    --ad-ring: linear-gradient(120deg, #2770da, #7c3aed 45%, #e85d9e 75%, #2c5ca2);
+  .jp {
+    --jp-ring: linear-gradient(120deg, #2770da, #7c3aed 45%, #e85d9e 75%, #2c5ca2);
     position: relative;
     margin: 2.4em 0;
     border-radius: 20px;
@@ -65,26 +67,26 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.6);
   }
   /* The AI colours as a thin ring, like the app's AI buttons. */
-  .ad::before {
+  .jp::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: 2;
     border-radius: inherit;
     padding: 1.5px;
-    background: var(--ad-ring);
+    background: var(--jp-ring);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0.8;
     pointer-events: none;
   }
-  .ad-end {
+  .jp-end {
     margin-top: 3em;
   }
 
   /* The photo, with the real app on a phone over it. */
-  .ad-media {
+  .jp-media {
     position: relative;
     display: block;
     aspect-ratio: 16 / 9;
@@ -92,13 +94,13 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     background: #0e1824;
     overflow: hidden;
   }
-  .ad-photo {
+  .jp-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
-  .ad-media::after {
+  .jp-media::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -136,34 +138,34 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
   }
 
   /* Words and the button. */
-  .ad-body {
+  .jp-body {
     position: relative;
     padding: 18px 22px 22px;
   }
-  .ad-brand {
+  .jp-brand {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-bottom: 10px;
     font-size: 0.82rem;
   }
-  .ad-brand img {
+  .jp-brand img {
     border-radius: 7px;
   }
-  .ad-name {
+  .jp-name {
     font-family: 'Nunito', var(--font);
     font-weight: 550;
     font-size: 1.05rem;
     color: #fff;
   }
-  .ad-tag {
+  .jp-tag {
     color: var(--dim);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 0;
   }
-  .ad-label {
+  .jp-label {
     margin-left: auto;
     flex: none;
     font-size: 0.68rem;
@@ -175,7 +177,7 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     border-radius: 6px;
     padding: 2px 6px;
   }
-  .ad-headline {
+  .jp-headline {
     margin: 0 0 6px;
     font-size: 1.32rem;
     font-weight: 800;
@@ -183,14 +185,14 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     color: #fff;
     text-wrap: balance;
   }
-  .ad-text {
+  .jp-text {
     margin: 0 0 16px;
     color: var(--text);
     line-height: 1.5;
   }
 
   /* Frosted glass over the moving AI gradient, like the app's AI buttons. */
-  .ad-btn {
+  .jp-btn {
     position: relative;
     display: inline-grid;
     grid-template-columns: auto auto;
@@ -209,36 +211,36 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     box-shadow: 0 8px 26px -8px rgba(124, 58, 237, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.25);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
-  .ad-btn::before {
+  .jp-btn::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: var(--ad-ring);
+    background: var(--jp-ring);
     background-size: 220% 220%;
     opacity: 0.55;
-    animation: ad-sweep 6s ease-in-out infinite alternate;
+    animation: jp-sweep 6s ease-in-out infinite alternate;
   }
-  .ad-btn:hover {
+  .jp-btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 12px 30px -8px rgba(232, 93, 158, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
-  .ad-btn-main {
+  .jp-btn-main {
     grid-column: 1;
     font-weight: 800;
     font-size: 1.02rem;
     line-height: 1.2;
   }
-  .ad-btn-sub {
+  .jp-btn-sub {
     grid-column: 1;
     font-size: 0.74rem;
     color: rgba(255, 255, 255, 0.8);
   }
-  .ad-btn-arrow {
+  .jp-btn-arrow {
     grid-column: 2;
     grid-row: 1 / span 2;
   }
-  @keyframes ad-sweep {
+  @keyframes jp-sweep {
     from {
       background-position: 0% 50%;
     }
@@ -247,48 +249,48 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .ad-btn::before {
+    .jp-btn::before {
       animation: none;
     }
   }
 
   /* Mid-article: a shorter photo, the phone hanging over into the words. */
-  .ad-inline .ad-media {
+  .jp-inline .jp-media {
     aspect-ratio: 2.2 / 1;
     overflow: visible;
   }
-  .ad-inline .ad-photo {
+  .jp-inline .jp-photo {
     border-radius: 0;
   }
-  .ad-inline .phone {
+  .jp-inline .phone {
     top: 8%;
     width: 22%;
   }
-  .ad-inline.ad-shot .ad-body {
+  .jp-inline.jp-shot .jp-body {
     padding-right: calc(5% + min(22%, 190px) + 14px);
   }
-  .ad-inline .ad-media::after {
+  .jp-inline .jp-media::after {
     background: linear-gradient(180deg, rgba(17, 29, 44, 0) 70%, rgba(17, 29, 44, 0.6) 100%);
   }
   @media (max-width: 719px) {
-    .ad-inline .ad-media {
+    .jp-inline .jp-media {
       aspect-ratio: 16 / 10;
       overflow: hidden;
     }
-    .ad-inline .ad-photo {
+    .jp-inline .jp-photo {
       object-position: left center;
     }
-    .ad-inline.ad-shot .ad-body {
+    .jp-inline.jp-shot .jp-body {
       padding-right: 18px;
     }
-    .ad-inline .phone,
+    .jp-inline .phone,
     .phone {
       top: 6%;
       width: 25%;
       --bezel: 4px;
       --r: 18px;
     }
-    .ad-headline {
+    .jp-headline {
       font-size: 1.15rem;
     }
   }

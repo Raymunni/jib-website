@@ -25,8 +25,8 @@ for (const p of plans) {
   for (const [slot, ad] of Object.entries({ inline: p.inline, end: p.end })) {
     if (!ad) continue;
     const id = `${name}-${slot}`;
-    const image = `/images/ads/${id}.jpg`;
-    const shot = `/images/ads/shots/${id}.webp`;
+    const image = `/images/jib/${id}.jpg`;
+    const shot = `/images/jib/shots/${id}.webp`;
     shotsSpec.push({ id, expand: ad.expand ?? 0, jobs: ad.jobs });
 
     if (slot === 'inline') {

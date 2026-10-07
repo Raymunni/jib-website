@@ -32,7 +32,7 @@ const denyRegions = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR'
         var a = e.target && e.target.closest ? e.target.closest('a') : null;
         if (!a) return;
         var href = a.getAttribute('href') || '';
-        var where = a.closest('header') ? 'nav' : a.closest('footer') ? 'footer' : a.closest('.cta') ? 'guide_cta' : a.closest('.hero') ? 'hero' : a.closest('.how') ? 'how_it_works' : a.closest('.feat, .spot') ? 'feature_tile' : a.classList.contains('mobile-cta') ? 'mobile_bar' : 'body';
+        var where = a.closest('header') ? 'nav' : a.closest('footer') ? 'footer' : a.closest('.jp, .cta') ? 'guide_cta' : a.closest('.hero') ? 'hero' : a.closest('.how') ? 'how_it_works' : a.closest('.feat, .spot') ? 'feature_tile' : a.classList.contains('mobile-cta') ? 'mobile_bar' : 'body';
         if (a.dataset.store) send('store_click', { store: a.dataset.store, location: where });
         else if (a.hasAttribute('data-get-app') || /^\/app\//.test(href)) {
           var m = href.match(/[?&]c=([^&]+)/);
