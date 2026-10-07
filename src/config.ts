@@ -10,7 +10,7 @@ export const SITE = {
   tagline: 'Snap a photo, get the full job.',
   description:
     'Jib is the home-improvement planner that tells you what you can legally DIY, what you need to buy, and what it will cost, then helps you plan and track the job.',
-  email: 'hello@jibapp.xyz',
+  email: 'ommybase@gmail.com',
   abn: '32 407 565 881',
   author: {
     name: 'Thomas Horsey',
