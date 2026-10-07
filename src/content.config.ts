@@ -19,6 +19,12 @@ const guides = defineCollection({
     // written to be quotable by AI Overviews / answer engines.
     answer: z.string(),
     cta: z.string(),
+    // The end-of-guide ad: its headline, its own photo (public/images/ads/)
+    // and a real screenshot of the job in Jib (public/images/ads/shots/).
+    ctaHeadline: z.string().optional(),
+    ctaImage: z.string().optional(),
+    ctaImageAlt: z.string().optional(),
+    ctaShot: z.string().optional(),
     sources: z
       .array(z.object({ title: z.string(), url: z.string().url() }))
       .default([]),

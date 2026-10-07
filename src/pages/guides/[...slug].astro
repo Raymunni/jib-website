@@ -113,7 +113,7 @@ const jsonLd = [
       <div class="prose body">
         <Content components={{ AppCta }} />
 
-        <AppCta text={d.cta} campaign={campaign} variant="end" />
+        <AppCta text={d.cta} headline={d.ctaHeadline} image={d.ctaImage} imageAlt={d.ctaImageAlt} shot={d.ctaShot} campaign={campaign} variant="end" />
 
         {
           d.sources.length > 0 && (
