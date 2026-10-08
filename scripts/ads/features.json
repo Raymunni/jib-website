@@ -74,8 +74,8 @@
    "prompt": "A busy mum in her 30s with a baby in a front carrier passes the laundry and notices a dripping tap, pausing with a tired smile, a basket of washing on her hip. Morning light.",
    "jobs": [{"room": "Laundry", "title": "Fix dripping laundry tap", "description": "Snapped in passing.", "timeEstimate": "About 20 minutes", "verdict": "diy_safe", "shoppingList": [{"item": "Tap washer kit", "price": 9}], "directions": ["Turn off the water", "Replace the washer", "Test"]}, {"room": "Kids' room", "title": "Anchor the bookcase to the wall", "verdict": "diy_safe"}, {"room": "Outside", "title": "Clear the blocked downpipe", "verdict": "diy_safe"}]},
   "end": {"headline": "Pick one when you've got a spare hour.", "alt": "A dad doing a quick fix during the baby's nap",
-   "prompt": "A dad in his 30s quietly tightens a loose cupboard handle in an Australian kitchen with a screwdriver while a baby monitor sits on the bench beside him. Soft afternoon light.",
-   "jobs": [{"room": "Kitchen", "title": "Tighten loose cupboard handles", "description": "Fits in a nap.", "timeEstimate": "About 15 minutes", "verdict": "diy_safe", "tools": [{"name": "Screwdriver set", "owned": true}], "directions": ["Open the door", "Tighten the screw from inside", "Check the others"]}, {"room": "Laundry", "title": "Fix dripping laundry tap", "verdict": "diy_safe"}]}},
+   "prompt": "A dad in his 30s crouches and oils a squeaky hinge on a kitchen cupboard door while a baby monitor sits on the bench above him. Soft afternoon light.",
+   "jobs": [{"room": "Kitchen", "title": "Oil the squeaky cupboard hinge", "description": "Fits in a nap.", "timeEstimate": "About 10 minutes", "verdict": "diy_safe", "tools": [{"name": "Oil can", "owned": true}], "directions": ["Wipe the hinge", "One drop of oil", "Work the door"]}, {"room": "Laundry", "title": "Fix dripping laundry tap", "verdict": "diy_safe"}]}},
 
  {"guide": "features/photo-to-job-plan", "slug": "photo-plan",
   "inline": {"headline": "That job you keep meaning to do? Plan it today.", "alt": "A couple looking at a tired timber deck needing a re-oil",
