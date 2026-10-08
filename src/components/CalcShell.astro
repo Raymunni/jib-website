@@ -14,9 +14,14 @@ interface Props {
   path: string; // e.g. /tools/paint-calculator/
   appName: string; // name used in WebApplication schema
   cta: string;
+  // The ad's own photo, headline and real Jib screen (see AppCta).
+  ctaHeadline?: string;
+  ctaImage?: string;
+  ctaImageAlt?: string;
+  ctaShot?: string;
   faqs: { q: string; a: string }[];
 }
-const { title, description, heading, lede, path, appName, cta, faqs } = Astro.props;
+const { title, description, heading, lede, path, appName, cta, ctaHeadline, ctaImage, ctaImageAlt, ctaShot, faqs } = Astro.props;
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -55,7 +60,7 @@ const jsonLd = [
       <slot name="note" />
     </section>
 
-    <AppCta text={cta} campaign="tools" />
+    <AppCta text={cta} headline={ctaHeadline} image={ctaImage} imageAlt={ctaImageAlt} shot={ctaShot} campaign="tools" />
 
     <article class="prose explain">
       <slot name="explain" />
