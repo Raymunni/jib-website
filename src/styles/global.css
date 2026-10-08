@@ -40,6 +40,10 @@ body {
   font-size: 1.0625rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  /* Long words and links wrap instead of widening the page, and nothing
+     can make a phone scroll sideways. */
+  overflow-wrap: break-word;
+  overflow-x: clip;
 }
 
 img {
@@ -172,6 +176,7 @@ strong {
 
 .grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
