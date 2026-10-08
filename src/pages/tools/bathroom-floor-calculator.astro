@@ -304,6 +304,9 @@ const jsonLd = [
   .results table {
     width: 100%;
     border-collapse: collapse;
+    /* Keep the columns to the card width so long amounts wrap on phones. */
+    table-layout: fixed;
+    overflow-wrap: anywhere;
   }
   .results :global(th),
   .results :global(td) {
