@@ -228,7 +228,8 @@ strong {
 .prose th {
   color: var(--ink);
   background: var(--surface);
-  white-space: nowrap;
+  /* Headers wrap like the cells, so columns stay as narrow as their content allows. */
+  line-height: 1.35;
 }
 
 .prose blockquote {
@@ -296,6 +297,7 @@ strong {
   .prose th,
   .prose td {
     padding: 8px 8px;
+    min-width: 4.5em;
   }
   .prose th:first-child,
   .prose td:first-child {
