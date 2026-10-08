@@ -220,6 +220,7 @@ strong {
 .prose td {
   text-align: left;
   padding: 10px 12px;
+  min-width: 7em;
   border-bottom: 1px solid var(--border);
   vertical-align: top;
 }
@@ -259,10 +260,12 @@ strong {
 .v {
   display: inline-block;
   padding: 2px 9px;
-  border-radius: 999px;
+  border-radius: 10px;
   font-size: 0.82rem;
   font-weight: 700;
-  white-space: nowrap;
+  line-height: 1.4;
+  /* Long verdicts wrap inside the chip rather than widening the table. */
+  white-space: normal;
 }
 
 .v.ok {
@@ -283,4 +286,19 @@ strong {
 :focus-visible {
   outline: 3px solid var(--accent-2);
   outline-offset: 2px;
+}
+
+/* Phones: tighter tables so most fit the screen without sideways scrolling. */
+@media (max-width: 600px) {
+  .prose table {
+    font-size: 0.88rem;
+  }
+  .prose th,
+  .prose td {
+    padding: 8px 8px;
+  }
+  .prose th:first-child,
+  .prose td:first-child {
+    padding-left: 0;
+  }
 }
