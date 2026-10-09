@@ -1,0 +1,24 @@
+---
+// Short link for socials and print: jibapp.com.au/ios goes straight to
+// the App Store, tagged with the "social" campaign so installs from these links
+// show up on their own in the store's analytics. A static site can't send
+// a real redirect, so this page does it instantly with a meta refresh and
+// script, with a plain link as the fallback.
+import { iosUrl } from '../config';
+const url = iosUrl('social');
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Get Jib on the App Store</title>
+    <meta http-equiv="refresh" content={`0; url=${url}`} />
+    <script is:inline define:vars={{ url }}>location.replace(url);</script>
+  </head>
+  <body style="font-family: system-ui, sans-serif; background: #0d141c; color: #fff; display: grid; place-items: center; min-height: 100vh; margin: 0">
+    <p>Opening the App Store... <a href={url} style="color: #6aa8ff">Tap here if nothing happens</a>.</p>
+  </body>
+</html>

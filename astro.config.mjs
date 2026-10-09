@@ -15,7 +15,8 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) => !page.endsWith('/404/') && !page.includes('/web/'),
+      // /ios/ and /android/ are short links that redirect to the stores.
+      filter: (page) => !page.endsWith('/404/') && !page.includes('/web/') && !page.endsWith('/ios/') && !page.endsWith('/android/'),
     }),
   ],
 });

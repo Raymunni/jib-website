@@ -40,7 +40,7 @@ export const STORES = {
 // Campaigns are grouped by content cluster rather than per page: Apple only
 // reports a campaign once it reaches 5 installs, so per-page campaigns would
 // mostly never show up.
-export type Campaign = 'home' | 'diy-legal' | 'council-approval' | 'materials' | 'features' | 'home-maintenance' | 'how-to' | 'tools' | 'general';
+export type Campaign = 'home' | 'diy-legal' | 'council-approval' | 'materials' | 'features' | 'home-maintenance' | 'how-to' | 'tools' | 'social' | 'general';
 
 export function iosUrl(campaign: Campaign = 'general'): string {
   const base = `https://apps.apple.com/app/apple-store/id${STORES.ios.appId}`;
