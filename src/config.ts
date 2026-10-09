@@ -24,7 +24,7 @@ export const SITE = {
 // people to a store page that doesn't exist yet.
 export const STORES = {
   ios: {
-    live: false,
+    live: true,
     appId: '6814005599',
     // App Store Connect → Analytics → Acquisition → Campaigns → "Generate a
     // campaign link" shows your provider token (pt). Without it, the ct
