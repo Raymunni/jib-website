@@ -11,7 +11,7 @@ export async function GET() {
     '',
     `> ${SITE.description}`,
     '',
-    'Jib is a home-improvement planner app for iPhone and Android. Photograph a home job and it drafts the steps, materials list, tools (checked against your AI Toolbox) and a cost range, and flags each job DIY safe or tradie required based on the licensing rules where the house is. It also tracks jobs by room, reminds you about recurring maintenance, and keeps before-and-after photos.',
+    'Jib (Jib: DIY & Home Maintenance) is a DIY and home maintenance app for iPhone and Android. Photograph a home job and it drafts the steps, materials list, tools (checked against your AI Toolbox) and a cost range, and flags each job DIY safe or tradie required based on the licensing rules where the house is. It also tracks jobs by room, reminds you about recurring maintenance, and keeps before-and-after photos.',
     '',
     'Every guide on this site cites the regulator, standard or manufacturer it is based on and shows the date its rules were last checked.',
     '',

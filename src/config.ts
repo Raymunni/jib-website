@@ -6,10 +6,10 @@ export const SITE = {
   domain: new URL(siteUrl).host,
   url: siteUrl,
   // Other names people search for, so "jibapp" as one word finds the site.
-  alternateNames: ['Jib app', 'jibapp', 'Jib: Home Improvement Planner'],
+  alternateNames: ['Jib app', 'jibapp', 'Jib: DIY & Home Maintenance', 'Jib: Home Improvement Planner'],
   tagline: 'Snap a photo, get the full job.',
   description:
-    'Jib is the home-improvement planner that tells you what you can legally DIY, what you need to buy, and what it will cost, then helps you plan and track the job.',
+    'Jib is the DIY and home maintenance app that tells you what you can legally DIY, what you need to buy, and what it will cost, then helps you plan and track every job around the house.',
   email: 'ommybase@gmail.com',
   abn: '32 407 565 881',
   author: {

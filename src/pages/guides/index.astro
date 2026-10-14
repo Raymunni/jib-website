@@ -5,6 +5,35 @@ import { HUBS, type HubKey } from '../../config';
 import { guideUrl } from '../../lib/guides';
 
 const guides = await getCollection('guides');
+
+// Which state a guide is specific to (from its address), for the region filter.
+const STATES: [string, RegExp][] = [
+  ['nsw', /nsw/],
+  ['vic', /victoria|-vic/],
+  ['qld', /queensland|qld/],
+  ['wa', /-wa(-|$)|western-australia/],
+  ['tas', /tasmania/],
+  ['sa', /south-australia|-sa(-|$)/],
+];
+const stateOf = (id: string) => STATES.find(([, re]) => re.test(id))?.[0] ?? '';
+const attrs = (g: (typeof guides)[number]) => ({
+  'data-hub': g.data.hub,
+  'data-market': g.data.market.toLowerCase(),
+  'data-state': stateOf(g.id),
+  'data-text': [g.data.title, g.data.description, g.data.answer].join(' ').toLowerCase(),
+});
+const TOPIC_LABELS: Record<HubKey, string> = {
+  'diy-legal': 'Can I DIY it?',
+  'council-approval': 'Council approval',
+  materials: 'Materials',
+  'how-to': 'How-to',
+  'home-maintenance': 'Maintenance',
+  features: 'Using Jib',
+};
+const REGIONS = [
+  ['all', 'All'], ['au', 'Australia'], ['nsw', 'NSW'], ['vic', 'VIC'], ['qld', 'QLD'],
+  ['wa', 'WA'], ['tas', 'TAS'], ['uk', 'UK'], ['nz', 'NZ'],
+];
 const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
   key,
   ...HUBS[key],
@@ -19,16 +48,29 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
     <h1>Straight answers for real jobs</h1>
     <p class="lede muted">Every guide cites the regulator or standard it’s based on, and shows the date the rules were last checked.</p>
 
+    <div class="finder" id="finder">
+      <input id="q" type="search" placeholder="Search guides, e.g. tap, deck, mould" aria-label="Search guides" autocomplete="off" />
+      <div class="chips" role="group" aria-label="Region">
+        {REGIONS.map(([k, label]) => <button type="button" class="chip" data-region={k} aria-pressed={k === 'all' ? 'true' : 'false'}>{label}</button>)}
+      </div>
+      <div class="chips" role="group" aria-label="Topic">
+        <button type="button" class="chip" data-topic="all" aria-pressed="true">All topics</button>
+        {(Object.keys(HUBS) as HubKey[]).map((k) => <button type="button" class="chip" data-topic={k} aria-pressed="false">{TOPIC_LABELS[k]}</button>)}
+      </div>
+      <p class="count muted" id="count" aria-live="polite"></p>
+    </div>
+    <p class="none muted" id="none" hidden>No guides match that yet. Try another word, or clear the filters.</p>
+
     {
       hubs.map((h) => (
-        <section class="hub">
+        <section class="hub" data-section={h.key}>
           <h2>
             {h.pillar ? <a href={guideUrl(h.pillar)}>{h.title}</a> : h.title}
           </h2>
           <p class="muted">{h.blurb}</p>
           <div class="grid grid-2">
             {h.pillar && (
-              <a class="card item pillar" href={guideUrl(h.pillar)}>
+              <a class="card item pillar" href={guideUrl(h.pillar)} {...attrs(h.pillar)}>
                 {h.pillar.data.image && <img class="thumb" src={h.pillar.data.image} alt="" width="1376" height="768" loading="lazy" decoding="async" />}
                 <span class="tag">Start here</span>
                 <strong>{h.pillar.data.title}</strong>
@@ -36,7 +78,7 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
               </a>
             )}
             {h.items.map((g) => (
-              <a class="card item" href={guideUrl(g)}>
+              <a class="card item" href={guideUrl(g)} {...attrs(g)}>
                 {g.data.image && <img class="thumb" src={g.data.image} alt="" width="1376" height="768" loading="lazy" decoding="async" />}
                 {g.data.market !== 'AU' && <span class="tag">{g.data.market}</span>}
                 <strong>{g.data.title}</strong>
@@ -50,6 +92,60 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
   </div>
 </Base>
 
+<script>
+  // Search and filters, all in the page (no reloads). The state of the
+  // filters is kept in the address, so a filtered view can be shared:
+  // /guides/?region=uk, /guides/?q=deck&topic=council-approval
+  const q = document.getElementById('q') as HTMLInputElement;
+  const cards = [...document.querySelectorAll<HTMLElement>('a.item[data-hub]')];
+  const sections = [...document.querySelectorAll<HTMLElement>('section[data-section]')];
+  const count = document.getElementById('count')!;
+  const none = document.getElementById('none')!;
+  const params = new URLSearchParams(location.search);
+  let region = params.get('region') || 'all';
+  let topic = params.get('topic') || 'all';
+  q.value = params.get('q') || '';
+
+  const AU_STATES = ['nsw', 'vic', 'qld', 'wa', 'tas', 'sa'];
+  function regionMatch(c: HTMLElement) {
+    const m = c.dataset.market, st = c.dataset.state;
+    if (region === 'all' || m === 'global') return true;
+    if (region === 'au') return m === 'au';
+    if (AU_STATES.includes(region)) return m === 'au' && (!st || st === region);
+    return m === region;
+  }
+  function apply() {
+    // Each word must start a word in the guide ("tap" finds taps, not "startup").
+    const words = q.value
+      .trim()
+      .toLowerCase()
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((w) => new RegExp('(^|[^a-z0-9])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    let shown = 0;
+    for (const c of cards) {
+      const ok = regionMatch(c) && (topic === 'all' || c.dataset.hub === topic) && words.every((w) => w.test(c.dataset.text!));
+      c.hidden = !ok;
+      if (ok) shown++;
+    }
+    for (const s of sections) s.hidden = !s.querySelector('a.item:not([hidden])');
+    const filtering = words.length > 0 || region !== 'all' || topic !== 'all';
+    count.textContent = filtering ? `${shown} guide${shown === 1 ? '' : 's'}` : '';
+    none.hidden = shown > 0;
+    document.querySelectorAll<HTMLElement>('[data-region]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.region === region)));
+    document.querySelectorAll<HTMLElement>('[data-topic]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.topic === topic)));
+    const p = new URLSearchParams();
+    if (q.value.trim()) p.set('q', q.value.trim());
+    if (region !== 'all') p.set('region', region);
+    if (topic !== 'all') p.set('topic', topic);
+    history.replaceState(null, '', p.toString() ? `?${p}` : location.pathname);
+  }
+  q.addEventListener('input', apply);
+  document.querySelectorAll<HTMLElement>('[data-region]').forEach((b) => b.addEventListener('click', () => { region = b.dataset.region!; apply(); }));
+  document.querySelectorAll<HTMLElement>('[data-topic]').forEach((b) => b.addEventListener('click', () => { topic = b.dataset.topic!; apply(); }));
+  apply();
+</script>
+
 <style>
   .page {
     padding-top: 40px;
@@ -60,6 +156,58 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
   }
   .hub {
     margin-top: 56px;
+  }
+  .hub[hidden],
+  .item[hidden] {
+    display: none;
+  }
+  .finder {
+    margin-top: 28px;
+    display: grid;
+    gap: 12px;
+  }
+  #q {
+    width: 100%;
+    max-width: 560px;
+    padding: 13px 16px;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.14));
+    border-radius: 12px;
+  }
+  #q:focus {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 1px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 7px 14px;
+    border-radius: 999px;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.14));
+    cursor: pointer;
+  }
+  .chip[aria-pressed='true'] {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+    color: #fff;
+  }
+  .count {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  .none {
+    margin-top: 32px;
   }
   .hub h2 {
     margin: 0 0 6px;
