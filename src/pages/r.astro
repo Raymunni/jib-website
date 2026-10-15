@@ -1,0 +1,123 @@
+---
+// A creator's link: jibapp.com.au/r/?c=CODE. Shows their code (which
+// links the new account to the creator and unlocks a free month of
+// Premium when entered in Jib), then sends people to their store with
+// the code attached: Google Play passes it to the app as the install
+// referrer; the App Store link carries it as the campaign (ct).
+import Base from '../layouts/Base.astro';
+import { STORES } from '../config';
+
+const ios = `https://apps.apple.com/app/apple-store/id${STORES.ios.appId}`;
+const android = `https://play.google.com/store/apps/details?id=${STORES.android.packageName}`;
+const pt = STORES.ios.providerToken;
+---
+
+<Base title="Your free month of Jib Premium" description="Get Jib, the DIY and home maintenance app, and use your creator's code for a free month of Premium." noindex>
+  <div class="wrap page">
+    <p class="eyebrow" id="from">A creator sent you here</p>
+    <h1>Your first month of Jib Premium is free</h1>
+    <p class="lede">Snap a photo of any job around the house and Jib writes the plan: the steps, what to buy, the cost, and whether you can legally DIY it.</p>
+
+    <div class="card code-card">
+      <p class="muted">Your code</p>
+      <p class="code" id="code">JIB</p>
+      <button class="btn btn-primary" id="copy" type="button">Copy code</button>
+      <p class="muted small" id="copied" hidden>Copied. Paste it into Jib after you sign up.</p>
+    </div>
+
+    <ol class="steps">
+      <li>Get Jib below and sign in.</li>
+      <li>Go to <strong>Settings</strong> and tap <strong>Have a code?</strong></li>
+      <li>Enter <strong class="code-inline">your code</strong> and Premium switches on.</li>
+    </ol>
+
+    <div class="stores">
+      <a class="btn btn-primary" id="ios" href={ios}>Get it on the App Store</a>
+      <a class="btn btn-ghost" id="android" href={android}>Get it on Google Play</a>
+    </div>
+    <p class="muted small">Codes are for new Jib accounts. The free month ends by itself; nothing is charged unless you choose a plan.</p>
+  </div>
+</Base>
+
+<script is:inline define:vars={{ ios, android, pt }}>
+  (function () {
+    var raw = new URLSearchParams(location.search).get('c') || '';
+    var code = raw.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
+    if (code.length < 4) code = '';
+    var show = code || 'ask your creator';
+    document.getElementById('code').textContent = show;
+    document.querySelectorAll('.code-inline').forEach(function (el) { el.textContent = code || 'their code'; });
+    if (!code) {
+      document.getElementById('copy').hidden = true;
+      return;
+    }
+    // The code travels with the store link: Play hands it to the app as
+    // the install referrer; Apple reports ct per campaign.
+    var ref = 'utm_source=creator&utm_medium=affiliate&utm_campaign=' + code + '&jib_creator=' + code;
+    document.getElementById('android').href = android + '&referrer=' + encodeURIComponent(ref);
+    document.getElementById('ios').href = ios + '?mt=8&ct=' + encodeURIComponent('cr-' + code) + (pt ? '&pt=' + pt : '');
+    var copy = function () {
+      try {
+        if (navigator.clipboard) navigator.clipboard.writeText(code).catch(function () {});
+      } catch (e) {}
+      document.getElementById('copied').hidden = false;
+    };
+    document.getElementById('copy').addEventListener('click', copy);
+    // Tapping a store button copies the code too, so it's ready to paste.
+    ['ios', 'android'].forEach(function (id) {
+      document.getElementById(id).addEventListener('click', function () {
+        copy();
+        if (window.gtag) window.gtag('event', 'creator_store_click', { creator_code: code, store: id });
+      });
+    });
+    if (window.gtag) window.gtag('event', 'creator_link_view', { creator_code: code });
+    // Show the phone's own store first.
+    var ua = navigator.userAgent;
+    if (/Android/.test(ua)) document.querySelector('.stores').prepend(document.getElementById('android'));
+  })();
+</script>
+
+<style>
+  .page {
+    padding-top: 48px;
+    max-width: 640px;
+  }
+  .eyebrow {
+    color: var(--accent, #4a8fe0);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+  .lede {
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+  }
+  .code-card {
+    text-align: center;
+    padding: 24px 16px;
+    margin-bottom: 24px;
+  }
+  .code {
+    font-size: 2.6rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin: 4px 0 16px;
+    word-break: break-all;
+  }
+  .steps {
+    margin: 0 0 24px;
+    padding-left: 1.3em;
+    display: grid;
+    gap: 8px;
+  }
+  .stores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .small {
+    font-size: 0.85rem;
+  }
+</style>
