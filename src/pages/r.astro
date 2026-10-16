@@ -5,6 +5,7 @@
 // the code attached: Google Play passes it to the app as the install
 // referrer; the App Store link carries it as the campaign (ct).
 import Base from '../layouts/Base.astro';
+import StoreButtons from '../components/StoreButtons.astro';
 import { STORES } from '../config';
 
 const ios = `https://apps.apple.com/app/apple-store/id${STORES.ios.appId}`;
@@ -31,10 +32,7 @@ const pt = STORES.ios.providerToken;
       <li>Enter <strong class="code-inline">your code</strong> and Premium switches on.</li>
     </ol>
 
-    <div class="stores">
-      <a class="btn btn-primary" id="ios" href={ios}>Get it on the App Store</a>
-      <a class="btn btn-ghost" id="android" href={android}>Get it on Google Play</a>
-    </div>
+    <div class="badges"><StoreButtons campaign="social" size="lg" /></div>
     <p class="muted small">Codes are for new Jib accounts. The free month ends by itself; nothing is charged unless you choose a plan.</p>
   </div>
 </Base>
@@ -53,9 +51,11 @@ const pt = STORES.ios.providerToken;
     }
     // The code travels with the store link: Play hands it to the app as
     // the install referrer; Apple reports ct per campaign.
+    var iosBtn = document.querySelector('.badges [data-store="ios"]');
+    var androidBtn = document.querySelector('.badges [data-store="android"]');
     var ref = 'utm_source=creator&utm_medium=affiliate&utm_campaign=' + code + '&jib_creator=' + code;
-    document.getElementById('android').href = android + '&referrer=' + encodeURIComponent(ref);
-    document.getElementById('ios').href = ios + '?mt=8&ct=' + encodeURIComponent('cr-' + code) + (pt ? '&pt=' + pt : '');
+    if (androidBtn) androidBtn.href = android + '&referrer=' + encodeURIComponent(ref);
+    if (iosBtn) iosBtn.href = ios + '?mt=8&ct=' + encodeURIComponent('cr-' + code) + (pt ? '&pt=' + pt : '');
     var copy = function () {
       try {
         if (navigator.clipboard) navigator.clipboard.writeText(code).catch(function () {});
@@ -64,16 +64,17 @@ const pt = STORES.ios.providerToken;
     };
     document.getElementById('copy').addEventListener('click', copy);
     // Tapping a store button copies the code too, so it's ready to paste.
-    ['ios', 'android'].forEach(function (id) {
-      document.getElementById(id).addEventListener('click', function () {
+    [[iosBtn, 'ios'], [androidBtn, 'android']].forEach(function (b) {
+      if (!b[0]) return;
+      b[0].addEventListener('click', function () {
         copy();
-        if (window.gtag) window.gtag('event', 'creator_store_click', { creator_code: code, store: id });
+        if (window.gtag) window.gtag('event', 'creator_store_click', { creator_code: code, store: b[1] });
       });
     });
     if (window.gtag) window.gtag('event', 'creator_link_view', { creator_code: code });
     // Show the phone's own store first.
     var ua = navigator.userAgent;
-    if (/Android/.test(ua)) document.querySelector('.stores').prepend(document.getElementById('android'));
+    if (/Android/.test(ua) && androidBtn) androidBtn.parentNode.prepend(androidBtn);
   })();
 </script>
 
@@ -111,10 +112,7 @@ const pt = STORES.ios.providerToken;
     display: grid;
     gap: 8px;
   }
-  .stores {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+  .badges {
     margin-bottom: 16px;
   }
   .small {
