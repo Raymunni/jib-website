@@ -16,7 +16,8 @@ export default defineConfig({
     mdx(),
     sitemap({
       // /ios/ and /android/ are short links that redirect to the stores.
-      filter: (page) => !page.endsWith('/404/') && !page.includes('/web/') && !page.endsWith('/ios/') && !page.endsWith('/android/'),
+      // /r/ is the creator code page (noindex), only reached from a creator's link.
+      filter: (page) => !page.endsWith('/404/') && !page.includes('/web/') && !page.endsWith('/ios/') && !page.endsWith('/android/') && !page.endsWith('/r/'),
     }),
   ],
 });
