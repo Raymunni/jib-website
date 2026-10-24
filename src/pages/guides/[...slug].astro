@@ -133,6 +133,13 @@ const jsonLd = [
           )
         }
 
+        <div class="helpful" id="helpful">
+          <p>Was this guide helpful?</p>
+          <button type="button" data-helpful="yes">Yes</button>
+          <button type="button" data-helpful="no">No</button>
+          <p class="muted" id="helpful-thanks" hidden>Thanks. If something's missing or wrong, <a href="/contact/">tell us</a>.</p>
+        </div>
+
         <p class="disclaimer muted">
           This guide is general information, not legal or professional advice. Rules differ between states, councils and individual properties, and they change. Confirm with your state regulator or council before starting work, and if in doubt, get a licensed tradesperson.
         </p>
@@ -157,9 +164,73 @@ const jsonLd = [
   </article>
 </Base>
 
+<script>
+  // "Was this helpful?": one vote per guide per browser, sent to GA as
+  // guide_feedback (helpful: yes/no) so weak guides show up in the data.
+  const box = document.getElementById('helpful');
+  const key = 'jib-helpful:' + location.pathname;
+  const thanks = () => {
+    box?.querySelectorAll('button').forEach((b) => (b.disabled = true));
+    document.getElementById('helpful-thanks')!.hidden = false;
+  };
+  try {
+    if (localStorage.getItem(key)) thanks();
+  } catch {}
+  box?.querySelectorAll<HTMLButtonElement>('button[data-helpful]').forEach((b) =>
+    b.addEventListener('click', () => {
+      (window as any).jibTrack?.('guide_feedback', { helpful: b.dataset.helpful });
+      try {
+        localStorage.setItem(key, b.dataset.helpful!);
+      } catch {}
+      b.setAttribute('aria-pressed', 'true');
+      thanks();
+    }),
+  );
+</script>
+
 <style>
   .guide {
     padding-top: 28px;
+  }
+  .helpful {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 36px 0 8px;
+    padding: 16px 18px;
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.14));
+    border-radius: 12px;
+    background: var(--surface);
+  }
+  .helpful p {
+    margin: 0;
+    font-weight: 700;
+  }
+  .helpful p.muted {
+    flex-basis: 100%;
+    font-weight: 400;
+    font-size: 0.92rem;
+  }
+  .helpful button {
+    font: inherit;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 999px;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.14));
+    cursor: pointer;
+  }
+  .helpful button:hover:not(:disabled),
+  .helpful button[aria-pressed='true'] {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+    color: #fff;
+  }
+  .helpful button:disabled:not([aria-pressed='true']) {
+    opacity: 0.5;
+    cursor: default;
   }
   .crumbs {
     display: flex;

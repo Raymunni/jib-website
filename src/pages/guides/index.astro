@@ -40,6 +40,11 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
   pillar: guides.find((g) => g.data.hub === key && g.data.pillar),
   items: guides.filter((g) => g.data.hub === key && !g.data.pillar).sort((a, b) => a.data.order - b.data.order),
 }));
+// The newest guides, shown above the hubs until someone searches or filters.
+const fresh = guides
+  .filter((g) => !g.data.pillar && g.data.hub !== 'features')
+  .sort((a, b) => b.data.published.getTime() - a.data.published.getTime())
+  .slice(0, 4);
 ---
 
 <Base title="DIY guides for Australian homes: how-tos, rules, materials and maintenance" description="Plain-English DIY guides for Australian homes: step-by-step repairs, what you can legally do yourself, council approval, materials lists and home maintenance.">
@@ -60,6 +65,21 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
       <p class="count muted" id="count" aria-live="polite"></p>
     </div>
     <p class="none muted" id="none" hidden>No guides match that yet. Try another word, or clear the filters.</p>
+
+    <section class="hub" id="fresh">
+      <h2>New and in season</h2>
+      <p class="muted">The latest guides, for the jobs that matter right now.</p>
+      <div class="grid grid-2">
+        {fresh.map((g) => (
+          <a class="card item" href={guideUrl(g)}>
+            {g.data.image && <img class="thumb" src={g.data.image} alt="" width="1376" height="768" loading="lazy" decoding="async" />}
+            <span class="tag">New</span>
+            <strong>{g.data.title}</strong>
+            <span class="muted">{g.data.description}</span>
+          </a>
+        ))}
+      </div>
+    </section>
 
     {
       hubs.map((h) => (
@@ -101,6 +121,7 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
   const sections = [...document.querySelectorAll<HTMLElement>('section[data-section]')];
   const count = document.getElementById('count')!;
   const none = document.getElementById('none')!;
+  const fresh = document.getElementById('fresh')!;
   const params = new URLSearchParams(location.search);
   let region = params.get('region') || 'all';
   let topic = params.get('topic') || 'all';
@@ -131,6 +152,7 @@ const hubs = (Object.keys(HUBS) as HubKey[]).map((key) => ({
     for (const s of sections) s.hidden = !s.querySelector('a.item:not([hidden])');
     const filtering = words.length > 0 || region !== 'all' || topic !== 'all';
     count.textContent = filtering ? `${shown} guide${shown === 1 ? '' : 's'}` : '';
+    fresh.hidden = filtering;
     none.hidden = shown > 0;
     document.querySelectorAll<HTMLElement>('[data-region]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.region === region)));
     document.querySelectorAll<HTMLElement>('[data-topic]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.topic === topic)));
