@@ -1,0 +1,529 @@
+[
+ {
+  "guide": "home-maintenance/storm-season-checklist",
+  "slug": "storm-season",
+  "inline": {
+   "headline": "Every spring, before the first storm.",
+   "alt": "A mum and her teenage son carrying outdoor chairs into a garage as a storm builds",
+   "prompt": "A mum in her 30s and her teenage son carry folded outdoor chairs into an open garage of a Brisbane brick house as a dark storm cell builds overhead, wind bending the trees. Late afternoon light.",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Tie down the trampoline",
+     "description": "Anchor kit on all four legs before storm season.",
+     "timeEstimate": "About 20 minutes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820012400000,
+     "tools": [
+      {
+       "name": "Rubber mallet",
+       "owned": true
+      }
+     ],
+     "shoppingList": [
+      {
+       "item": "Trampoline anchor kit",
+       "price": 40
+      }
+     ],
+     "directions": [
+      "Screw an anchor in beside each leg",
+      "Strap each leg down tight",
+      "Check the straps after big winds"
+     ]
+    },
+    {
+     "room": "Outside",
+     "title": "Clear the gutters and downpipes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820012400000
+    },
+    {
+     "room": "Backyard",
+     "title": "Trim branches over the roof",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820012400000
+    }
+   ]
+  },
+  "end": {
+   "headline": "Ready before the sky turns green.",
+   "alt": "A family relaxing inside while a storm rolls over a tidy backyard",
+   "prompt": "Inside a Queensland living room, a family of four sits relaxed on the couch watching heavy rain and a green-grey storm sky through a wide sliding glass door; outside, the tidy backyard has its outdoor chairs stacked against the wall. Warm lamp light inside.",
+   "expand": -1,
+   "fill": false,
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Tie down the trampoline",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820012400000
+    },
+    {
+     "room": "Outside",
+     "title": "Clear the gutters and downpipes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820012400000
+    },
+    {
+     "room": "Backyard",
+     "title": "Trim branches over the roof",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820012400000
+    },
+    {
+     "room": "Outside",
+     "title": "Pack the storm kit",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820012400000
+    },
+    {
+     "room": "Outside",
+     "title": "Get the roof and tie-downs checked",
+     "verdict": "tradie_required",
+     "repeat": {
+      "freq": "year",
+      "interval": 2
+     },
+     "scheduledAt": 1820617200000
+    }
+   ]
+  }
+ },
+ {
+  "guide": "council-approval/seven-year-rule-unapproved-building-work",
+  "slug": "seven-year-rule",
+  "inline": {
+   "headline": "Know if it needs approval before you build.",
+   "alt": "A couple marking out a new shed with pegs and string in their backyard",
+   "prompt": "A couple in their 30s stand on the lawn of an Australian backyard beside timber pegs and a string line marking out a new shed near the back fence; the woman photographs the spot with her phone while the man holds a tape measure. Sunny morning.",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Get the old shed approved",
+     "description": "Built by the previous owner, not on council's records.",
+     "timeEstimate": "Before you list the house",
+     "verdict": "tradie_required",
+     "verdictReason": "A private building certifier can tell you whether it needs approval and what it needs to get there.",
+     "labour": {
+      "low": 800,
+      "high": 2500,
+      "note": "Certifier and engineering"
+     },
+     "directions": [
+      "Find any old plans or receipts",
+      "Book a private certifier",
+      "Fix anything they flag",
+      "Lodge the approval"
+     ]
+    }
+   ]
+  },
+  "end": {
+   "headline": "Build it right once, not twice.",
+   "alt": "A dad and his daughter in front of a new garden shed",
+   "prompt": "A dad in his 30s and his young daughter stand proudly in front of a newly built small steel garden shed on a fresh concrete slab in a neat Australian backyard, the dad holding a cordless drill. Late afternoon sun.",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Build a 3 x 3 m garden shed",
+     "description": "Kit shed on a slab, 1 m off the side fence.",
+     "timeEstimate": "A weekend",
+     "verdict": "diy_safe",
+     "verdictReason": "Small sheds often need no approval if they meet your state's size, height and siting limits. Check yours first.",
+     "tools": [
+      {
+       "name": "Cordless drill",
+       "owned": true
+      },
+      {
+       "name": "Spirit level",
+       "owned": true
+      }
+     ],
+     "shoppingList": [
+      {
+       "item": "Steel shed kit, 3 x 3 m",
+       "price": 899
+      },
+      {
+       "item": "Anchor bolts",
+       "price": 32
+      }
+     ],
+     "directions": [
+      "Check the size and setback limits",
+      "Pour or level the slab",
+      "Build the frame",
+      "Fix the sheeting and doors"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/pool-fence-rules-qld",
+  "slug": "pool-fence",
+  "inline": {
+   "headline": "Every spring, before swimming season.",
+   "alt": "A mum moving a pot plant away from a pool fence while her kids wait in swimmers",
+   "prompt": "A mum in her 30s carries a large pot plant away from a black aluminium pool fence in a Queensland backyard while two kids in swimmers and rashies wait by the closed pool gate. Bright spring morning.",
+   "jobs": [
+    {
+     "room": "Pool",
+     "title": "Check the pool fence and gate",
+     "description": "Height, gaps, anything climbable, and the latch.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820617200000,
+     "tools": [
+      {
+       "name": "Tape measure",
+       "owned": true
+      }
+     ],
+     "directions": [
+      "Measure the height all the way round",
+      "Check the gaps, including underneath",
+      "Move anything climbable 900 mm away",
+      "Test the gate from every position"
+     ]
+    }
+   ]
+  },
+  "end": {
+   "headline": "Checked before the first swim.",
+   "alt": "Kids jumping into a backyard pool with a pool fence behind them",
+   "prompt": "Two kids jump into a backyard pool on a hot Queensland afternoon, mid-splash, with a black aluminium pool fence and closed gate behind them and their dad watching from a chair in the shade.",
+   "expand": -1,
+   "fill": false,
+   "jobs": [
+    {
+     "room": "Pool",
+     "title": "Check the pool fence and gate",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820617200000
+    },
+    {
+     "room": "Pool",
+     "title": "Oil the pool gate hinges",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 6
+     },
+     "scheduledAt": 1794006000000
+    },
+    {
+     "room": "Pool",
+     "title": "Replace the faded CPR sign",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Backyard",
+     "title": "Trim the hedge back from the fence",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 3
+     },
+     "scheduledAt": 1794607200000
+    },
+    {
+     "room": "Pool",
+     "title": "Pool safety certificate",
+     "description": "Only when you sell or lease.",
+     "verdict": "tradie_required"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/ceiling-fan-direction-summer",
+  "slug": "fan-summer",
+  "inline": {
+   "headline": "Every fan, switched in one go.",
+   "alt": "A teenager reading on her bed under a spinning ceiling fan",
+   "prompt": "A teenage girl lies on her bed reading a book under a spinning white ceiling fan, the blades softly motion blurred, in a bright Australian bedroom on a hot afternoon, sheer curtains half drawn.",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Switch the fans to summer mode",
+     "description": "Anticlockwise from below, all 4 fans.",
+     "timeEstimate": "About 15 minutes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1793401200000,
+     "tools": [
+      {
+       "name": "Step ladder",
+       "owned": true
+      }
+     ],
+     "directions": [
+      "Turn the fan off and let it stop",
+      "Flick the switch on the motor housing",
+      "Dust the blades with a pillowcase",
+      "Check it blows down on you"
+     ]
+    }
+   ]
+  },
+  "end": {
+   "headline": "Cooler rooms for 2 cents an hour.",
+   "alt": "A family relaxing on the couch under a ceiling fan on a warm evening",
+   "prompt": "A family of four relaxes on a couch in an Australian living room on a warm summer evening under a spinning white ceiling fan, the blades softly motion blurred, windows open, the kids eating icy poles.",
+   "expand": -1,
+   "fill": false,
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Switch the fans to summer mode",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1793401200000
+    },
+    {
+     "room": "Bedroom",
+     "title": "Dust the bedroom fan blades",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 3
+     },
+     "scheduledAt": 1794006000000
+    },
+    {
+     "room": "Living room",
+     "title": "Clean the aircon filters",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 1
+     },
+     "scheduledAt": 1794607200000
+    },
+    {
+     "room": "Bedroom",
+     "title": "Install a fan in the kids' room",
+     "verdict": "tradie_required"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/summer-home-maintenance-checklist",
+  "slug": "summer-checklist",
+  "inline": {
+   "headline": "Every summer job, sorted by time.",
+   "alt": "A mum raking dry leaves away from the side of a house on a hot morning",
+   "prompt": "A mum in her 30s rakes dry leaves and bark away from the side of a timber Queensland house on a hot summer morning, a wheelbarrow half full beside her, bright harsh sun and dry grass.",
+   "jobs": [
+    {
+     "room": "Outside",
+     "title": "Hose the aircon outdoor unit",
+     "description": "Gentle hose over the fins, leaves cleared around it.",
+     "timeEstimate": "About 15 minutes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1794006000000,
+     "directions": [
+      "Turn the aircon off at the isolator",
+      "Clear leaves and weeds around it",
+      "Gently hose the fins",
+      "Check nothing blocks the airflow"
+     ]
+    }
+   ]
+  },
+  "end": {
+   "headline": "A cooler, safer summer on autopilot.",
+   "alt": "A family eating dinner on a back deck on a warm summer evening",
+   "prompt": "A family of four eats dinner at a timber table on a covered back deck of an Australian house on a warm summer evening, the kids laughing, festoon lights glowing, a tidy backyard behind them.",
+   "expand": -1,
+   "fill": false,
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Clean the aircon filters",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 1
+     },
+     "scheduledAt": 1794607200000
+    },
+    {
+     "room": "Outside",
+     "title": "Hose the aircon outdoor unit",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1794006000000
+    },
+    {
+     "room": "Living room",
+     "title": "Switch the fans to summer mode",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1793401200000
+    },
+    {
+     "room": "Pool",
+     "title": "Check the pool fence and gate",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820617200000
+    },
+    {
+     "room": "Outside",
+     "title": "Clear the gutters and downpipes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820012400000
+    }
+   ]
+  }
+ },
+ {
+  "guide": "diy-legal/can-i-paint-my-own-house",
+  "slug": "paint-own-house",
+  "inline": {
+   "headline": "Every room: the paint, the prep, the time.",
+   "alt": "A couple taping skirting boards in an empty bedroom before painting",
+   "prompt": "A couple in their 30s kneel in an empty, sunlit Australian bedroom taping the skirting boards with blue painter's tape before painting, a closed tin of paint, a roller tray and folded drop sheets beside them, the walls a tired cream. Natural window light. No logos or text.",
+   "jobs": [
+    {
+     "room": "Bedroom",
+     "title": "Paint the main bedroom",
+     "description": "Walls and ceiling, about 3.5 x 4 m. Tired cream to soft white.",
+     "timeEstimate": "A weekend",
+     "verdict": "diy_safe",
+     "verdictReason": "Painting your own home needs no licence anywhere in Australia. Built before 1970? Test for lead before you sand.",
+     "tools": [
+      {
+       "name": "Roller and tray",
+       "owned": true
+      },
+      {
+       "name": "Step ladder",
+       "owned": true
+      }
+     ],
+     "shoppingList": [
+      {
+       "item": "Low sheen wall paint, 10 L",
+       "price": 189
+      },
+      {
+       "item": "Ceiling paint, 4 L",
+       "price": 62
+      },
+      {
+       "item": "Painter's tape",
+       "price": 9
+      }
+     ],
+     "directions": [
+      "Move the furniture out and lay drop sheets",
+      "Fill holes, sand and wipe down",
+      "Tape the skirting and cut in",
+      "Two coats, ceiling first"
+     ]
+    }
+   ]
+  },
+  "end": {
+   "headline": "Painted by you. Planned by Jib.",
+   "alt": "A dad and his daughter admiring a freshly painted sage green lounge room",
+   "prompt": "A dad in his 30s and his young daughter stand back admiring a freshly painted sage green lounge room wall in an Australian home, the roller and tray on a drop sheet at their feet, late afternoon light through the window. No logos or text.",
+   "expand": -1,
+   "fill": false,
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Paint the lounge room",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Bedroom",
+     "title": "Paint the main bedroom",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Hallway",
+     "title": "Touch up the hallway scuffs",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Outside",
+     "title": "Test the old paint for lead",
+     "description": "House built in 1962.",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Outside",
+     "title": "Paint the weatherboards",
+     "description": "Check heritage rules first.",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ }
+]
