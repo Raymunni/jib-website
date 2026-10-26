@@ -5,7 +5,7 @@ import { SITE } from '../config';
 
 <Page title="Privacy Policy" description="What the Jib website and app collect, how it's used, and your choices.">
   <h1>Privacy Policy</h1>
-  <p><strong>Last updated: 29 September 2026</strong></p>
+  <p><strong>Last updated: 26 October 2026</strong></p>
   <p>This policy explains what information Jib (“we”, “us”) collects through the Jib website ({SITE.domain}) and the Jib mobile app (<code>com.jibjobs.app</code>), how it’s used, and the choices you have.</p>
 
   <h2>The website</h2>
@@ -56,6 +56,12 @@ import { SITE } from '../config';
 
   <h2>4. AI features and third-party processing</h2>
   <p>Jib uses Anthropic’s Claude API to power job planning, steps, shopping suggestions, follow-up questions, reading photos of your tools, writing tradie briefs and turning jobs you add by voice into job entries. When you use these features, the relevant details (such as a job’s title, description, room and house details, the text of what you said and, where relevant, a photo you’ve attached) are sent to Anthropic to generate a response. See <a href="https://www.anthropic.com/legal/privacy">Anthropic’s Privacy Policy</a>.</p>
+  <p>Jib also uses Google’s Gemini API to make images, for two features:</p>
+  <ul>
+    <li><strong>Visualise it (AI previews):</strong> when you ask for a preview, the photo you choose and that job’s details (title, description, space, steps and materials) are sent to Google to draw a picture of how the space could look with the job done. The preview is saved to your account, like your photos, and is always labelled as an AI preview. You can remove it at any time.</li>
+    <li><strong>Tool and item pictures:</strong> generic product pictures of the tools and shopping list items on your jobs. Only the generic item name (for example “cordless drill”) is sent to Google. No photos, house details or personal information are sent, and every Jib user sees the same picture.</li>
+  </ul>
+  <p>We use Google’s paid Gemini API, under which Google doesn’t use this data to improve its products. See the <a href="https://ai.google.dev/gemini-api/terms">Gemini API terms</a> and <a href="https://policies.google.com/privacy">Google’s Privacy Policy</a>.</p>
   <p><strong>AI-generated content is not professional advice.</strong> Steps, material suggestions, cost estimates and safety warnings are generated automatically and may be incomplete or inaccurate, or miss risks specific to your property.</p>
 
   <h2>5. Where your information is stored</h2>
@@ -65,10 +71,10 @@ import { SITE } from '../config';
     <li><strong>Location lookups:</strong> resolving a suburb uses Google’s geocoding and Places services and, for AI-assisted matching, Anthropic’s API. Neither keeps this beyond what’s needed to return a result.</li>
   </ul>
   <h3>5.1 Storage outside Australia</h3>
-  <p>The services we use to run Jib (Google Firebase and Google Analytics, Anthropic, RevenueCat and GitHub) are based overseas, so your information may be stored and processed outside Australia, mainly in the United States. We only use providers that protect data with industry-standard security, and we share only what each one needs to do its job.</p>
+  <p>The services we use to run Jib (Google Firebase, Google Analytics and the Gemini API, Anthropic, RevenueCat and GitHub) are based overseas, so your information may be stored and processed outside Australia, mainly in the United States. We only use providers that protect data with industry-standard security, and we share only what each one needs to do its job.</p>
 
   <h2>6. Sharing your information</h2>
-  <p>We don’t sell or rent your information. We share it only with the service providers needed to run Jib: Google Firebase (sign-in, sync, Google Analytics and Crashlytics), Apple (Sign in with Apple, if you use it), Anthropic (AI features), Google Places/geocoding (location) and RevenueCat (purchases). We may disclose information if required by law, or to protect the rights, safety or property of Jib, our users or others.</p>
+  <p>We don’t sell or rent your information. We share it only with the service providers needed to run Jib: Google Firebase (sign-in, sync, Google Analytics and Crashlytics), Apple (Sign in with Apple, if you use it), Anthropic (AI features), Google’s Gemini API (AI previews and item pictures), Google Places/geocoding (location) and RevenueCat (purchases). We may disclose information if required by law, or to protect the rights, safety or property of Jib, our users or others.</p>
 
   <h3>6.1 Shared houses</h3>
   <p>You can share a house with people you choose, such as a partner or housemate, by sending them an invite code. Codes expire after 7 days.</p>
