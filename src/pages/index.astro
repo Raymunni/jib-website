@@ -471,15 +471,20 @@ const jsonLd = [
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 60% 50%;
+      object-position: 50% 30%;
     }
     .hero-phones {
       display: none;
     }
     /* On desktop the photo carries the tools; the copy is plain and sits high,
        and the notes lie on the concrete between the copy and the phones. */
+    /* The copy sits to the left, on the bare concrete above the gloves. */
     .hero-copy {
-      max-width: var(--maxw, 1180px);
+      max-width: none;
+      margin: 0;
+      padding-left: clamp(24px, 7vw, 140px);
+      padding-right: 32px;
+      width: fit-content;
     }
     .hero-notes {
       position: absolute;
@@ -500,25 +505,28 @@ const jsonLd = [
       margin-left: -1.5vw;
       margin-top: 4.5vw;
     }
-    /* A soft wash of the concrete behind the copy, so the type stays clear of the tools. */
-    .hero::before {
+    /* A soft wash of concrete just behind the copy and a little past its
+       edges, so the type reads; the rest of the photo stays clear. */
+    .hero-copy::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(222, 223, 220, 0.62) 0%, rgba(222, 223, 220, 0.42) 30%, rgba(222, 223, 220, 0) 44%);
-      z-index: 1;
+      inset: 4% -4% -2% 3%;
+      background: rgba(222, 223, 220, 0.62);
+      filter: blur(28px);
+      border-radius: 40px;
+      z-index: -1;
     }
     .hero-copy {
       z-index: 2;
     }
     .hero-copy {
-      padding-top: clamp(28px, 3.2vw, 56px);
+      padding-top: clamp(20px, 2.2vw, 44px);
       padding-bottom: 48px;
     }
     .hero-copy > .lede,
     .hero-copy > .trust,
     .hero-copy > .hero-ctas {
-      max-width: 40%;
+      max-width: 34rem;
     }
   }
   .section-title {
