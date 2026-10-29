@@ -482,7 +482,7 @@ const jsonLd = [
     .hero-copy {
       max-width: none;
       margin: 0;
-      padding-left: clamp(24px, 7vw, 140px);
+      padding-left: 21vw;
       padding-right: 32px;
       width: fit-content;
     }
@@ -526,7 +526,24 @@ const jsonLd = [
     .hero-copy > .lede,
     .hero-copy > .trust,
     .hero-copy > .hero-ctas {
-      max-width: 34rem;
+      max-width: 32vw;
+    }
+    /* The copy scales with the screen, so it always fits between the
+       gloves and the phones. */
+    .hero-logo {
+      font-size: min(4.4vw, 5rem);
+    }
+    .hero h1 {
+      font-size: min(3.6vw, 4.4rem);
+    }
+    .hero-sub {
+      font-size: min(1.6vw, 1.85rem);
+    }
+    .lede {
+      font-size: clamp(0.92rem, 1.05vw, 1.2rem);
+    }
+    .trust {
+      font-size: clamp(0.8rem, 0.85vw, 1rem);
     }
   }
   .section-title {
