@@ -5,19 +5,19 @@ import Base from '../layouts/Base.astro';
 import StoreButtons from '../components/StoreButtons.astro';
 import ToolIcon from '../components/ToolIcon.astro';
 import { SITE, HUBS, STORES, anyStoreLive } from '../config';
-import heroWide from '../assets/hero/a.jpg';
-import heroTall from '../assets/hero/b.jpg';
-import shotPlan from '../assets/screens/01-plan.png';
-import shotTrack from '../assets/screens/02-track.png';
-import shotCatch from '../assets/screens/03-catch.png';
-import shotShop from '../assets/screens/04-shop.png';
-import shotSee from '../assets/screens/05-see.png';
+import heroWide from '../assets/hero/hero-wide.jpg';
+import heroPhones from '../assets/hero/hero-phones.jpg';
+import shotSee from '../assets/screens/c1-see.png';
+import shotPlan from '../assets/screens/c2-plan.png';
+import shotCheck from '../assets/screens/c3-check.png';
+import shotShop from '../assets/screens/c4-shop.png';
+import shotWatch from '../assets/screens/c5-watch.png';
 import { guideUrl } from '../lib/guides';
 
-const wideAvif = await getImage({ src: heroWide, format: 'avif', width: 1376, quality: 60 });
-const wideWebp = await getImage({ src: heroWide, format: 'webp', width: 1376, quality: 72 });
-const tallAvif = await getImage({ src: heroTall, format: 'avif', width: 768, quality: 60 });
-const tallWebp = await getImage({ src: heroTall, format: 'webp', width: 768, quality: 72 });
+const wideAvif = await getImage({ src: heroWide, format: 'avif', width: 2400, quality: 58 });
+const wideWebp = await getImage({ src: heroWide, format: 'webp', width: 2400, quality: 72 });
+const phonesAvif = await getImage({ src: heroPhones, format: 'avif', width: 900, quality: 58 });
+const phonesWebp = await getImage({ src: heroPhones, format: 'webp', width: 900, quality: 72 });
 
 const allGuides = await getCollection('guides');
 // The three newest guides with a hero image.
@@ -33,22 +33,24 @@ const popular = [
 ];
 
 
-// The six things that sell Jib. Everything else lives in the features guide.
+// The eight things that sell Jib. Everything else lives in the features guide.
 const featureTiles = [
-  { icon: 'snap', href: '/guides/features/photo-to-job-plan/', title: 'Snap it, AI plans it', body: 'One photo becomes a full job: steps, materials, tools, time and cost. No typing.' },
-  { icon: 'checker', href: '/guides/features/diy-or-tradie-verdict/', title: 'DIY safe or tradie required', body: 'Know before you start if a job is legal to DIY where you live, and which step needs a licence.' },
-  { icon: 'cart', href: '/guides/features/ai-shopping-list/', title: 'One trip to the hardware store', body: 'Every job’s materials on one list, by store. It skips the tools you already own.' },
-  { icon: 'voice', href: '/guides/features/add-home-jobs-by-voice/', title: 'Hands full? Just say it', body: 'Tap the mic, say the job, and Jib files it in the right room.' },
-  { icon: 'together', href: '/guides/features/shared-home-to-do-list/', title: 'Plan it together', body: 'Share your house with your partner. Same jobs and list on both phones.' },
-  { icon: 'beforeafter', href: '/guides/features/before-and-after-photos/', title: 'See your home get better', body: 'Before and after photos on a timeline for every room. Gold when you sell.' },
+  { icon: 'snap', href: '/guides/features/photo-to-job-plan/', title: 'Snap it, Jib plans it', body: 'One photo becomes a full job: steps, materials, tools, time and cost. No typing.' },
+  { icon: 'beforeafter', href: '/guides/features/', title: 'See it finished first', body: 'Jib’s AI pictures your space with the work done, before you lift a tool.' },
+  { icon: 'planner', href: '/guides/features/', title: 'Plan the whole space', body: 'A full look at a room or yard: every job it needs, in the right order, with the cost.' },
+  { icon: 'climate', href: '/guides/features/', title: 'It knows your house', body: 'Age, soil, climate, termites. Every plan is written for your place, not a generic one.' },
+  { icon: 'checker', href: '/guides/features/diy-or-tradie-verdict/', title: 'DIY safe or tradie required', body: 'Know if a job is legal to DIY where you live. If not, Jib writes the quote request.' },
+  { icon: 'toolbox', href: '/guides/features/garage-tool-inventory/', title: 'AI tool inventory', body: 'Snap your shed once. Jib remembers what you own, so you never buy it twice.' },
+  { icon: 'cart', href: '/guides/features/ai-shopping-list/', title: 'Real prices, one trip', body: 'Every job’s materials on one list, with real hardware store prices to compare.' },
+  { icon: 'together', href: '/guides/features/shared-home-to-do-list/', title: 'Share the house', body: 'Your partner gets the same jobs, plans and list, live on their phone.' },
 ];
 
 const shots = [
-  { src: shotPlan, alt: 'Jib app: snap a photo and AI plans the whole job' },
-  { src: shotTrack, alt: 'Jib app: every job, every room, at a glance' },
-  { src: shotCatch, alt: 'Jib app: know if a job is DIY safe before you start' },
-  { src: shotShop, alt: 'Jib app: one shopping list for every job' },
-  { src: shotSee, alt: 'Jib app: a timeline of your home, before and after' },
+  { src: shotSee, alt: 'Jib app: see your space finished before you start' },
+  { src: shotPlan, alt: 'Jib app: every job in the right order' },
+  { src: shotCheck, alt: 'Jib app: DIY safe or a job for a tradie' },
+  { src: shotShop, alt: 'Jib app: real prices, one trip' },
+  { src: shotWatch, alt: 'Jib app: watch your home come together' },
 ];
 
 // Three real-life moments, told with photos.
@@ -89,8 +91,8 @@ const faqs = [
     a: 'Yes. On Jib’s paid plans, every job gets a corner flag: DIY safe (green) or tradie required (red), based on the licensing rules where your house is, with the exact step that needs a licence. It’s general guidance, not legal advice: always confirm with your state regulator or council. Our free DIY legality checker shows the rules for common jobs by state, with links to the regulator.',
   },
   {
-    q: 'What is the AI Toolbox?',
-    a: 'Photograph your garage, shed or a hardware receipt and Jib lists every tool it can see. After that, every job you plan checks your Toolbox, ticks off the tools you already own, and asks before adding any you’re missing to your shopping list. The AI Toolbox is part of Jib’s paid plans.',
+    q: 'What is the AI tool inventory?',
+    a: 'Photograph your garage, shed or a hardware receipt and Jib lists every tool it can see. After that, every job you plan checks your inventory, ticks off the tools you already own, and asks before adding any you’re missing to your shopping list. The AI tool inventory is part of Jib’s paid plans.',
   },
   {
     q: 'Is Jib only for Australia?',
@@ -129,35 +131,20 @@ const jsonLd = [
   jsonLd={jsonLd}
 >
   <section class="hero">
-    <picture class="hero-img">
-      <source media="(max-width: 719px)" srcset={tallAvif.src} type="image/avif" />
-      <source media="(max-width: 719px)" srcset={tallWebp.src} type="image/webp" />
-      <source srcset={wideAvif.src} type="image/avif" />
-      <img src={wideWebp.src} alt="Holding a phone up in front of a Queenslander house at golden hour, with a paintbrush and spirit level on the deck" width="1376" height="768" fetchpriority="high" decoding="async" />
+    <picture class="hero-img" aria-hidden="true">
+      <source media="(min-width: 900px)" srcset={wideAvif.src} type="image/avif" />
+      <source media="(min-width: 900px)" srcset={wideWebp.src} type="image/webp" />
+      <img src={wideWebp.src} alt="" width="2400" height="1200" fetchpriority="high" decoding="async" />
     </picture>
-    <div class="hero-shade"></div>
     <div class="wrap hero-copy">
-      <p class="eyebrow">The home jobs app for people with no time</p>
-      <h1>See a job. Snap it.<br /><span>Jib does the rest.</span></h1>
+      <span class="hero-logo"><img src="/images/jib-mark-navy.png" width="171" height="160" alt="" /><span>Jib</span></span>
+      <h1>Your home, <span>sorted.</span></h1>
+      <p class="hero-sub">The ultimate home planner, <b>with AI.</b></p>
       <p class="lede">
-        Photograph anything around the house that needs doing. Jib’s AI writes the plan, the shopping list and the cost, and tells you if it’s DIY-legal or needs a tradie. Then pick a job whenever you’ve got a spare hour.
+        Snap anything that needs doing. Jib writes the plan, the shopping list and the cost, shows you the finished result, and tells you if it’s DIY-legal or needs a tradie.
       </p>
       <div class="hero-ctas">
-        {
-          anyStoreLive ? (
-            <>
-              <StoreButtons campaign="home" size="lg" />
-              {!STORES.ios.live && (
-                <a class="ios-notify" href={`mailto:${SITE.email}?subject=${encodeURIComponent('Tell me when Jib is on iPhone')}&body=${encodeURIComponent('Please email me when Jib is on the App Store.')}`}>On iPhone? Get an email when it’s on the App Store</a>
-              )}
-            </>
-          ) : (
-            <>
-              <a class="btn btn-primary" href="/app/" data-get-app>Get it on your phone</a>
-              <a class="btn btn-ghost" href={`mailto:${SITE.email}?subject=${encodeURIComponent('Tell me when Jib launches')}&body=${encodeURIComponent('Please email me when Jib is on the App Store / Google Play. My phone is: iPhone / Android')}`}>Tell me when it launches</a>
-            </>
-          )
-        }
+        <StoreButtons campaign="home" size="lg" />
       </div>
       <ul class="trust">
         <li>✓ Free to download</li>
@@ -165,6 +152,10 @@ const jsonLd = [
         <li>✓ Built for Australian homes and rules</li>
       </ul>
     </div>
+    <picture class="hero-phones">
+      <source srcset={phonesAvif.src} type="image/avif" />
+      <img src={phonesWebp.src} alt="The Jib app on two phones among DIY tools: the job list, and a backyard pictured finished by AI" width="1200" height="1024" decoding="async" />
+    </picture>
   </section>
 
   <!-- 1. The app itself: the first thing under the hero is proof. -->
@@ -180,6 +171,7 @@ const jsonLd = [
 
   <!-- 2. What it does: six features, not seventeen. -->
   <section class="wrap feats" aria-labelledby="feats-title">
+    <p class="eyebrow">Everything in one app</p>
     <h2 id="feats-title" class="section-title feats-title">What Jib does</h2>
     <div class="feat-grid">
       {
@@ -202,7 +194,7 @@ const jsonLd = [
     <h2 id="how-title" class="how-title">Three steps. No lists, no research.</h2>
     <ol class="how-steps">
       <li><span class="how-n">1</span><strong>Snap it</strong><span>See something that needs doing? Take a photo and get on with your day.</span></li>
-      <li><span class="how-n">2</span><strong>Jib plans it</strong><span>AI writes the steps, materials, tools, cost and a DIY-or-tradie verdict.</span></li>
+      <li><span class="how-n">2</span><strong>Jib plans it</strong><span>AI writes the steps, materials, tools, cost and a DIY-or-tradie verdict for your house, and shows you the finished result.</span></li>
       <li><span class="how-n">3</span><strong>Do it when you can</strong><span>Got a spare hour? Pick a job that fits, with everything on one shopping list.</span></li>
     </ol>
     <div class="how-cta">
@@ -297,8 +289,8 @@ const jsonLd = [
   <section class="wrap final">
     <div class="final-card">
       <img src="/images/jib-mark.png" width="56" height="56" alt="" />
-      <h2>Your next job, planned properly.</h2>
-      <p>Snap it, plan it, buy what you need, and know when to call a pro.</p>
+      <h2>Your home, sorted.</h2>
+      <p>Snap it, see it finished, plan it, and know when to call a pro.</p>
       <StoreButtons campaign="home" size="lg" />
     </div>
   </section>
@@ -323,52 +315,67 @@ const jsonLd = [
     font-size: 0.92rem;
     opacity: 0.85;
   }
+  /* Hero: the flat-lay on light concrete, so the type is dark ink. On
+     desktop the photo fills the band with the phones on the right; on
+     phones the copy comes first and the phones sit under it. */
   .hero {
     position: relative;
-    min-height: min(70vh, 620px);
-    display: flex;
-    align-items: flex-end;
     overflow: hidden;
+    background: #d9dad7;
+    color: #1d2530;
   }
-  .hero-img,
-  .hero-img img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .hero-shade {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(14, 24, 36, 0.1) 0%, rgba(14, 24, 36, 0.35) 40%, rgba(14, 24, 36, 0.95) 100%);
-  }
-  @media (min-width: 720px) {
-    .hero {
-      align-items: center;
-    }
-    .hero-shade {
-      background: linear-gradient(90deg, rgba(14, 24, 36, 0.95) 0%, rgba(14, 24, 36, 0.75) 40%, rgba(14, 24, 36, 0.1) 75%),
-        linear-gradient(180deg, transparent 70%, var(--bg) 100%);
-    }
+  .hero-img {
+    display: none;
   }
   .hero-copy {
     position: relative;
-    padding-top: 84px;
-    padding-bottom: 72px;
-    width: 100%;
+    padding-top: 36px;
+    padding-bottom: 8px;
+  }
+  .hero-logo {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.22em;
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 550;
+    font-size: clamp(3rem, 7vw, 4.6rem);
+    line-height: 1;
+    color: #1b365d;
+  }
+  .hero-logo img {
+    width: auto;
+    height: 0.86em;
   }
   .hero h1 {
-    max-width: 20ch;
-    font-size: clamp(2.2rem, 5.2vw, 3.5rem);
+    margin: 18px 0 0;
+    font-size: clamp(2.3rem, 5.6vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: #14181f;
+    white-space: nowrap;
   }
   .hero h1 span {
-    color: #9cc2ff;
+    color: #1f5fd6;
+  }
+  .hero-sub {
+    margin: 10px 0 0;
+    font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+    font-weight: 500;
+    color: #3a414c;
+  }
+  .hero-sub b {
+    font-weight: 700;
+    background: linear-gradient(90deg, #3b6ff0, #8b4fe0, #e2569c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
   .lede {
-    font-size: 1.15rem;
-    color: #e3eaf2;
-    max-width: 46ch;
+    font-size: 1.08rem;
+    color: #2b313a;
+    max-width: 44ch;
+    margin-top: 16px;
   }
   .hero-ctas {
     display: flex;
@@ -380,12 +387,58 @@ const jsonLd = [
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 18px;
+    gap: 6px 18px;
     padding: 0;
-    margin: 18px 0 0;
+    margin: 16px 0 0;
     font-size: 0.92rem;
     font-weight: 700;
-    color: #d7e6fb;
+    color: #3a414c;
+  }
+  .hero-phones img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 8px;
+  }
+  @media (min-width: 900px) {
+    .hero {
+      min-height: min(48vw, 760px);
+      display: flex;
+      align-items: center;
+    }
+    .hero-img,
+    .hero-img img {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 60% 50%;
+    }
+    .hero-phones {
+      display: none;
+    }
+    /* A soft wash of the concrete behind the copy, so the type stays clear of the tools. */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(222, 223, 220, 0.94) 0%, rgba(222, 223, 220, 0.86) 34%, rgba(222, 223, 220, 0) 52%);
+      z-index: 1;
+    }
+    .hero-copy {
+      z-index: 2;
+    }
+    .hero-copy {
+      padding-top: 56px;
+      padding-bottom: 64px;
+    }
+    .hero-copy > .lede,
+    .hero-copy > .trust,
+    .hero-copy > .hero-ctas {
+      max-width: 40%;
+    }
   }
   .section-title {
     margin: 4px 0 0;
@@ -444,8 +497,12 @@ const jsonLd = [
   }
   @media (min-width: 980px) {
     .feat-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
+    }
+    .feat {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
   .feat {
