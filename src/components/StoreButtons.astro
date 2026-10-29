@@ -26,7 +26,7 @@ const { campaign = 'general', size = 'md' } = Astro.props;
   {
     STORES.android.live ? (
       <a class="store" href={androidUrl(campaign)} rel="noopener" data-store="android">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.6 1.8c-.3.3-.4.7-.4 1.2v18c0 .5.1.9.4 1.2l10-10.2-10-10.2Zm11.1 11.3 2.8 2.9-11.6 6.6c-.4.2-.8.2-1.1.1l9.9-9.6Zm0-2.2L4.8 1.3c.3-.1.7-.1 1.1.1l11.6 6.6-2.8 2.9Zm4.1-2.3 3 1.7c.8.5.8 1.8 0 2.3l-3 1.7-3.1-2.9 3.1-2.8Z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#2196f3" d="M3.6 1.8c-.3.3-.4.7-.4 1.2v18c0 .5.1.9.4 1.2l10-10.2-10-10.2Z"/><path fill="#f44336" d="M14.7 13.1l2.8 2.9-11.6 6.6c-.4.2-.8.2-1.1.1l9.9-9.6Z"/><path fill="#4caf50" d="M14.7 10.9L4.8 1.3c.3-.1.7-.1 1.1.1l11.6 6.6-2.8 2.9Z"/><path fill="#ffc107" d="M18.8 8.6l3 1.7c.8.5.8 1.8 0 2.3l-3 1.7-3.1-2.9 3.1-2.8Z"/></svg>
         <span><small>Get it on</small>Google Play</span>
       </a>
     ) : (
