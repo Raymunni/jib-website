@@ -8,8 +8,6 @@ import { SITE, HUBS, STORES, anyStoreLive } from '../config';
 import heroWide from '../assets/hero/hero-wide.jpg';
 import heroPhones from '../assets/hero/hero-phones.jpg';
 import heroMobile from '../assets/hero/hero-mobile.jpg';
-import note1 from '../assets/hero/note-1.png';
-import note2 from '../assets/hero/note-2.png';
 import shotSee from '../assets/screens/c1-see.png';
 import shotPlan from '../assets/screens/c2-plan.png';
 import shotCheck from '../assets/screens/c3-check.png';
@@ -25,8 +23,6 @@ const wideWebp = await getImage({ src: heroWide, format: 'webp', width: 2400, qu
 const phonesAvif = await getImage({ src: heroPhones, format: 'avif', width: 900, quality: 58 });
 const phonesWebp = await getImage({ src: heroPhones, format: 'webp', width: 900, quality: 72 });
 const mobileWebp = await getImage({ src: heroMobile, format: 'webp', width: 900, quality: 70 });
-const note1Webp = await getImage({ src: note1, format: 'webp', width: 420, quality: 82 });
-const note2Webp = await getImage({ src: note2, format: 'webp', width: 420, quality: 82 });
 
 const allGuides = await getCollection('guides');
 // The three newest guides with a hero image.
@@ -160,10 +156,6 @@ const jsonLd = [
         <li>✓ 7-day free trial of every AI feature</li>
         <li>✓ Built for Australian homes and rules</li>
       </ul>
-    </div>
-    <div class="hero-notes" aria-hidden="true">
-      <img src={note1Webp.src} width="420" height="420" alt="" decoding="async" />
-      <img src={note2Webp.src} width="420" height="420" alt="" decoding="async" />
     </div>
     <picture class="hero-phones">
       <source srcset={phonesAvif.src} type="image/avif" />
@@ -513,7 +505,7 @@ const jsonLd = [
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(222, 223, 220, 0.78) 0%, rgba(222, 223, 220, 0.62) 30%, rgba(222, 223, 220, 0) 46%);
+      background: linear-gradient(90deg, rgba(222, 223, 220, 0.62) 0%, rgba(222, 223, 220, 0.42) 30%, rgba(222, 223, 220, 0) 44%);
       z-index: 1;
     }
     .hero-copy {
