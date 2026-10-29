@@ -70,7 +70,7 @@
    "jobs": [{"room": "Outside", "title": "Overflowing gully trap", "description": "Sewer overflow outside: plumber needed. Photos saved for the landlord.", "timeEstimate": "About 1 hour (plumber)", "verdict": "tradie_required", "labour": {"low": 220, "high": 450, "note": "Plumber with a drain machine or jetter"}, "directions": ["Don't use the drains", "Call the plumber", "Plumber clears the line", "Send the photos to the landlord"]}]}},
 
  {"guide": "how-to/renovations-before-selling", "slug": "pre-sale",
-  "inline": {"headline": "Your pre-sale list, costed and sorted.", "alt": "A couple photographing a tired kitchen before selling",
+  "inline": {"headline": "See the refresh before you list.", "vis": true, "alt": "A couple photographing a tired kitchen before selling",
    "prompt": "A couple in their 30s stand in a tired 1990s Australian kitchen photographing the dated cupboards and benchtop, moving boxes stacked in the corner. Daylight.",
    "jobs": [{"room": "Kitchen", "title": "Pre-sale kitchen refresh", "description": "Paint the cupboards, new handles, regrout the splashback.", "timeEstimate": "Two weekends", "verdict": "diy_safe", "shoppingList": [{"item": "Cupboard paint, satin, 4 L", "price": 119}, {"item": "Brushed nickel handles, 20", "price": 140}, {"item": "Grout refresh kit", "price": 29}], "directions": ["Clean and sand the doors", "Prime and paint", "New handles", "Regrout the splashback"]}, {"room": "Bathroom", "title": "Replace the cracked vanity top", "verdict": "diy_safe"}, {"room": "Outside", "title": "Fix the leaking downpipe", "verdict": "diy_safe"}]},
   "end": {"headline": "Show the buyer the after, before you spend.", "vis": true, "alt": "A real estate agent photographing a freshly refreshed living room",

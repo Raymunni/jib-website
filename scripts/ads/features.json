@@ -13,7 +13,7 @@
    "jobs": [{"room": "Bathroom", "title": "Re-silicone the bath edge", "description": "Added by voice on the school run.", "timeEstimate": "About 1 hour + overnight", "verdict": "diy_safe", "shoppingList": [{"item": "Bathroom silicone, white", "price": 15}], "directions": ["Cut out the old silicone", "Clean and dry", "Run a new bead", "Leave 24 hours"]}, {"room": "Front yard", "title": "Replace broken fence paling", "verdict": "diy_safe"}, {"room": "Garage", "title": "Oil the squeaky roller door", "verdict": "diy_safe"}]}},
 
  {"guide": "features/ai-shopping-list", "slug": "shopping-list",
-  "inline": {"headline": "The list writes itself.", "alt": "A mum pushing a trolley through a hardware store with her daughter in the seat",
+  "inline": {"headline": "See the colour on your walls before you buy a tin.", "vis": true, "alt": "A mum pushing a trolley through a hardware store with her daughter in the seat",
    "prompt": "A mum in her 30s pushes a flatbed trolley down a bright hardware store aisle with her young daughter sitting on it, both looking at shelves of paint tins. No readable signs or brand names.",
    "jobs": [{"room": "Bedroom", "title": "Paint the kids' bedroom", "description": "Walls and ceiling, about 3.5 x 3 m.", "timeEstimate": "A weekend", "verdict": "diy_safe", "shoppingList": [{"item": "Interior wall paint, low sheen, 10 L", "price": 189}, {"item": "Ceiling white, 4 L", "price": 69}, {"item": "Roller kit", "price": 29}, {"item": "Painter's tape, 2 rolls", "price": 14}, {"item": "Drop sheets, 2", "price": 18}], "directions": ["Move furniture and cover the floor", "Patch and sand", "Cut in and roll the ceiling", "Two coats on the walls"]}]},
   "end": {"headline": "Pick the colour. See it on the walls.", "vis": true, "alt": "A dad loading paint tins and timber into a car boot in a car park",
@@ -29,7 +29,7 @@
    "jobs": [{"room": "Kitchen", "title": "Tile the kitchen splashback", "description": "2.4 m x 600 mm behind the cooktop and sink.", "timeEstimate": "A weekend", "verdict": "diy_safe", "shoppingList": [{"item": "White subway tiles, 1.5 m2", "price": 65}, {"item": "Tile adhesive, 5 kg", "price": 29}, {"item": "Grout, white", "price": 16}], "directions": ["Clean and mark a level line", "Spread adhesive", "Lay tiles with spacers", "Grout", "Seal the edges"]}]}},
 
  {"guide": "features/before-and-after-photos", "slug": "before-after",
-  "inline": {"headline": "Your before shot is the job itself.", "alt": "A dad looking at a tired old timber front door before restoring it",
+  "inline": {"headline": "Snap the before. See the after.", "vis": true, "alt": "A dad looking at a tired old timber front door before restoring it",
    "prompt": "A dad in his 30s stands at the front of an Australian house looking at a tired, peeling old timber front door, a sander and paint tin at his feet, his son sitting on the step. Morning light.",
    "jobs": [{"room": "Front", "title": "Restore the front door", "description": "Peeling paint, sticky lock.", "timeEstimate": "A weekend", "verdict": "diy_safe", "shoppingList": [{"item": "Exterior enamel, 1 L", "price": 45}, {"item": "Sandpaper pack", "price": 12}], "directions": ["Remove the hardware", "Sand back", "Prime and paint", "Refit and lubricate the lock"]}]},
   "end": {"headline": "See the after before you start.", "vis": true, "alt": "A family admiring their freshly painted bright front door",
@@ -45,7 +45,7 @@
    "jobs": [{"room": "Backyard", "title": "Move the outdoor tap", "description": "Want it 2 m further along the wall.", "timeEstimate": "About 2 hours (plumber)", "verdict": "tradie_required", "labour": {"low": 250, "high": 420, "note": "Plumber to extend the pipe"}, "directions": ["Send the plumber the brief", "Book the plumber", "Done"]}, {"room": "Backyard", "title": "Build a raised garden bed", "verdict": "diy_safe"}, {"room": "Kitchen", "title": "Replace the kitchen tap washer", "verdict": "diy_safe"}]}},
 
  {"guide": "features/garage-tool-inventory", "slug": "inventory",
-  "inline": {"headline": "One wall of tools, listed in seconds.", "alt": "A dad looking over a pegboard wall of tools in his garage",
+  "inline": {"headline": "See the build, then check your shed.", "vis": true, "alt": "A dad looking over a pegboard wall of tools in his garage",
    "prompt": "A dad in his 30s stands in front of a pegboard wall full of hand tools in a tidy Australian garage, hands on hips, his son reaching for a hammer. Daylight from the roller door. No brand names on tools.",
    "jobs": [{"room": "Garage", "title": "Build a raised garden bed", "description": "3 of 4 tools already in your Inventory.", "timeEstimate": "About 3 hours", "verdict": "diy_safe", "tools": [{"name": "Cordless drill", "owned": true}, {"name": "Spirit level", "owned": true}, {"name": "Tape measure", "owned": true}, {"name": "Mitre saw", "owned": false, "price": 199}], "shoppingList": [{"item": "Treated pine sleepers, 200 x 50 mm x 2.4 m, 6", "price": 132}], "directions": ["Cut the sleepers", "Screw the corners", "Level it", "Fill with soil"]}]},
   "end": {"headline": "Never buy a second spirit level again.", "alt": "A mum finding the right tool on a garage shelf",
@@ -78,7 +78,7 @@
    "jobs": [{"room": "Kitchen", "title": "Oil the squeaky cupboard hinge", "description": "Fits in a nap.", "timeEstimate": "About 10 minutes", "verdict": "diy_safe", "tools": [{"name": "Oil can", "owned": true}], "directions": ["Wipe the hinge", "One drop of oil", "Work the door"]}, {"room": "Laundry", "title": "Fix dripping laundry tap", "verdict": "diy_safe"}]}},
 
  {"guide": "features/photo-to-job-plan", "slug": "photo-plan",
-  "inline": {"headline": "That job you keep meaning to do? Plan it today.", "alt": "A couple looking at a tired timber deck needing a re-oil",
+  "inline": {"headline": "One photo of the deck. See it finished.", "vis": true, "alt": "A couple looking at a tired timber deck needing a re-oil",
    "prompt": "A couple in their 30s stand on a grey, weathered timber deck behind an Australian house looking down at the faded boards, one crouching to touch them. Sunny afternoon.",
    "jobs": [{"room": "Backyard", "title": "Clean and re-oil the deck", "description": "Grey and dry, about 20 m2.", "timeEstimate": "A weekend", "verdict": "diy_safe", "shoppingList": [{"item": "Deck cleaner, 4 L", "price": 39}, {"item": "Decking oil, 4 L", "price": 79}, {"item": "Applicator pad", "price": 19}], "directions": ["Sweep and clean", "Rinse and let dry", "Sand rough spots", "Two coats of oil"]}]},
   "end": {"headline": "Snap the deck. See it re-oiled.", "vis": true, "alt": "A dad oiling a deck while kids play nearby",
