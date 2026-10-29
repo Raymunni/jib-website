@@ -5,7 +5,7 @@
 // icons in the status bar are covered with a patch of the status bar's own
 // background, so only the time, signal, wifi and battery show.
 // Usage: node scripts/take-shots.mjs [id ...]   (no ids: all of them)
-import { readdirSync, mkdirSync, existsSync } from 'node:fs';
+import { readdirSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
 
@@ -18,7 +18,10 @@ const all = new Set([
   ...(existsSync(phone) ? readdirSync(phone) : []),
   ...(existsSync(rendered) ? readdirSync(rendered) : []),
 ]);
-const files = [...all].filter((f) => f.endsWith('.png') && (ids.length === 0 || ids.includes(f.replace('.png', ''))));
+// Ads marked vis use a Visualise screen made by make-vis-shot.cjs; leave those.
+const vis = new Set(readdirSync('scripts/ads').filter((f) => f.endsWith('.json')).flatMap((f) => JSON.parse(readFileSync(`scripts/ads/${f}`, 'utf8')))
+  .flatMap((p) => ['inline', 'end', 'extra'].filter((k) => p[k]?.vis).map((k) => `${p.slug ?? p.guide.split('/').pop()}-${k}`)));
+const files = [...all].filter((f) => f.endsWith('.png') && !vis.has(f.replace('.png', '')) && (ids.length === 0 || ids.includes(f.replace('.png', ''))));
 for (const f of files) {
   const fromPhone = existsSync(join(phone, f));
   let img = sharp(join(fromPhone ? phone : rendered, f));

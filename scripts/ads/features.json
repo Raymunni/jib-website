@@ -16,7 +16,7 @@
   "inline": {"headline": "The list writes itself.", "alt": "A mum pushing a trolley through a hardware store with her daughter in the seat",
    "prompt": "A mum in her 30s pushes a flatbed trolley down a bright hardware store aisle with her young daughter sitting on it, both looking at shelves of paint tins. No readable signs or brand names.",
    "jobs": [{"room": "Bedroom", "title": "Paint the kids' bedroom", "description": "Walls and ceiling, about 3.5 x 3 m.", "timeEstimate": "A weekend", "verdict": "diy_safe", "shoppingList": [{"item": "Interior wall paint, low sheen, 10 L", "price": 189}, {"item": "Ceiling white, 4 L", "price": 69}, {"item": "Roller kit", "price": 29}, {"item": "Painter's tape, 2 rolls", "price": 14}, {"item": "Drop sheets, 2", "price": 18}], "directions": ["Move furniture and cover the floor", "Patch and sand", "Cut in and roll the ceiling", "Two coats on the walls"]}]},
-  "end": {"headline": "Walk out with everything, first trip.", "alt": "A dad loading paint tins and timber into a car boot in a car park",
+  "end": {"headline": "Pick the colour. See it on the walls.", "vis": true, "alt": "A dad loading paint tins and timber into a car boot in a car park",
    "prompt": "A dad in his 30s loads paint tins, a roller tray and timber lengths into the open boot of a car in a sunny hardware store car park, his son helping carry a small bag. No readable signs or brand names, no number plates.",
    "jobs": [{"room": "Bedroom", "title": "Paint the kids' bedroom", "description": "Everything for it on one shopping list.", "timeEstimate": "A weekend", "verdict": "diy_safe", "shoppingList": [{"item": "Interior wall paint, low sheen, 10 L", "price": 189}, {"item": "Ceiling white, 4 L", "price": 69}, {"item": "Roller kit", "price": 29}, {"item": "Painter's tape, 2 rolls", "price": 14}], "directions": ["Prep", "Ceiling", "Walls", "Tidy up"]}, {"room": "Backyard", "title": "Build a raised garden bed", "verdict": "diy_safe"}]}},
 
@@ -32,7 +32,7 @@
   "inline": {"headline": "Your before shot is the job itself.", "alt": "A dad looking at a tired old timber front door before restoring it",
    "prompt": "A dad in his 30s stands at the front of an Australian house looking at a tired, peeling old timber front door, a sander and paint tin at his feet, his son sitting on the step. Morning light.",
    "jobs": [{"room": "Front", "title": "Restore the front door", "description": "Peeling paint, sticky lock.", "timeEstimate": "A weekend", "verdict": "diy_safe", "shoppingList": [{"item": "Exterior enamel, 1 L", "price": 45}, {"item": "Sandpaper pack", "price": 12}], "directions": ["Remove the hardware", "Sand back", "Prime and paint", "Refit and lubricate the lock"]}]},
-  "end": {"headline": "Then the after, side by side.", "alt": "A family admiring their freshly painted bright front door",
+  "end": {"headline": "See the after before you start.", "vis": true, "alt": "A family admiring their freshly painted bright front door",
    "prompt": "A family of four stands on the front path admiring a freshly painted deep blue front door on an Australian house, the kids high-fiving. Golden afternoon light.",
    "jobs": [{"room": "Front", "title": "Restore the front door", "description": "Done. Before and after saved to the gallery.", "timeEstimate": "A weekend", "verdict": "diy_safe", "shoppingList": [{"item": "Exterior enamel, 1 L", "price": 45}], "directions": ["Sand", "Prime", "Paint", "Refit"]}]}},
 
@@ -81,7 +81,7 @@
   "inline": {"headline": "That job you keep meaning to do? Plan it today.", "alt": "A couple looking at a tired timber deck needing a re-oil",
    "prompt": "A couple in their 30s stand on a grey, weathered timber deck behind an Australian house looking down at the faded boards, one crouching to touch them. Sunny afternoon.",
    "jobs": [{"room": "Backyard", "title": "Clean and re-oil the deck", "description": "Grey and dry, about 20 m2.", "timeEstimate": "A weekend", "verdict": "diy_safe", "shoppingList": [{"item": "Deck cleaner, 4 L", "price": 39}, {"item": "Decking oil, 4 L", "price": 79}, {"item": "Applicator pad", "price": 19}], "directions": ["Sweep and clean", "Rinse and let dry", "Sand rough spots", "Two coats of oil"]}]},
-  "end": {"headline": "Start it this weekend.", "alt": "A dad oiling a deck while kids play nearby",
+  "end": {"headline": "Snap the deck. See it re-oiled.", "vis": true, "alt": "A dad oiling a deck while kids play nearby",
    "prompt": "A dad in his 30s applies golden decking oil to timber boards with an applicator pad on a sunny Saturday, the boards glowing, kids playing on the lawn nearby.",
    "jobs": [{"room": "Backyard", "title": "Clean and re-oil the deck", "description": "Plan, list and steps ready.", "timeEstimate": "A weekend", "verdict": "diy_safe", "shoppingList": [{"item": "Deck cleaner, 4 L", "price": 39}, {"item": "Decking oil, 4 L", "price": 79}], "directions": ["Clean", "Dry", "Sand", "Oil"]}]}},
 
