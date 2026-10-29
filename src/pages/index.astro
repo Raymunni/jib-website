@@ -16,6 +16,9 @@ import shotCheck from '../assets/screens/c3-check.png';
 import shotShop from '../assets/screens/c4-shop.png';
 import shotWatch from '../assets/screens/c5-watch.png';
 import { guideUrl } from '../lib/guides';
+import howSnap from '../assets/how/1-snap.jpg';
+import howPlan from '../assets/how/2-plan.jpg';
+import howSee from '../assets/how/3-see.jpg';
 
 const wideAvif = await getImage({ src: heroWide, format: 'avif', width: 2400, quality: 58 });
 const wideWebp = await getImage({ src: heroWide, format: 'webp', width: 2400, quality: 72 });
@@ -199,25 +202,42 @@ const jsonLd = [
     <p class="all-feats"><a href="/guides/features/">See everything Jib does →</a></p>
   </section>
 
-  <!-- 3. How it works, ending in the download. -->
+  <!-- 3. How it works: one backyard, start to finish, ending in the download. -->
   <section class="wrap how" aria-labelledby="how-title">
-    <h2 id="how-title" class="how-title">Three steps. No lists, no research.</h2>
+    <p class="eyebrow">How it works</p>
+    <h2 id="how-title" class="section-title">One photo in. A finished yard out.</h2>
     <ol class="how-steps">
-      <li><span class="how-n">1</span><strong>Snap it</strong><span>See something that needs doing? Take a photo and get on with your day.</span></li>
-      <li><span class="how-n">2</span><strong>Jib plans it</strong><span>AI writes the steps, materials, tools, cost and a DIY-or-tradie verdict for your house, and shows you the finished result.</span></li>
-      <li><span class="how-n">3</span><strong>Do it when you can</strong><span>Got a spare hour? Pick a job that fits, with everything on one shopping list.</span></li>
+      <li class="how-step">
+        <figure class="how-pic">
+          <Image src={howSnap} alt="A phone photo of a bare dirt patch outside a back door" widths={[360, 540, 720]} sizes="(max-width: 759px) 90vw, 340px" loading="lazy" />
+          <span class="how-tag">Your photo</span>
+        </figure>
+        <span class="how-n">1</span>
+        <strong>Snap it</strong>
+        <span>See something that needs doing? Take a photo and get on with your day.</span>
+      </li>
+      <li class="how-step">
+        <figure class="how-pic">
+          <Image src={howPlan} alt="Jib's plan for a back garden: 4 jobs, $681 to spend, the first phase Safety and structure" widths={[360, 540, 720]} sizes="(max-width: 759px) 90vw, 340px" loading="lazy" />
+          <span class="how-tag">Jib's plan</span>
+        </figure>
+        <span class="how-n">2</span>
+        <strong>Jib plans it</strong>
+        <span>The steps, materials, cost and a DIY-or-tradie verdict, written for your house.</span>
+      </li>
+      <li class="how-step">
+        <figure class="how-pic">
+          <Image src={howSee} alt="The same back door with a new timber deck, chairs and a green lawn, pictured by Jib's AI" widths={[360, 540, 720]} sizes="(max-width: 759px) 90vw, 340px" loading="lazy" />
+          <span class="how-tag ai">✦ AI preview</span>
+        </figure>
+        <span class="how-n">3</span>
+        <strong>See it, then do it</strong>
+        <span>See it finished before you start, then pick a weekend and everything’s on one list.</span>
+      </li>
     </ol>
     <div class="how-cta">
-      {
-        anyStoreLive ? (
-          <StoreButtons campaign="home" size="lg" />
-        ) : (
-          <>
-            <a class="btn btn-light" href="/app/" data-get-app>Get it on your phone</a>
-            <a class="btn btn-ghost" href={`mailto:${SITE.email}?subject=${encodeURIComponent('Tell me when Jib launches')}&body=${encodeURIComponent('Please email me when Jib is on the App Store / Google Play. My phone is: iPhone / Android')}`}>Tell me when it’s on the App Store</a>
-          </>
-        )
-      }
+      <StoreButtons campaign="home" size="lg" />
+      <span class="how-free">Free to download. 7-day free trial of every AI feature.</span>
     </div>
   </section>
 
@@ -245,14 +265,23 @@ const jsonLd = [
     </div>
   </section>
 
-  <section class="wrap tool-promo">
-    <div class="card promo">
-      <div>
+  <section class="wrap tool-promo" aria-labelledby="promo-title">
+    <div class="promo">
+      <div class="promo-copy">
         <p class="eyebrow">Free tool</p>
-        <h2>DIY or tradie? Check the rules for your state.</h2>
-        <p>Pick your state and the job. We’ll tell you if you can legally do it yourself, if you need a licence or a certificate, and link the regulator that says so.</p>
+        <h2 id="promo-title">DIY or tradie? Check your state’s rules.</h2>
+        <p>Pick the job. We’ll tell you if you can legally do it yourself, if it needs a licence or a certificate, and link the regulator that says so.</p>
+        <div class="states" aria-label="Pick your state">
+          {['QLD', 'NSW', 'VIC', 'WA', 'SA', 'TAS', 'ACT', 'NT'].map((st) => <a href={`/tools/diy-legality-checker/?state=${st}`}>{st}</a>)}
+        </div>
       </div>
-      <a class="btn btn-light" href="/tools/diy-legality-checker/">Open the DIY checker</a>
+      <a class="verdicts" href="/tools/diy-legality-checker/" aria-label="Open the DIY checker">
+        <span class="verdict ok"><b>Change a tap washer</b><em>✓ DIY safe in every state</em></span>
+        <span class="verdict no"><b>Replace a power point</b><em>⚠ Licensed electrician only</em></span>
+        <span class="verdict ok"><b>Build a low garden deck</b><em>✓ Usually DIY, check your council</em></span>
+        <span class="verdict no"><b>Move the shower waste</b><em>⚠ Licensed plumber only</em></span>
+        <span class="go">Open the DIY checker →</span>
+      </a>
     </div>
   </section>
 
@@ -607,54 +636,97 @@ const jsonLd = [
     text-decoration: none;
   }
 
-  /* 3. How it works */
+  /* 3. How it works: three picture cards, one yard start to finish */
   .how {
-    margin-top: 64px;
-    background: linear-gradient(135deg, var(--accent-deep), #173a6b);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: var(--radius);
-    padding: 28px;
-  }
-  .how-title {
-    margin: 0 0 22px;
-    color: #fff;
-    font-size: clamp(1.35rem, 2.6vw, 1.8rem);
+    margin-top: 72px;
   }
   .how-steps {
     list-style: none;
-    margin: 0;
+    margin: 22px 0 0;
     padding: 0;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 18px;
+    gap: 22px;
+    counter-reset: how;
   }
   @media (min-width: 760px) {
     .how-steps {
       grid-template-columns: repeat(3, 1fr);
     }
   }
-  .how-steps li {
+  .how-step {
+    position: relative;
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 12px;
-    align-items: start;
+    row-gap: 4px;
+    align-items: center;
   }
-  .how-steps strong {
+  .how-pic {
+    grid-column: 1 / -1;
+    position: relative;
+    margin: 0 0 14px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    aspect-ratio: 1;
+  }
+  :global(.how-pic img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .how-tag {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    padding: 5px 11px;
+    border-radius: 10px;
+    background: rgba(14, 24, 36, 0.72);
     color: #fff;
-    font-size: 1.15rem;
+    font-size: 0.82rem;
+    font-weight: 700;
   }
-  .how-steps li > span:last-child {
-    grid-column: 2;
-    color: #dbe7f7;
+  .how-tag.ai {
+    background: linear-gradient(90deg, #3b6ff0, #8b4fe0, #e2569c);
+  }
+  /* Arrows between the cards on wide screens. */
+  @media (min-width: 760px) {
+    .how-step + .how-step::before {
+      content: '→';
+      position: absolute;
+      left: -18px;
+      top: calc(50% - 60px);
+      transform: translate(-50%, -50%);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+  }
+  .how-step strong {
+    color: var(--ink);
+    font-size: 1.2rem;
+  }
+  .how-step > span:last-child {
+    grid-column: 1 / -1;
+    color: var(--dim);
     font-size: 0.95rem;
   }
   .how-n {
-    grid-row: span 2;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: #fff;
-    color: var(--accent-deep);
+    background: var(--accent);
+    color: #fff;
     font-weight: 900;
     display: grid;
     place-items: center;
@@ -662,12 +734,14 @@ const jsonLd = [
   .how-cta {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 24px;
+    align-items: center;
+    gap: 12px 20px;
+    margin-top: 28px;
   }
-  .how-cta .btn-ghost {
-    border-color: rgba(255, 255, 255, 0.5);
-    color: #fff;
+  .how-free {
+    color: var(--dim);
+    font-size: 0.92rem;
+    font-weight: 600;
   }
   .btn-light {
     background: #fff;
@@ -776,29 +850,105 @@ const jsonLd = [
     font-size: 0.95rem;
   }
 
+  /* The DIY checker: the pitch and state shortcuts, beside real-looking verdicts. */
   .tool-promo {
     margin-top: 80px;
   }
   .promo {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 20px;
+    gap: 26px;
     align-items: center;
-    padding: 32px;
-    background: linear-gradient(135deg, var(--accent-deep), #173a6b);
-    border-color: rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    border-radius: var(--radius);
+    background:
+      radial-gradient(circle at 85% 20%, rgba(79, 143, 240, 0.35), transparent 55%),
+      linear-gradient(135deg, var(--accent-deep), #142c50);
+    border: 1px solid rgba(255, 255, 255, 0.18);
   }
-  @media (min-width: 720px) {
+  @media (min-width: 820px) {
     .promo {
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 1.05fr 1fr;
+      padding: 40px;
     }
   }
   .promo h2 {
-    margin-top: 0;
+    margin: 4px 0 0;
+    color: #fff;
   }
-  .promo p {
+  .promo-copy p {
     color: #dbe7f7;
-    margin-bottom: 0;
+  }
+  .states {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .states a {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  .states a:hover {
+    background: #fff;
+    color: var(--accent-deep);
+  }
+  .verdicts {
+    display: grid;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .verdict {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 13px 16px;
+    border-radius: 14px;
+    background: rgba(9, 16, 26, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-left: 4px solid;
+  }
+  .verdict:nth-child(odd) {
+    transform: rotate(-0.6deg);
+  }
+  .verdict:nth-child(even) {
+    transform: rotate(0.6deg) translateX(10px);
+  }
+  .verdict b {
+    color: #fff;
+    font-size: 1rem;
+  }
+  .verdict em {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 0.88rem;
+  }
+  .verdict.ok {
+    border-left-color: #45c27a;
+  }
+  .verdict.ok em {
+    color: #6fe3a0;
+  }
+  .verdict.no {
+    border-left-color: #ef5a5a;
+  }
+  .verdict.no em {
+    color: #ff8c8c;
+  }
+  .go {
+    justify-self: start;
+    margin-top: 6px;
+    padding: 11px 18px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--accent-deep);
+    font-weight: 800;
   }
 
   .guides {
