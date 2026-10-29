@@ -7,6 +7,9 @@ import ToolIcon from '../components/ToolIcon.astro';
 import { SITE, HUBS, STORES, anyStoreLive } from '../config';
 import heroWide from '../assets/hero/hero-wide.jpg';
 import heroPhones from '../assets/hero/hero-phones.jpg';
+import heroMobile from '../assets/hero/hero-mobile.jpg';
+import note1 from '../assets/hero/note-1.png';
+import note2 from '../assets/hero/note-2.png';
 import shotSee from '../assets/screens/c1-see.png';
 import shotPlan from '../assets/screens/c2-plan.png';
 import shotCheck from '../assets/screens/c3-check.png';
@@ -18,6 +21,9 @@ const wideAvif = await getImage({ src: heroWide, format: 'avif', width: 2400, qu
 const wideWebp = await getImage({ src: heroWide, format: 'webp', width: 2400, quality: 72 });
 const phonesAvif = await getImage({ src: heroPhones, format: 'avif', width: 900, quality: 58 });
 const phonesWebp = await getImage({ src: heroPhones, format: 'webp', width: 900, quality: 72 });
+const mobileWebp = await getImage({ src: heroMobile, format: 'webp', width: 900, quality: 70 });
+const note1Webp = await getImage({ src: note1, format: 'webp', width: 420, quality: 82 });
+const note2Webp = await getImage({ src: note2, format: 'webp', width: 420, quality: 82 });
 
 const allGuides = await getCollection('guides');
 // The three newest guides with a hero image.
@@ -130,7 +136,7 @@ const jsonLd = [
   description="The home jobs app for people with no time. Snap a photo and Jib writes the steps, shopping list and cost, and flags anything that legally needs a tradie."
   jsonLd={jsonLd}
 >
-  <section class="hero">
+  <section class="hero" style={`--hero-mobile:url(${mobileWebp.src})`}>
     <picture class="hero-img" aria-hidden="true">
       <source media="(min-width: 900px)" srcset={wideAvif.src} type="image/avif" />
       <source media="(min-width: 900px)" srcset={wideWebp.src} type="image/webp" />
@@ -151,6 +157,10 @@ const jsonLd = [
         <li>✓ 7-day free trial of every AI feature</li>
         <li>✓ Built for Australian homes and rules</li>
       </ul>
+    </div>
+    <div class="hero-notes" aria-hidden="true">
+      <img src={note1Webp.src} width="420" height="420" alt="" decoding="async" />
+      <img src={note2Webp.src} width="420" height="420" alt="" decoding="async" />
     </div>
     <picture class="hero-phones">
       <source srcset={phonesAvif.src} type="image/avif" />
@@ -327,10 +337,30 @@ const jsonLd = [
   .hero-img {
     display: none;
   }
+  /* On phones the tools run along the top edge, the copy sits on the bare
+     concrete under them, then the sticky notes and the phones. */
   .hero-copy {
     position: relative;
-    padding-top: 36px;
+    padding-top: 30vw;
     padding-bottom: 8px;
+    max-width: none;
+  }
+  @media (max-width: 899px) {
+    .hero {
+      background: #d9dad7 var(--hero-mobile) center top / 100% auto no-repeat;
+    }
+  }
+  .hero-notes {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: 4vw;
+    margin: 18px 0 -16vw;
+  }
+  .hero-notes img {
+    width: 40vw;
+    height: auto;
   }
   .hero-logo {
     display: inline-flex;
@@ -399,6 +429,8 @@ const jsonLd = [
     color: #3a414c;
   }
   .hero-phones img {
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 22%);
     display: block;
     width: 100%;
     height: auto;
@@ -408,7 +440,7 @@ const jsonLd = [
     .hero {
       min-height: min(50vw, 900px);
       display: flex;
-      align-items: center;
+      align-items: flex-start;
     }
     .hero-img,
     .hero-img img {
@@ -423,20 +455,44 @@ const jsonLd = [
     .hero-phones {
       display: none;
     }
+    /* On desktop the photo carries the tools; the copy is plain and sits high,
+       and the notes lie on the concrete between the copy and the phones. */
+    .hero-copy {
+      max-width: var(--maxw, 1180px);
+    }
+    .hero-notes {
+      position: absolute;
+      left: 40%;
+      top: 34%;
+      margin: 0;
+      gap: 0;
+    }
+    .hero-notes img {
+      width: clamp(110px, 9.5vw, 180px);
+    }
+    @media (max-width: 1199px) {
+      .hero-notes {
+        display: none;
+      }
+    }
+    .hero-notes img + img {
+      margin-left: -1.5vw;
+      margin-top: 4.5vw;
+    }
     /* A soft wash of the concrete behind the copy, so the type stays clear of the tools. */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(222, 223, 220, 0.94) 0%, rgba(222, 223, 220, 0.86) 34%, rgba(222, 223, 220, 0) 52%);
+      background: linear-gradient(90deg, rgba(222, 223, 220, 0.78) 0%, rgba(222, 223, 220, 0.62) 30%, rgba(222, 223, 220, 0) 46%);
       z-index: 1;
     }
     .hero-copy {
       z-index: 2;
     }
     .hero-copy {
-      padding-top: 56px;
-      padding-bottom: 64px;
+      padding-top: clamp(28px, 3.2vw, 56px);
+      padding-bottom: 48px;
     }
     .hero-copy > .lede,
     .hero-copy > .trust,
