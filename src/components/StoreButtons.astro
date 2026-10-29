@@ -81,7 +81,38 @@ const { campaign = 'general', size = 'md' } = Astro.props;
     opacity: 0.6;
     cursor: default;
   }
+  /* Both buttons the same size, whatever their labels. */
+  .store {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    width: 168px;
+    height: 52px;
+    min-height: 0;
+  }
   .stores-lg .store {
-    min-height: 58px;
+    width: 184px;
+    height: 58px;
+  }
+  /* On phones the pair shares the row equally, side by side. */
+  @media (max-width: 480px) {
+    .stores {
+      width: 100%;
+      max-width: 360px;
+    }
+    .store,
+    .stores-lg .store {
+      width: calc(50% - 6px);
+      padding-left: 10px;
+      padding-right: 8px;
+      gap: 8px;
+    }
+    .store span {
+      white-space: nowrap;
+      font-size: 0.98rem;
+    }
+    .store svg {
+      width: 21px;
+      height: 21px;
+    }
   }
 </style>
