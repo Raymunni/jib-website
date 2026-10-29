@@ -11,7 +11,7 @@
   "inline": {"headline": "Deck plans, materials and steps from one photo.", "alt": "A dad photographing a bare patch of lawn behind a Sydney house",
    "prompt": "A dad in his 30s stands on the back step of a Sydney brick house photographing a bare patch of lawn where a deck will go, his son sitting on the step with a toy truck. Sunny morning.",
    "jobs": [{"room": "Backyard", "title": "Build a low timber deck", "description": "4 x 3 m off the back door, under 1 m high.", "timeEstimate": "Two weekends", "verdict": "diy_safe", "shoppingList": [{"item": "Merbau decking, 90 x 19 mm, 40 m", "price": 820}, {"item": "Treated pine bearers, 140 x 45 mm", "price": 210}, {"item": "Decking screws, 1000", "price": 89}], "directions": ["Check exempt development rules", "Set the stirrups", "Bearers and joists", "Lay the boards", "Oil the deck"]}]},
-  "end": {"headline": "From bare lawn to Sunday lunch.", "alt": "Friends and family on a new deck in Sydney at sunset",
+  "end": {"headline": "From bare lawn to Sunday lunch.", "vis": true, "alt": "Friends and family on a new deck in Sydney at sunset",
    "prompt": "Friends and family gather on a newly built timber deck behind a Sydney home at sunset, festoon lights, kids playing on the lawn, relaxed and happy.",
    "jobs": [{"room": "Backyard", "title": "Build a low timber deck", "description": "Exempt: under 1 m, behind the building line.", "timeEstimate": "Two weekends", "verdict": "diy_safe", "shoppingList": [{"item": "Merbau decking, 90 x 19 mm, 40 m", "price": 820}, {"item": "Treated pine joists, 90 x 45 mm", "price": 260}, {"item": "Decking oil, 4 L", "price": 79}], "directions": ["Set the stirrups", "Bearers and joists", "Lay the boards", "Oil the deck"]}]}},
 

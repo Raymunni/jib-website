@@ -49,7 +49,7 @@
   "inline": {"headline": "Clean-up or moisture problem? Find out.", "alt": "A mum photographing mould on a bathroom ceiling",
    "prompt": "A mum in her 30s photographs black mould spots on the ceiling above a shower in a small Australian bathroom, a towel over her shoulder. Daylight.",
    "jobs": [{"room": "Bathroom", "title": "Get rid of ceiling mould", "description": "Black spots above the shower, comes back each winter.", "timeEstimate": "About 2 hours + drying", "verdict": "diy_safe", "shoppingList": [{"item": "Mould remover spray", "price": 12}, {"item": "Anti-mould ceiling paint, 1 L", "price": 39}], "directions": ["Ventilate and wear a mask", "Kill the mould with vinegar or remover", "Dry, then paint with anti-mould paint", "Run the fan after showers"]}]},
-  "end": {"headline": "Mould gone, and a reminder so it stays gone.", "alt": "A bright, clean bathroom with fresh air through an open window",
+  "end": {"headline": "Mould gone, and a reminder so it stays gone.", "vis": true, "alt": "A bright, clean bathroom with fresh air through an open window",
    "prompt": "A bright clean white Australian bathroom with an open window and fresh towels, a parent wiping the shower screen while a child's rubber duck sits on the bath. Fresh morning light.",
    "jobs": [{"room": "Bathroom", "title": "Get rid of ceiling mould", "description": "Fixed. Reminder set to check each winter.", "timeEstimate": "About 2 hours + drying", "verdict": "diy_safe", "repeat": {"freq": "year", "interval": 1}, "scheduledAt": 1806616800000, "shoppingList": [{"item": "Anti-mould ceiling paint, 1 L", "price": 39}], "directions": ["Kill the mould", "Paint with anti-mould paint", "Clean the exhaust fan", "Check each winter"]}]}},
 
@@ -57,7 +57,7 @@
   "inline": {"headline": "The right patch, and only what you're missing.", "alt": "A dad photographing a doorknob hole in a hallway wall",
    "prompt": "A dad in his 30s photographs a fist-sized hole in a plasterboard wall behind a hallway door (doorknob damage), his son looking guilty with a soccer ball. Daylight.",
    "jobs": [{"room": "Hallway", "title": "Patch hole behind the door", "description": "Doorknob hole, about 8 cm across.", "timeEstimate": "About 1 hour + drying", "verdict": "diy_safe", "shoppingList": [{"item": "Plasterboard patch kit, 10 cm", "price": 15}, {"item": "Door stopper", "price": 6}], "tools": [{"name": "Filling knife", "owned": true}, {"name": "Sanding block", "owned": true}, {"name": "Paint roller", "owned": false}], "directions": ["Trim the hole", "Stick on the patch", "Two coats of filler", "Sand and paint"]}]},
-  "end": {"headline": "Smooth wall by Sunday.", "alt": "A freshly painted smooth hallway wall with a family walking past",
+  "end": {"headline": "Smooth wall by Sunday.", "vis": true, "alt": "A freshly painted smooth hallway wall with a family walking past",
    "prompt": "A freshly painted, perfectly smooth hallway wall in an Australian home, a mum and two kids walking past with school bags, morning light, a new door stopper on the skirting.",
    "jobs": [{"room": "Hallway", "title": "Patch hole behind the door", "description": "Filler and patch on the list; knife and sander already in your Toolbox.", "timeEstimate": "About 1 hour + drying", "verdict": "diy_safe", "shoppingList": [{"item": "Plasterboard patch kit, 10 cm", "price": 15}, {"item": "Interior paint sample pot", "price": 9}], "tools": [{"name": "Filling knife", "owned": true}, {"name": "Sanding block", "owned": true}], "directions": ["Patch", "Fill", "Sand", "Paint"]}]}},
 
@@ -70,7 +70,7 @@
    "jobs": [{"room": "Outside", "title": "Overflowing gully trap", "description": "Sewer overflow outside: plumber needed. Photos saved for the landlord.", "timeEstimate": "About 1 hour (plumber)", "verdict": "tradie_required", "labour": {"low": 220, "high": 450, "note": "Plumber with a drain machine or jetter"}, "directions": ["Don't use the drains", "Call the plumber", "Plumber clears the line", "Send the photos to the landlord"]}]}},
 
  {"guide": "how-to/renovations-before-selling", "slug": "pre-sale",
-  "inline": {"headline": "See the refresh before you list.", "vis": true, "alt": "A couple photographing a tired kitchen before selling",
+  "inline": {"headline": "Your pre-sale list, costed and sorted.", "alt": "A couple photographing a tired kitchen before selling",
    "prompt": "A couple in their 30s stand in a tired 1990s Australian kitchen photographing the dated cupboards and benchtop, moving boxes stacked in the corner. Daylight.",
    "jobs": [{"room": "Kitchen", "title": "Pre-sale kitchen refresh", "description": "Paint the cupboards, new handles, regrout the splashback.", "timeEstimate": "Two weekends", "verdict": "diy_safe", "shoppingList": [{"item": "Cupboard paint, satin, 4 L", "price": 119}, {"item": "Brushed nickel handles, 20", "price": 140}, {"item": "Grout refresh kit", "price": 29}], "directions": ["Clean and sand the doors", "Prime and paint", "New handles", "Regrout the splashback"]}, {"room": "Bathroom", "title": "Replace the cracked vanity top", "verdict": "diy_safe"}, {"room": "Outside", "title": "Fix the leaking downpipe", "verdict": "diy_safe"}]},
   "end": {"headline": "Show the buyer the after, before you spend.", "vis": true, "alt": "A real estate agent photographing a freshly refreshed living room",
