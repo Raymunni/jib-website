@@ -1,0 +1,54 @@
+[
+ {
+  "guide": "home-maintenance/how-to-clean-a-dishwasher",
+  "slug": "dishwasher-clean",
+  "inline": {
+   "headline": "Before the smell finds you.",
+   "text": "Add the filter as a job that repeats monthly, with the steps saved, and Jib reminds you long before you open the door and regret it.",
+   "alt": "A mum clearing the holes of a dishwasher spray arm with a toothpick at the kitchen bench",
+   "jobs": [
+    {
+     "room": "Kitchen",
+     "title": "Clean the dishwasher filter",
+     "description": "Twist out, rinse hot, gentle scrub. Check the spray arms too.",
+     "timeEstimate": "About 15 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 1 },
+     "scheduledAt": 1820012400000,
+     "shoppingList": [ { "item": "Dishwasher cleaner", "price": 9 } ],
+     "directions": [
+      "Pull out the bottom rack, twist out the filters",
+      "Rinse hot and scrub gently",
+      "Clear the spray arm holes with a toothpick",
+      "Wipe the seals",
+      "Run an empty hot cycle"
+     ]
+    },
+    { "room": "Kitchen", "title": "Clean the rangehood filter", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 2 }, "scheduledAt": 1820012400000 },
+    { "room": "Kitchen", "title": "Change the fridge water filter", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 }
+   ]
+  },
+  "end": {
+   "headline": "One list for every little job.",
+   "alt": "A family stacking the dishwasher together after dinner, laughing",
+   "jobs": [
+    {
+     "room": "Kitchen",
+     "title": "Fix the dishwasher that won't drain",
+     "description": "Filter's clean, hose looks fine. Water still sits in the bottom.",
+     "timeEstimate": "About an hour",
+     "verdict": "tradie_required",
+     "shoppingList": [ { "item": "Appliance repairer: call-out", "price": 160 } ],
+     "directions": [
+      "Note the model number on the door",
+      "Photograph the water level",
+      "Book a qualified repairer",
+      "Send the brief with your photos"
+     ]
+    },
+    { "room": "Kitchen", "title": "Clean the dishwasher filter", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 1 }, "scheduledAt": 1820012400000 },
+    { "room": "Laundry", "title": "Vacuum behind the clothes dryer", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ }
+]
