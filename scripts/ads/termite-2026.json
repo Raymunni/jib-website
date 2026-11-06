@@ -1,0 +1,52 @@
+[
+ {
+  "guide": "home-maintenance/termite-inspection-how-often",
+  "slug": "termite-inspection",
+  "inline": {
+   "headline": "Hand over the whole story.",
+   "text": "Snap what you found and Jib writes a clear brief with your photos, so the pest controller knows exactly where to look.",
+   "alt": "A dad crouching by a brick pier under a house, photographing a thin line of dried mud with his phone",
+   "jobs": [
+    {
+     "room": "Under the house",
+     "title": "Get mud tubes on the stump checked",
+     "description": "Thin mud line on the back stump. Left it alone, not sprayed.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "tradie_required",
+     "shoppingList": [ { "item": "Licensed pest inspection and report", "price": 280 } ],
+     "directions": [
+      "Leave it undisturbed, don't spray",
+      "Photograph it and note where it is",
+      "Book a licensed pest controller",
+      "Keep the written report"
+     ]
+    },
+    { "room": "Backyard", "title": "Move the firewood away from the house", "verdict": "diy_safe" },
+    { "room": "Outside", "title": "Fix the dripping tap by the laundry wall", "verdict": "diy_safe" }
+   ]
+  },
+  "end": {
+   "headline": "One date in the diary, every year.",
+   "alt": "A family relaxing on a timber deck in the evening",
+   "jobs": [
+    {
+     "room": "Outside",
+     "title": "Book the yearly termite inspection",
+     "description": "Keep last year's report handy for the inspector.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "tradie_required",
+     "repeat": { "freq": "year", "interval": 1 },
+     "scheduledAt": 1820012400000,
+     "shoppingList": [ { "item": "Licensed pest inspection and report", "price": 280 } ],
+     "directions": [
+      "Book a licensed pest controller",
+      "Clear access under the house",
+      "Save the written report on this job"
+     ]
+    },
+    { "room": "Outside", "title": "Walk around for mud tubes", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 3 }, "scheduledAt": 1820012400000 },
+    { "room": "Backyard", "title": "Pull the mulch back from the slab", "verdict": "diy_safe" }
+   ]
+  }
+ }
+]
