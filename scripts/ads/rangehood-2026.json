@@ -1,0 +1,54 @@
+[
+ {
+  "guide": "home-maintenance/how-to-clean-a-rangehood-filter",
+  "slug": "rangehood-filter",
+  "inline": {
+   "headline": "Grease doesn't send reminders.",
+   "text": "Add the rangehood filter to Jib once, set it to repeat every couple of months, and it reminds you before the build-up gets there.",
+   "alt": "A mum unclipping a metal filter from under a rangehood in her kitchen",
+   "jobs": [
+    {
+     "room": "Kitchen",
+     "title": "Clean the rangehood filter",
+     "description": "Metal mesh filter. Soak, scrub and dry before refitting.",
+     "timeEstimate": "About 15 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 2 },
+     "scheduledAt": 1820012400000,
+     "directions": [
+      "Turn the rangehood off, let the cooktop cool",
+      "Unclip the filter",
+      "Soak in hot soapy water for 10 minutes",
+      "Scrub gently, rinse and dry fully",
+      "Clip it back in firmly"
+     ]
+    },
+    { "room": "Laundry", "title": "Clean the dryer lint filter", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 1 }, "scheduledAt": 1820012400000 },
+    { "room": "Kitchen", "title": "Change the fridge water filter", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 }
+   ]
+  },
+  "end": {
+   "headline": "Cook more. Scrub less.",
+   "alt": "A family cooking a stir fry together in a clean kitchen, the rangehood running above them",
+   "jobs": [
+    {
+     "room": "Kitchen",
+     "title": "Replace the charcoal rangehood filter",
+     "description": "Recirculating rangehood. Check the part number first.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 6 },
+     "scheduledAt": 1820012400000,
+     "shoppingList": [ { "item": "Charcoal rangehood filter", "price": 39 } ],
+     "directions": [
+      "Note the rangehood model and part number",
+      "Turn the rangehood off",
+      "Twist out the old filter, fit the new one"
+     ]
+    },
+    { "room": "Kitchen", "title": "Clean the rangehood filter", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 2 }, "scheduledAt": 1820012400000 },
+    { "room": "Kitchen", "title": "Clean the dishwasher filter", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 1 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ }
+]
