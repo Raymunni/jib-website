@@ -1,0 +1,105 @@
+[
+ {
+  "guide": "home-maintenance/hot-water-system-maintenance",
+  "slug": "hot-water",
+  "inline": {
+   "headline": "Six months goes quickly. Jib remembers.",
+   "text": "Add the relief valve check as a job that repeats every six months, with the steps saved on it, and Jib reminds you when it's due.",
+   "alt": "A mum holding a mug in a laundry, checking a hot water reminder on her phone",
+   "jobs": [
+    {
+     "room": "Outside",
+     "title": "Check the hot water relief valve",
+     "description": "Lift the lever for 10 seconds, check it stops running.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 6 },
+     "scheduledAt": 1820012400000,
+     "directions": [
+      "Find the valve and where its drain line ends",
+      "Keep everyone clear of the drain line",
+      "Lift the lever gently for 10 seconds",
+      "Lower it and check the flow stops"
+     ]
+    },
+    { "room": "Outside", "title": "Look for leaks around the hot water tank", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 },
+    { "room": "Outside", "title": "Book the 5 year hot water service", "verdict": "tradie_required", "repeat": { "freq": "year", "interval": 5 }, "scheduledAt": 1940000000000 }
+   ]
+  },
+  "end": {
+   "headline": "Hot showers, no surprises.",
+   "alt": "A dad and his young son laughing as they wash up with steam rising at the kitchen sink",
+   "jobs": [
+    {
+     "room": "Outside",
+     "title": "Book the 5 year hot water service",
+     "description": "Tank is due: new relief valve and anode check. Licensed plumber.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "tradie_required",
+     "repeat": { "freq": "year", "interval": 5 },
+     "scheduledAt": 1820012400000,
+     "shoppingList": [ { "item": "Plumber: valve and anode service", "price": 380 } ],
+     "directions": [
+      "Note the model number on the tank label",
+      "Ask for a new relief valve and anode check",
+      "Write the service date on the tank"
+     ]
+    },
+    { "room": "Outside", "title": "Check the hot water relief valve", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 },
+    { "room": "Kitchen", "title": "Change the under-sink water filter", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/when-to-replace-a-water-filter-cartridge",
+  "slug": "water-filter",
+  "inline": {
+   "headline": "A filter you can't see, remembered.",
+   "text": "Add the filter change as a repeating job in Jib with the part number saved, and it reminds you before it's overdue.",
+   "alt": "A mum writing the date on a new water filter cartridge at the kitchen bench",
+   "jobs": [
+    {
+     "room": "Kitchen",
+     "title": "Change the under-sink water filter",
+     "description": "Carbon cartridge. Family of four, so every 12 months.",
+     "timeEstimate": "About 15 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "year", "interval": 1 },
+     "scheduledAt": 1820012400000,
+     "shoppingList": [ { "item": "Replacement carbon cartridge", "price": 79 } ],
+     "directions": [
+      "Turn off the isolation valve and open the tap",
+      "Towel and bucket under the filter",
+      "Twist out the old cartridge, fit the new one",
+      "Turn on slowly, check for leaks and flush",
+      "Write the date on the cartridge"
+     ]
+    }
+   ]
+  },
+  "end": {
+   "headline": "Clean water, on autopilot.",
+   "alt": "A family pouring glasses of water at dinner",
+   "jobs": [
+    {
+     "room": "Kitchen",
+     "title": "Change the fridge water filter",
+     "description": "Indicator comes on about every 6 months. Check the part number.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 6 },
+     "scheduledAt": 1820012400000,
+     "shoppingList": [ { "item": "Fridge water filter", "price": 69 } ],
+     "directions": [
+      "Match the part number on the old filter",
+      "Twist out the old one, twist in the new one",
+      "Run a few litres through",
+      "Reset the indicator"
+     ]
+    },
+    { "room": "Kitchen", "title": "Change the under-sink water filter", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1820012400000 },
+    { "room": "Outside", "title": "Check the hot water relief valve", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ }
+]

@@ -1,0 +1,112 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'How do I know when to replace my water filter?', a: 'Replace it at its rated litres or its time limit, whichever comes first. Replace it sooner if the flow drops, the water tastes or smells different, or it looks cloudy. Your cartridge pack or manual has both ratings.' },
+  { q: 'How many litres of filtered water does a household use?', a: 'As a rule of thumb, around 3 to 5 litres per person a day if the filtered tap is used for drinking and cooking. Use the higher figure if you fill bottles, kettles and pots from it.' },
+  { q: 'How long does a fridge water filter last?', a: 'About six months for the Samsung and Fisher & Paykel models we checked, and most fridges show an indicator. Check the manual for your model.' },
+  { q: 'Does tank or bore water shorten filter life?', a: 'It can, especially for the first sediment stage. This calculator brings the date forward by a quarter as a rule of thumb. If the flow drops sooner, change it sooner.' },
+];
+---
+
+<CalcShell
+  title="Water filter replacement calculator: when to change your cartridge"
+  description="Free water filter calculator: enter your cartridge's rating, your household and water source, and see the month to replace your under-sink, fridge or RO filter."
+  heading="Water filter replacement calculator"
+  lede="Tell us about your filter and your household, and we'll work out when the cartridge is due: at its rated litres or its time limit, whichever comes first."
+  path="/tools/water-filter-replacement-calculator/"
+  appName="Water filter replacement calculator"
+  ctaHeadline="Never miss a filter change again."
+  ctaImage="/images/jib/tool-water-filter-inline.jpg"
+  ctaImageAlt="A dad filling his daughter's drink bottle at a filtered kitchen tap"
+  ctaShot="/images/jib/shots/water-filter-end.webp"
+  cta="Add the filter to Jib as a job that repeats on this schedule, with the part number on your shopping list, and it reminds you when it's due."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <fieldset>
+      <legend>Your filter</legend>
+      <div class="g3">
+        <label><span>Type</span><select id="type">
+          <option value="carbon" selected>Under-sink carbon cartridge</option>
+          <option value="sediment">Sediment cartridge</option>
+          <option value="ro">Reverse osmosis membrane</option>
+          <option value="fridge">Fridge filter</option>
+          <option value="custom">Other (use my numbers)</option>
+        </select></label>
+        <label><span>Rated litres (0 if not listed)</span><input type="number" id="litres" value="0" min="0" step="500" /></label>
+        <label><span>Time limit (months)</span><input type="number" id="months" value="12" min="1" max="60" step="1" /></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Your household</legend>
+      <div class="g3">
+        <label><span>People</span><input type="number" id="people" value="4" min="1" max="20" step="1" /></label>
+        <label><span>Litres per person a day</span><input type="number" id="lpd" value="4" min="0.5" max="30" step="0.5" /></label>
+        <label><span>Water source</span><select id="source"><option value="town" selected>Town water</option><option value="other">Tank or bore water</option></select></label>
+      </div>
+      <div class="g3">
+        <label><span>Last changed</span><input type="date" id="last" /></label>
+      </div>
+    </fieldset>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>How it's worked out</h2>
+    <ul>
+      <li><strong>Litres per day:</strong> people × litres per person a day.</li>
+      <li><strong>Litres limit:</strong> rated litres ÷ litres per day, if your cartridge lists a litre rating.</li>
+      <li><strong>Due:</strong> the litres limit or the time limit, whichever comes first.</li>
+      <li><strong>Tank or bore water:</strong> brought forward by a quarter, as a rule of thumb.</li>
+    </ul>
+    <p>Choosing a type fills in a common time limit for it: 12 months for a carbon cartridge, 6 for sediment, 24 for a reverse osmosis membrane and 6 for a fridge filter. Real cartridges vary, so use the numbers on your pack or in your manual. A dated pack is more accurate than any calculator.</p>
+    <h2>Before you change it</h2>
+    <ul>
+      <li>Read why it matters and how to do it: <a href="/guides/home-maintenance/when-to-replace-a-water-filter-cartridge/">when to replace a water filter cartridge</a>.</li>
+      <li>Change it sooner if the flow falls, or the taste or smell comes back.</li>
+      <li>Swapping a cartridge is normally DIY. Connecting a new system to the water supply is plumbing work.</li>
+      <li>This gives you an estimate only, and doesn't tell you whether your water is safe to drink.</li>
+    </ul>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { num, val, fmt, rows, summary, live } from '../../scripts/calc';
+
+  const defaults: Record<string, number> = { carbon: 12, sediment: 6, ro: 24, fridge: 6 };
+  const type = document.getElementById('type') as HTMLSelectElement;
+  const months = document.getElementById('months') as HTMLInputElement;
+  const last = document.getElementById('last') as HTMLInputElement;
+  last.value = new Date().toISOString().slice(0, 10);
+  type.addEventListener('change', () => {
+    if (defaults[type.value]) {
+      months.value = String(defaults[type.value]);
+      months.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  });
+
+  live(() => {
+    const people = num('people') || 1;
+    const lpd = num('lpd') || 1;
+    const rated = num('litres');
+    const limit = num('months') || 12;
+    const factor = val('source') === 'other' ? 0.75 : 1;
+    const perDay = people * lpd;
+    const byMonths = limit * factor;
+    const byLitres = rated > 0 ? (rated / perDay / 30.4) * factor : Infinity;
+    const due = Math.min(byMonths, byLitres);
+    const reason = byLitres < byMonths ? 'its rated litres come first' : 'its time limit comes first';
+    const start = last.value ? new Date(last.value + 'T00:00:00') : new Date();
+    const date = new Date(start.getTime());
+    date.setDate(date.getDate() + Math.round(due * 30.4));
+    const when = date.toLocaleDateString('en-AU', { month: 'long', year: 'numeric' });
+    const out: [string, string, string?][] = [
+      ['Replace in', `${fmt(due, due < 10 ? 1 : 0)} months`, reason],
+      ['Due around', when, 'or sooner if the flow drops or the taste changes'],
+      ['Water through the filter', `${fmt(perDay, 1)} L a day`, `about ${Math.round(perDay * due * 30.4).toLocaleString('en-AU')} L by the due date`],
+      ['Changes a year', fmt(12 / due, 1), 'how many cartridges to budget for'],
+    ];
+    summary(`Change your cartridge around ${when}`);
+    rows(out);
+  });
+</script>
