@@ -1,0 +1,103 @@
+[
+ {
+  "guide": "how-to/why-does-my-safety-switch-keep-tripping",
+  "slug": "safety-switch",
+  "inline": {
+   "headline": "Hand your electrician the whole story.",
+   "text": "Snap the switchboard in Jib and note what tripped. It writes a clear brief with your photos, so the electrician knows what they're walking into.",
+   "alt": "An electrician and a homeowner talking at a switchboard, looking over the notes on her phone",
+   "jobs": [
+    {
+     "room": "Garage",
+     "title": "Safety switch keeps tripping",
+     "description": "Trips with everything unplugged. Started after heavy rain.",
+     "timeEstimate": "About an hour",
+     "verdict": "tradie_required",
+     "shoppingList": [ { "item": "Electrician: find and fix fault", "price": 220 } ],
+     "directions": [
+      "Leave the switch off, keep clear of the board",
+      "Photograph the switchboard",
+      "Book a licensed electrician",
+      "Send the brief with your photos"
+     ]
+    },
+    { "room": "Laundry", "title": "Replace the old washing machine", "verdict": "diy_safe" },
+    { "room": "Backyard", "title": "Get the outdoor power point checked", "verdict": "tradie_required" }
+   ]
+  },
+  "end": {
+   "headline": "Three months goes quickly. Jib doesn't forget.",
+   "alt": "A family cooking and laughing in a bright kitchen with everything working",
+   "jobs": [
+    {
+     "room": "Garage",
+     "title": "Test the safety switches",
+     "description": "Press T on each one. Warn everyone first, then turn back on.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 3 },
+     "scheduledAt": 1820012400000,
+     "directions": [
+      "Tell everyone at home first",
+      "Press the test button on each switch",
+      "Check the power drops, then turn back on",
+      "Call an electrician if one doesn't drop"
+     ]
+    },
+    { "room": "Hallway", "title": "Test the smoke alarms", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 1 }, "scheduledAt": 1820012400000 },
+    { "room": "Outside", "title": "Check the hot water relief valve", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/why-does-my-smoke-alarm-keep-beeping",
+  "slug": "smoke-alarm-beep",
+  "inline": {
+   "headline": "No more 3 am chirps.",
+   "text": "Add the alarm check as a monthly job in Jib, with each alarm's replacement date, and it reminds you long before the battery gets there.",
+   "alt": "A dad in pyjamas holding a smoke alarm he has just taken down, half laughing at the time on the clock",
+   "jobs": [
+    {
+     "room": "Hallway",
+     "title": "Test the smoke alarms",
+     "description": "Press the test button on all three. Vacuum the vents every 6 months.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 1 },
+     "scheduledAt": 1820012400000,
+     "shoppingList": [ { "item": "9V alarm batteries, 4 pack", "price": 18 } ],
+     "directions": [
+      "Use a sturdy ladder with someone holding it",
+      "Press the test button on each alarm",
+      "Check the replace-by date on the back",
+      "Book the swap if any are over 10 years"
+     ]
+    },
+    { "room": "Hallway", "title": "Replace the 10 year old alarm", "verdict": "diy_safe" },
+    { "room": "Garage", "title": "Test the safety switches", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 3 }, "scheduledAt": 1820012400000 }
+   ]
+  },
+  "end": {
+   "headline": "Sleep through. Every night.",
+   "alt": "A child asleep in a cosy bedroom at night with a smoke alarm on the ceiling",
+   "jobs": [
+    {
+     "room": "Bedrooms",
+     "title": "Replace the hardwired smoke alarms",
+     "description": "All three over 10 years old. Needs a licensed electrician.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "tradie_required",
+     "shoppingList": [ { "item": "Electrician: replace 3 alarms", "price": 420 } ],
+     "directions": [
+      "Read the replace-by dates",
+      "Book a licensed electrician",
+      "Ask for interconnected photoelectric alarms",
+      "Test them all together afterwards"
+     ]
+    },
+    { "room": "Hallway", "title": "Test the smoke alarms", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 1 }, "scheduledAt": 1820012400000 },
+    { "room": "Garage", "title": "Test the safety switches", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 3 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ }
+]
