@@ -1,0 +1,52 @@
+[
+ {
+  "guide": "home-maintenance/clothes-dryer-lint-filter-and-fire-safety",
+  "slug": "dryer-lint",
+  "inline": {
+   "headline": "The laundry jobs nobody remembers.",
+   "text": "Add the yearly dryer clean as a repeating job, with who's helping you shift it, and it comes up on your list when it's due.",
+   "alt": "A dad and his teenage son lifting a clothes dryer away from the laundry wall, a vacuum beside them",
+   "jobs": [
+    {
+     "room": "Laundry",
+     "title": "Vacuum behind the clothes dryer",
+     "description": "Needs two people. Unplug it, shift it, vacuum the lint.",
+     "timeEstimate": "About 20 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "year", "interval": 1 },
+     "scheduledAt": 1820012400000,
+     "directions": [
+      "Turn it off at the wall and unplug it",
+      "Shift it out with a second person",
+      "Vacuum behind, under and around it",
+      "Check the cord, then push it back with room around it"
+     ]
+    },
+    { "room": "Laundry", "title": "Clean the dryer condenser filter", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 3 }, "scheduledAt": 1820012400000 },
+    { "room": "Kitchen", "title": "Clean the rangehood filter", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 2 }, "scheduledAt": 1820012400000 }
+   ]
+  },
+  "end": {
+   "headline": "Warm towels. Nothing to worry about.",
+   "alt": "A child laughing as a parent wraps them in a warm towel from a laundry basket",
+   "jobs": [
+    {
+     "room": "Laundry",
+     "title": "Get the dryer's burning smell checked",
+     "description": "Smells hot on long cycles. Stopped using it until it's looked at.",
+     "timeEstimate": "About an hour",
+     "verdict": "tradie_required",
+     "shoppingList": [ { "item": "Appliance repairer: call-out", "price": 150 } ],
+     "directions": [
+      "Turn it off at the wall",
+      "Note the model number on the door",
+      "Book a qualified repairer",
+      "Ask about the filters and thermostat"
+     ]
+    },
+    { "room": "Laundry", "title": "Vacuum behind the clothes dryer", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1820012400000 },
+    { "room": "Hallway", "title": "Test the smoke alarms", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 1 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ }
+]
