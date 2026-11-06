@@ -1,0 +1,52 @@
+[
+ {
+  "guide": "how-to/overflow-relief-gully-and-blocked-sewers",
+  "slug": "relief-gully",
+  "inline": {
+   "headline": "The grate nobody remembers.",
+   "text": "Snap where your gully is, add the check as a job that repeats twice a year, and everyone in the house knows where to look when it matters.",
+   "alt": "A mum pulling mulch back from around a small round drain grate in a garden bed",
+   "jobs": [
+    {
+     "room": "Outside",
+     "title": "Clear around the overflow relief gully",
+     "description": "Beside the laundry tap. Keep it clear, and above the ground.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 6 },
+     "scheduledAt": 1820012400000,
+     "directions": [
+      "Pull back mulch, soil and pot plants",
+      "Check the rim sits above the ground",
+      "Lift the grate and check it moves freely",
+      "Call a plumber if you can smell sewage"
+     ]
+    },
+    { "room": "Outside", "title": "Check the hot water relief valve", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 },
+    { "room": "Bathroom", "title": "Fix the gurgling shower drain", "verdict": "tradie_required" }
+   ]
+  },
+  "end": {
+   "headline": "Know who to call before it happens.",
+   "alt": "A dad and his teenage daughter laughing while washing the dog on a back lawn beside a tap",
+   "jobs": [
+    {
+     "room": "Outside",
+     "title": "Get the sewer line checked for tree roots",
+     "description": "Second blockage this year. Ask about a camera inspection.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "tradie_required",
+     "shoppingList": [ { "item": "Plumber: drain camera inspection", "price": 350 } ],
+     "directions": [
+      "Call the water authority first",
+      "Book a licensed plumber for your pipes",
+      "Ask for the camera footage",
+      "Keep the invoice and the report"
+     ]
+    },
+    { "room": "Outside", "title": "Clear around the overflow relief gully", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 },
+    { "room": "Backyard", "title": "Move the fig tree off the sewer line", "verdict": "tradie_required" }
+   ]
+  }
+ }
+]
