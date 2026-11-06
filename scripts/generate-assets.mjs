@@ -1,4 +1,4 @@
-// Regenerates favicons and the default social share image into public/.
+// Regenerates favicons into public/.
 // Run with: node scripts/generate-assets.mjs
 import sharp from 'sharp';
 import { writeFile, mkdir } from 'node:fs/promises';
@@ -36,27 +36,6 @@ for (const [name, size] of [
   await sharp(Buffer.from(iconSvg(size))).resize(size, size).png().toFile(`public/${name}`);
 }
 
-// Social share image: the landscape hero, darkened on the left, with the
-// logo and headline over it.
-const W = 1200;
-const H = 630;
-const hero = await sharp('src/assets/hero/a.jpg').resize(W, H, { fit: 'cover', position: 'right' }).toBuffer();
-const overlay = `
-<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
-  <defs>
-    <linearGradient id="g" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0" stop-color="${NAVY}" stop-opacity="0.96"/>
-      <stop offset="0.55" stop-color="${NAVY}" stop-opacity="0.75"/>
-      <stop offset="0.85" stop-color="${NAVY}" stop-opacity="0.05"/>
-    </linearGradient>
-  </defs>
-  <rect width="${W}" height="${H}" fill="url(#g)"/>
-  <g transform="translate(70 70) scale(0.11)">${logoPaths('#ffffff')}</g>
-  <text x="72" y="300" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="68" fill="#ffffff">Can you DIY it?</text>
-  <text x="72" y="382" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="68" fill="#9cc2ff">Snap a photo, find out.</text>
-  <text x="72" y="460" font-family="Segoe UI, Arial, sans-serif" font-weight="500" font-size="30" fill="#d6dee8">Plans, materials, costs — and when you need a tradie.</text>
-  <text x="72" y="560" font-family="Segoe UI, Arial, sans-serif" font-weight="700" font-size="30" fill="#4f8ff0">jibapp.com.au</text>
-</svg>`;
-await sharp(hero).composite([{ input: Buffer.from(overlay) }]).png({ quality: 85 }).toFile('public/og/default.png');
+// The share image (public/og/default.png) comes from jib_store_images/store_v2/make-feature-e.cjs og.
 
 console.log('Assets generated.');
