@@ -31,6 +31,10 @@ const siteLd = [
     url: SITE.url,
     logo: `${SITE.url}/icon-512.png`,
     email: SITE.email,
+    sameAs: [
+      `https://apps.apple.com/app/id${STORES.ios.appId}`,
+      `https://play.google.com/store/apps/details?id=${STORES.android.packageName}`,
+    ],
     founder: { '@type': 'Person', name: SITE.author.name },
   },
   {

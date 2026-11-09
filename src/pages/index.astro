@@ -120,6 +120,16 @@ const jsonLd = [
     description: SITE.description,
     url: SITE.url,
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'AUD' },
+    image: `${SITE.url}/icon-512.png`,
+    installUrl: [`https://apps.apple.com/app/id${STORES.ios.appId}`, `https://play.google.com/store/apps/details?id=${STORES.android.packageName}`],
+    featureList: [
+      'Photograph a home job and get the steps, materials, tools and a cost range',
+      'DIY safe or tradie required, from the licensing rules where your house is',
+      'See a space finished with AI before you start',
+      'Plan a whole room or home in the right order',
+      'One shopping list with real prices',
+      'Recurring maintenance reminders and before-and-after photos',
+    ],
     publisher: { '@id': `${SITE.url}/#org` },
   },
   {
