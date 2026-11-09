@@ -29,23 +29,23 @@ Prompt frame (swap in the subject):
 | sagging-gate (done) | photo-plan-extra | a timber side gate that has dropped on its hinges and drags on the concrete path |
 | bookcase-unfixed (done) | inventory-end | a tall white bookcase full of books and toys against the wall of a kid's room |
 | cracked-splashback-tile (done) | shared-inline | a cracked white tile in a kitchen splashback beside a kettle, close up |
-| water-stain-ceiling | quote-brief-inline, quote-brief-end | a brown water stain ring on a white ceiling in the corner of a bedroom |
-| crooked-cupboard-door | directions-inline, no-time-end, howto-hub-end, diy-nsw-extra | a kitchen cupboard door hanging slightly crooked, open enough to show its hinge |
-| sticking-drawer | quick-jobs-extra | a timber kitchen drawer stuck half open and sitting crooked |
-| loose-skirting | diy-victoria-inline, diy-victoria-end | a skirting board pulling away from the wall in a hallway with timber floors, the gap visible |
-| sash-window | diy-tasmania-inline, diy-tasmania-end | an old timber sash window with flaking paint and visible gaps around the sashes |
-| broken-sprinkler | diy-wa-inline, diy-wa-end | a broken pop-up lawn sprinkler head spraying water sideways on a suburban lawn |
-| exhaust-fan | diy-nsw-inline, mould-extra | a dusty, yellowed bathroom ceiling exhaust fan with a cracked cover |
-| hallway-light | nz-home-inline | an old dated light fitting on the hallway ceiling of a timber villa |
-| garden-tap-drip | diy-queensland-inline, diy-queensland-end | a brass garden tap dripping on an outside wall, a wet patch on the paving beneath |
-| back-step-board | features-hub-end | a cracked timber board on a back door step, split along the grain |
-| shed-door | shared-end | an old garden shed with its timber door hanging off the top hinge |
-| torn-screen-door | diy-wa-extra | a sliding fly screen door with torn mesh |
-| loose-door-handle | diy-tasmania-extra | a loose, tarnished old handle on a painted front door, close up |
-| picture-rail | diy-victoria-extra | a bare wall with a timber picture rail in a period home, framed pictures leaning against the wall on the floor |
-| dusty-ceiling-fan | diy-queensland-extra | ceiling fan blades seen from below with a thick line of dust along their edges |
-| shower-grout | directions-extra | shower wall tiles with dark, crumbling grout lines, close up |
-| broken-paling | voice-inline | a timber paling fence with one paling snapped and hanging |
-| garage-wall-crack | verdict-inline | a stepped crack running through the mortar of a brick garage wall |
-| laundry-tap | no-time-inline, dripping-tap-extra | an old laundry tap dripping into a stainless steel laundry tub |
-| splashback-bare | directions-end | a bare kitchen wall above a benchtop ready to be tiled, a box of tiles sitting on the bench |
+| water-stain-ceiling (done) | quote-brief-inline, quote-brief-end | a brown water stain ring on a white ceiling in the corner of a bedroom |
+| crooked-cupboard-door (done) | directions-inline, no-time-end, howto-hub-end, diy-nsw-extra | a kitchen cupboard door hanging slightly crooked, open enough to show its hinge |
+| sticking-drawer (done) | quick-jobs-extra | a timber kitchen drawer stuck half open and sitting crooked |
+| loose-skirting (done) | diy-victoria-inline, diy-victoria-end | a skirting board pulling away from the wall in a hallway with timber floors, the gap visible |
+| sash-window (done) | diy-tasmania-inline, diy-tasmania-end | an old timber sash window with flaking paint and visible gaps around the sashes |
+| broken-sprinkler (done) | diy-wa-inline, diy-wa-end | a broken pop-up lawn sprinkler head spraying water sideways on a suburban lawn |
+| exhaust-fan (done) | diy-nsw-inline, mould-extra | a dusty, yellowed bathroom ceiling exhaust fan with a cracked cover |
+| hallway-light (done) | nz-home-inline | an old dated light fitting on the hallway ceiling of a timber villa |
+| garden-tap-drip (done) | diy-queensland-inline, diy-queensland-end | a brass garden tap dripping on an outside wall, a wet patch on the paving beneath |
+| back-step-board (done) | features-hub-end | a cracked timber board on a back door step, split along the grain |
+| shed-door (done) | shared-end | an old garden shed with its timber door hanging off the top hinge |
+| torn-screen-door (done) | diy-wa-extra | a sliding fly screen door with torn mesh |
+| loose-door-handle (done) | diy-tasmania-extra | a loose, tarnished old handle on a painted front door, close up |
+| picture-rail (done) | diy-victoria-extra | a bare wall with a timber picture rail in a period home, framed pictures leaning against the wall on the floor |
+| dusty-ceiling-fan (done) | diy-queensland-extra | ceiling fan blades seen from below with a thick line of dust along their edges |
+| shower-grout (done) | directions-extra | shower wall tiles with dark, crumbling grout lines, close up |
+| broken-paling (done) | voice-inline | a timber paling fence with one paling snapped and hanging |
+| garage-wall-crack (done) | verdict-inline | a stepped crack running through the mortar of a brick garage wall |
+| laundry-tap (done) | no-time-inline, dripping-tap-extra | an old laundry tap dripping into a stainless steel laundry tub |
+| splashback-bare (done) | directions-end | a bare kitchen wall above a benchtop ready to be tiled, a box of tiles sitting on the bench |
