@@ -1,0 +1,159 @@
+[
+ {
+  "guide": "how-to/how-to-reseal-a-shower",
+  "slug": "shower-reseal",
+  "inline": {
+   "headline": "Reseal or a leak? Find out first.",
+   "text": "Photograph the shower in Jib and it tells you whether it's a simple reseal or a waterproofing job, with the steps and the shopping list saved.",
+   "alt": "Old mouldy silicone cut out of the corner of a shower recess in one long strip, lying on the tiles next to a scraper blade and a roll of blue painter's tape",
+   "jobs": [
+    {
+     "room": "Bathroom",
+     "title": "Reseal the shower",
+     "description": "Silicone is black in the corners and peeling at the base. Tiles are solid.",
+     "timeEstimate": "About 2 hours, plus curing",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      { "item": "Wet area silicone, mould resistant", "price": 18 },
+      { "item": "Sealant remover", "price": 16 },
+      { "item": "Silicone removal tool", "price": 12 },
+      { "item": "Caulking gun", "price": 10 },
+      { "item": "Painter's tape", "price": 7 },
+      { "item": "Methylated spirits, 1 L", "price": 8 }
+     ],
+     "directions": [
+      "Cut out all the old silicone",
+      "Soften the rest with remover, scrape, wipe with metho",
+      "Kill the mould and let it dry overnight",
+      "Tape both sides, run one bead, smooth it",
+      "Pull the tape, keep water off until cured"
+     ]
+    },
+    { "room": "Bathroom", "title": "Regrout the shower floor", "verdict": "diy_safe" },
+    { "room": "Bathroom", "title": "Clean the exhaust fan cover", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 }
+   ]
+  },
+  "end": {
+   "headline": "A shower you don't scrub around.",
+   "alt": "A mum and her young daughter brushing their teeth together at the vanity, a bright clean shower with fresh white silicone behind them",
+   "jobs": [
+    {
+     "room": "Bathroom",
+     "title": "Get the shower leak checked",
+     "description": "Skirting in the hallway is swelling and the paint is bubbling. New silicone didn't stop it.",
+     "timeEstimate": "About an hour to inspect",
+     "verdict": "tradie_required",
+     "shoppingList": [ { "item": "Waterproofer: leak inspection", "price": 250 } ],
+     "directions": [
+      "Photograph the damp wall and skirting",
+      "Note when it gets worse after showers",
+      "Book a licensed waterproofer",
+      "Send the brief with your photos"
+     ]
+    },
+    { "room": "Bathroom", "title": "Reseal the shower", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 3 }, "scheduledAt": 1820012400000 },
+    { "room": "Laundry", "title": "Run the washing machine drum clean", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 1 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/how-to-clean-a-washing-machine",
+  "slug": "washing-machine-clean",
+  "inline": {
+   "headline": "The smell won't come back.",
+   "text": "Add the drum clean to Jib as a monthly job and the pump filter every two months. Jib reminds you, with the steps for your machine saved.",
+   "alt": "The small flap at the bottom of a front loader open with the pump filter cap unscrewed, a shallow baking tray on a folded towel in front of it catching the water, a few coins in the tray",
+   "jobs": [
+    {
+     "room": "Laundry",
+     "title": "Run the washing machine drum clean",
+     "description": "Empty drum, Drum Clean cycle with cleaner. Wipe the door seal after.",
+     "timeEstimate": "About 10 minutes, plus the cycle",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 1 },
+     "scheduledAt": 1820012400000,
+     "shoppingList": [ { "item": "Washing machine cleaner", "price": 10 } ],
+     "directions": [
+      "Empty the drum and check for socks",
+      "Add cleaner as the manual says",
+      "Run Drum Clean or the hottest cycle",
+      "Wipe the seal dry, leave the door ajar"
+     ]
+    },
+    { "room": "Laundry", "title": "Clean the washing machine pump filter", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 2 }, "scheduledAt": 1820012400000 },
+    { "room": "Laundry", "title": "Clean the dryer lint filter", "verdict": "diy_safe", "repeat": { "freq": "week", "interval": 1 }, "scheduledAt": 1820012400000 }
+   ]
+  },
+  "end": {
+   "headline": "Fresh washing, every load.",
+   "alt": "A dad and his son pegging fresh washing on a backyard clothesline on a sunny afternoon, a laundry basket at their feet",
+   "jobs": [
+    {
+     "room": "Laundry",
+     "title": "Fix the washing machine that won't drain",
+     "description": "Filter's clean but water still sits in the drum. Impeller feels stuck.",
+     "timeEstimate": "About an hour",
+     "verdict": "tradie_required",
+     "shoppingList": [ { "item": "Appliance repairer: call-out", "price": 160 } ],
+     "directions": [
+      "Turn it off at the wall",
+      "Note the model number inside the door",
+      "Book a qualified repairer",
+      "Send the brief with your photos"
+     ]
+    },
+    { "room": "Laundry", "title": "Run the washing machine drum clean", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 1 }, "scheduledAt": 1820012400000 },
+    { "room": "Laundry", "title": "Check the washing machine hoses", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/is-it-safe-to-clean-your-own-solar-panels",
+  "slug": "solar-panel-clean",
+  "inline": {
+   "headline": "Clean panels, both feet on the grass.",
+   "text": "Add a quick solar check to Jib, done from the ground, and set the licensed service to repeat every two years. Jib reminds you when each one's due.",
+   "alt": "A mum standing in the backyard of a single-storey house in early morning light, gently brushing dust off the solar panels with a soft brush on a long extension pole",
+   "jobs": [
+    {
+     "room": "Roof",
+     "title": "Hose the solar panels from the ground",
+     "description": "Dusty after a dry spell. Single storey, panels reachable from the lawn.",
+     "timeEstimate": "About 20 minutes",
+     "verdict": "diy_safe",
+     "shoppingList": [ { "item": "Soft brush with extension pole", "price": 45 } ],
+     "directions": [
+      "Check for cracks from the ground first",
+      "Go early, while the panels are cool",
+      "Gentle hose spray, no pressure washer",
+      "Soft brush only, stay off the roof"
+     ]
+    },
+    { "room": "Outside", "title": "Book the solar system service", "verdict": "tradie_required", "repeat": { "freq": "year", "interval": 2 }, "scheduledAt": 1820012400000 },
+    { "room": "Garage", "title": "Dust the solar inverter vents", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 }
+   ]
+  },
+  "end": {
+   "headline": "Sunshine in. Nobody on the roof.",
+   "alt": "A family having a picnic lunch on the back lawn on a sunny day, the solar panels on their single-storey roof behind them",
+   "jobs": [
+    {
+     "room": "Roof",
+     "title": "Get the solar panels cleaned",
+     "description": "Two storey, can't reach from the ground. Bird droppings on the top row.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "tradie_required",
+     "shoppingList": [ { "item": "Solar panel cleaning service", "price": 220 } ],
+     "directions": [
+      "Photograph the panels from the ground",
+      "Note the panel brand for the warranty",
+      "Book a cleaner with fall protection",
+      "Check output on the app afterwards"
+     ]
+    },
+    { "room": "Outside", "title": "Book the solar system service", "verdict": "tradie_required", "repeat": { "freq": "year", "interval": 2 }, "scheduledAt": 1820012400000 },
+    { "room": "Outside", "title": "Clean the gutters", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ }
+]

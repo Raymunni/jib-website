@@ -1,0 +1,181 @@
+[
+ {
+  "guide": "council-approval/pergola-without-council-approval",
+  "slug": "pergola",
+  "inline": {
+   "headline": "Posts, beams and rafters, from one photo.",
+   "text": "Photograph your patio in Jib and it drafts the pergola plan, the materials list and the build steps, and flags what to confirm with a certifier first.",
+   "alt": "A dad on the back step photographing a bare paved patio where a pergola will go, while his son draws on the pavers with chalk",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Build an open pergola over the patio",
+     "description": "3 x 3 m, unroofed, freestanding. Under the no-approval size here.",
+     "timeEstimate": "Two weekends",
+     "verdict": "diy_safe",
+     "verdictReason": "Fine to build yourself if it stays within your state's exempt size and height.",
+     "shoppingList": [
+      { "item": "Treated pine posts, 90 x 90 mm x 2.7 m, 4", "price": 168 },
+      { "item": "Treated pine beams, 190 x 45 mm x 3.6 m, 2", "price": 132 },
+      { "item": "Treated pine rafters, 140 x 45 mm x 3.6 m, 6", "price": 210 },
+      { "item": "Galvanised post anchors, 4", "price": 96 },
+      { "item": "Rapid set concrete, 20 kg x 6", "price": 66 }
+     ],
+     "directions": [
+      "Check the size and height limits for your state",
+      "Mark out the posts, clear of the boundary",
+      "Concrete the post anchors",
+      "Stand and brace the posts",
+      "Fix the beams, then the rafters"
+     ]
+    },
+    { "room": "Backyard", "title": "Plant a climber for the pergola", "verdict": "diy_safe" },
+    { "room": "Backyard", "title": "Pressure wash the patio pavers", "verdict": "diy_safe" }
+   ]
+  },
+  "end": {
+   "headline": "Shade for Sunday lunch.",
+   "alt": "A family eating lunch at an outdoor table under a new timber pergola with a young vine on one post, dappled shade on the pavers",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Build an open pergola over the patio",
+     "description": "Within the exempt size. Kit, posts and steps ready.",
+     "timeEstimate": "Two weekends",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      { "item": "Timber pergola kit, 3 x 3 m", "price": 1190 },
+      { "item": "Galvanised post anchors, 4", "price": 96 },
+      { "item": "Exterior decking oil, 4 L", "price": 79 }
+     ],
+     "directions": [
+      "Set the post anchors",
+      "Stand the posts",
+      "Beams and rafters",
+      "Oil the timber"
+     ]
+    },
+    { "room": "Backyard", "title": "Plant a climber for the pergola", "verdict": "diy_safe" },
+    { "room": "Backyard", "title": "Hang festoon lights", "verdict": "diy_safe" }
+   ]
+  }
+ },
+ {
+  "guide": "council-approval/carport-without-council-approval",
+  "slug": "carport",
+  "inline": {
+   "headline": "Know what the certifier will ask.",
+   "text": "Photograph the driveway in Jib and it drafts the carport plan, the materials list and the questions to ask your certifier.",
+   "alt": "A mum photographing the side of the driveway beside the family car while her daughter sits on the front step with a scooter",
+   "jobs": [
+    {
+     "room": "Driveway",
+     "title": "Put up a single carport",
+     "description": "3 x 6 m flat roof beside the house. Needs building approval here.",
+     "timeEstimate": "Two weekends",
+     "verdict": "diy_safe",
+     "verdictReason": "You can build the kit yourself, but get building approval from a certifier first.",
+     "shoppingList": [
+      { "item": "Steel carport kit, 3 x 6 m, with engineering", "price": 2490 },
+      { "item": "Rapid set concrete, 20 kg x 12", "price": 132 },
+      { "item": "Building certifier: approval", "price": 1100 }
+     ],
+     "directions": [
+      "Get the kit engineering for your wind region",
+      "Book a certifier and lodge the approval",
+      "Mark out and dig the footings",
+      "Concrete the posts",
+      "Fit the beams and roof sheets"
+     ]
+    },
+    { "room": "Driveway", "title": "Clean the oil stain off the driveway", "verdict": "diy_safe" },
+    { "room": "Outside", "title": "Clean the gutters before summer", "verdict": "diy_safe" }
+   ]
+  },
+  "end": {
+   "headline": "No more scorching car seats.",
+   "alt": "A dad buckling his son into the car parked in the shade of a new steel carport on a hot sunny afternoon",
+   "jobs": [
+    {
+     "room": "Driveway",
+     "title": "Put up a single carport",
+     "description": "Approved. Kit delivered, footings marked out.",
+     "timeEstimate": "Two weekends",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      { "item": "Steel carport kit, 3 x 6 m, with engineering", "price": 2490 },
+      { "item": "Rapid set concrete, 20 kg x 12", "price": 132 },
+      { "item": "Tek screws, 100", "price": 29 }
+     ],
+     "directions": [
+      "Dig and concrete the footings",
+      "Stand and brace the posts",
+      "Fit the beams and purlins",
+      "Roof sheets and gutter"
+     ]
+    },
+    { "room": "Driveway", "title": "Book the certifier's final inspection", "verdict": "diy_safe" },
+    { "room": "Driveway", "title": "Hose down the driveway", "verdict": "diy_safe" }
+   ]
+  }
+ },
+ {
+  "guide": "council-approval/how-close-to-fence-can-a-shed-be",
+  "slug": "shed-fence",
+  "inline": {
+   "headline": "The right spot, before you dig.",
+   "text": "Photograph the spot in Jib and it drafts the base, the kit build steps and the materials, with the setbacks to check before you dig.",
+   "alt": "A dad and his daughter measuring from the back paling fence to a string line pegged out on the lawn for a new shed",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Build a garden shed in the back corner",
+     "description": "3 x 2.3 m kit shed, 2.2 m high. Keep it 900 mm off both fences.",
+     "timeEstimate": "A weekend",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      { "item": "Steel shed kit, 3 x 2.3 m", "price": 990 },
+      { "item": "Concrete pavers for base, 16", "price": 128 },
+      { "item": "Shed anchor kit", "price": 39 },
+      { "item": "String line and pegs", "price": 18 }
+     ],
+     "directions": [
+      "Check the setback and height rules for your state",
+      "Peg out the shed, measured from both fences",
+      "Level and lay the base",
+      "Build the frame, walls and roof",
+      "Anchor it down"
+     ]
+    },
+    { "room": "Backyard", "title": "Fix the loose fence palings", "verdict": "diy_safe" },
+    { "room": "Backyard", "title": "Move the compost bin", "verdict": "diy_safe" }
+   ]
+  },
+  "end": {
+   "headline": "Tools away, lawn back.",
+   "alt": "A mum and her son wheeling the lawn mower into a new green garden shed set a short gap off the back fence, late afternoon light",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Build a garden shed in the back corner",
+     "description": "900 mm off the fences, under the exempt size.",
+     "timeEstimate": "A weekend",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      { "item": "Steel shed kit, 3 x 2.3 m", "price": 990 },
+      { "item": "Concrete pavers for base, 16", "price": 128 },
+      { "item": "Downpipe and rainwater diverter", "price": 45 }
+     ],
+     "directions": [
+      "Lay the base",
+      "Build the frame",
+      "Walls, roof and doors",
+      "Run the downpipe away from the fence"
+     ]
+    },
+    { "room": "Garage", "title": "Hang the garden tools on the wall", "verdict": "diy_safe" },
+    { "room": "Backyard", "title": "Clear leaves behind the shed", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 3 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ }
+]

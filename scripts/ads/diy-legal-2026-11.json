@@ -1,0 +1,171 @@
+[
+ {
+  "guide": "diy-legal/can-i-remove-a-non-load-bearing-wall-myself",
+  "slug": "wall-removal",
+  "inline": {
+   "headline": "Before the hammer, a plan.",
+   "text": "Snap the wall in Jib and it lists what to check first: the engineer's sign-off, the asbestos test, and the electrician for the power point that's in the way.",
+   "alt": "A structural engineer and a couple standing at a hallway wall in an older home, the engineer pointing up at the ceiling line while their toddler watches from the doorway",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Remove the wall between kitchen and lounge",
+     "description": "Plasterboard stud wall, 1970s house. Power point on the kitchen side.",
+     "timeEstimate": "About 2 days",
+     "verdict": "tradie_required",
+     "shoppingList": [
+      { "item": "Structural engineer: wall inspection", "price": 550 },
+      { "item": "Asbestos test: lining sample", "price": 120 },
+      { "item": "Electrician: remove power point and make safe", "price": 280 }
+     ],
+     "directions": [
+      "Book the engineer to confirm it's not load bearing",
+      "Have the wall lining tested for asbestos",
+      "Get the electrician to disconnect the power point",
+      "Then strip linings and remove the studs"
+     ]
+    },
+    { "room": "Living room", "title": "Patch the ceiling where the wall was", "verdict": "diy_safe" },
+    { "room": "Kitchen", "title": "Relocate the power point", "verdict": "tradie_required" }
+   ]
+  },
+  "end": {
+   "headline": "One wall down. One big room.",
+   "alt": "A family eating breakfast together at a kitchen bench in a bright, newly opened-up kitchen and living area",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Patch and paint after the wall removal",
+     "description": "Fill the ceiling and wall joins, new cornice, then two coats.",
+     "timeEstimate": "About a weekend",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      { "item": "Plasterboard 10 mm, 2400 x 1200", "price": 24 },
+      { "item": "Cornice, 90 mm x 4.2 m, 2 lengths", "price": 38 },
+      { "item": "Base coat and topping compound", "price": 32 },
+      { "item": "Ceiling paint, 4 L", "price": 72 }
+     ],
+     "directions": [
+      "Screw new plasterboard strips to the ceiling joists",
+      "Tape and set the joins in three coats",
+      "Glue up the new cornice",
+      "Sand lightly, prime and paint"
+     ]
+    },
+    { "room": "Living room", "title": "Fill the floor gap where the wall stood", "verdict": "diy_safe" },
+    { "room": "Living room", "title": "Fit new skirting along the opening", "verdict": "diy_safe" }
+   ]
+  }
+ },
+ {
+  "guide": "diy-legal/can-i-install-a-downlight-myself",
+  "slug": "downlight",
+  "inline": {
+   "headline": "Twelve halogens. One electrician visit.",
+   "text": "Snap each room's ceiling in Jib and it builds the list: how many downlights, which IC-4 fittings to buy, and what's left for you to patch and paint.",
+   "alt": "A dad photographing an old, yellowed halogen downlight in the living room ceiling with his phone while his daughter points out another one",
+   "jobs": [
+    {
+     "room": "Kitchen",
+     "title": "Replace 12 halogen downlights with LED",
+     "description": "Old 12 V halogens with transformers. Insulation going in next month.",
+     "timeEstimate": "About half a day",
+     "verdict": "tradie_required",
+     "shoppingList": [
+      { "item": "IC-4 LED downlights, 90 mm cut-out, x12", "price": 300 },
+      { "item": "Electrician: replace 12 downlights", "price": 480 }
+     ],
+     "directions": [
+      "Count the downlights and note the cut-out size",
+      "Buy IC-4 rated LEDs with the same cut-out",
+      "Book a licensed electrician to swap them",
+      "Book the insulation for after the swap"
+     ]
+    },
+    { "room": "Hallway", "title": "Change the blown downlight globe", "verdict": "diy_safe" },
+    { "room": "Roof space", "title": "Top up the ceiling insulation", "verdict": "tradie_required" }
+   ]
+  },
+  "end": {
+   "headline": "Better light, safer roof.",
+   "alt": "A family reading together on the couch in the evening under warm, even downlights",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Patch the old downlight holes",
+     "description": "Four holes left after the electrician moved the lights.",
+     "timeEstimate": "About 2 hours, plus drying",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      { "item": "Plasterboard offcut and backing strips", "price": 18 },
+      { "item": "Setting compound", "price": 16 },
+      { "item": "Ceiling paint, 1 L", "price": 26 }
+     ],
+     "directions": [
+      "Check the electrician has made the cables safe",
+      "Fix backing strips and a plasterboard plug",
+      "Set, sand and set again",
+      "Prime and paint the patch"
+     ]
+    },
+    { "room": "Hallway", "title": "Change the blown downlight globe", "verdict": "diy_safe" },
+    { "room": "Roof space", "title": "Check for leaves around the downlights", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ },
+ {
+  "guide": "council-approval/rainwater-tank-without-council-approval",
+  "slug": "rainwater-tank",
+  "inline": {
+   "headline": "Tank first. Then the plumber's bit.",
+   "text": "Snap the side of the house in Jib and it plans the tank: the base, the screens and first flush, and a clear brief for the plumber to connect it.",
+   "alt": "A mum and her son reading the label on a new slimline rainwater tank that has just been delivered to their side yard",
+   "jobs": [
+    {
+     "room": "Side yard",
+     "title": "Install a 3,000 L slimline rainwater tank",
+     "description": "Along the side fence, behind the building line. Toilet and laundry connection.",
+     "timeEstimate": "About a day, plus the plumber",
+     "verdict": "tradie_required",
+     "shoppingList": [
+      { "item": "Slimline poly tank, 3,000 L", "price": 1150 },
+      { "item": "Crusher dust for the base, 1 m³", "price": 95 },
+      { "item": "First-flush diverter, 90 mm", "price": 65 },
+      { "item": "Plumber: connect to toilet and laundry", "price": 900 }
+     ],
+     "directions": [
+      "Check council limits and the boundary distance",
+      "Level and compact the base",
+      "Fit the rain head, first flush and mosquito mesh",
+      "Book a licensed plumber for the house connection"
+     ]
+    },
+    { "room": "Roof", "title": "Clean the gutters before the tank goes in", "verdict": "diy_safe" },
+    { "room": "Side yard", "title": "Connect the tank pump and backflow device", "verdict": "tradie_required" }
+   ]
+  },
+  "end": {
+   "headline": "Free water. A few easy checks.",
+   "alt": "A girl filling a watering can from the tap on a rainwater tank beside the family veggie patch while her dad watches",
+   "jobs": [
+    {
+     "room": "Side yard",
+     "title": "Check the tank screens and first flush",
+     "description": "Empty the first-flush diverter, check the mesh for holes, clear the rain head.",
+     "timeEstimate": "About 15 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 3 },
+     "scheduledAt": 1820012400000,
+     "directions": [
+      "Empty and rinse the first-flush diverter",
+      "Check the mosquito mesh on every opening",
+      "Clear leaves from the rain head",
+      "Look for pooling water around the tank"
+     ]
+    },
+    { "room": "Roof", "title": "Clean the gutters", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820012400000 },
+    { "room": "Side yard", "title": "Check the tank for sediment", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 2 }, "scheduledAt": 1820012400000 }
+   ]
+  }
+ }
+]
