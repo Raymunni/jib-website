@@ -145,6 +145,7 @@ const jsonLd = [
   description="The home jobs app for people with no time. Snap a photo and Jib writes the steps, shopping list and cost, and flags anything that legally needs a tradie."
   jsonLd={jsonLd}
 >
+  <link slot="head" rel="preload" as="image" href={mobileWebp.src} media="(max-width: 899px)" fetchpriority="high" />
   <section class="hero" style={`--hero-mobile:url(${mobileWebp.src})`}>
     <picture class="hero-img" aria-hidden="true">
       <source media="(min-width: 900px)" srcset={wideAvif.src} type="image/avif" />
@@ -277,7 +278,7 @@ const jsonLd = [
           {['QLD', 'NSW', 'VIC', 'WA', 'SA', 'TAS', 'ACT', 'NT'].map((st) => <a href={`/tools/diy-legality-checker/?state=${st}`}>{st}</a>)}
         </div>
       </div>
-      <a class="verdicts" href="/tools/diy-legality-checker/" aria-label="Open the DIY checker">
+      <a class="verdicts" href="/tools/diy-legality-checker/">
         <span class="verdict ok"><b>Change a tap washer</b><em>✓ DIY safe in every state</em></span>
         <span class="verdict no"><b>Replace a power point</b><em>⚠ Licensed electrician only</em></span>
         <span class="verdict ok"><b>Build a low garden deck</b><em>✓ Usually DIY, check your council</em></span>

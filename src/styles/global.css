@@ -1,3 +1,7 @@
+/* The two brand faces, served from this site (no third-party font request). */
+@font-face { font-family: 'Outfit'; src: url('/fonts/outfit-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Caveat'; src: url('/fonts/caveat-latin-wght-normal.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; }
+
 :root {
   /* The app's look (Nov 2026): Egyptian navy, clean black tiles, the button
      blue, and pink into violet for anything Jib AI does. */
