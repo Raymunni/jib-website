@@ -1,15 +1,23 @@
 :root {
-  --bg: #0e1824;
-  --bg-2: #121f2f;
-  --surface: #16263a;
-  --surface-2: #1b2f47;
-  --border: rgba(255, 255, 255, 0.12);
+  /* The app's look (Nov 2026): Egyptian navy, clean black tiles, the button
+     blue, and pink into violet for anything Jib AI does. */
+  --bg: #020d1c;
+  --bg-2: #041427;
+  --surface: #080b11;
+  --surface-2: #0e1622;
+  --border: rgba(255, 255, 255, 0.1);
   --ink: #f3f6fa;
   --text: #d6dee8;
   --dim: #9fb0c3;
-  --accent: #2770da;
-  --accent-2: #4f8ff0;
-  --accent-deep: #2c5ca2;
+  --accent: #73aaff;
+  --accent-2: #73aaff;
+  --accent-deep: #244fa8;
+  /* Text that sits on a solid --accent fill. */
+  --on-accent: #020d1c;
+  --ai-pink: #ff38d1;
+  --ai-violet: #8a4bff;
+  --ai: linear-gradient(90deg, #ff38d1, #e42ee6 38%, #8a4bff 78%, #4f8bff);
+  --ai-soft: linear-gradient(90deg, #ff6bdc, #ee5cf0 38%, #a274ff 78%, #73aaff);
   --ok: #3fb96b;
   --warn: #f2b33d;
   --danger: #ff5a52;
@@ -58,7 +66,7 @@ a {
 }
 
 a:hover {
-  color: #7fb0ff;
+  color: #a4c8ff;
 }
 
 h1,
@@ -118,7 +126,7 @@ strong {
   top: 12px;
   z-index: 100;
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   padding: 8px 12px;
   border-radius: 8px;
 }
@@ -144,14 +152,19 @@ strong {
   transform: scale(0.98);
 }
 
+/* Blue glass, like the app's buttons: see-through blue inside a bright edge. */
 .btn-primary {
-  background: var(--accent);
+  background: rgba(115, 170, 255, 0.2);
+  border-color: var(--accent);
+  border-width: 1.5px;
   color: #fff;
-  box-shadow: 0 6px 20px rgba(39, 112, 218, 0.35);
+  box-shadow: 0 0 22px rgba(115, 170, 255, 0.18);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
 .btn-primary:hover {
-  background: #3380ec;
+  background: rgba(115, 170, 255, 0.32);
   color: #fff;
 }
 

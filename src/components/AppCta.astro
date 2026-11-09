@@ -69,12 +69,13 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
 
 <style>
   .jp {
-    --jp-ring: linear-gradient(120deg, #2770da, #7c3aed 45%, #e85d9e 75%, #2c5ca2);
+    --jp-ring: linear-gradient(120deg, #ff38d1, #e42ee6 35%, #8a4bff 72%, #4f8bff);
     position: relative;
     margin: 2.4em 0;
     border-radius: 20px;
     overflow: hidden;
-    background: linear-gradient(160deg, #18304d 0%, #111d2c 70%);
+    /* A clean black tile on the navy page, like the app's. */
+    background: linear-gradient(160deg, #0c121d 0%, #06080c 70%);
     box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.6);
     container-type: inline-size;
   }
@@ -103,7 +104,7 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     display: block;
     aspect-ratio: 16 / 9;
     max-width: 100%;
-    background: #0e1824;
+    background: #020d1c;
     overflow: hidden;
   }
   .jp-photo {
@@ -116,7 +117,7 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(17, 29, 44, 0) 60%, rgba(17, 29, 44, 0.55) 100%);
+    background: linear-gradient(180deg, rgba(6, 8, 12, 0) 60%, rgba(6, 8, 12, 0.55) 100%);
     pointer-events: none;
   }
   .phone {
@@ -146,7 +147,7 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     aspect-ratio: 9 / 20;
     object-fit: cover;
     border-radius: calc(var(--r) - var(--bezel));
-    background: #0e1824;
+    background: #020d1c;
   }
 
   /* Words and the button. */
@@ -201,8 +202,9 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     line-height: 1.5;
   }
 
-  /* A full-width bar like an app store listing (icon, name, GET), in
-     frosted glass over the moving AI gradient, like the app's AI buttons. */
+  /* A full-width bar like an app store listing (icon, name, GET): dark
+     frosted glass with the AI colours drifting slowly along its edge, like
+     the app's AI buttons. The colours are light on the edge, never a fill. */
   .jp-btn {
     position: relative;
     display: flex;
@@ -215,26 +217,31 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     text-decoration: none;
     isolation: isolate;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
+    background: rgba(2, 13, 28, 0.62);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    box-shadow: 0 8px 26px -8px rgba(124, 58, 237, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    border: 0;
+    box-shadow: 0 8px 26px -12px rgba(255, 56, 209, 0.4);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .jp-btn::before {
     content: '';
     position: absolute;
     inset: 0;
-    z-index: -1;
-    background: var(--jp-ring);
-    background-size: 220% 220%;
-    opacity: 0.55;
-    animation: jp-sweep 6s ease-in-out infinite alternate;
+    border-radius: inherit;
+    padding: 1.6px;
+    /* A loop that starts and ends on the same pink, so it never jumps. */
+    background: linear-gradient(90deg, #ff38d1, #e42ee6 20%, #8a4bff 42%, #4f8bff 50%, #8a4bff 58%, #e42ee6 80%, #ff38d1);
+    background-size: 200% 100%;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: jp-flow 10s linear infinite;
   }
   .jp-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 12px 30px -8px rgba(232, 93, 158, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 30px -10px rgba(255, 56, 209, 0.55);
   }
   .jp-btn-icon {
     flex: none;
@@ -270,7 +277,7 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     padding: 9px 14px 9px 18px;
     border-radius: 999px;
     background: #fff;
-    color: #1d4fb5;
+    color: #03203e;
     font-weight: 900;
     font-size: 0.86rem;
     letter-spacing: 0.08em;
@@ -296,12 +303,9 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
       display: none;
     }
   }
-  @keyframes jp-sweep {
-    from {
-      background-position: 0% 50%;
-    }
+  @keyframes jp-flow {
     to {
-      background-position: 100% 50%;
+      background-position: 200% 0;
     }
   }
   @media (prefers-reduced-motion: reduce) {

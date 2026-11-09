@@ -11,8 +11,8 @@ const { name, size = 72 } = Astro.props;
 const palette: Record<string, [string, string]> = {
   checker: ['#2e9d57', '#1d6b3b'],
   bathroom: ['#2f8fd8', '#1f5f9e'],
-  units: ['#7c5cff', '#4b36b8'],
-  paint: ['#e8588f', '#a93768'],
+  units: ['#8a4bff', '#4b2fb8'],
+  paint: ['#ff38d1', '#a3198a'],
   concrete: ['#8a96a8', '#566173'],
   soil: ['#b07a3c', '#7a4f22'],
   fence: ['#c9933f', '#8e6424'],
@@ -21,26 +21,26 @@ const palette: Record<string, [string, string]> = {
   decking: ['#b8793d', '#7d4d21'],
   stairs: ['#f08a3c', '#b35a17'],
   roof: ['#d9534f', '#98312e'],
-  planner: ['#3f7fe0', '#2a54a0'],
+  planner: ['#73aaff', '#244fa8'],
   // Feature icons (home page)
-  snap: ['#3f7fe0', '#2a4fa0'],
-  steps: ['#7c5cff', '#4b36b8'],
+  snap: ['#73aaff', '#244fa8'],
+  steps: ['#8a4bff', '#4b2fb8'],
   cart: ['#f08a3c', '#b35a17'],
   toolbox: ['#d9534f', '#98312e'],
   clock: ['#26a6a6', '#16706f'],
   cost: ['#2e9d57', '#1d6b3b'],
   bell: ['#e8a33c', '#a86d17'],
   rooms: ['#5b8def', '#3558a8'],
-  beforeafter: ['#e8588f', '#a93768'],
+  beforeafter: ['#ff38d1', '#8a4bff'],
   chat: ['#9b5cf0', '#6534b0'],
   homes: ['#b8793d', '#7d4d21'],
   web: ['#4f6d8f', '#2f4560'],
   climate: ['#e0b83f', '#a07c1c'],
-  together: ['#e8588f', '#9b3fd0'],
-  voice: ['#7c5cff', '#c8468f'],
+  together: ['#ff38d1', '#8a4bff'],
+  voice: ['#8a4bff', '#ff38d1'],
   quote: ['#d9534f', '#98312e'],
 };
-const [c1, c2] = palette[name] ?? ['#2770da', '#1a4a90'];
+const [c1, c2] = palette[name] ?? ['#73aaff', '#244fa8'];
 const id = `ti-${name}`;
 ---
 

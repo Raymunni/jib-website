@@ -392,7 +392,7 @@ const jsonLd = [
     font-size: clamp(3.6rem, 8.4vw, 5.6rem);
     letter-spacing: -0.03em;
     line-height: 1;
-    color: #1b365d;
+    color: #03203e;
   }
   .hero-logo img {
     width: auto;
@@ -430,7 +430,7 @@ const jsonLd = [
   }
   .hero-sub b {
     font-weight: 500;
-    background: linear-gradient(90deg, #3b6ff0, #8b4fe0, #e2569c);
+    background: var(--ai);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -716,7 +716,7 @@ const jsonLd = [
     font-weight: 700;
   }
   .how-tag.ai {
-    background: linear-gradient(90deg, #3b6ff0, #8b4fe0, #e2569c);
+    background: var(--ai);
   }
   /* Arrows between the cards on wide screens. */
   @media (min-width: 760px) {
@@ -730,7 +730,7 @@ const jsonLd = [
       height: 34px;
       border-radius: 50%;
       background: var(--accent);
-      color: #fff;
+      color: var(--on-accent);
       font-weight: 900;
       display: grid;
       place-items: center;
@@ -752,7 +752,7 @@ const jsonLd = [
     height: 32px;
     border-radius: 50%;
     background: var(--accent);
-    color: #fff;
+    color: var(--on-accent);
     font-weight: 900;
     display: grid;
     place-items: center;
@@ -795,7 +795,10 @@ const jsonLd = [
       gap: 8px;
       padding: 14px 16px;
       border-radius: 999px;
-      background: var(--accent);
+      background: rgba(22, 52, 104, 0.82);
+      border: 1.5px solid var(--accent);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
       color: #fff;
       text-decoration: none;
       font-weight: 800;
@@ -1063,7 +1066,7 @@ const jsonLd = [
     text-align: center;
     padding: 48px 24px;
     border-radius: var(--radius);
-    background: linear-gradient(135deg, #1b365d, #0e1824);
+    background: linear-gradient(135deg, #03203e, #020d1c);
     border: 1px solid rgba(255, 255, 255, 0.14);
   }
   .final-card img {
@@ -1090,7 +1093,7 @@ const jsonLd = [
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 0.8;
-    background: linear-gradient(90deg, #6d9bff, #a678f2, #f07ab4);
+    background: var(--ai-soft);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -1107,7 +1110,7 @@ const jsonLd = [
   }
   .final-sub b {
     font-weight: 500;
-    background: linear-gradient(90deg, #6d9bff, #a678f2, #f07ab4);
+    background: var(--ai-soft);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

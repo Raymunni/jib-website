@@ -12,6 +12,10 @@ const plans = readdirSync('scripts/ads')
   .filter((f) => f.endsWith('.json'))
   .flatMap((f) => JSON.parse(readFileSync(`scripts/ads/${f}`, 'utf8')));
 
+// A photo for every open job that doesn't get the guide's own: ad id -> image
+// under public/, each one checked by eye against its job (.map so the plan
+// loader, which reads every .json here, leaves it alone).
+const jobPhotos = existsSync('scripts/ads/job-photos.map') ? JSON.parse(readFileSync('scripts/ads/job-photos.map', 'utf8')) : {};
 const attr = (v) => String(v).replace(/"/g, '&quot;');
 const have = (p) => existsSync(`public${p}`);
 const shotsSpec = [];
@@ -40,7 +44,15 @@ for (const p of plans) {
       copyFileSync('public' + hero, '../jib_jobs/test/ad_shots/photos/' + file);
       jobs = [{ ...jobs[0], photo: file }, ...jobs.slice(1)];
     }
-    shotsSpec.push({ id, expand: ad.expand ?? 0, jobs, ...(ad.fill === false ? { fill: false } : {}) });
+    const open = ad.expand ?? 0;
+    if (jobs[open] && !jobs[open].photo && jobPhotos[id] && existsSync('public' + jobPhotos[id])) {
+      // Named after the ad so two ads can't clash over one file name.
+      const file = `${id}-job.jpg`;
+      mkdirSync('../jib_jobs/test/ad_shots/photos', { recursive: true });
+      copyFileSync('public' + jobPhotos[id], '../jib_jobs/test/ad_shots/photos/' + file);
+      jobs = jobs.map((j, i) => (i === open ? { ...j, photo: file } : j));
+    }
+    shotsSpec.push({ id, expand: open, jobs, ...(ad.fill === false ? { fill: false } : {}) });
 
     if (slot === 'extra') {
       // A second mid-article ad for long guides, its own pitch and photo,
