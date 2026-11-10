@@ -28,11 +28,12 @@ const pt = STORES.ios.providerToken;
 
     <ol class="steps">
       <li>Get Jib below and sign in.</li>
-      <li>Go to <strong>Settings</strong> and tap <strong>Have a code?</strong></li>
+      <li>Go to <strong>Settings</strong> and tap <strong id="where">Have a code?</strong></li>
       <li>Enter <strong class="code-inline">your code</strong> and start your free month.</li>
     </ol>
 
     <div class="badges"><StoreButtons campaign="social" size="lg" /></div>
+    <p class="redeem" id="redeem" hidden>On iPhone? <a id="redeem-link" href="#">Redeem your code in the App Store</a> and it's already filled in.</p>
     <p class="muted small">Your free month of Home Owner starts a subscription through Apple or Google, then it’s billed monthly at the price shown in the app unless you cancel at least 24 hours before the free month ends. Cancel any time in your store settings.</p>
   </div>
 </Base>
@@ -72,8 +73,20 @@ const pt = STORES.ios.providerToken;
       });
     });
     if (window.gtag) window.gtag('event', 'creator_link_view', { creator_code: code });
-    // Show the phone's own store first.
+    // iPhone: Apple only takes codes through the App Store, so the app's
+    // button has a different name and the code can be redeemed by link.
     var ua = navigator.userAgent;
+    var apple = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    var link = document.getElementById('redeem-link');
+    link.href = 'https://apps.apple.com/redeem?ctx=offercodes&id=' + ios.split('/id')[1] + '&code=' + encodeURIComponent(code);
+    link.addEventListener('click', function () {
+      if (window.gtag) window.gtag('event', 'creator_store_click', { creator_code: code, store: 'ios_redeem' });
+    });
+    if (apple) {
+      document.getElementById('where').textContent = 'Redeem an App Store code';
+      document.getElementById('redeem').hidden = false;
+    }
+    // Show the phone's own store first.
     if (/Android/.test(ua) && androidBtn) androidBtn.parentNode.prepend(androidBtn);
   })();
 </script>
@@ -114,6 +127,9 @@ const pt = STORES.ios.providerToken;
   }
   .badges {
     margin-bottom: 16px;
+  }
+  .redeem {
+    margin: 0 0 16px;
   }
   .small {
     font-size: 0.85rem;
