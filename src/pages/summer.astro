@@ -47,11 +47,14 @@ const ld = [
     <defs>
       <!-- Finger-painted zinc: a rough, slightly lumpy stroke. -->
       <filter id="zinc" x="-20%" y="-20%" width="140%" height="140%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n" />
-        <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" result="d" />
-        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="3" result="g" />
-        <feColorMatrix in="g" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -0.55 1.2" result="m" />
-        <feComposite in="d" in2="m" operator="in" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G" result="d" />
+        <feGaussianBlur in="d" stdDeviation="0.9" result="b" />
+        <feComponentTransfer in="b" result="s"><feFuncA type="linear" slope="1.6" intercept="-0.3" /></feComponentTransfer>
+        <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="1" seed="3" result="g" />
+        <feColorMatrix in="g" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -0.3 1.1" result="m" />
+        <feGaussianBlur in="m" stdDeviation="0.6" result="mb" />
+        <feComposite in="s" in2="mb" operator="in" />
       </filter>
     </defs>
   </svg>
@@ -143,7 +146,7 @@ const ld = [
       <div class="get"><span class="num">60</span><p><strong>AI credits</strong> for the month, six times the free plan.</p></div>
       <div class="get"><span class="num sm">Plan</span><p><strong>Any job from one photo:</strong> the steps, the time, what it costs and whether it needs a licensed tradie.</p></div>
       <div class="get"><span class="num sm">Shop</span><p><strong>A shopping list with prices</strong> from Australian stores, ticked off as you go.</p></div>
-      <div class="get"><span class="num sm ai">See</span><p><strong>See it finished</strong> before you spend a cent, drawn by Jib AI.</p></div>
+      <div class="get"><span class="num sm">See</span><p><strong>See it finished</strong> before you spend a cent, drawn by Jib AI.</p></div>
     </div>
   </section>
 
@@ -466,12 +469,6 @@ const ld = [
     font-size: 1.9rem;
     letter-spacing: 0;
     color: var(--zinc-orange);
-  }
-  .num.ai {
-    background: var(--ai);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
   .guides {
     display: grid;
