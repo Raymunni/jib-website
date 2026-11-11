@@ -19,6 +19,8 @@ const { title, description, ogImage = '/og/default.png', ogType = 'website', jso
 
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
 const ogImageUrl = new URL(ogImage, SITE.url).toString();
+// The SUMMER offer strip: every page but the offer page itself, until the code ends.
+const showSummer = !Astro.url.pathname.startsWith('/summer') && Date.now() < Date.parse('2027-03-01T00:00:00+10:00');
 const fullTitle = title.includes('Jib') ? title : `${title} | Jib`;
 
 const siteLd = [
@@ -96,6 +98,13 @@ const qr = await qrSvg(`${SITE.url}/app/`);
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
+    {showSummer && (
+      <a class="summer-strip" href="/summer/?s=site" data-summer-strip>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="#ffe58a" /><g stroke="#ff9f43" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8" /></g></svg>
+        <span>Summer offer: a free month of Jib with code <strong>SUMMER</strong></span>
+        <span class="go">Get it</span>
+      </a>
+    )}
     <header class="site-header">
       <div class="wrap bar">
         <a class="brand" href="/" aria-label="Jib home">
@@ -193,6 +202,39 @@ const qr = await qrSvg(`${SITE.url}/app/`);
     </script>
 
     <style>
+      .summer-strip {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 4px 10px;
+        padding: 8px 16px;
+        background: linear-gradient(90deg, rgba(255, 229, 138, 0.16), rgba(255, 159, 67, 0.16));
+        border-bottom: 1px solid rgba(255, 229, 138, 0.25);
+        color: #fff3cf;
+        font-size: 0.9rem;
+        line-height: 1.35;
+        text-align: center;
+        text-decoration: none;
+      }
+      .summer-strip svg {
+        width: 18px;
+        height: 18px;
+        flex: none;
+      }
+      .summer-strip strong {
+        color: #ffe58a;
+        letter-spacing: 0.05em;
+      }
+      .summer-strip .go {
+        font-weight: 700;
+        color: #ffc95c;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .summer-strip:hover {
+        color: #fff;
+      }
       .site-header {
         position: sticky;
         top: 0;

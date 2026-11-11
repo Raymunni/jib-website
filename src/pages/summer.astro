@@ -1,0 +1,570 @@
+---
+// The SUMMER offer page (code live to 28 Feb 2027, first 1,000 uses).
+// Every summer post, story, ad and the link in bio points here. It works out
+// which phone it's on: iPhone gets Apple's redeem link with the code filled
+// in (Apple only allows its own offer codes), Android gets the code to copy
+// and the Play link, a computer gets both plus a QR code back to this page.
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { SITE, STORES, iosUrl, androidUrl } from '../config';
+import { qrSvg } from '../lib/qr';
+import planShot from '../assets/screens/summer-phone-home.png';
+
+const CODE = 'SUMMER';
+const ENDS = '28 February 2027';
+const redeem = `https://apps.apple.com/redeem?ctx=offercodes&id=${STORES.ios.appId}&code=${CODE}`;
+const play = androidUrl('summer');
+const appStore = iosUrl('summer');
+const qr = await qrSvg(`${SITE.url}/summer/`);
+
+const guides = [
+  { href: '/guides/home-maintenance/summer-home-maintenance-checklist/', img: '/images/blog/summer-maintenance.jpg', alt: 'A man hosing down an air conditioner unit beside a brick house', title: 'The summer checklist', blurb: 'Everything worth doing before the heat really sets in.' },
+  { href: '/guides/home-maintenance/storm-season-checklist/', img: '/images/blog/storm-season.jpg', alt: 'A man pegging down a trampoline under dark storm clouds', title: 'Storm season prep', blurb: 'Gutters, trees and loose things, before the first big one.' },
+  { href: '/guides/home-maintenance/pool-fence-rules-qld/', img: '/images/blog/pool-fence-qld.jpg', alt: 'A black aluminium pool fence around a backyard pool', title: 'The pool fence check', blurb: 'The gate test and the numbers you can measure yourself.' },
+  { href: '/guides/how-to/ceiling-fan-direction-summer/', img: '/images/blog/ceiling-fan-summer.jpg', alt: 'A hand reaching up to a ceiling fan switch in a bright room', title: 'Fans the right way round', blurb: 'One switch that makes a room feel cooler.' },
+];
+
+const faqs = [
+  { q: 'What do I get?', a: 'One month of Jib Home Owner: 60 AI credits to plan jobs, build shopping lists with prices and see a room finished before you start. The free plan has 10 credits a month.' },
+  { q: 'What happens after the month?', a: 'Home Owner carries on at A$4.99 a month. Cancel any time before the free month ends and you pay nothing. You cancel in the App Store or Google Play, like any subscription.' },
+  { q: 'Do I need a card?', a: 'Yes. Apple and Google ask for a payment method to start any free month, but nothing is charged until it ends.' },
+  { q: 'Who can use it?', a: 'Anyone on the free plan, including people whose paid plan has ended. One free month per account.' },
+  { q: 'Why can’t I type the code in the app on my iPhone?', a: 'Apple only lets apps take its own codes, so on iPhone the code is redeemed by the App Store. The button on this page opens it with SUMMER already filled in. In the app it’s Settings, then Redeem an App Store code.' },
+  { q: 'When does it end?', a: `${ENDS}, or sooner once 1,000 people have used it.` },
+];
+
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base title="A free month of Jib with code SUMMER" description={`Use code SUMMER for a free month of Jib Home Owner and get your place ready for summer. Then A$4.99 a month, cancel any time. Ends ${ENDS}.`} jsonLd={ld}>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- Finger-painted zinc: a rough, slightly lumpy stroke. -->
+      <filter id="zinc" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" result="d" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="3" result="g" />
+        <feColorMatrix in="g" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -0.55 1.2" result="m" />
+        <feComposite in="d" in2="m" operator="in" />
+      </filter>
+    </defs>
+  </svg>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="tag"><span class="dot" aria-hidden="true"></span>Summer offer, ends {ENDS.replace(' 2027', '')}</p>
+        <h1>Get your place <span class="nowrap">summer ready.</span></h1>
+        <p class="pen">Your first month’s on us.</p>
+        <p class="lede">Use code <strong class="code-inline">SUMMER</strong> for a free month of Jib Home Owner. Plan every summer job, price the shopping list and see it finished before you start.</p>
+
+        <div class="cta" data-for="ios" hidden>
+          <a class="btn btn-sun" href={redeem} data-act="ios_redeem">Redeem in the App Store</a>
+          <p class="small">The App Store opens with the code filled in. No Jib yet? It offers to download it.</p>
+        </div>
+        <div class="cta" data-for="android" hidden>
+          <a class="btn btn-sun" href={play} data-act="play" data-copy>Copy code and get Jib</a>
+          <p class="small">Then open Jib, go to Settings, tap <strong>Have a code?</strong> and paste it.</p>
+        </div>
+        <div class="cta" data-for="desktop">
+          <a class="btn btn-sun" href="#how">How to get it</a>
+          <p class="small">Scan the code below with your phone and it does the rest.</p>
+        </div>
+        <p class="fine">Free for one month, then A$4.99 a month. Cancel any time before it ends and you pay nothing.</p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="sun-big" viewBox="0 0 400 400" filter="url(#zinc)">
+          <circle cx="200" cy="200" r="92" fill="none" stroke="var(--sun)" stroke-width="22" />
+          <circle cx="200" cy="200" r="52" fill="var(--sun)" opacity="0.9" />
+          <g stroke="var(--zinc-orange)" stroke-width="18" stroke-linecap="round">
+            <path d="M200 70 L200 22" /><path d="M200 330 L200 378" /><path d="M70 200 L22 200" /><path d="M330 200 L378 200" />
+            <path d="M108 108 L74 74" /><path d="M292 292 L326 326" /><path d="M292 108 L326 74" /><path d="M108 292 L74 326" />
+          </g>
+        </svg>
+        <div class="phone">
+          <Image src={planShot} alt="" widths={[300, 450, 600]} sizes="(max-width: 859px) 60vw, 290px" loading="eager" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap ticket-row">
+    <div class="ticket">
+      <svg class="sun-small" viewBox="0 0 120 120" filter="url(#zinc)" aria-hidden="true">
+        <circle cx="60" cy="60" r="20" fill="var(--sun)" />
+        <g stroke="var(--zinc-orange)" stroke-width="8" stroke-linecap="round"><path d="M60 22 V8" /><path d="M60 98 V112" /><path d="M22 60 H8" /><path d="M98 60 H112" /><path d="M33 33 L23 23" /><path d="M87 87 L97 97" /><path d="M87 33 L97 23" /><path d="M33 87 L23 97" /></g>
+      </svg>
+      <div>
+        <p class="t-label">Your code</p>
+        <p class="t-code" id="code">{CODE}</p>
+      </div>
+      <button class="btn btn-ghost" id="copy" type="button" data-act="copy">Copy code</button>
+    </div>
+  </section>
+
+  <section class="wrap" id="how">
+    <h2>How to use it</h2>
+    <div class="how">
+      <div class="card step-card" data-os="ios">
+        <h3>On iPhone</h3>
+        <ol>
+          <li>On your iPhone, tap <a href={redeem} data-act="ios_redeem">Redeem SUMMER</a>. The App Store opens with the code filled in.</li>
+          <li>Tap <strong>Redeem</strong>, then confirm the free month with Face ID.</li>
+          <li>Open Jib. Home Owner is switched on, with 60 credits ready.</li>
+        </ol>
+        <p class="small">Already in the app? Settings, then <strong>Redeem an App Store code</strong>, and enter SUMMER. <a href={appStore} data-act="app_store">Get Jib on the App Store</a></p>
+      </div>
+      <div class="card step-card" data-os="android">
+        <h3>On Android</h3>
+        <ol>
+          <li><a href={play} data-act="play">Get Jib on Google Play</a> and open it.</li>
+          <li>Go to <strong>Settings</strong> and tap <strong>Have a code?</strong></li>
+          <li>Enter <strong>SUMMER</strong> and confirm the free month with Google Play.</li>
+        </ol>
+        <p class="small">You can do it any time before {ENDS}.</p>
+      </div>
+    </div>
+    <div class="desktop-only card qr-card">
+      <div class="qr" set:html={qr} role="img" aria-label="QR code linking to this page" />
+      <p class="muted">On a computer? Scan this with your phone camera. This page opens on your phone with the right button for it.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>A month of Home Owner</h2>
+    <div class="gets">
+      <div class="get"><span class="num">60</span><p><strong>AI credits</strong> for the month, six times the free plan.</p></div>
+      <div class="get"><span class="num sm">Plan</span><p><strong>Any job from one photo:</strong> the steps, the time, what it costs and whether it needs a licensed tradie.</p></div>
+      <div class="get"><span class="num sm">Shop</span><p><strong>A shopping list with prices</strong> from Australian stores, ticked off as you go.</p></div>
+      <div class="get"><span class="num sm ai">See</span><p><strong>See it finished</strong> before you spend a cent, drawn by Jib AI.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>Summer jobs worth planning</h2>
+    <div class="guides">
+      {
+        guides.map((g) => (
+          <a class="guide card" href={g.href}>
+            <img src={g.img} alt={g.alt} width="640" height="360" loading="lazy" />
+            <span class="g-title">{g.title}</span>
+            <span class="g-blurb">{g.blurb}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="wrap faq">
+    <h2>Good to know</h2>
+    {
+      faqs.map((f) => (
+        <details>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))
+    }
+  </section>
+
+  <section class="wrap end">
+    <div class="end-card">
+      <svg class="sun-end" viewBox="0 0 120 120" filter="url(#zinc)" aria-hidden="true">
+        <circle cx="60" cy="60" r="22" fill="var(--sun)" />
+        <g stroke="var(--zinc-orange)" stroke-width="8" stroke-linecap="round"><path d="M60 22 V8" /><path d="M60 98 V112" /><path d="M22 60 H8" /><path d="M98 60 H112" /><path d="M33 33 L23 23" /><path d="M87 87 L97 97" /><path d="M87 33 L97 23" /><path d="M33 87 L23 97" /></g>
+      </svg>
+      <p class="end-h">Your home, <span class="pen-in">sorted</span> for summer.</p>
+      <div class="cta" data-for="ios" hidden><a class="btn btn-sun" href={redeem} data-act="ios_redeem">Redeem SUMMER</a></div>
+      <div class="cta" data-for="android" hidden><a class="btn btn-sun" href={play} data-act="play" data-copy>Copy SUMMER and get Jib</a></div>
+      <div class="cta" data-for="desktop"><a class="btn btn-sun" href="#how">How to get it</a></div>
+      <p class="fine">Free for one month, then A$4.99 a month. Ends {ENDS} or after the first 1,000 people.</p>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  (function () {
+    var ua = navigator.userAgent;
+    var device = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ? 'ios' : /Android/.test(ua) ? 'android' : 'desktop';
+    document.documentElement.setAttribute('data-device', device);
+    document.querySelectorAll('.cta').forEach(function (el) { el.hidden = el.getAttribute('data-for') !== device; });
+    var q = new URLSearchParams(location.search);
+    var src = q.get('utm_source') || q.get('s') || 'direct';
+    var camp = q.get('utm_campaign') || q.get('c') || '';
+    function ev(name, extra) {
+      if (!window.gtag) return;
+      var p = { device: device, source: src, campaign: camp };
+      for (var k in extra) p[k] = extra[k];
+      window.gtag('event', name, p);
+    }
+    ev('summer_view', {});
+    function copy() {
+      try { if (navigator.clipboard) navigator.clipboard.writeText('SUMMER').catch(function () {}); } catch (e) {}
+    }
+    document.querySelectorAll('[data-act]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (a.hasAttribute('data-copy')) copy();
+        ev('summer_click', { action: a.getAttribute('data-act') });
+      });
+    });
+    var btn = document.getElementById('copy');
+    if (btn) btn.addEventListener('click', function () {
+      copy();
+      btn.textContent = 'Copied';
+      setTimeout(function () { btn.textContent = 'Copy code'; }, 1800);
+    });
+  })();
+</script>
+
+<style>
+  :root {
+    --sun: #ffe58a;
+    --zinc-orange: #ff9f43;
+    --zinc-white: #fff6e6;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 48px 0 24px;
+    background:
+      radial-gradient(60% 70% at 85% 30%, rgba(255, 159, 67, 0.16), transparent 70%),
+      radial-gradient(50% 60% at 10% 0%, rgba(255, 229, 138, 0.09), transparent 70%);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 48px;
+    }
+    .hero {
+      padding: 72px 0 40px;
+    }
+  }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(255, 229, 138, 0.12);
+    border: 1px solid rgba(255, 229, 138, 0.35);
+    color: var(--sun);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--zinc-orange);
+    box-shadow: 0 0 10px var(--zinc-orange);
+  }
+  h1 {
+    font-family: 'Outfit', var(--font);
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    font-size: clamp(2.5rem, 7vw, 4.2rem);
+    line-height: 1.02;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .pen {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(2rem, 5.5vw, 3rem);
+    font-weight: 500;
+    color: var(--sun);
+    line-height: 1.1;
+    margin: 6px 0 18px;
+  }
+  .lede {
+    font-size: 1.12rem;
+    max-width: 34rem;
+  }
+  .code-inline {
+    color: var(--sun);
+    letter-spacing: 0.06em;
+  }
+  .cta {
+    margin: 26px 0 10px;
+  }
+  .btn-sun {
+    background: linear-gradient(180deg, #ffe9a0, #ffc95c);
+    color: #2a1600;
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 6px 26px rgba(255, 170, 60, 0.35);
+    font-size: 1.05rem;
+    padding: 0 26px;
+    min-height: 54px;
+  }
+  .btn-sun:hover {
+    color: #2a1600;
+    filter: brightness(1.05);
+  }
+  .small {
+    font-size: 0.92rem;
+    color: var(--dim);
+    margin: 10px 0 0;
+  }
+  .fine {
+    font-size: 0.85rem;
+    color: var(--dim);
+    margin: 14px 0 0;
+  }
+  .hero-art {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 360px;
+  }
+  .sun-big {
+    position: absolute;
+    width: min(360px, 82%);
+    top: -10px;
+    left: -6%;
+  }
+  .phone {
+    position: relative;
+    width: min(270px, 58vw);
+    transform: rotate(5deg) translateX(14%);
+    filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.55));
+  }
+  .phone :global(img) {
+    width: 100%;
+  }
+  .ticket-row {
+    margin-top: 12px;
+  }
+  .ticket {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px 24px;
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    border: 2px dashed rgba(255, 229, 138, 0.55);
+    background: linear-gradient(120deg, rgba(255, 229, 138, 0.1), rgba(255, 159, 67, 0.08));
+  }
+  .ticket > div {
+    flex: 1 1 160px;
+    min-width: 0;
+  }
+  .sun-small {
+    width: 64px;
+    flex: none;
+  }
+  .t-label {
+    margin: 0;
+    color: var(--dim);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .t-code {
+    margin: 0;
+    font-family: 'Outfit', var(--font);
+    font-weight: 700;
+    font-size: clamp(2.2rem, 7vw, 3rem);
+    letter-spacing: 0.08em;
+    color: var(--sun);
+    line-height: 1.1;
+  }
+  .how {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  @media (min-width: 760px) {
+    .how {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .step-card h3 {
+    margin-top: 0;
+  }
+  .step-card ol {
+    padding-left: 1.3em;
+  }
+  :global([data-device='ios']) .step-card[data-os='ios'],
+  :global([data-device='android']) .step-card[data-os='android'] {
+    border-color: rgba(255, 229, 138, 0.55);
+    order: -1;
+  }
+  .qr-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .qr {
+    width: 140px;
+    flex: none;
+    background: #fff;
+    padding: 8px;
+    border-radius: 12px;
+  }
+  .qr-card p {
+    margin: 0;
+  }
+  @media (hover: none) and (pointer: coarse) {
+    .desktop-only {
+      display: none;
+    }
+  }
+  .gets {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  @media (min-width: 720px) {
+    .gets {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .get {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .get p {
+    margin: 0;
+    min-width: 0;
+  }
+  .num {
+    flex: none;
+    width: 74px;
+    text-align: center;
+    font-family: 'Outfit', var(--font);
+    font-weight: 700;
+    font-size: 2.2rem;
+    letter-spacing: -0.04em;
+    color: var(--sun);
+  }
+  .num.sm {
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: 1.9rem;
+    letter-spacing: 0;
+    color: var(--zinc-orange);
+  }
+  .num.ai {
+    background: var(--ai);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .guides {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  @media (min-width: 640px) {
+    .guides {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1000px) {
+    .guides {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .guide {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 0 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .guide img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .g-title,
+  .g-blurb {
+    padding: 0 16px;
+  }
+  .g-title {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .g-blurb {
+    font-size: 0.93rem;
+    color: var(--dim);
+  }
+  .guide:hover .g-title {
+    color: var(--sun);
+  }
+  .faq details {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+  }
+  .faq summary {
+    cursor: pointer;
+    color: var(--ink);
+    font-weight: 650;
+  }
+  .faq details p {
+    margin: 10px 0 0;
+    max-width: var(--prose);
+  }
+  .end {
+    margin: 56px auto 72px;
+  }
+  .end-card {
+    text-align: center;
+    padding: 40px 22px;
+    border-radius: 24px;
+    background:
+      radial-gradient(70% 90% at 50% 0%, rgba(255, 159, 67, 0.18), transparent 70%),
+      var(--surface-2);
+    border: 1px solid rgba(255, 229, 138, 0.25);
+  }
+  .sun-end {
+    width: 72px;
+    margin: 0 auto 6px;
+    display: block;
+  }
+  .end-h {
+    font-family: 'Outfit', var(--font);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+    color: var(--ink);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .pen-in {
+    font-family: 'Caveat', cursive;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: var(--sun);
+    font-size: 1.2em;
+  }
+  .end-card .cta {
+    margin-top: 18px;
+  }
+</style>
