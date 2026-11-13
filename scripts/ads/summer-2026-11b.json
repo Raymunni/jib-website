@@ -1,0 +1,140 @@
+[
+ {
+  "guide": "home-maintenance/pool-fence-rules-nsw",
+  "slug": "pool-fence-nsw",
+  "inline": {
+   "headline": "Every spring, before swimming season.",
+   "alt": "A dad kneeling beside a black pool fence, checking the gap under the bottom rail, tape measure in hand",
+   "jobs": [
+    {
+     "room": "Pool",
+     "title": "Check the pool fence and gate",
+     "description": "Height, gaps underneath, anything climbable, and the latch.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "year", "interval": 1 },
+     "scheduledAt": 1820617200000,
+     "tools": [ { "name": "Tape measure", "owned": true } ],
+     "directions": [
+      "Measure the height all the way round",
+      "Check gaps under the fence, max 10 cm",
+      "Clear the 90 cm zone of anything climbable",
+      "Test the gate from every position"
+     ]
+    },
+    { "room": "Pool", "title": "Oil the pool gate hinges and latch", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820617200000 },
+    { "room": "Pool", "title": "Register the pool on the NSW register", "verdict": "diy_safe" }
+   ]
+  },
+  "end": {
+   "headline": "Checked before the first swim.",
+   "alt": "Two kids in rash vests sitting on the edge of a backyard pool with their feet in the water, a black pool fence behind them",
+   "expand": -1,
+   "fill": false,
+   "jobs": [
+    { "room": "Pool", "title": "Check the pool fence and gate", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1820617200000 },
+    { "room": "Pool", "title": "Replace the faded CPR sign", "verdict": "diy_safe" },
+    { "room": "Pool", "title": "Book a pool compliance inspection", "verdict": "tradie_required" },
+    { "room": "Backyard", "title": "Move the pot plants off the pool fence", "verdict": "diy_safe" }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/hot-water-temperature-50-degrees",
+  "slug": "hot-water-50",
+  "inline": {
+   "headline": "Hot tap, checked once a year.",
+   "alt": "An electric hot water system on a brick wall with copper pipes and a brass tempering valve",
+   "jobs": [
+    {
+     "room": "Bathroom",
+     "title": "Check the bathroom hot water temperature",
+     "description": "Basin hot tap seems hotter than it should. Kids bath in here.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "year", "interval": 1 },
+     "scheduledAt": 1820617200000,
+     "tools": [ { "name": "Cooking thermometer", "owned": true } ],
+     "directions": [
+      "Run the basin on full hot for 2 minutes",
+      "Fill a glass, put the thermometer in",
+      "Read it after 30 seconds",
+      "Over 50°C? Book a plumber"
+     ]
+    },
+    { "room": "Side yard", "title": "Get the tempering valve checked", "verdict": "tradie_required" },
+    { "room": "Side yard", "title": "Flush the hot water relief valve", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820617200000 }
+   ]
+  },
+  "end": {
+   "headline": "Hot enough to wash. Not enough to scald.",
+   "alt": "A dad and his young son washing their hands together at a bathroom basin, the boy standing on a step stool",
+   "jobs": [
+    {
+     "room": "Side yard",
+     "title": "Get the tempering valve checked",
+     "description": "Bathroom basin reads 62°C on full hot. Kitchen is normal.",
+     "timeEstimate": "About an hour",
+     "verdict": "tradie_required",
+     "shoppingList": [ { "item": "Plumber: tempering valve check", "price": 180 } ],
+     "directions": [
+      "Snap the model plate on the hot water system",
+      "Note the temperature you measured",
+      "Book a licensed plumber",
+      "Send the brief with your photos"
+     ]
+    },
+    { "room": "Bathroom", "title": "Check the bathroom hot water temperature", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1820617200000 },
+    { "room": "Bathroom", "title": "Descale the shower head", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820617200000 }
+   ]
+  }
+ },
+ {
+  "guide": "diy-legal/can-i-repoint-my-own-ridge-capping",
+  "slug": "ridge-capping",
+  "inline": {
+   "headline": "Snapped from the ground. Sorted from there.",
+   "alt": "A single-storey brick house with a terracotta tiled roof after rain, seen from the front lawn",
+   "jobs": [
+    {
+     "room": "Roof",
+     "title": "Repoint the ridge capping",
+     "description": "Pointing cracked along the ridge. Mortar bits in the gutter after the storm.",
+     "timeEstimate": "Half a day",
+     "verdict": "tradie_required",
+     "directions": [
+      "Photograph the ridge from the yard",
+      "Check the roof space for daylight or stains",
+      "Get two roofer quotes",
+      "Ask: repoint or rebed?"
+     ]
+    },
+    { "room": "Roof", "title": "Check the roof from the ground after storms", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 3 }, "scheduledAt": 1820617200000 },
+    { "room": "Outside", "title": "Clean the gutters", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820617200000 }
+   ]
+  },
+  "end": {
+   "headline": "Storm on the roof. Dry inside.",
+   "alt": "A family on the couch on a rainy evening, rain on the window behind them",
+   "jobs": [
+    {
+     "room": "Roof",
+     "title": "Check the roof from the ground after storms",
+     "description": "Look along the ridge for cracked pointing or slipped caps.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 3 },
+     "scheduledAt": 1820617200000,
+     "directions": [
+      "Walk round the house with your phone",
+      "Zoom in on the ridge and hips",
+      "Check the gutters for mortar bits",
+      "Torch in the roof space after rain"
+     ]
+    },
+    { "room": "Roof", "title": "Repoint the ridge capping", "verdict": "tradie_required" },
+    { "room": "Outside", "title": "Clean the gutters", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820617200000 }
+   ]
+  }
+ }
+]
