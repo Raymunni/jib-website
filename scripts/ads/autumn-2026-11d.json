@@ -1,0 +1,200 @@
+[
+ {
+  "guide": "home-maintenance/how-often-should-a-gas-heater-be-serviced",
+  "slug": "gas-heater-service",
+  "inline": {
+   "headline": "Every two years, before the cold.",
+   "alt": "A gasfitter kneeling at a wall gas heater with its front panel off, testing it before winter",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Book the gas heater service",
+     "description": "Every two years by a licensed gasfitter, including a carbon monoxide test.",
+     "timeEstimate": "About an hour",
+     "verdict": "tradie_required",
+     "repeat": { "freq": "year", "interval": 2 },
+     "scheduledAt": 1803855600000,
+     "directions": [
+      "Note the heater's make and model",
+      "Book a licensed gasfitter in autumn",
+      "Ask for a carbon monoxide test",
+      "Keep the service record"
+     ]
+    },
+    { "room": "Living room", "title": "Test the carbon monoxide alarm", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1803855600000 },
+    { "room": "Outside", "title": "Clear plants from the heater flue", "verdict": "diy_safe" }
+   ]
+  },
+  "end": {
+   "headline": "Warm, and checked.",
+   "alt": "A family under a knitted blanket on the couch on a winter night, a gas heater glowing beside them",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Check around the gas heater",
+     "description": "A metre clear all round, vents open, no exhaust fans while it runs.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "year", "interval": 1 },
+     "scheduledAt": 1803855600000,
+     "directions": [
+      "Move furniture and curtains a metre back",
+      "Check the wall vents aren't blocked",
+      "Look for soot or a changed flame",
+      "Keep the rangehood off while it's on"
+     ]
+    },
+    { "room": "Living room", "title": "Book the gas heater service", "verdict": "tradie_required", "repeat": { "freq": "year", "interval": 2 }, "scheduledAt": 1803855600000 },
+    { "room": "Living room", "title": "Test the carbon monoxide alarm", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1803855600000 }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/electric-blanket-safety-check",
+  "slug": "electric-blanket",
+  "inline": {
+   "headline": "One check, first cold week.",
+   "alt": "A woman checking the cord where it joins an electric blanket controller, the blanket spread out on the bed",
+   "jobs": [
+    {
+     "room": "Bedroom",
+     "title": "Check the electric blanket",
+     "description": "Scorch marks, kinks, frayed cord, then the hot spot test.",
+     "timeEstimate": "About 20 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "year", "interval": 1 },
+     "scheduledAt": 1803855600000,
+     "directions": [
+      "Lay the blanket out flat",
+      "Look for scorch marks, kinks and lumps",
+      "Check the cord and controller",
+      "Cover it, run on high, feel for hot spots"
+     ]
+    },
+    { "room": "Kids' room", "title": "Check the electric blanket", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1803855600000 },
+    { "room": "Hallway", "title": "Test the smoke alarms", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 1 }, "scheduledAt": 1803855600000 }
+   ]
+  },
+  "end": {
+   "headline": "Cosy, not risky.",
+   "alt": "A couple reading in bed on a cold night under a thick doona, a bedside lamp on",
+   "jobs": [
+    {
+     "room": "Bedroom",
+     "title": "Roll up the electric blanket for summer",
+     "description": "Roll it, don't fold it, and store it with nothing on top.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "year", "interval": 1 },
+     "scheduledAt": 1820185200000,
+     "directions": [
+      "Unplug it and let it cool",
+      "Sponge any marks, dry it flat",
+      "Roll it loosely, never fold",
+      "Store it where nothing sits on top"
+     ]
+    },
+    { "room": "Bedroom", "title": "Check the electric blanket", "verdict": "diy_safe", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1803855600000 },
+    { "room": "Living room", "title": "Book the gas heater service", "verdict": "tradie_required" }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/how-to-store-firewood",
+  "slug": "firewood",
+  "inline": {
+   "headline": "Move the pile. Book the check.",
+   "alt": "A man stacking split firewood onto a freestanding steel rack on pavers in the middle of a backyard",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Move the woodpile off the house",
+     "description": "Off the ground, under cover, away from walls, fences and the shed.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "diy_safe",
+     "directions": [
+      "Pick a dry spot well away from the house",
+      "Set up a steel rack off the ground",
+      "Restack with the oldest wood in front",
+      "Check the old spot for mud tubes"
+     ]
+    },
+    { "room": "Outside", "title": "Book the termite inspection", "verdict": "tradie_required", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1803855600000 },
+    { "room": "Living room", "title": "Get the chimney cleaned", "verdict": "tradie_required", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1803855600000 }
+   ]
+  },
+  "end": {
+   "headline": "Dry wood. Happy house.",
+   "alt": "A dad and his daughter carrying split firewood across the backyard on a cold autumn afternoon",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Fill the log holder from the rack",
+     "description": "Oldest wood first. Tap two pieces together for a hollow crack.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "week", "interval": 1 },
+     "scheduledAt": 1803855600000,
+     "directions": [
+      "Take wood from the oldest end",
+      "Knock two pieces to check they're dry",
+      "Fill the metal log holder",
+      "Leave the rest under cover"
+     ]
+    },
+    { "room": "Backyard", "title": "Move the woodpile off the house", "verdict": "diy_safe" },
+    { "room": "Outside", "title": "Book the termite inspection", "verdict": "tradie_required", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1803855600000 }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/how-often-to-clean-a-chimney-or-flue",
+  "slug": "chimney-flue",
+  "inline": {
+   "headline": "Book the sweep in autumn.",
+   "alt": "A woman shining a torch up into an open brick fireplace to check the chimney for soot",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Get the chimney cleaned",
+     "description": "Once a year before winter, by a qualified chimney sweep.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "tradie_required",
+     "repeat": { "freq": "year", "interval": 1 },
+     "scheduledAt": 1803855600000,
+     "directions": [
+      "Torch check for soot and blockages",
+      "Book a sweep in late summer or autumn",
+      "Ask them to check for corrosion",
+      "Don't light a fire until it's done"
+     ]
+    },
+    { "room": "Living room", "title": "Check the fire screen and hearth", "verdict": "diy_safe" },
+    { "room": "Backyard", "title": "Move the woodpile off the house", "verdict": "diy_safe" }
+   ]
+  },
+  "end": {
+   "headline": "First fire, no worries.",
+   "alt": "A couple with mugs of tea sitting on the floor near an open fire behind a mesh fire screen",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Torch check up the chimney",
+     "description": "Look for thick soot, tar-like build-up or nests before the first fire.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "year", "interval": 1 },
+     "scheduledAt": 1803855600000,
+     "directions": [
+      "Wait until the fireplace is cold",
+      "Open the damper",
+      "Shine a torch up the flue",
+      "Book a sweep if there's build-up"
+     ]
+    },
+    { "room": "Living room", "title": "Get the chimney cleaned", "verdict": "tradie_required", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1803855600000 },
+    { "room": "Hallway", "title": "Test the smoke alarms", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 1 }, "scheduledAt": 1803855600000 }
+   ]
+  }
+ }
+]
