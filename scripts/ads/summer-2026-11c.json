@@ -1,0 +1,193 @@
+[
+ {
+  "guide": "council-approval/unapproved-shed-south-australia",
+  "slug": "unapproved-shed-sa",
+  "inline": {
+   "headline": "Know before you build.",
+   "alt": "A dad measuring a backyard spot for a new shed with a tape measure, pegs in the lawn",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Mark out the new shed",
+     "description": "Under 15 m² and 2.5 m high, behind the house, clear of the fence.",
+     "timeEstimate": "About 30 minutes",
+     "verdict": "diy_safe",
+     "tools": [ { "name": "Tape measure", "owned": true }, { "name": "Pegs and string", "owned": false } ],
+     "directions": [
+      "Check the shed's floor area and height",
+      "Peg out the footprint on the lawn",
+      "Measure back from the side fence",
+      "Look up the address on the SA Code"
+     ]
+    },
+    { "room": "Backyard", "title": "Pour the shed slab", "verdict": "tradie_required" },
+    { "room": "Backyard", "title": "Clear leaves behind the shed", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 3 }, "scheduledAt": 1820617200000 }
+   ]
+  },
+  "end": {
+   "headline": "Right size. Right spot. No letters.",
+   "alt": "A mum and her daughter planting seedlings in pots on a wooden crate beside a small new garden shed",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Plant the seedlings by the shed",
+     "description": "Herbs and tomatoes along the sunny side.",
+     "timeEstimate": "About an hour",
+     "verdict": "diy_safe",
+     "directions": [
+      "Fill the pots with potting mix",
+      "Plant one seedling per pot",
+      "Water in well",
+      "Keep them out of the hot afternoon sun"
+     ]
+    },
+    { "room": "Backyard", "title": "Build the garden shed", "verdict": "diy_safe" },
+    { "room": "Backyard", "title": "Clear leaves behind the shed", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 3 }, "scheduledAt": 1820617200000 }
+   ]
+  }
+ },
+ {
+  "guide": "diy-legal/replace-a-light-with-a-ceiling-fan",
+  "slug": "light-to-ceiling-fan",
+  "inline": {
+   "headline": "One visit. Every fan.",
+   "alt": "An electrician on a stepladder fitting a ceiling fan mounting plate where a bedroom light used to be",
+   "jobs": [
+    {
+     "room": "Bedroom",
+     "title": "Replace the light with a ceiling fan",
+     "description": "2.4 m ceiling, 122 to 132 cm fan, wall control by the door.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "tradie_required",
+     "directions": [
+      "Measure the room and ceiling height",
+      "Pick a fan with blades over 2.1 m",
+      "Get an electrician to quote every room",
+      "Ask about the switch and the certificate"
+     ]
+    },
+    { "room": "Kids' room", "title": "Replace the light with a ceiling fan", "verdict": "tradie_required" },
+    { "room": "Living room", "title": "Wipe the ceiling fan blades", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 3 }, "scheduledAt": 1820617200000 }
+   ]
+  },
+  "end": {
+   "headline": "Cool room. Quote sorted.",
+   "alt": "A young woman reading on her bed on a hot afternoon under a white ceiling fan",
+   "jobs": [
+    {
+     "room": "Bedroom",
+     "title": "Switch the fan to summer mode",
+     "description": "Anticlockwise from below, so it pushes air down.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "year", "interval": 1 },
+     "scheduledAt": 1820617200000,
+     "directions": [
+      "Turn the fan off and let it stop",
+      "Find the direction switch on the motor",
+      "Flip it, then run on high",
+      "Check you feel a breeze underneath"
+     ]
+    },
+    { "room": "Bedroom", "title": "Replace the light with a ceiling fan", "verdict": "tradie_required" },
+    { "room": "Bedroom", "title": "Wipe the ceiling fan blades", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 3 }, "scheduledAt": 1820617200000 }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/split-system-not-cooling",
+  "slug": "split-system-not-cooling",
+  "inline": {
+   "headline": "Filters, every fortnight. Sorted.",
+   "alt": "A woman rinsing a split system air conditioner filter under the laundry tap",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Clean the split system filters",
+     "description": "Dusty filters choke the airflow. Rinse, dry in the shade, refit.",
+     "timeEstimate": "About 15 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "week", "interval": 2 },
+     "scheduledAt": 1820617200000,
+     "directions": [
+      "Turn it off and isolate the power",
+      "Lift the front panel, slide the filters out",
+      "Vacuum or rinse in lukewarm water",
+      "Dry fully in the shade, then refit"
+     ]
+    },
+    { "room": "Outside", "title": "Clear around the aircon outdoor unit", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 3 }, "scheduledAt": 1820617200000 },
+    { "room": "Living room", "title": "Book the aircon service", "verdict": "tradie_required", "repeat": { "freq": "year", "interval": 1 }, "scheduledAt": 1820617200000 }
+   ]
+  },
+  "end": {
+   "headline": "Cool again by dinner.",
+   "alt": "A family of four laughing over pasta at the kitchen table, a split system on the wall behind them",
+   "jobs": [
+    {
+     "room": "Kitchen",
+     "title": "Check the aircon is on Cool",
+     "description": "Snowflake on the remote, set below room temperature.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "directions": [
+      "Check the mode shows the snowflake",
+      "Set it a few degrees below the room",
+      "Turn off any timer or eco setting",
+      "Close the doors to the room"
+     ]
+    },
+    { "room": "Living room", "title": "Clean the split system filters", "verdict": "diy_safe", "repeat": { "freq": "week", "interval": 2 }, "scheduledAt": 1820617200000 },
+    { "room": "Living room", "title": "Book the aircon service", "verdict": "tradie_required" }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/possum-in-the-roof",
+  "slug": "possum-in-roof",
+  "inline": {
+   "headline": "Find the gap. Block it once.",
+   "alt": "A rough timber possum nest box strapped high on a gum tree trunk in a suburban backyard",
+   "jobs": [
+    {
+     "room": "Roof",
+     "title": "Move the possum out of the roof",
+     "description": "Nest box in the gum tree first, then block the gap at night.",
+     "timeEstimate": "About 3 days",
+     "verdict": "diy_safe",
+     "directions": [
+      "Watch at dusk to find the way in",
+      "Fix a nest box 4 m up a tree",
+      "Block the gap at night once it's out",
+      "Wash the old entry with disinfectant"
+     ]
+    },
+    { "room": "Backyard", "title": "Prune branches back from the roof", "verdict": "diy_safe" },
+    { "room": "Roof", "title": "Fix the gap under the eaves", "verdict": "tradie_required" }
+   ]
+  },
+  "end": {
+   "headline": "Quiet roof. Happy possum.",
+   "alt": "A couple asleep in bed in a calm bedroom, early morning light coming through the curtains",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Check the possum box and the roofline",
+     "description": "Make sure the box is in use and no new gaps have opened.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "repeat": { "freq": "month", "interval": 6 },
+     "scheduledAt": 1820617200000,
+     "directions": [
+      "Look for signs of use at the box",
+      "Walk round the eaves at dusk",
+      "Check the one-way flap still works",
+      "Trim any new branches near the roof"
+     ]
+    },
+    { "room": "Roof", "title": "Fix the gap under the eaves", "verdict": "tradie_required" },
+    { "room": "Backyard", "title": "Prune branches back from the roof", "verdict": "diy_safe", "repeat": { "freq": "month", "interval": 6 }, "scheduledAt": 1820617200000 }
+   ]
+  }
+ }
+]
