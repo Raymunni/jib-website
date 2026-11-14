@@ -1,0 +1,750 @@
+[
+ {
+  "guide": "how-to/how-to-put-up-christmas-lights-safely",
+  "slug": "xmas-lights",
+  "inline": {
+   "headline": "Plan the display. Skip the drama.",
+   "alt": "A woman kneeling on the front lawn checking a string of Christmas lights for damage, a box of lights beside her",
+   "jobs": [
+    {
+     "room": "Front yard",
+     "title": "Put up the Christmas lights",
+     "description": "Outdoor-rated lights, IP23 or better, weatherproof plugs and a timer.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "diy_safe",
+     "scheduledAt": 1796425200000,
+     "directions": [
+      "Test last year's lights on the ground",
+      "Test the safety switch",
+      "Clip lights along the gutter from the ladder",
+      "Set the timer to switch off at bedtime"
+     ]
+    },
+    {
+     "room": "Front yard",
+     "title": "Take down the Christmas lights",
+     "verdict": "diy_safe",
+     "scheduledAt": 1799449200000
+    },
+    {
+     "room": "Hallway",
+     "title": "Test the safety switch",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 3
+     },
+     "scheduledAt": 1796425200000
+    }
+   ]
+  },
+  "end": {
+   "headline": "Lights up. Feet on the ground.",
+   "alt": "A family standing on the front lawn at dusk looking up at their house lit with warm white Christmas lights",
+   "jobs": [
+    {
+     "room": "Front yard",
+     "title": "Take down the Christmas lights",
+     "description": "Coil each set loosely, check for damage, and box them with the clips.",
+     "timeEstimate": "About an hour",
+     "verdict": "diy_safe",
+     "scheduledAt": 1799449200000,
+     "directions": [
+      "Switch off and unplug at the wall",
+      "Unclip from the gutter, coil loosely",
+      "Bin any damaged sets",
+      "Label the box for next year"
+     ]
+    },
+    {
+     "room": "Front yard",
+     "title": "Put up the Christmas lights",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1796425200000
+    },
+    {
+     "room": "Outside",
+     "title": "Clean the gutters",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 6
+     },
+     "scheduledAt": 1795820400000
+    }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/christmas-lights-tripping-safety-switch",
+  "slug": "xmas-lights-tripping",
+  "inline": {
+   "headline": "Find it. Fix it. Light it up.",
+   "alt": "A woman crouched on the pavers at dusk pulling a Christmas light plug out of an outdoor power board",
+   "jobs": [
+    {
+     "room": "Front yard",
+     "title": "Find the faulty Christmas lights",
+     "description": "Unplug every set, reset the safety switch, then plug in one at a time.",
+     "timeEstimate": "About 30 minutes",
+     "verdict": "diy_safe",
+     "directions": [
+      "Unplug every set and lead",
+      "Reset the safety switch",
+      "Plug sets back in one at a time",
+      "Bin the set that trips it"
+     ]
+    },
+    {
+     "room": "Front yard",
+     "title": "Weatherproof the outdoor plugs",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Hallway",
+     "title": "Call an electrician about the safety switch",
+     "verdict": "tradie_required"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Lights back on, safely.",
+   "alt": "A mum and her young daughter sitting on the front steps at night under warm Christmas lights along the veranda",
+   "jobs": [
+    {
+     "room": "Front yard",
+     "title": "Weatherproof the outdoor plugs",
+     "description": "Weatherproof covers, plugs off the ground, display off in rain.",
+     "timeEstimate": "About 20 minutes",
+     "verdict": "diy_safe",
+     "directions": [
+      "Fit weatherproof covers to every join",
+      "Lift power boards off the ground",
+      "Bring indoor transformers inside",
+      "Set the timer to switch off at bedtime"
+     ]
+    },
+    {
+     "room": "Front yard",
+     "title": "Find the faulty Christmas lights",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Hallway",
+     "title": "Test the safety switch",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 3
+     },
+     "scheduledAt": 1796425200000
+    }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/button-batteries-christmas-safety",
+  "slug": "button-batteries",
+  "inline": {
+   "headline": "Ten minutes, every remote checked.",
+   "alt": "A grandmother on the couch looking closely at a TV remote, a toddler playing by the Christmas tree behind her",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Do a button battery sweep",
+     "description": "Remotes, scales, musical cards and light-up toys: check every compartment.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "scheduledAt": 1797634800000,
+     "directions": [
+      "Gather remotes, scales and light-up toys",
+      "Check every battery compartment is secure",
+      "Put spare batteries up high",
+      "Tape and recycle the dead ones"
+     ]
+    },
+    {
+     "room": "Kitchen",
+     "title": "Recycle the old batteries",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Hallway",
+     "title": "Test the smoke alarms",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 1
+     },
+     "scheduledAt": 1796425200000
+    }
+   ]
+  },
+  "end": {
+   "headline": "Checked before the kids arrive.",
+   "alt": "Grandparents and two small grandchildren laughing on the living room floor beside a Christmas tree",
+   "jobs": [
+    {
+     "room": "Kitchen",
+     "title": "Recycle the old batteries",
+     "description": "Tape both sides of each battery and take them to a drop-off point.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "directions": [
+      "Tape both sides of each battery",
+      "Keep them in a closed container",
+      "Drop them at a battery recycling point",
+      "Put spares in a high cupboard"
+     ]
+    },
+    {
+     "room": "Living room",
+     "title": "Do a button battery sweep",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1797634800000
+    },
+    {
+     "room": "Living room",
+     "title": "Check the Christmas lights before use",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/get-your-home-ready-for-christmas-guests",
+  "slug": "xmas-hosting",
+  "inline": {
+   "headline": "Every job, before Christmas Eve.",
+   "alt": "A couple making up a spare bed with fresh linen in a bright guest room before Christmas",
+   "jobs": [
+    {
+     "room": "Spare room",
+     "title": "Get the spare room ready",
+     "description": "Fresh sheets, a clear drawer, a working lamp and a window that opens.",
+     "timeEstimate": "About an hour",
+     "verdict": "diy_safe",
+     "scheduledAt": 1797634800000,
+     "directions": [
+      "Make the bed with fresh linen",
+      "Clear a drawer and some hangers",
+      "Check the bedside lamp works",
+      "Check the window opens and locks"
+     ]
+    },
+    {
+     "room": "Hallway",
+     "title": "Test the smoke alarms",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 1
+     },
+     "scheduledAt": 1797030000000
+    },
+    {
+     "room": "Pool",
+     "title": "Check the pool gate self-closes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 1
+     },
+     "scheduledAt": 1797030000000
+    }
+   ]
+  },
+  "end": {
+   "headline": "Ready before the doorbell.",
+   "alt": "Three generations of a family laughing around a long table at Christmas lunch on a shaded back deck",
+   "jobs": [
+    {
+     "room": "Pool",
+     "title": "Check the pool gate self-closes",
+     "description": "Open it from every angle and let go: it must shut and latch by itself.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 1
+     },
+     "scheduledAt": 1797030000000,
+     "directions": [
+      "Open the gate fully and let go",
+      "Try it half open too",
+      "Check the latch catches every time",
+      "Move anything climbable off the fence"
+     ]
+    },
+    {
+     "room": "Backyard",
+     "title": "Clean the BBQ",
+     "verdict": "diy_safe",
+     "scheduledAt": 1797634800000
+    },
+    {
+     "room": "Spare room",
+     "title": "Get the spare room ready",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/gas-bottle-expiry-date",
+  "slug": "gas-bottle",
+  "inline": {
+   "headline": "Never caught short at the servo.",
+   "alt": "A man kneeling on a back deck checking the valve and collar of a BBQ gas bottle",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Check the gas bottle test date",
+     "description": "Stamped on the collar. Valid for 10 years, then test or swap it.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "scheduledAt": 1797030000000,
+     "directions": [
+      "Find the stamp on the collar",
+      "Add 10 years to the date",
+      "Check for rust, dents and the seal",
+      "Swap or retest it if it's out of date"
+     ]
+    },
+    {
+     "room": "Backyard",
+     "title": "Clean the BBQ",
+     "verdict": "diy_safe",
+     "scheduledAt": 1797634800000
+    },
+    {
+     "room": "Backyard",
+     "title": "Swap the gas bottle",
+     "verdict": "diy_safe"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Bottle checked. Snags on.",
+   "alt": "A dad turning sausages on a barbecue on a summer afternoon while his kids wait with plates",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Clean the BBQ",
+     "description": "Scrape the grill, empty the fat tray, check the hose and seal.",
+     "timeEstimate": "About 45 minutes",
+     "verdict": "diy_safe",
+     "scheduledAt": 1797634800000,
+     "directions": [
+      "Scrape the hot plate and grill",
+      "Empty and wash the fat tray",
+      "Check the hose for cracks",
+      "Turn off at the bottle first when done"
+     ]
+    },
+    {
+     "room": "Backyard",
+     "title": "Check the gas bottle test date",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1797030000000
+    },
+    {
+     "room": "Hallway",
+     "title": "Test the smoke alarms",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 1
+     },
+     "scheduledAt": 1796425200000
+    }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/when-can-i-water-my-lawn",
+  "slug": "lawn-watering",
+  "inline": {
+   "headline": "Watered on time, all summer.",
+   "alt": "A woman watering a backyard lawn with a trigger nozzle hose in early morning light",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Water the lawn early",
+     "description": "Deep water in the morning, within your city's allowed times.",
+     "timeEstimate": "About 20 minutes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "week",
+      "interval": 1
+     },
+     "scheduledAt": 1796425200000,
+     "directions": [
+      "Check your allowed watering times",
+      "Water early, before the heat",
+      "Water deeply, less often",
+      "Use a trigger nozzle on the hose"
+     ]
+    },
+    {
+     "room": "Backyard",
+     "title": "Raise the mower height",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Backyard",
+     "title": "Mow and edge before Christmas",
+     "verdict": "diy_safe",
+     "scheduledAt": 1797634800000
+    }
+   ]
+  },
+  "end": {
+   "headline": "Green for Christmas cricket.",
+   "alt": "Kids and a dad playing backyard cricket on a green lawn on a summer evening",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Mow and edge before Christmas",
+     "description": "Mower up a notch, edges done, clippings off the cricket pitch.",
+     "timeEstimate": "About an hour",
+     "verdict": "diy_safe",
+     "scheduledAt": 1797634800000,
+     "directions": [
+      "Raise the mower a notch for summer",
+      "Mow the whole lawn",
+      "Edge the paths and beds",
+      "Water early the next morning"
+     ]
+    },
+    {
+     "room": "Backyard",
+     "title": "Water the lawn early",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "week",
+      "interval": 1
+     },
+     "scheduledAt": 1796425200000
+    },
+    {
+     "room": "Backyard",
+     "title": "Check the sprinkler run times",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/prepare-your-home-for-bushfire-season",
+  "slug": "bushfire-prep",
+  "inline": {
+   "headline": "The list, done before summer.",
+   "alt": "A man raking dry gum leaves into a pile beside the brick wall of a house near the bush",
+   "jobs": [
+    {
+     "room": "Outside",
+     "title": "Clear fallen leaves from around the house",
+     "description": "Leaves, bark and twigs raked away from the walls, decks and steps.",
+     "timeEstimate": "About an hour",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 1
+     },
+     "scheduledAt": 1795820400000,
+     "directions": [
+      "Rake leaves and bark away from the walls",
+      "Clear under the deck and steps",
+      "Move firewood away from the house",
+      "Green bin or compost the pile"
+     ]
+    },
+    {
+     "room": "Roof",
+     "title": "Clear the gutters for bushfire season",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 3
+     },
+     "scheduledAt": 1795820400000
+    },
+    {
+     "room": "Roof",
+     "title": "Fit metal gutter guards",
+     "verdict": "tradie_required"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Ready before the smoke.",
+   "alt": "A family relaxing on the back deck of a house near the bush on a clear summer evening",
+   "jobs": [
+    {
+     "room": "Outside",
+     "title": "Write the bushfire survival plan",
+     "description": "Decide when you'll leave, where you'll go and what you'll take.",
+     "timeEstimate": "About an hour",
+     "verdict": "diy_safe",
+     "scheduledAt": 1795820400000,
+     "directions": [
+      "Check if you're on bush fire prone land",
+      "Decide your trigger to leave",
+      "Pack the emergency kit",
+      "Share the plan with everyone at home"
+     ]
+    },
+    {
+     "room": "Roof",
+     "title": "Clear the gutters for bushfire season",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 3
+     },
+     "scheduledAt": 1795820400000
+    },
+    {
+     "room": "Outside",
+     "title": "Check the hoses reach around the house",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/best-temperature-for-air-conditioner-in-summer",
+  "slug": "aircon-temp",
+  "inline": {
+   "headline": "The right setting, every summer.",
+   "alt": "A woman sliding the filter back into a wall-mounted split system air conditioner",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Clean the split system filters",
+     "description": "Every few weeks in summer keeps it efficient at 26°C.",
+     "timeEstimate": "About 15 minutes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "week",
+      "interval": 3
+     },
+     "scheduledAt": 1796425200000,
+     "directions": [
+      "Turn off and isolate the power",
+      "Slide the filters out",
+      "Rinse in lukewarm water, dry in shade",
+      "Refit and set to 25 to 27°C"
+     ]
+    },
+    {
+     "room": "Outside",
+     "title": "Clear around the aircon outdoor unit",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 3
+     },
+     "scheduledAt": 1796425200000
+    },
+    {
+     "room": "Living room",
+     "title": "Book the aircon service",
+     "verdict": "tradie_required",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1803855600000
+    }
+   ]
+  },
+  "end": {
+   "headline": "Cool house. Smaller bill.",
+   "alt": "A couple relaxing on the couch in a cool living room on a hot afternoon, blinds half drawn",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Set the aircon to 26°C",
+     "description": "25 to 27°C, internal doors shut, ceiling fan on summer mode.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "directions": [
+      "Set the remote to Cool at 26°C",
+      "Close doors to unused rooms",
+      "Draw the blinds on sunny windows",
+      "Run the ceiling fan as well"
+     ]
+    },
+    {
+     "room": "Living room",
+     "title": "Clean the split system filters",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "week",
+      "interval": 3
+     },
+     "scheduledAt": 1796425200000
+    },
+    {
+     "room": "Living room",
+     "title": "Book the aircon service",
+     "verdict": "tradie_required"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/how-to-keep-your-house-cool-without-air-con",
+  "slug": "keep-cool",
+  "inline": {
+   "headline": "Shade first. Power last.",
+   "alt": "A woman lowering a bamboo blind on a timber veranda in the late afternoon sun",
+   "jobs": [
+    {
+     "room": "Outside",
+     "title": "Shade the west-facing windows",
+     "description": "Outdoor blinds or an awning stop the afternoon sun before it gets in.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "diy_safe",
+     "directions": [
+      "Find the windows that get afternoon sun",
+      "Measure each window",
+      "Fit outdoor blinds or a shade sail",
+      "Close them by early afternoon"
+     ]
+    },
+    {
+     "room": "Living room",
+     "title": "Seal the gaps around doors",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Roof space",
+     "title": "Top up the ceiling insulation",
+     "verdict": "tradie_required"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Cooler rooms, no extra power.",
+   "alt": "Two kids lying on cool floorboards reading picture books under a ceiling fan on a hot summer afternoon",
+   "jobs": [
+    {
+     "room": "Living room",
+     "title": "Seal the gaps around doors",
+     "description": "Weather strips on the frames and a door snake at the bottom.",
+     "timeEstimate": "About an hour",
+     "verdict": "diy_safe",
+     "directions": [
+      "Feel for draughts around each door",
+      "Fit adhesive weather strips",
+      "Add a door snake under the door",
+      "Check windows the same way"
+     ]
+    },
+    {
+     "room": "Outside",
+     "title": "Shade the west-facing windows",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Bedroom",
+     "title": "Switch the fan to summer mode",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1795820400000
+    }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/pool-cpr-sign-requirements",
+  "slug": "pool-cpr-sign",
+  "inline": {
+   "headline": "Gate, fence, sign. Checked.",
+   "alt": "A dad fixing a new CPR sign to a pool fence with cable ties while his daughter watches from the lawn",
+   "jobs": [
+    {
+     "room": "Pool",
+     "title": "Replace the faded CPR sign",
+     "description": "Readable from 3 m, weatherproof, fixed where people at the pool can see it.",
+     "timeEstimate": "About 15 minutes",
+     "verdict": "diy_safe",
+     "scheduledAt": 1795820400000,
+     "directions": [
+      "Check the old sign is readable from 3 m",
+      "Buy a compliant weatherproof sign",
+      "Fix it where people at the pool can see it",
+      "Remove the faded one"
+     ]
+    },
+    {
+     "room": "Pool",
+     "title": "Check the pool gate self-closes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 1
+     },
+     "scheduledAt": 1796425200000
+    },
+    {
+     "room": "Pool",
+     "title": "Move climbable things off the fence",
+     "verdict": "diy_safe"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Pool ready, sign and all.",
+   "alt": "Two kids jumping into a backyard pool on a hot summer afternoon while their mum watches from the edge",
+   "jobs": [
+    {
+     "room": "Pool",
+     "title": "Check the pool gate self-closes",
+     "description": "Every month in summer: it must shut and latch by itself.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 1
+     },
+     "scheduledAt": 1796425200000,
+     "directions": [
+      "Open the gate fully and let go",
+      "Try it half open too",
+      "Check the latch catches",
+      "Move chairs and pots off the fence"
+     ]
+    },
+    {
+     "room": "Pool",
+     "title": "Replace the faded CPR sign",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Pool",
+     "title": "Move climbable things off the fence",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ }
+]
