@@ -19,7 +19,7 @@ const { guide, all } = Astro.props;
 const { Content, headings } = await render(guide);
 const d = guide.data;
 const hub = HUBS[d.hub];
-const campaign = d.hub as Campaign;
+const campaign = (d.campaign ?? d.hub) as Campaign;
 const url = new URL(guideUrl(guide), SITE.url).toString();
 
 // Pillar: list every guide in the hub. Cluster page: explicit related

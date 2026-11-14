@@ -33,6 +33,9 @@ const guides = defineCollection({
     image: z.string().optional(),
     imageAlt: z.string().optional(),
     order: z.number().default(100),
+    // 'summer' turns this guide's ads into the SUMMER offer version (code
+    // chip, links to /summer) until the code ends on 1 Mar 2027.
+    campaign: z.enum(['summer']).optional(),
   }),
 });
 

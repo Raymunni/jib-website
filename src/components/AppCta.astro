@@ -24,14 +24,18 @@ interface Props {
 
 const { text, headline, image, imageAlt = '', shot, campaign = 'general', variant = 'inline' } = Astro.props;
 
-const href = `/app/?c=${campaign}&p=${variant}`;
+// SUMMER ads send people to the offer page with the code, until it ends.
+const summer = campaign === 'summer' && Date.now() < Date.parse('2027-03-01T00:00:00+10:00');
+// On desktop, data-get-app opens a QR code; the offer page explains the code instead.
+const getApp = summer ? {} : { 'data-get-app': '' };
+const href = summer ? `/summer/?s=guide-${variant}` : `/app/?c=${campaign}&p=${variant}`;
 const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : STORES.android.live ? 'Android now, iPhone soon' : 'Launching soon';
 ---
 
 <aside class={`jp jp-${variant}${image ? '' : ' jp-plain'}${shot ? ' jp-shot' : ''}`} aria-label="From Jib">
   {
     image && (
-      <a class="jp-media" href={href} data-get-app tabindex="-1" aria-hidden="true">
+      <a class="jp-media" href={href} {...getApp} tabindex="-1" aria-hidden="true">
         <img class="jp-photo" src={image} alt={imageAlt} loading="lazy" decoding="async" width="1376" height="768" />
         {shot && (
           <span class="phone">
@@ -48,16 +52,21 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     <div class="jp-brand">
       <span class="jp-name">Jib</span>
       <span class="jp-tag">Home jobs, planned by AI</span>
+      {summer && <span class="jp-code">Code SUMMER</span>}
       <span class="jp-label">Ad</span>
     </div>
     {headline && <p class="jp-headline">{headline}</p>}
     <p class="jp-text">{text}</p>
     {/* Like an app store listing: icon, name, what it does, and GET. */}
-    <a class="jp-btn" href={href} data-get-app>
+    <a class="jp-btn" href={href} {...getApp}>
       <img class="jp-btn-icon" src="/icon-192.png" alt="" width="52" height="52" />
       <span class="jp-btn-copy">
         <span class="jp-btn-main">{anyStoreLive ? 'Get Jib free' : 'Get Jib'}</span>
-        <span class="jp-btn-sub">{where}<span class="jp-btn-more"> · Plans any job from a photo</span></span>
+        {summer ? (
+          <span class="jp-btn-sub">Home Owner free for a month, then A$4.99</span>
+        ) : (
+          <span class="jp-btn-sub">{where}<span class="jp-btn-more"> · Plans any job from a photo</span></span>
+        )}
       </span>
       <span class="jp-btn-get">
         {anyStoreLive ? 'Get' : 'Soon'}
@@ -175,6 +184,21 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 0;
+  }
+  /* The SUMMER code chip: baby yellow to warm orange, as in the app. */
+  .jp-code {
+    flex: none;
+    margin-left: auto;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #1a1204;
+    background: linear-gradient(120deg, #ffe58a, #ff9f43);
+    border-radius: 999px;
+    padding: 3px 9px;
+  }
+  .jp-code + .jp-label {
+    margin-left: 0;
   }
   .jp-label {
     margin-left: auto;
