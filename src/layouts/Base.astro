@@ -36,6 +36,7 @@ const siteLd = [
     sameAs: [
       `https://apps.apple.com/app/id${STORES.ios.appId}`,
       `https://play.google.com/store/apps/details?id=${STORES.android.packageName}`,
+      'https://x.com/getjibapp',
     ],
     founder: { '@type': 'Person', name: SITE.author.name },
   },
@@ -59,6 +60,7 @@ const qr = await qrSvg(`${SITE.url}/app/`);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="msvalidate.01" content="53767F1446F867D135FC6ED159872CAB" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
