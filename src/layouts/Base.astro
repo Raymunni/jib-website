@@ -154,6 +154,23 @@ const qr = await qrSvg(`${SITE.url}/app/`);
           <a href="/delete-account/">Delete your account</a>
         </div>
       </div>
+      <div class="wrap findon">
+        <h2>Find Jib on</h2>
+        <ul>
+          <li><a href="https://alternativeto.net/software/jib/" rel="noopener">AlternativeTo</a></li>
+          <li><a href="https://www.saashub.com/jib-app" rel="noopener">SaaSHub</a></li>
+          <li><a href="https://peerpush.com/p/jib" rel="noopener">PeerPush</a></li>
+          <li><a href="https://www.uneed.best/tool/jib-app" rel="noopener">Uneed</a></li>
+          <li><a href="https://www.startupranking.com/jib-2" rel="noopener">Startup Ranking</a></li>
+          <li><a href="https://www.websitehunt.co/" rel="noopener">Website Hunt</a></li>
+          <li><a href="https://fazier.com/" rel="noopener">Fazier</a></li>
+          <li><a href="https://dang.ai/" rel="noopener">Dang.ai</a></li>
+          <li><a href="https://twelve.tools/" rel="noopener">Twelve Tools</a></li>
+          <li><a href="https://openhunts.com/" rel="noopener">OpenHunts</a></li>
+          <li><a href="https://www.saasgenius.com/" rel="noopener">SaaSGenius</a></li>
+          <li><a href="https://awesomeindie.com/" rel="noopener">Awesome Indie</a></li>
+        </ul>
+      </div>
       <div class="wrap fine">
         <p class="muted">
           Guides are general information, not legal or professional advice. Rules change and vary by council, always confirm with your state regulator or council before starting work. © {new Date().getFullYear()} Jib.
@@ -323,6 +340,40 @@ const qr = await qrSvg(`${SITE.url}/app/`);
       .foot p {
         max-width: 40ch;
         margin-top: 14px;
+      }
+      .findon {
+        margin-top: 32px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+      }
+      .findon h2 {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin: 0 0 12px;
+        color: var(--dim);
+      }
+      .findon ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .findon a {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        color: var(--text);
+        text-decoration: none;
+        background: rgba(115, 170, 255, 0.1);
+        border: 1px solid rgba(115, 170, 255, 0.45);
+      }
+      .findon a:hover {
+        color: #fff;
+        border-color: #73aaff;
       }
       .fine {
         margin-top: 24px;
