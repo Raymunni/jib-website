@@ -5,9 +5,10 @@ import Base from '../layouts/Base.astro';
 import StoreButtons from '../components/StoreButtons.astro';
 import ToolIcon from '../components/ToolIcon.astro';
 import { SITE, HUBS, STORES, anyStoreLive } from '../config';
-import heroWide from '../assets/hero/hero-wide.jpg';
-import heroPhones from '../assets/hero/hero-phones.jpg';
-import heroMobile from '../assets/hero/hero-mobile.jpg';
+// The app's own blue-hour house at dusk (Nov 2026 look), from
+// jib_store_images/store_v2/make-web-hero-dusk.cjs.
+import heroWide from '../assets/hero/hero-dusk-wide.jpg';
+import heroMobile from '../assets/hero/hero-dusk-mobile.jpg';
 import shotSee from '../assets/screens/c1-see.png';
 import shotPlan from '../assets/screens/c2-plan.png';
 import shotCheck from '../assets/screens/c3-check.png';
@@ -20,8 +21,6 @@ import howSee from '../assets/how/3-see.jpg';
 
 const wideAvif = await getImage({ src: heroWide, format: 'avif', width: 2400, quality: 58 });
 const wideWebp = await getImage({ src: heroWide, format: 'webp', width: 2400, quality: 72 });
-const phonesAvif = await getImage({ src: heroPhones, format: 'avif', width: 900, quality: 58 });
-const phonesWebp = await getImage({ src: heroPhones, format: 'webp', width: 900, quality: 72 });
 const mobileWebp = await getImage({ src: heroMobile, format: 'webp', width: 900, quality: 70 });
 
 const allGuides = await getCollection('guides');
@@ -52,9 +51,9 @@ const featureTiles = [
 
 const shots = [
   { src: shotSee, alt: 'Jib app: see your space finished before you start' },
-  { src: shotPlan, alt: 'Jib app: every job in the right order' },
+  { src: shotPlan, alt: 'Jib app: every step, in the right order' },
   { src: shotCheck, alt: 'Jib app: DIY safe or a job for a tradie' },
-  { src: shotShop, alt: 'Jib app: real prices, one trip' },
+  { src: shotShop, alt: 'Jib app: know the cost, one trip' },
   { src: shotWatch, alt: 'Jib app: watch your home come together' },
 ];
 
@@ -153,7 +152,7 @@ const jsonLd = [
       <img src={wideWebp.src} alt="" width="2400" height="1200" fetchpriority="high" decoding="async" />
     </picture>
     <div class="wrap hero-copy">
-      <span class="hero-logo"><img src="/images/jib-mark-navy.png" width="171" height="160" alt="" /><span>Jib</span></span>
+      <span class="hero-logo"><img src="/images/jib-mark.png" width="171" height="160" alt="" /><span>Jib</span></span>
       <h1>Your home, <span>sorted.</span></h1>
       <p class="hero-sub">The ultimate home planner, <b>with AI.</b></p>
       <p class="lede">
@@ -168,10 +167,6 @@ const jsonLd = [
         <li>✓ Checks the rules where you live</li>
       </ul>
     </div>
-    <picture class="hero-phones">
-      <source srcset={phonesAvif.src} type="image/avif" />
-      <img src={phonesWebp.src} alt="The Jib app on two phones among DIY tools: the job list, and a backyard pictured finished by AI" width="1200" height="1024" decoding="async" />
-    </picture>
   </section>
 
   <!-- 1. The app itself: the first thing under the hero is proof. -->
@@ -357,20 +352,18 @@ const jsonLd = [
     font-size: 0.92rem;
     opacity: 0.85;
   }
-  /* Hero: the flat-lay on light concrete, so the type is dark ink. On
-     desktop the photo fills the band with the phones on the right; on
-     phones the copy comes first and the phones sit under it. */
+  /* Hero: the app's blue-hour house at dusk, white type on the navy sky.
+     On desktop the photo fills the band with the phone on the right; on
+     phones the copy comes first and the house sits under it. */
   .hero {
     position: relative;
     overflow: hidden;
-    background: #d9dad7;
-    color: #1d2530;
+    background: #020d1c;
+    color: #fff;
   }
   .hero-img {
     display: none;
   }
-  /* On phones the tools run along the top edge, the copy sits on the bare
-     concrete under them, then the sticky notes and the phones. */
   .hero-copy {
     position: relative;
     padding-top: 30vw;
@@ -378,21 +371,28 @@ const jsonLd = [
     max-width: none;
   }
   @media (max-width: 899px) {
+    /* The house sits at the foot of the hero, the copy on the deepened
+       sky above it, the phone standing on the lawn. */
     .hero {
-      background: #d9dad7 var(--hero-mobile) center top / 100% auto no-repeat;
+      padding-bottom: 128vw;
     }
-  }
-  .hero-notes {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    justify-content: center;
-    gap: 4vw;
-    margin: 18px 0 -16vw;
-  }
-  .hero-notes img {
-    width: 40vw;
-    height: auto;
+    /* The photo fades in from the page navy itself (a mask, so image
+       compression can never leave a seam). 900 x 1613 photo. */
+    .hero::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 179.2vw;
+      background: var(--hero-mobile) center bottom / 100% auto no-repeat;
+      -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%);
+      mask-image: linear-gradient(180deg, transparent 0, #000 14%);
+      pointer-events: none;
+    }
+    .hero-copy {
+      padding-top: 26px;
+    }
   }
   .hero-logo {
     display: inline-flex;
@@ -403,7 +403,7 @@ const jsonLd = [
     font-size: clamp(3.6rem, 8.4vw, 5.6rem);
     letter-spacing: -0.03em;
     line-height: 1;
-    color: #03203e;
+    color: #fff;
   }
   .hero-logo img {
     width: auto;
@@ -417,7 +417,7 @@ const jsonLd = [
     letter-spacing: -0.07em;
     word-spacing: 0.07em;
     line-height: 1.05;
-    color: #14181f;
+    color: #fff;
     white-space: nowrap;
   }
   .hero h1 span {
@@ -427,7 +427,7 @@ const jsonLd = [
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 0.8;
-    color: #1f5fd6;
+    color: #73aaff;
   }
   .hero-sub {
     margin: 22px 0 0;
@@ -437,7 +437,7 @@ const jsonLd = [
     font-weight: 450;
     letter-spacing: -0.02em;
     line-height: 1.1;
-    color: #3a414c;
+    color: rgba(255, 255, 255, 0.82);
   }
   .hero-sub b {
     font-weight: 500;
@@ -448,7 +448,7 @@ const jsonLd = [
   }
   .lede {
     font-size: 1.08rem;
-    color: #2b313a;
+    color: #d6dee8;
     max-width: 44ch;
     margin-top: 16px;
   }
@@ -467,15 +467,7 @@ const jsonLd = [
     margin: 16px 0 0;
     font-size: 0.92rem;
     font-weight: 700;
-    color: #3a414c;
-  }
-  .hero-phones img {
-    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 6%);
-    mask-image: linear-gradient(180deg, transparent 0, #000 6%);
-    display: block;
-    width: 100%;
-    height: auto;
-    margin-top: 8px;
+    color: #b9c7d8;
   }
   @media (min-width: 900px) {
     .hero {
@@ -491,50 +483,20 @@ const jsonLd = [
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 50% 30%;
+      object-position: 50% 50%;
     }
-    .hero-phones {
-      display: none;
+    /* The photo's foot fades into the page navy. */
+    .hero-img img {
+      -webkit-mask-image: linear-gradient(180deg, #000 82%, transparent);
+      mask-image: linear-gradient(180deg, #000 82%, transparent);
     }
-    /* On desktop the photo carries the tools; the copy is plain and sits high,
-       and the notes lie on the concrete between the copy and the phones. */
-    /* A faint wash of concrete just behind the copy, a tenth of the
-       first version's strength, so the photo stays clear. */
-    .hero-copy::before {
-      content: '';
-      position: absolute;
-      inset: 3% -3% -2% calc(15.5vw - 28px);
-      background: rgba(222, 223, 220, 0.06);
-      filter: blur(28px);
-      border-radius: 40px;
-      z-index: -1;
-    }
-    /* The copy sits to the left, on the bare concrete above the gloves. */
+    /* The copy sits to the left, on the dark sky and trees. */
     .hero-copy {
       max-width: none;
       margin: 0;
       padding-left: 15.5vw;
       padding-right: 32px;
       width: fit-content;
-    }
-    .hero-notes {
-      position: absolute;
-      left: 40%;
-      top: 34%;
-      margin: 0;
-      gap: 0;
-    }
-    .hero-notes img {
-      width: clamp(110px, 9.5vw, 180px);
-    }
-    @media (max-width: 1199px) {
-      .hero-notes {
-        display: none;
-      }
-    }
-    .hero-notes img + img {
-      margin-left: -1.5vw;
-      margin-top: 4.5vw;
     }
     .hero-copy {
       z-index: 2;
@@ -901,10 +863,14 @@ const jsonLd = [
     align-items: center;
     padding: 30px;
     border-radius: var(--radius);
+    /* The app's flat navy section (J.navyShade) with a soft top light,
+       lifted by shadow, not a border (Nov 2026 look). */
     background:
-      radial-gradient(circle at 85% 20%, rgba(79, 143, 240, 0.35), transparent 55%),
-      linear-gradient(135deg, var(--accent-deep), #142c50);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+      radial-gradient(120% 60% at 50% 0%, rgba(115, 170, 255, 0.07), rgba(115, 170, 255, 0) 70%),
+      #0a1628;
+    box-shadow:
+      0 22px 48px -20px rgba(0, 0, 0, 0.75),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
   @media (min-width: 820px) {
     .promo {
@@ -917,7 +883,7 @@ const jsonLd = [
     color: #fff;
   }
   .promo-copy p {
-    color: #dbe7f7;
+    color: #b9c7d8;
   }
   .states {
     display: flex;
@@ -928,16 +894,17 @@ const jsonLd = [
   .states a {
     padding: 8px 14px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.28);
+    /* The app's navy pill: navy inside a Jib blue ring, white words. */
+    background: linear-gradient(180deg, rgba(115, 170, 255, 0.1), rgba(115, 170, 255, 0.03)), #0a1628;
+    border: 1.5px solid rgba(115, 170, 255, 0.85);
     color: #fff;
     font-weight: 800;
     font-size: 0.9rem;
     text-decoration: none;
+    transition: background 0.15s ease;
   }
   .states a:hover {
-    background: #fff;
-    color: var(--accent-deep);
+    background: linear-gradient(180deg, rgba(115, 170, 255, 0.22), rgba(115, 170, 255, 0.08)), #0a1628;
   }
   .verdicts {
     display: grid;
@@ -950,8 +917,8 @@ const jsonLd = [
     gap: 2px;
     padding: 13px 16px;
     border-radius: 14px;
-    background: rgba(9, 16, 26, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.045);
+    box-shadow: 0 10px 24px -16px rgba(0, 0, 0, 0.8);
     border-left: 4px solid;
   }
   .verdict:nth-child(odd) {
@@ -987,7 +954,7 @@ const jsonLd = [
     padding: 11px 18px;
     border-radius: 999px;
     background: #fff;
-    color: var(--accent-deep);
+    color: #0a1628;
     font-weight: 800;
   }
 
@@ -1077,8 +1044,14 @@ const jsonLd = [
     text-align: center;
     padding: 48px 24px;
     border-radius: var(--radius);
-    background: linear-gradient(135deg, #03203e, #020d1c);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    /* The app's flat navy section (J.navyShade) with a soft top light,
+       lifted by shadow, not a border (Nov 2026 look). */
+    background:
+      radial-gradient(120% 60% at 50% 0%, rgba(115, 170, 255, 0.07), rgba(115, 170, 255, 0) 70%),
+      #0a1628;
+    box-shadow:
+      0 22px 48px -20px rgba(0, 0, 0, 0.75),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
   .final-card img {
     display: block;
@@ -1104,10 +1077,8 @@ const jsonLd = [
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 0.8;
-    background: var(--ai-soft);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    /* "sorted." is Jib blue, like the hero; AI colours only on "AI". */
+    color: #73aaff;
   }
   .final-sub {
     margin: 0;

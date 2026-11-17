@@ -51,7 +51,7 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     {image && shot && variant === 'inline' && <span class="jp-dodge" aria-hidden="true" />}
     <div class="jp-brand">
       <span class="jp-name">Jib</span>
-      <span class="jp-tag">Home jobs, planned by AI</span>
+      <span class="jp-tag">Home jobs, planned by <span class="jp-ai">AI</span></span>
       {summer && <span class="jp-code">Code SUMMER</span>}
       <span class="jp-label">Ad</span>
     </div>
@@ -78,30 +78,19 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
 
 <style>
   .jp {
-    --jp-ring: linear-gradient(120deg, #ff38d1, #e42ee6 35%, #8a4bff 72%, #4f8bff);
     position: relative;
     margin: 2.4em 0;
     border-radius: 20px;
     overflow: hidden;
-    /* A clean black tile on the navy page, like the app's. */
-    background: linear-gradient(160deg, #0c121d 0%, #06080c 70%);
-    box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.6);
+    /* The app's flat navy section (J.navyShade #0A1628) with a soft top
+       light, lifted off the page by shadow, not a border (Nov 2026 look). */
+    background:
+      radial-gradient(120% 60% at 50% 0%, rgba(115, 170, 255, 0.07), rgba(115, 170, 255, 0) 70%),
+      #0a1628;
+    box-shadow:
+      0 22px 48px -20px rgba(0, 0, 0, 0.75),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
     container-type: inline-size;
-  }
-  /* The AI colours as a thin ring, like the app's AI buttons. */
-  .jp::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    border-radius: inherit;
-    padding: 1.5px;
-    background: var(--jp-ring);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0.8;
-    pointer-events: none;
   }
   .jp-end {
     margin-top: 3em;
@@ -122,11 +111,12 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     object-fit: cover;
     display: block;
   }
+  /* The photo bleeds down into the navy in eased steps: no edge. */
   .jp-media::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(6, 8, 12, 0) 60%, rgba(6, 8, 12, 0.55) 100%);
+    background: linear-gradient(180deg, rgba(10, 22, 40, 0) 52%, rgba(10, 22, 40, 0.18) 66%, rgba(10, 22, 40, 0.5) 80%, rgba(10, 22, 40, 0.82) 92%, #0a1628 100%);
     pointer-events: none;
   }
   .phone {
@@ -185,6 +175,14 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     text-overflow: ellipsis;
     min-width: 0;
   }
+  /* The one touch of the AI colours: the word AI. */
+  .jp-ai {
+    font-weight: 700;
+    background: var(--ai-soft);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
   /* The SUMMER code chip: baby yellow to warm orange, as in the app. */
   .jp-code {
     flex: none;
@@ -208,9 +206,9 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--dim);
-    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.06);
     border-radius: 6px;
-    padding: 2px 6px;
+    padding: 3px 7px;
   }
   .jp-headline {
     margin: 0 0 6px;
@@ -226,46 +224,31 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     line-height: 1.5;
   }
 
-  /* A full-width bar like an app store listing (icon, name, GET): dark
-     frosted glass with the AI colours drifting slowly along its edge, like
-     the app's AI buttons. The colours are light on the edge, never a fill. */
+  /* A full-width bar like an app store listing (icon, name, GET), in the
+     app's action style: the navy pill inside a Jib blue ring, white words
+     (Nov 2026 look; blue is what you press). */
   .jp-btn {
     position: relative;
     display: flex;
     align-items: center;
     gap: 14px;
     width: 100%;
-    padding: 12px 12px 12px 12px;
+    padding: 12px;
     border-radius: 18px;
     color: #fff;
     text-decoration: none;
-    isolation: isolate;
-    overflow: hidden;
-    background: rgba(2, 13, 28, 0.62);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 0;
-    box-shadow: 0 8px 26px -12px rgba(255, 56, 209, 0.4);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  .jp-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1.6px;
-    /* A loop that starts and ends on the same pink, so it never jumps. */
-    background: linear-gradient(90deg, #ff38d1, #e42ee6 20%, #8a4bff 42%, #4f8bff 50%, #8a4bff 58%, #e42ee6 80%, #ff38d1);
-    background-size: 200% 100%;
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    animation: jp-flow 10s linear infinite;
+    background: linear-gradient(180deg, rgba(115, 170, 255, 0.1), rgba(115, 170, 255, 0.03)), #0a1628;
+    border: 1.5px solid rgba(115, 170, 255, 0.85);
+    box-shadow: 0 10px 26px -14px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   }
   .jp-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 12px 30px -10px rgba(255, 56, 209, 0.55);
+    border-color: #73aaff;
+    box-shadow: 0 14px 30px -12px rgba(115, 170, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  .jp-btn:active {
+    transform: scale(0.985);
   }
   .jp-btn-icon {
     flex: none;
@@ -300,8 +283,8 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     gap: 6px;
     padding: 9px 14px 9px 18px;
     border-radius: 999px;
-    background: #fff;
-    color: #03203e;
+    background: #73aaff;
+    color: #020d1c;
     font-weight: 900;
     font-size: 0.86rem;
     letter-spacing: 0.08em;
@@ -325,16 +308,6 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     }
     .jp-btn-more {
       display: none;
-    }
-  }
-  @keyframes jp-flow {
-    to {
-      background-position: 200% 0;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .jp-btn::before {
-      animation: none;
     }
   }
 
@@ -361,9 +334,6 @@ const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : ST
     float: right;
     width: calc(5cqw + min(22cqw, 190px) - 8px);
     height: max(0px, calc(3.64cqw + min(22cqw, 190px) * 2.2222 - 14.7px - 45.45cqw - 6px));
-  }
-  .jp-inline .jp-media::after {
-    background: linear-gradient(180deg, rgba(17, 29, 44, 0) 70%, rgba(17, 29, 44, 0.6) 100%);
   }
   @media (max-width: 719px) {
     .jp-inline .jp-media {
