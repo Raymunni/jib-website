@@ -105,7 +105,7 @@ const qr = await qrSvg(`${SITE.url}/app/`);
     {showSummer && (
       <a class="summer-strip" href="/summer/?s=site" data-summer-strip>
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="#ffe58a" /><g stroke="#ff9f43" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8" /></g></svg>
-        <span>Summer offer: a free month of Jib with code <strong>SUMMER</strong></span>
+        <span><span class="long">Summer offer: a free month of Jib with code</span><span class="short">Free month of Jib, code</span> <strong>SUMMER</strong></span>
         <span class="go">Get it</span>
       </a>
     )}
@@ -251,6 +251,29 @@ const qr = await qrSvg(`${SITE.url}/app/`);
         color: #ffc95c;
         text-decoration: underline;
         text-underline-offset: 3px;
+      }
+      .summer-strip .short {
+        display: none;
+      }
+      /* On a phone the offer reads in one line: the sun, a shorter line and Get it. */
+      @media (max-width: 640px) {
+        .summer-strip {
+          flex-wrap: nowrap;
+          gap: 8px;
+          padding: 8px 12px;
+          font-size: 0.86rem;
+          white-space: nowrap;
+        }
+        .summer-strip svg {
+          width: 16px;
+          height: 16px;
+        }
+        .summer-strip .long {
+          display: none;
+        }
+        .summer-strip .short {
+          display: inline;
+        }
       }
       .summer-strip:hover {
         color: #fff;
