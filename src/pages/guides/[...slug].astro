@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import AppCta from '../../components/AppCta.astro';
 import { SITE, HUBS, type Campaign } from '../../config';
 import { guideSlug, guideUrl, formatDate, type Guide } from '../../lib/guides';
+import { extractFaqs } from '../../lib/faq';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
@@ -33,6 +34,11 @@ const related = d.pillar
 
 const toc = headings.filter((h) => h.depth === 2);
 
+// The page's last real edit: its rules re-check, or a later content update.
+const modified = d.updated && d.updated > d.lastChecked ? d.updated : d.lastChecked;
+// The visible FAQ section, also given to search engines and AI answer tools as FAQPage data.
+const faqs = extractFaqs(guide.body);
+
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -40,7 +46,7 @@ const jsonLd = [
     headline: d.title,
     description: d.description,
     datePublished: d.published.toISOString(),
-    dateModified: d.lastChecked.toISOString(),
+    dateModified: modified.toISOString(),
     mainEntityOfPage: url,
     image: `${SITE.url}${d.image ?? '/og/default.png'}`,
     author: { '@type': 'Person', name: SITE.author.name, url: `${SITE.url}${SITE.author.url}` },
@@ -60,6 +66,13 @@ const jsonLd = [
           ]),
     ],
   },
+  ...(faqs.length
+    ? [{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+      }]
+    : []),
 ];
 ---
 

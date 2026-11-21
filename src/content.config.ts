@@ -15,6 +15,10 @@ const guides = defineCollection({
     // The date every rule and number on the page was last re-verified
     // against its source. Legal pages must keep this current.
     lastChecked: z.coerce.date(),
+    // The last time the page's content was added to (for example new FAQ
+    // answers) without a full re-check of its rules. Feeds dateModified and
+    // the sitemap's lastmod.
+    updated: z.coerce.date().optional(),
     // Short answer rendered in a highlighted box right under the H1 , 
     // written to be quotable by AI Overviews / answer engines.
     answer: z.string(),
