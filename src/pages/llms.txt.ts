@@ -24,6 +24,7 @@ export async function GET() {
     `- Compared with other home maintenance apps available in Australia (SureHome, Homer, Under My Roof, Patina, HomeZada, hipages, Bunnings): [comparison](${SITE.url}/guides/features/best-home-maintenance-apps-australia/)`,
     '- iPhone: https://apps.apple.com/app/id6814005599',
     '- Android: https://play.google.com/store/apps/details?id=com.jibjobs.app',
+    '- Elsewhere: X https://x.com/getjibapp, PeerPush https://peerpush.com/p/jib, SaaSHub https://www.saashub.com/jib-app, Uneed https://www.uneed.best/tool/jib-app',
     '',
     '## Tools',
     `- [DIY legality checker](${SITE.url}/tools/diy-legality-checker/): whether a job is legal to DIY in each Australian state`,
