@@ -22,6 +22,7 @@ const palette: Record<string, [string, string]> = {
   stairs: ['#f08a3c', '#b35a17'],
   roof: ['#d9534f', '#98312e'],
   planner: ['#73aaff', '#244fa8'],
+  raintank: ['#3aa0e0', '#1c6aa3'],
   // Feature icons (home page)
   snap: ['#73aaff', '#244fa8'],
   steps: ['#8a4bff', '#4b2fb8'],
@@ -78,6 +79,15 @@ const id = `ti-${name}`;
             <rect x="9" y="24" width="46" height="16" rx="3" fill="rgba(255,255,255,.15)" />
             <path d="M16 24v7M23 24v4M30 24v7M37 24v4M44 24v7M51 24v4" />
             <path d="M22 50h20M22 50l4-4M22 50l4 4M42 50l-4-4M42 50l-4 4" stroke-width="2.2" />
+          </>
+        )
+      }
+      {
+        name === 'raintank' && (
+          <>
+            <rect x="18" y="22" width="28" height="30" rx="4" fill="rgba(255,255,255,.2)" />
+            <path d="M18 30h28M18 38h28M18 46h28" stroke-width="1.6" />
+            <path d="M32 8c-3 4-5 7-5 9a5 5 0 0 0 10 0c0-2-2-5-5-9z" />
           </>
         )
       }

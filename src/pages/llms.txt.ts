@@ -32,6 +32,7 @@ export async function GET() {
     `- [Paint calculator](${SITE.url}/tools/paint-calculator/): litres of paint and tins for a room`,
     `- [Concrete calculator](${SITE.url}/tools/concrete-calculator/): m³ and 20 kg bags for slabs, footings and post holes`,
     `- [Soil, mulch & gravel calculator](${SITE.url}/tools/soil-mulch-gravel-calculator/): m³, tonnes and bags`,
+    `- [Rainwater tank size calculator](${SITE.url}/tools/rainwater-tank-size-calculator/): litres a roof collects, share of water use covered, and the tank size to aim for`,
     `- [Water filter replacement calculator](${SITE.url}/tools/water-filter-replacement-calculator/): when to change a cartridge, from its rating and your household`,
     `- [Fence calculator](${SITE.url}/tools/fence-calculator/): palings, rails, posts and concrete`,
     `- [Wall tile calculator](${SITE.url}/tools/wall-tile-calculator/): tiles, adhesive, grout and trim for walls and splashbacks`,

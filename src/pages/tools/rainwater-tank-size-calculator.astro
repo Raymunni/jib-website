@@ -1,0 +1,137 @@
+---
+import CalcShell from '../../components/CalcShell.astro';
+
+const faqs = [
+  { q: 'How much water can my roof collect?', a: 'Each millimetre of rain on each square metre of roof is about 1 litre. Some is lost to the first-flush diverter, evaporation, splash and overflow, so this calculator counts 80% of it. A 100 m² roof in a 1,000 mm rainfall area collects roughly 80,000 litres a year.' },
+  { q: 'What size rainwater tank do I need for a family of 4?', a: 'It depends on your roof, your rainfall and what the water is for. For toilets and laundry, a family of 4 might use around 160 litres a day, so covering 4 dry weeks takes about a 4,500 litre tank. Enter your own numbers above for a better estimate.' },
+  { q: 'How do I work out my roof area?', a: 'Measure the footprint of the roof sections whose gutters run to the tank, including the eaves, and multiply length by width. Use the plan area, not the sloped surface. Only count the downpipes that will actually feed the tank.' },
+  { q: 'Where do I find my average rainfall?', a: 'The Bureau of Meteorology publishes long-term averages for weather stations across Australia (Climate statistics for Australian locations). Pick the station nearest you. The city presets here are rounded and approximate.' },
+  { q: 'Does a bigger tank need council approval?', a: 'Often. In NSW an above-ground tank up to 10,000 litres can be exempt in residential zones if it meets the conditions, and other states and councils set their own limits. See our rainwater tank approval guide before you buy.' },
+];
+---
+
+<CalcShell
+  title="Rainwater tank size calculator: how big a tank do you need?"
+  description="Free rainwater tank calculator for Australian homes: enter your roof area, rainfall and household, and see how much water you can collect and the tank size to aim for."
+  heading="Rainwater tank size calculator"
+  lede="Work out how much rain your roof can collect, how much of your water use it can cover, and roughly what size tank gets you through the dry spells."
+  path="/tools/rainwater-tank-size-calculator/"
+  appName="Rainwater tank size calculator"
+  ctaHeadline="Free water. A few easy checks."
+  ctaImage="/images/jib/rainwater-tank-end.jpg"
+  ctaImageAlt="A girl filling a watering can from the tap on a rainwater tank beside the family veggie patch while her dad watches"
+  ctaShot="/images/jib/shots/rainwater-tank-end.webp"
+  cta="Snap the side of the house in Jib and it plans the tank: the base, the screens and first flush, and a clear brief for the plumber to connect it."
+  faqs={faqs}
+>
+  <Fragment slot="form">
+    <fieldset>
+      <legend>Your roof and rain</legend>
+      <div class="g3">
+        <label><span>Roof area feeding the tank (m²)</span><input type="number" id="roof" value="100" min="1" max="2000" step="5" /></label>
+        <label><span>Area</span><select id="city">
+          <option value="1200">Sydney (about 1,200 mm a year)</option>
+          <option value="650">Melbourne (about 650 mm)</option>
+          <option value="1000" selected>Brisbane (about 1,000 mm)</option>
+          <option value="750">Perth (about 750 mm)</option>
+          <option value="550">Adelaide (about 550 mm)</option>
+          <option value="600">Hobart (about 600 mm)</option>
+          <option value="600">Canberra (about 600 mm)</option>
+          <option value="1700">Darwin (about 1,700 mm)</option>
+          <option value="custom">Other (use my rainfall)</option>
+        </select></label>
+        <label><span>Average rainfall (mm a year)</span><input type="number" id="rain" value="1000" min="50" max="5000" step="10" /></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>What the water is for</legend>
+      <div class="g3">
+        <label><span>People in the house</span><input type="number" id="people" value="4" min="1" max="20" step="1" /></label>
+        <label><span>Use</span><select id="use">
+          <option value="garden">Garden only</option>
+          <option value="toilet" selected>Toilets and laundry</option>
+          <option value="custom">My own figure</option>
+        </select></label>
+        <label><span>Litres a day from the tank</span><input type="number" id="lpd" value="160" min="0" max="5000" step="10" /></label>
+      </div>
+      <div class="g3">
+        <label><span>Dry weeks to cover</span><input type="number" id="weeks" value="4" min="1" max="26" step="1" /></label>
+      </div>
+    </fieldset>
+  </Fragment>
+
+  <Fragment slot="explain">
+    <h2>How it's worked out</h2>
+    <ul>
+      <li><strong>Collected a year:</strong> roof area (m²) × rainfall (mm) × 0.8. One millimetre on one square metre is one litre; the 0.8 allows for first flush, evaporation, splash and overflow.</li>
+      <li><strong>Used a year:</strong> litres a day × 365.</li>
+      <li><strong>Share of your use covered:</strong> collected ÷ used, capped at 100%.</li>
+      <li><strong>Suggested tank:</strong> enough to supply your daily use through the dry weeks you choose, rounded up to a common tank size, but no bigger than about two months of what the roof collects, because a tank that never fills is money in plastic.</li>
+    </ul>
+    <p>The daily-use presets are rough starting points, not measurements: about 40 litres a person a day for toilets and laundry, and 100 litres a day for a garden. Check your water bill or meter if you want it closer. Rain doesn't fall evenly through the year, so in places with a long dry season, cover more weeks.</p>
+    <h2>Before you buy</h2>
+    <ul>
+      <li>Check whether the tank needs approval where you live: <a href="/guides/council-approval/rainwater-tank-without-council-approval/">rainwater tank without council approval</a>.</li>
+      <li>Connecting a tank to toilets, the laundry or hot water is work for a licensed plumber, and so is any mains top-up.</li>
+      <li>Every tank needs mosquito-proof screens and a first-flush diverter, and a level base that can carry the weight: a full 5,000 litre tank weighs about 5 tonnes.</li>
+      <li>Rainfall averages are long-term figures. Find the station nearest you on the Bureau of Meteorology's climate statistics.</li>
+    </ul>
+  </Fragment>
+</CalcShell>
+
+<script>
+  import { num, val, fmt, rows, summary, live } from '../../scripts/calc';
+
+  const city = document.getElementById('city') as HTMLSelectElement;
+  const rain = document.getElementById('rain') as HTMLInputElement;
+  const use = document.getElementById('use') as HTMLSelectElement;
+  const lpd = document.getElementById('lpd') as HTMLInputElement;
+  const people = document.getElementById('people') as HTMLInputElement;
+
+  city.addEventListener('change', () => {
+    if (city.value !== 'custom') rain.value = city.value;
+  });
+  rain.addEventListener('input', () => {
+    if (city.value !== 'custom' && rain.value !== city.value) city.value = 'custom';
+  });
+  const presetUse = () => {
+    const p = parseFloat(people.value) || 1;
+    if (use.value === 'toilet') lpd.value = String(p * 40);
+    if (use.value === 'garden') lpd.value = '100';
+  };
+  use.addEventListener('change', presetUse);
+  people.addEventListener('input', presetUse);
+  lpd.addEventListener('input', () => {
+    use.value = 'custom';
+  });
+
+  const SIZES = [1000, 2000, 3000, 4500, 5000, 7500, 10000, 13500, 22500, 30000];
+
+  live(() => {
+    const roof = num('roof');
+    const mm = num('rain');
+    const daily = num('lpd');
+    const weeks = num('weeks') || 4;
+    const collected = roof * mm * 0.8;
+    const used = daily * 365;
+    const share = used > 0 ? Math.min(1, collected / used) : 1;
+    const need = daily * weeks * 7;
+    const cap = (collected / 12) * 2;
+    const target = Math.max(1000, Math.min(need, cap || need));
+    const capped = cap > 0 && need > cap;
+    // Round up to a common size, except when the roof is the limit: then round
+    // down, so we never suggest a tank the roof can't fill.
+    const tank = capped
+      ? [...SIZES].reverse().find((s) => s <= target) ?? 1000
+      : SIZES.find((s) => s >= target) ?? Math.ceil(target / 1000) * 1000;
+    const L = (n: number) => `${Math.round(n).toLocaleString('en-AU')} L`;
+    const out: [string, string, string?][] = [
+      ['Suggested tank', L(tank), capped ? 'limited by what your roof collects; more roof area would help' : `covers about ${fmt(weeks, 0)} dry weeks at ${L(daily)} a day`],
+      ['Roof collects', `${L(collected)} a year`, `about ${L(collected / 12)} in an average month`],
+      ['You use', `${L(used)} a year`, `${L(daily)} a day from the tank`],
+      ['Share of that use covered', `${fmt(share * 100, 0)}%`, share < 1 ? 'in a year of average rain; the rest comes from the mains' : 'in a year of average rain, with water to spare'],
+    ];
+    summary(`Aim for about a ${L(tank)} tank`);
+    rows(out);
+  });
+</script>
