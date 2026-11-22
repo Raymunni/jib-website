@@ -10,8 +10,8 @@
    "jobs": [
     {
      "room": "Nursery",
-     "title": "Anchor the chest of drawers to the wall",
-     "description": "Into a stud, not just the plasterboard. Heavy things in the bottom drawers.",
+     "title": "Anchor the bookcase to the wall",
+     "description": "Into a stud, not just the plasterboard. Heavy books on the bottom shelves.",
      "timeEstimate": "About 30 minutes",
      "verdict": "diy_safe",
      "shoppingList": [
@@ -25,9 +25,9 @@
       }
      ],
      "directions": [
-      "Find a stud behind the drawers with a stud finder",
+      "Find a stud behind the bookcase with a stud finder",
       "Screw the wall bracket into the stud",
-      "Fix the strap to the top rail at the back",
+      "Fix the strap to the top of the bookcase",
       "Pull it snug and give it a firm tug"
      ]
     },
