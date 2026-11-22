@@ -1,0 +1,96 @@
+[
+ {
+  "guide": "home-maintenance/how-to-babyproof-your-home",
+  "slug": "babyproofing",
+  "photo": false,
+  "inline": {
+   "headline": "Every job, in the order it matters.",
+   "text": "Add the babyproofing list to Jib room by room, with the urgent fixes first and the rest set for the weeks before your baby crawls.",
+   "alt": "A dad kneeling beside a white chest of drawers in a nursery with one hand on top, checking where it meets the wall, while his baby chews a cloth toy on a play mat",
+   "jobs": [
+    {
+     "room": "Nursery",
+     "title": "Anchor the chest of drawers to the wall",
+     "description": "Into a stud, not just the plasterboard. Heavy things in the bottom drawers.",
+     "timeEstimate": "About 30 minutes",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Furniture anchor kit",
+       "price": 15
+      },
+      {
+       "item": "Drawer locks (4 pack)",
+       "price": 12
+      }
+     ],
+     "directions": [
+      "Find a stud behind the drawers with a stud finder",
+      "Screw the wall bracket into the stud",
+      "Fix the strap to the top rail at the back",
+      "Pull it snug and give it a firm tug"
+     ]
+    },
+    {
+     "room": "Living room",
+     "title": "Tie the blind cords up 1.6m off the floor",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Bathroom",
+     "title": "Lock the medicines in the top cupboard",
+     "verdict": "diy_safe"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Done before they crawl.",
+   "alt": "A baby crawling across a jute rug towards his smiling dad, who is lying on his stomach on the living room floor",
+   "jobs": [
+    {
+     "room": "Stairs",
+     "title": "Fit a screwed-in gate at the top of the stairs",
+     "description": "Hardware mounted, not pressure. One that opens with one hand.",
+     "timeEstimate": "About 1 hour",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Hardware-mounted safety gate",
+       "price": 90
+      },
+      {
+       "item": "Stair gate wall mounting kit",
+       "price": 25
+      }
+     ],
+     "directions": [
+      "Find the studs or a solid post on each side",
+      "Screw the hinge and latch brackets in",
+      "Hang the gate so it can't swing out over the stairs",
+      "Check it latches every time you close it"
+     ]
+    },
+    {
+     "room": "Backyard",
+     "title": "Check the pool gate shuts and latches",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "month",
+      "interval": 1
+     },
+     "scheduledAt": 1796425200000
+    },
+    {
+     "room": "Nursery",
+     "title": "Check every furniture anchor is still tight",
+     "verdict": "diy_safe",
+     "repeat": {
+      "freq": "year",
+      "interval": 1
+     },
+     "scheduledAt": 1820012400000
+    }
+   ]
+  }
+ }
+]
