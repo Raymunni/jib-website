@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
+import responsiveImages from './src/integrations/responsive-images.mjs';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -35,6 +36,7 @@ export default defineConfig({
   redirects: { '/web': '/app/' },
   integrations: [
     mdx(),
+    responsiveImages(),
     sitemap({
       // /ios/ and /android/ are short links that redirect to the stores.
       // /r/ is the creator code page (noindex), only reached from a creator's link.

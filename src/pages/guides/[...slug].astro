@@ -5,6 +5,7 @@ import AppCta from '../../components/AppCta.astro';
 import { SITE, HUBS, type Campaign } from '../../config';
 import { guideSlug, guideUrl, formatDate, type Guide } from '../../lib/guides';
 import { extractFaqs } from '../../lib/faq';
+import { webpSrcset } from '../../lib/responsive';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
@@ -48,7 +49,7 @@ const jsonLd = [
     datePublished: d.published.toISOString(),
     dateModified: modified.toISOString(),
     mainEntityOfPage: url,
-    image: `${SITE.url}${d.image ?? '/og/default.png'}`,
+    image: `${SITE.url}${d.image ?? '/og/default.jpg'}`,
     author: { '@type': 'Person', name: SITE.author.name, url: `${SITE.url}${SITE.author.url}` },
     publisher: { '@id': `${SITE.url}/#org` },
     inLanguage: d.market === 'UK' ? 'en-GB' : d.market === 'NZ' ? 'en-NZ' : d.market === 'US' ? 'en-US' : 'en-AU',
@@ -98,7 +99,10 @@ const jsonLd = [
       </p>
       {
         d.image && (
-          <img class="hero" src={d.image} alt={d.imageAlt ?? ''} width="1376" height="768" fetchpriority="high" decoding="async" />
+          <picture class="hero-pic">
+            {webpSrcset(d.image) && <source type="image/webp" srcset={webpSrcset(d.image)} sizes="(max-width: 860px) calc(100vw - 40px), 820px" />}
+            <img class="hero" src={d.image} alt={d.imageAlt ?? ''} width="1376" height="768" fetchpriority="high" decoding="async" />
+          </picture>
         )
       }
       <div class="answer">
@@ -277,6 +281,9 @@ const jsonLd = [
     border: 1px solid var(--border);
     border-radius: 999px;
     padding: 1px 8px;
+  }
+  .hero-pic {
+    display: contents;
   }
   .hero {
     width: 100%;
