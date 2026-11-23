@@ -31,7 +31,8 @@ const GUIDE_DATES = guideDates();
 export default defineConfig({
   site: process.env.SITE_URL || 'https://jibapp.com.au',
   trailingSlash: 'always',
-  build: { format: 'directory' },
+  // Inline the small CSS files so they don't block the first paint (PageSpeed, 23 Nov: 770 ms of render-blocking CSS on guides).
+  build: { format: 'directory', inlineStylesheets: 'always' },
   // The web app was retired; old links land on the app download page.
   redirects: { '/web': '/app/' },
   integrations: [
