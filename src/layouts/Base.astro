@@ -312,6 +312,10 @@ const qr = await qrSvg(`${SITE.url}/app/`);
         text-decoration: none;
         font-weight: 600;
         font-size: 0.95rem;
+        /* A 44 px tall tap area with no visible change (DESIGN.md, 44 taps). */
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
       }
       nav a:not(.btn):hover {
         color: #fff;
