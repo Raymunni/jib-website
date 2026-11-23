@@ -1,0 +1,62 @@
+---
+// The one main action on a phone: "Get Jib free". It goes through /app/,
+// which sends each phone to its own store with the campaign kept, so an
+// iPhone never sees a Google Play badge. On a computer data-get-app opens
+// the QR code instead. Navy fill in the Jib blue ring (DESIGN.md, 17 Nov).
+import { STORES, type Campaign } from '../config';
+
+interface Props {
+  campaign?: Campaign;
+  placement?: string;
+  class?: string;
+}
+const { campaign = 'general', placement, class: cls = '' } = Astro.props;
+const href = `/app/?c=${campaign}${placement ? `&p=${placement}` : ''}`;
+const where = STORES.ios.live && STORES.android.live ? 'iPhone and Android' : STORES.android.live ? 'Android now, iPhone soon' : 'Coming soon';
+---
+
+<a class={`getjib ${cls}`} href={href} data-get-app>
+  <span class="getjib-main">Get Jib free</span>
+  <span class="getjib-sub">{where}</span>
+</a>
+
+<style>
+  .getjib {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 54px;
+    padding: 0 28px;
+    border-radius: 999px;
+    font-family: 'Outfit', system-ui, sans-serif;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(180deg, rgba(115, 170, 255, 0.3), rgba(115, 170, 255, 0.15)), rgba(3, 32, 62, 0.72);
+    box-shadow:
+      inset 0 0 0 1.5px #73aaff,
+      0 10px 30px rgba(31, 95, 214, 0.35);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .getjib:hover {
+    color: #fff;
+    box-shadow:
+      inset 0 0 0 1.5px #a9cbff,
+      0 12px 34px rgba(31, 95, 214, 0.45);
+  }
+  .getjib:active {
+    transform: scale(0.98);
+  }
+  .getjib-main {
+    font-weight: 600;
+    font-size: 1.08rem;
+    letter-spacing: -0.02em;
+  }
+  .getjib-sub {
+    font-weight: 500;
+    font-size: 0.86rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+</style>

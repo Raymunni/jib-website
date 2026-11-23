@@ -3,6 +3,8 @@ import { getImage, Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import StoreButtons from '../components/StoreButtons.astro';
+import GetJib from '../components/GetJib.astro';
+import Rating from '../components/Rating.astro';
 import ToolIcon from '../components/ToolIcon.astro';
 import { SITE, HUBS, STORES, anyStoreLive } from '../config';
 // The app's own blue-hour house at dusk (Nov 2026 look), from
@@ -43,7 +45,7 @@ const featureTiles = [
   { icon: 'beforeafter', href: '/guides/features/see-your-renovation-before-you-start/', title: 'See it finished first', body: 'Jib’s AI pictures your space with the work done, before you lift a tool.' },
   { icon: 'planner', href: '/guides/features/plan-a-whole-backyard-or-room/', title: 'Plan the whole space', body: 'A full look at a room or yard: every job it needs, in the right order, with the cost.' },
   { icon: 'climate', href: '/guides/features/advice-for-your-house/', title: 'It knows your house', body: 'Age, soil, climate, termites. Every plan is written for your place, not a generic one.' },
-  { icon: 'checker', href: '/guides/features/diy-or-tradie-verdict/', title: 'DIY safe or tradie required', body: 'Know if a job is legal to DIY where you live. If not, Jib writes the quote request.' },
+  { icon: 'checker', href: '/guides/features/diy-or-tradie-verdict/', title: 'DIY safe, or needs a tradie', body: 'Know if a job is legal to DIY where you live. If not, Jib writes the quote request.' },
   { icon: 'toolbox', href: '/guides/features/garage-tool-inventory/', title: 'AI tool inventory', body: 'Snap your shed once. Jib remembers what you own, so you never buy it twice.' },
   { icon: 'cart', href: '/guides/features/ai-shopping-list/', title: 'Real prices, one trip', body: 'Every job’s materials on one list, with real hardware store prices to compare.' },
   { icon: 'together', href: '/guides/features/shared-home-to-do-list/', title: 'Share the house', body: 'Your partner gets the same jobs, plans and list, live on their phone.' },
@@ -92,7 +94,7 @@ const faqs = [
   },
   {
     q: 'Does Jib tell me if a job is legal to DIY?',
-    a: 'Yes. On Jib’s paid plans, every job gets a corner flag: DIY safe (green) or tradie required (red), based on the licensing rules where your house is, with the exact step that needs a licence. It’s general guidance, not legal advice: always confirm with your state regulator or council. Our free DIY legality checker shows the rules for common jobs by state, with links to the regulator.',
+    a: 'Yes. On Jib’s paid plans, every job gets a corner flag: DIY safe (green) or needs a tradie (red), based on the licensing rules where your house is, with the exact step that needs a licence. It’s general guidance, not legal advice: always confirm with your state regulator or council. Our free DIY legality checker shows the rules for common jobs by state, with links to the regulator.',
   },
   {
     q: 'What is the AI tool inventory?',
@@ -123,7 +125,7 @@ const jsonLd = [
     installUrl: [`https://apps.apple.com/app/id${STORES.ios.appId}`, `https://play.google.com/store/apps/details?id=${STORES.android.packageName}`],
     featureList: [
       'Photograph a home job and get the steps, materials, tools and a cost range',
-      'DIY safe or tradie required, from the licensing rules where your house is',
+      'DIY safe or Needs a tradie, from the licensing rules where your house is',
       'See a space finished with AI before you start',
       'Plan a whole room or home in the right order',
       'One shopping list with real prices',
@@ -154,18 +156,17 @@ const jsonLd = [
     <div class="wrap hero-copy">
       <span class="hero-logo"><img src="/images/jib-mark.png" width="171" height="160" alt="" /><span>Jib</span></span>
       <h1>Your home, <span>sorted.</span></h1>
-      <p class="hero-sub">The ultimate home planner, <b>with AI.</b></p>
       <p class="lede">
-        Snap anything that needs doing. Jib writes the plan, the shopping list and the cost, shows you the finished result, and tells you if it’s DIY-legal or needs a tradie.
+        Snap a photo of any job around the house. <span class="ai">Jib’s AI</span> plans the lot: the steps, the shopping list, the cost, and whether it’s safe to DIY.
       </p>
       <div class="hero-ctas">
-        <StoreButtons campaign="home" size="lg" />
+        <GetJib campaign="home" placement="hero" class="only-phone hero-getjib" />
+        <div class="only-wide"><StoreButtons campaign="home" size="lg" /></div>
       </div>
-      <ul class="trust">
-        <li>✓ Free to download</li>
-        <li>✓ 7-day free trial of every AI feature</li>
-        <li>✓ Checks the rules where you live</li>
-      </ul>
+      <p class="proof">
+        <Rating />
+        <span>Made for Australian homes</span>
+      </p>
     </div>
   </section>
 
@@ -234,8 +235,9 @@ const jsonLd = [
       </li>
     </ol>
     <div class="how-cta">
-      <StoreButtons campaign="home" size="lg" />
-      <span class="how-free">Free to download. 7-day free trial of every AI feature.</span>
+      <GetJib campaign="home" placement="how" class="only-phone" />
+      <div class="only-wide"><StoreButtons campaign="home" size="lg" /></div>
+      <p class="proof how-proof"><Rating /><span>Free to download, with a 7-day free trial of every AI feature</span></p>
     </div>
   </section>
 
@@ -328,10 +330,27 @@ const jsonLd = [
       <img src="/images/jib-mark.png" width="56" height="56" alt="" />
       <h2 class="final-title">Your home, <span>sorted.</span></h2>
       <p class="final-sub">The ultimate home planner, <b>with AI.</b></p>
-      <StoreButtons campaign="home" size="lg" />
+      <GetJib campaign="home" placement="end" class="only-phone" />
+      <div class="only-wide"><StoreButtons campaign="home" size="lg" /></div>
+      <p class="proof final-proof"><Rating /></p>
     </div>
   </section>
 </Base>
+
+<script>
+  // The sticky bar waits while any on-page Get Jib button is in view.
+  const bar = document.querySelector<HTMLElement>('.mobile-cta');
+  const ctas = document.querySelectorAll('.getjib');
+  if (bar && ctas.length && 'IntersectionObserver' in window) {
+    const seen = new Set<Element>();
+    bar.classList.add('is-away');
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) e.isIntersecting ? seen.add(e.target) : seen.delete(e.target);
+      bar.classList.toggle('is-away', seen.size > 0);
+    });
+    ctas.forEach((c) => io.observe(c));
+  }
+</script>
 
 <style>
   .popular {
@@ -343,7 +362,31 @@ const jsonLd = [
     gap: 8px;
   }
   .popular a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 52px;
+    padding: 10px 16px;
+    border-radius: 14px;
     font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    background: rgba(115, 170, 255, 0.06);
+    box-shadow: inset 0 0 0 1px rgba(115, 170, 255, 0.16);
+  }
+  .popular a::after {
+    content: '';
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #73aaff;
+    border-right: 2px solid #73aaff;
+    transform: rotate(45deg);
+  }
+  .popular a:hover {
+    color: #fff;
+    background: rgba(115, 170, 255, 0.1);
   }
   .ios-notify {
     display: block;
@@ -374,7 +417,7 @@ const jsonLd = [
     /* The house sits at the foot of the hero, the copy on the deepened
        sky above it, the phone standing on the lawn. */
     .hero {
-      padding-bottom: 128vw;
+      padding-bottom: 118vw;
     }
     /* The photo fades in from the page navy itself (a mask, so image
        compression can never leave a seam). 900 x 1613 photo. */
@@ -429,45 +472,59 @@ const jsonLd = [
     line-height: 0.8;
     color: #73aaff;
   }
-  .hero-sub {
-    margin: 22px 0 0;
-    font-family: 'Caveat', cursive;
-    font-size: clamp(1.35rem, 6.5vw, 3.2rem);
-    white-space: nowrap;
-    font-weight: 450;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    color: rgba(255, 255, 255, 0.82);
-  }
-  .hero-sub b {
+  /* One concrete line under the headline (user, 23 Nov: the mobile mock). */
+  .lede {
+    margin: 18px 0 0;
+    max-width: 30ch;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: clamp(1.18rem, 4.9vw, 1.5rem);
     font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.3;
+    color: #eaf1fb;
+  }
+  .lede .ai {
+    white-space: nowrap;
     background: var(--ai);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-  .lede {
-    font-size: 1.08rem;
-    color: #d6dee8;
-    max-width: 44ch;
-    margin-top: 16px;
+  .proof {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 16px;
+    margin: 14px 0 0;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #b9c7d8;
+  }
+  /* Phones get one button; computers keep both store badges. */
+  :global(.only-wide) {
+    display: none;
+  }
+  @media (max-width: 899px) {
+    .hero-logo {
+      display: none;
+    }
+    .hero h1 {
+      margin-top: 4px;
+    }
+  }
+  @media (min-width: 900px) {
+    :global(.only-phone) {
+      display: none !important;
+    }
+    :global(.only-wide) {
+      display: block;
+    }
   }
   .hero-ctas {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 22px;
-  }
-  .trust {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 18px;
-    padding: 0;
-    margin: 16px 0 0;
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: #b9c7d8;
   }
   @media (min-width: 900px) {
     .hero {
@@ -506,7 +563,7 @@ const jsonLd = [
       padding-bottom: 48px;
     }
     .hero-copy > .lede,
-    .hero-copy > .trust,
+    .hero-copy > .proof,
     .hero-copy > .hero-ctas {
       max-width: 32vw;
     }
@@ -518,14 +575,13 @@ const jsonLd = [
     .hero h1 {
       font-size: min(3.6vw, 4.4rem);
     }
-    .hero-sub {
-      font-size: min(2.75vw, 3.2rem);
-    }
     .lede {
-      font-size: clamp(0.92rem, 1.05vw, 1.2rem);
+      max-width: 32vw;
+      font-size: clamp(1.1rem, 1.45vw, 1.6rem);
     }
-    .trust {
-      font-size: clamp(0.8rem, 0.85vw, 1rem);
+    .proof {
+      font-size: clamp(0.85rem, 0.9vw, 1.05rem);
+      margin-top: 18px;
     }
   }
   .section-title {
@@ -737,10 +793,15 @@ const jsonLd = [
     gap: 12px 20px;
     margin-top: 28px;
   }
-  .how-free {
-    color: var(--dim);
-    font-size: 0.92rem;
-    font-weight: 600;
+  .how-proof {
+    margin: 0;
+  }
+  .final-card .getjib {
+    margin-top: 24px;
+  }
+  .final-proof {
+    justify-content: center;
+    margin-top: 16px;
   }
   .btn-light {
     background: #fff;
@@ -780,6 +841,18 @@ const jsonLd = [
     .mobile-cta small {
       font-weight: 600;
       opacity: 0.85;
+    }
+    /* One main action per screen: the bar steps away while a Get Jib
+       button is already on screen (hero, how it works, the end card). */
+    .mobile-cta {
+      transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+    }
+    .mobile-cta.is-away {
+      transform: translateY(140%);
+      opacity: 0;
+      pointer-events: none;
     }
     .mobile-cta:hover {
       color: #fff;
@@ -892,7 +965,10 @@ const jsonLd = [
     margin-top: 18px;
   }
   .states a {
-    padding: 8px 14px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 14px;
     border-radius: 999px;
     /* The app's navy pill: navy inside a Jib blue ring, white words. */
     background: linear-gradient(180deg, rgba(115, 170, 255, 0.1), rgba(115, 170, 255, 0.03)), #0a1628;
@@ -1033,6 +1109,8 @@ const jsonLd = [
     cursor: pointer;
     font-weight: 700;
     color: var(--ink);
+    padding: 10px 0;
+    margin: -10px 0;
   }
   details p {
     margin: 12px 0 0;

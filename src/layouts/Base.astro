@@ -233,6 +233,7 @@ const qr = await qrSvg(`${SITE.url}/app/`);
         justify-content: center;
         flex-wrap: wrap;
         gap: 4px 10px;
+        min-height: 44px;
         padding: 8px 16px;
         background: linear-gradient(90deg, rgba(255, 229, 138, 0.16), rgba(255, 159, 67, 0.16));
         border-bottom: 1px solid rgba(255, 229, 138, 0.25);
@@ -300,6 +301,8 @@ const qr = await qrSvg(`${SITE.url}/app/`);
       }
       .brand {
         display: inline-flex;
+        align-items: center;
+        min-height: 44px;
         color: #fff;
       }
       nav {
@@ -321,7 +324,7 @@ const qr = await qrSvg(`${SITE.url}/app/`);
         color: #fff;
       }
       .nav-cta {
-        min-height: 40px;
+        min-height: 44px;
         padding: 0 16px;
         font-size: 0.92rem;
       }
@@ -359,11 +362,13 @@ const qr = await qrSvg(`${SITE.url}/app/`);
         margin: 0 0 12px;
         color: var(--dim);
       }
+      /* 44 px tall rows, the same rhythm as before (DESIGN.md, 44 taps). */
       .foot a:not(.brand) {
-        display: block;
+        display: flex;
+        align-items: center;
+        min-height: 44px;
         color: var(--text);
         text-decoration: none;
-        margin-bottom: 8px;
       }
       .foot a:not(.brand):hover {
         color: #fff;
@@ -393,8 +398,10 @@ const qr = await qrSvg(`${SITE.url}/app/`);
         gap: 8px;
       }
       .findon a {
-        display: inline-block;
-        padding: 6px 12px;
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 14px;
         border-radius: 999px;
         font-size: 0.82rem;
         color: var(--text);

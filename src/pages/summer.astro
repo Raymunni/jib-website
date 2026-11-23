@@ -8,6 +8,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { SITE, STORES, iosUrl, androidUrl } from '../config';
 import { qrSvg } from '../lib/qr';
+import Rating from '../components/Rating.astro';
 import planShot from '../assets/screens/summer-phone-home.png';
 
 const CODE = 'SUMMER';
@@ -79,6 +80,7 @@ const ld = [
           <a class="btn btn-sun" href="#how">How to get it</a>
           <p class="small">Scan the code below with your phone and it does the rest.</p>
         </div>
+        <p class="summer-proof"><Rating /></p>
         <p class="fine">Free for one month, then A$4.99 a month. Cancel any time before it ends and you pay nothing.</p>
       </div>
 
@@ -523,6 +525,8 @@ const ld = [
     cursor: pointer;
     color: var(--ink);
     font-weight: 650;
+    padding: 10px 0;
+    margin: -10px 0;
   }
   .faq details p {
     margin: 10px 0 0;
@@ -563,5 +567,9 @@ const ld = [
   }
   .end-card .cta {
     margin-top: 18px;
+  }
+  .summer-proof {
+    margin: 14px 0 0;
+    font-size: 0.92rem;
   }
 </style>

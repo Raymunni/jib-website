@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import StoreButtons from '../components/StoreButtons.astro';
 import { SITE, STORES, anyStoreLive, iosUrl, androidUrl } from '../config';
 import { qrSvg } from '../lib/qr';
+import Rating from '../components/Rating.astro';
 
 const qr = await qrSvg(`${SITE.url}/app/`);
 const campaigns = ['home', 'diy-legal', 'council-approval', 'materials', 'features', 'home-maintenance', 'how-to', 'tools', 'general'] as const;
@@ -18,11 +19,12 @@ const routes = {
     <p class="lede">
       {
         anyStoreLive
-          ? 'Snap a photo of any home job and get the steps, materials list and cost, plus a flag on anything that legally needs a licensed tradie.'
+          ? 'Snap a photo of any job around the house. Jib’s AI plans the lot: the steps, the shopping list, the cost, and whether it’s safe to DIY.'
           : 'Jib is in final review on the App Store and Google Play. Leave your email and we’ll tell you the day it’s live.'
       }
     </p>
     <StoreButtons campaign="general" size="lg" />
+    {anyStoreLive && <p class="app-proof"><Rating /><span>Free to download</span></p>}
     {
       anyStoreLive && !STORES.ios.live && (
         <p class="muted">
@@ -68,6 +70,15 @@ const routes = {
   .page {
     padding-top: 56px;
     max-width: 720px;
+  }
+  .app-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin: 16px 0 0;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #b9c7d8;
   }
   .lede {
     font-size: 1.15rem;

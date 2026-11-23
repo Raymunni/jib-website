@@ -94,7 +94,7 @@ const jsonLd = [
     <header class="guide-head">
       <h1>{d.title}</h1>
       <p class="meta muted">
-        By <a href="/about/">{SITE.author.name}</a> · Rules last checked <time datetime={d.lastChecked.toISOString()}>{formatDate(d.lastChecked)}</time>
+        By <a href="/about/">{SITE.author.name}</a> · {d.hub === 'features' ? 'Updated' : 'Rules last checked'} <time datetime={d.lastChecked.toISOString()}>{formatDate(d.lastChecked)}</time>
         {d.market !== 'global' && <span class="market">{d.market}</span>}
       </p>
       {
@@ -232,7 +232,8 @@ const jsonLd = [
   .helpful button {
     font: inherit;
     font-weight: 700;
-    padding: 6px 18px;
+    min-height: 44px;
+    padding: 6px 20px;
     border-radius: 999px;
     color: var(--text);
     background: transparent;
@@ -251,11 +252,15 @@ const jsonLd = [
   }
   .crumbs {
     display: flex;
+    align-items: center;
     gap: 8px;
     font-size: 0.9rem;
-    margin-bottom: 18px;
+    margin: -10px 0 8px;
   }
   .crumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     color: var(--dim);
     text-decoration: none;
   }

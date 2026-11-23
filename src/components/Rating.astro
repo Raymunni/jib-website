@@ -1,0 +1,61 @@
+---
+// The App Store rating as proof: five stars in priority yellow and
+// "5.0 on the App Store". One source of truth: RATING in src/config.ts.
+// size "sm" is the compact form for tight rows (guide ads).
+import { RATING } from '../config';
+
+interface Props {
+  size?: 'sm' | 'md';
+  class?: string;
+}
+const { size = 'md', class: cls = '' } = Astro.props;
+const star = "M12 2.6l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17l-5.7 3.1 1.2-6.4L2.8 9.3l6.4-.8L12 2.6Z";
+---
+
+<span class={`rating rating-${size} ${cls}`}>
+  <span class="stars" aria-hidden="true">
+    {[0, 1, 2, 3, 4].map(() => <svg viewBox="2.5 2.4 19 18.2"><path fill="currentColor" d={star} /></svg>)}
+  </span>
+  <span class="rating-text">
+    {size === 'sm' ? `${RATING.value}` : `${RATING.value} on the ${RATING.store}`}
+    {size === 'sm' && <span class="sr-only"> stars on the {RATING.store}</span>}
+  </span>
+</span>
+
+<style>
+  .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 600;
+    color: #c9d5e3;
+    white-space: nowrap;
+  }
+  .stars {
+    display: inline-flex;
+    gap: 2px;
+    color: #fbe07e;
+  }
+  .stars svg {
+    width: 1.05em;
+    height: 1.05em;
+    display: block;
+  }
+  .rating-sm {
+    gap: 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .rating-sm .stars svg {
+    width: 0.95em;
+    height: 0.95em;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+</style>

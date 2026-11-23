@@ -208,11 +208,29 @@ const fresh = guides
     flex-wrap: wrap;
     gap: 8px;
   }
+  /* On phones each filter group is one row that scrolls sideways, so the
+     guides start in the first screen instead of under five rows of chips. */
+  @media (max-width: 719px) {
+    .chips {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      margin: 0 -20px;
+      padding: 2px 20px;
+      scrollbar-width: none;
+    }
+    .chips::-webkit-scrollbar {
+      display: none;
+    }
+    .chip {
+      flex: none;
+    }
+  }
   .chip {
     font: inherit;
     font-size: 0.88rem;
     font-weight: 700;
-    padding: 7px 14px;
+    min-height: 44px;
+    padding: 7px 16px;
     border-radius: 999px;
     color: var(--text);
     background: var(--surface);

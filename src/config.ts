@@ -19,6 +19,14 @@ export const SITE = {
   },
 };
 
+// The App Store rating shown as proof across the site (hero, ads, CTAs).
+// Update it here when it changes; checked in App Store Connect.
+export const RATING = {
+  value: '5.0',
+  store: 'App Store',
+  checked: '2026-11-23',
+};
+
 // Flip these to true the day each store listing goes live. While false,
 // every download button becomes a "coming soon" state instead of sending
 // people to a store page that doesn't exist yet.

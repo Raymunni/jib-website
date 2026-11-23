@@ -45,7 +45,8 @@ export default defineConfig({
         if (d) item.lastmod = new Date(d).toISOString();
         return item;
       },
-      filter: (page) => !page.endsWith('/404/') && !page.includes('/web/') && !page.endsWith('/ios/') && !page.endsWith('/android/') && !page.endsWith('/r/'),
+      // /app/ only forwards phones to their store (Google's phone crawler too), so it is a router, not a page to index (T-5, 23 Nov).
+      filter: (page) => !page.endsWith('/404/') && !page.endsWith('/app/') && !page.includes('/web/') && !page.endsWith('/ios/') && !page.endsWith('/android/') && !page.endsWith('/r/'),
     }),
   ],
 });

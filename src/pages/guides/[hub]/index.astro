@@ -21,7 +21,7 @@ const items = (await getCollection('guides')).filter((g) => g.data.hub === hub).
 
 <Base title={info.title} description={info.blurb}>
   <div class="wrap page">
-    <nav class="crumbs"><a href="/guides/">Guides</a></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/guides/">Guides</a></nav>
     <h1>{info.title}</h1>
     <p class="lede muted">{info.blurb}</p>
     {
@@ -46,6 +46,9 @@ const items = (await getCollection('guides')).filter((g) => g.data.hub === hub).
     padding-top: 40px;
   }
   .crumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     color: var(--dim);
     font-size: 0.9rem;
     text-decoration: none;
