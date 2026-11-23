@@ -29,7 +29,9 @@ export const STORES = {
     // App Store Connect → Analytics → Acquisition → Campaigns → "Generate a
     // campaign link" shows your provider token (pt). Without it, the ct
     // campaign parameter isn't attributed.
-    providerToken: '',
+    // Read from App Store Connect's campaign link generator, 23 Nov 2026.
+    // A public ID (it appears in every campaign link), not a secret.
+    providerToken: '129483552',
   },
   android: {
     live: true,
