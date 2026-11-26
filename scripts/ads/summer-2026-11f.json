@@ -1,0 +1,474 @@
+[
+ {
+  "guide": "home-maintenance/where-can-pool-backwash-water-go",
+  "slug": "pool-backwash",
+  "photo": false,
+  "inline": {
+   "headline": "Filter day, without the guesswork.",
+   "text": "Snap your pool equipment in Jib and it plans the backwash and filter clean in the right order, and reminds you through the swimming season.",
+   "alt": "A flat blue pool backwash hose running into a round grated drain on the concrete in a side yard, beside a brick wall",
+   "jobs": [
+    {
+     "room": "Pool",
+     "title": "Backwash the sand filter to the gully",
+     "description": "Into the overflow gully, never the stormwater drain or the street.",
+     "timeEstimate": "About 15 minutes",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Backwash hose (15 m)",
+       "price": 35
+      }
+     ],
+     "directions": [
+      "Turn the pump off and set the valve to backwash",
+      "Run the hose to the overflow gully",
+      "Pump until the sight glass runs clear",
+      "Rinse for 30 seconds, then back to filter"
+     ]
+    },
+    {
+     "room": "Pool",
+     "title": "Check the pool gate latches by itself",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Pool",
+     "title": "Test the water before the weekend",
+     "verdict": "diy_safe"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Clear water, clear rules.",
+   "alt": "A clear blue backyard pool in late afternoon sun behind a glass pool fence, with towels and a sun hat on a lounge",
+   "jobs": [
+    {
+     "room": "Pool",
+     "title": "Clean the filter before summer",
+     "description": "Backwash, then check the sand is still doing its job.",
+     "timeEstimate": "About 30 minutes",
+     "verdict": "diy_safe",
+     "directions": [
+      "Backwash and rinse the filter",
+      "Note the pressure gauge reading",
+      "Look for sand in the pool after backwashing",
+      "Ask a pool shop to check old sand"
+     ]
+    },
+    {
+     "room": "Pool",
+     "title": "Clear leaves from the skimmer basket",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Outside",
+     "title": "Check the gully grate isn't blocked",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/how-to-clean-a-bbq",
+  "slug": "clean-bbq",
+  "photo": false,
+  "inline": {
+   "headline": "Ready for the first sausage.",
+   "text": "Snap your barbecue in Jib and it plans the gas check and the deep clean, with the materials list, and reminds you every spring.",
+   "alt": "A white LPG gas bottle in the open cabinet under a stainless steel barbecue, its regulator joint dabbed with soapy water, a spray bottle on the deck",
+   "jobs": [
+    {
+     "room": "Deck",
+     "title": "Soapy water test on the BBQ gas hose",
+     "description": "Before the first cook of summer. Bubbles mean a leak.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Spray bottle",
+       "price": 4
+      },
+      {
+       "item": "Replacement BBQ hose and regulator",
+       "price": 35
+      }
+     ],
+     "directions": [
+      "Turn the gas on at the bottle, burners off",
+      "Spray the joints and hose with soapy water",
+      "Watch for bubbles growing",
+      "Bubbles? Gas off, and replace the hose or regulator"
+     ]
+    },
+    {
+     "room": "Deck",
+     "title": "Scrape and wash the hotplate",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Deck",
+     "title": "Empty and clean the fat tray",
+     "verdict": "diy_safe"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Sausages, not smoke alarms.",
+   "alt": "Sausages and onions cooking on the clean hotplate of a stainless steel barbecue on a back deck at dusk, string lights behind",
+   "jobs": [
+    {
+     "room": "Deck",
+     "title": "Deep clean the BBQ before summer",
+     "description": "Plates, grill, burners and the fat tray, in that order.",
+     "timeEstimate": "About 1 hour",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "BBQ scraper",
+       "price": 15
+      },
+      {
+       "item": "Degreaser",
+       "price": 10
+      }
+     ],
+     "directions": [
+      "Heat the plates for 10 minutes, then turn off",
+      "Scrape the plates and grill while warm",
+      "Wash the hood and plates with warm soapy water",
+      "Brush the burner holes clear and refit"
+     ]
+    },
+    {
+     "room": "Deck",
+     "title": "Check the gas bottle's test date",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Deck",
+     "title": "Keep the BBQ a metre from the fence",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/how-to-clean-pavers-without-polluting-stormwater",
+  "slug": "clean-pavers",
+  "photo": false,
+  "inline": {
+   "headline": "Sweep, wash, sand, done.",
+   "text": "Snap the patio or driveway in Jib and it plans the clean in the right order, with the materials, and reminds you next year.",
+   "alt": "A grimy, mould-darkened paver driveway beside a brick house, with a broom against the wall and a yellow pressure washer by the garden tap",
+   "jobs": [
+    {
+     "room": "Driveway",
+     "title": "Pressure clean the driveway",
+     "description": "Push the dirty water onto the lawn, not into the street.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Paver joint sand (20 kg)",
+       "price": 15
+      }
+     ],
+     "directions": [
+      "Sweep off the leaves and loose dirt",
+      "Wash with plain water at a low angle",
+      "Push the run-off onto the lawn or garden",
+      "Sweep joint sand back in once it's dry"
+     ]
+    },
+    {
+     "room": "Patio",
+     "title": "Top up the joint sand",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Outside",
+     "title": "Clear the moss along the fence line",
+     "verdict": "diy_safe"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Clean pavers, clean drains.",
+   "alt": "A freshly cleaned sandstone-coloured paver patio behind a brick house, with a broom against the wall and an outdoor table and chairs",
+   "jobs": [
+    {
+     "room": "Patio",
+     "title": "Sweep joint sand into the pavers",
+     "description": "Fills the gaps so weeds and ants can't move in.",
+     "timeEstimate": "About 30 minutes",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Paver joint sand (20 kg)",
+       "price": 15
+      },
+      {
+       "item": "Soft broom",
+       "price": 20
+      }
+     ],
+     "directions": [
+      "Wait until the pavers are fully dry",
+      "Tip sand over the joints",
+      "Sweep it diagonally into the gaps",
+      "Sweep off the extra and hose lightly"
+     ]
+    },
+    {
+     "room": "Patio",
+     "title": "Seal the pavers",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Outside",
+     "title": "Check the stormwater grate is clear",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/how-to-fix-a-torn-fly-screen",
+  "slug": "fly-screen",
+  "photo": false,
+  "inline": {
+   "headline": "The right mesh, first trip.",
+   "text": "Snap the screen in Jib and it plans the fix with a shopping list, from the mesh roll to the spline size, so you buy it all in one trip.",
+   "alt": "A window fly screen frame on a garage workbench with new grey mesh fitted, a coil of black spline, a spline roller and a utility knife beside it",
+   "jobs": [
+    {
+     "room": "Bedroom",
+     "title": "Re-mesh the bedroom fly screen",
+     "description": "New mesh and spline. Take the old spline to match the size.",
+     "timeEstimate": "About 45 minutes",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Fibreglass fly mesh roll",
+       "price": 20
+      },
+      {
+       "item": "Spline (to match)",
+       "price": 8
+      },
+      {
+       "item": "Spline roller",
+       "price": 10
+      }
+     ],
+     "directions": [
+      "Lift the screen out and lay it flat",
+      "Pull out the old spline and mesh",
+      "Roll new spline over the mesh into the channel",
+      "Trim the extra mesh with a sharp knife"
+     ]
+    },
+    {
+     "room": "Kitchen",
+     "title": "Patch the small hole in the door screen",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Laundry",
+     "title": "Check the screen clips",
+     "verdict": "diy_safe"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Breeze in. Mozzies out.",
+   "alt": "An open bedroom window with a new fly screen at dusk, a white sheer curtain blowing in and a bedside lamp on",
+   "jobs": [
+    {
+     "room": "Bedroom",
+     "title": "Check every fly screen before summer",
+     "description": "Tears, gaps at the edges and loose clips.",
+     "timeEstimate": "About 20 minutes",
+     "verdict": "diy_safe",
+     "directions": [
+      "Look at each screen against the light",
+      "Push on the edges for gaps",
+      "Note tears big and small",
+      "Add a fix job for each one"
+     ]
+    },
+    {
+     "room": "Outside",
+     "title": "Tip out water in pot plant saucers",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Bedroom",
+     "title": "Patch the small tear by the latch",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/how-to-oil-a-deck",
+  "slug": "oil-deck",
+  "photo": false,
+  "inline": {
+   "headline": "Prep, oil, wait, done.",
+   "text": "Snap your deck in Jib and it plans the job with the materials, the drying days and a reminder for the next coat.",
+   "alt": "A weathered grey timber deck freshly scrubbed and wet, with a deck brush, a blue bucket and a coiled garden hose",
+   "jobs": [
+    {
+     "room": "Deck",
+     "title": "Clean the deck before oiling",
+     "description": "Then let it dry for a couple of days before the oil goes on.",
+     "timeEstimate": "About 2 hours",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Deck cleaner",
+       "price": 30
+      },
+      {
+       "item": "Stiff deck brush",
+       "price": 25
+      }
+     ],
+     "directions": [
+      "Sweep and clear the gaps between boards",
+      "Wet the deck and apply the cleaner",
+      "Scrub along the boards and rinse well",
+      "Leave it to dry for a couple of days"
+     ]
+    },
+    {
+     "room": "Deck",
+     "title": "Sand the rough spots",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Deck",
+     "title": "Punch down any raised nails",
+     "verdict": "diy_safe"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Deck done before the guests.",
+   "alt": "A freshly oiled timber deck glowing honey brown at golden hour, with an outdoor table, chairs and pot plants",
+   "jobs": [
+    {
+     "room": "Deck",
+     "title": "Oil the deck",
+     "description": "Thin coats along the boards, on a mild, dry day.",
+     "timeEstimate": "Half a day, then drying time",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Decking oil (10 L)",
+       "price": 130
+      },
+      {
+       "item": "Applicator pad and pole",
+       "price": 30
+      }
+     ],
+     "directions": [
+      "Check the forecast for dry days",
+      "Stir the oil well",
+      "Coat two or three boards at a time, along their length",
+      "Wait as long as the tin says before walking on it"
+     ]
+    },
+    {
+     "room": "Deck",
+     "title": "Oil the steps",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Deck",
+     "title": "Move the pot plants back",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "how-to/how-to-snake-proof-your-yard",
+  "slug": "snake-proof",
+  "photo": false,
+  "inline": {
+   "headline": "Every hiding spot, on one list.",
+   "text": "Snap the yard, the shed and the woodpile in Jib and it plans the clean-up, the gaps to seal and the rat control, with dates.",
+   "alt": "Split firewood stacked on a raised black steel rack against a Colorbond fence, with bare concrete underneath",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Stack the firewood off the ground",
+     "description": "On a rack, away from the house, so nothing can live under it.",
+     "timeEstimate": "About 1 hour",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Steel firewood rack",
+       "price": 80
+      }
+     ],
+     "directions": [
+      "Pick a spot away from the house and the back door",
+      "Set the rack on firm, level ground",
+      "Restack the wood on the rack",
+      "Sweep the old spot clear of bark and rubbish"
+     ]
+    },
+    {
+     "room": "Backyard",
+     "title": "Mow the lawn short along the fence",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Shed",
+     "title": "Clear the sheets of iron behind the shed",
+     "verdict": "diy_safe"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Fewer places to hide.",
+   "alt": "A black compost bin with its lid shut at the end of a tidy vegetable bed in a backyard",
+   "jobs": [
+    {
+     "room": "Backyard",
+     "title": "Swap the open compost heap for a closed bin",
+     "description": "Food scraps feed rats, and rats bring snakes.",
+     "timeEstimate": "About 1 hour",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Lidded compost bin",
+       "price": 60
+      }
+     ],
+     "directions": [
+      "Set the bin on bare ground or pavers",
+      "Move the old heap into it",
+      "Keep the lid shut",
+      "Keep pet food and seed in sealed tubs"
+     ]
+    },
+    {
+     "room": "Backyard",
+     "title": "Move the garden beds back from the house",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "House",
+     "title": "Fit a seal under the back door",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ }
+]
