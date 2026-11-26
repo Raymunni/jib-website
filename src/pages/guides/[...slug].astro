@@ -78,6 +78,7 @@ const jsonLd = [
 ---
 
 <Base title={d.title} description={d.description} ogType="article" ogImage={d.image} jsonLd={jsonLd}>
+  {d.image && webpSrcset(d.image) && <link slot="head" rel="preload" as="image" type="image/webp" imagesrcset={webpSrcset(d.image)} imagesizes="(max-width: 860px) calc(100vw - 40px), 820px" fetchpriority="high" />}
   <article class="wrap guide">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href="/guides/">Guides</a>
@@ -101,7 +102,7 @@ const jsonLd = [
         d.image && (
           <picture class="hero-pic">
             {webpSrcset(d.image) && <source type="image/webp" srcset={webpSrcset(d.image)} sizes="(max-width: 860px) calc(100vw - 40px), 820px" />}
-            <img class="hero" src={d.image} alt={d.imageAlt ?? ''} width="1376" height="768" fetchpriority="high" decoding="async" />
+            <img class="hero" src={d.image} alt={d.imageAlt ?? ''} width="1376" height="768" fetchpriority="high" />
           </picture>
         )
       }

@@ -1,0 +1,141 @@
+[
+ {
+  "guide": "home-maintenance/secure-your-home-while-on-holiday",
+  "slug": "holiday-security",
+  "photo": false,
+  "inline": {
+   "headline": "One list. Then the beach.",
+   "text": "Snap each room and the yard in Jib and it builds your lock-up list for the weekend before you leave, so nothing is left for the driveway.",
+   "alt": "A single-storey red brick house at dusk with a table lamp glowing behind sheer curtains in the front window and the rest of the house dark",
+   "jobs": [
+    {
+     "room": "Lounge",
+     "title": "Put the lounge lamp on a timer",
+     "description": "On at dusk, off at 11. From the street it looks like someone's home.",
+     "timeEstimate": "About 10 minutes",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Plug-in timer (2 pack)",
+       "price": 15
+      }
+     ],
+     "directions": [
+      "Plug the timer into the power point by the lamp",
+      "Set its clock to the right time",
+      "Push in the pins for 7 pm to 11 pm",
+      "Plug the lamp in and leave its switch on"
+     ]
+    },
+    {
+     "room": "Front yard",
+     "title": "Trim the hedge under the front window",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Letterbox",
+     "title": "Ask next door to clear the letterbox",
+     "verdict": "diy_safe"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Lock up, then switch off.",
+   "alt": "A solar motion sensor light switched on above a timber side gate on a red brick house at dusk, lighting the concrete path",
+   "jobs": [
+    {
+     "room": "Side yard",
+     "title": "Fit a motion sensor light over the side gate",
+     "description": "A solar one screws to the wall, so there's no wiring and no electrician.",
+     "timeEstimate": "About 30 minutes",
+     "verdict": "diy_safe",
+     "shoppingList": [
+      {
+       "item": "Solar motion sensor light",
+       "price": 45
+      },
+      {
+       "item": "Masonry screws and wall plugs",
+       "price": 8
+      }
+     ],
+     "directions": [
+      "Pick a spot where the panel gets some sun",
+      "Drill the brick with a masonry bit and fit the plugs",
+      "Screw the light to the wall",
+      "Walk past at dusk to check it comes on"
+     ]
+    },
+    {
+     "room": "Laundry",
+     "title": "Turn the washing machine taps off",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Kitchen",
+     "title": "Clear the fridge of milk and leftovers",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ },
+ {
+  "guide": "home-maintenance/turn-off-hot-water-on-holiday",
+  "slug": "hot-water-holiday",
+  "photo": false,
+  "inline": {
+   "headline": "Back on, with the wait built in.",
+   "text": "Snap your hot water system in Jib and it saves the switch-off steps for the day you leave and a 'back on' job for the day you return.",
+   "alt": "A finger switching off one circuit breaker on the switchboard inside an open meter box on a brick wall",
+   "jobs": [
+    {
+     "room": "Meter box",
+     "title": "Turn the hot water off at the switchboard",
+     "description": "Only the switch marked hot water or HWS. Everything else stays on.",
+     "timeEstimate": "About 5 minutes",
+     "verdict": "diy_safe",
+     "directions": [
+      "Open the meter box",
+      "Find the switch marked hot water or HWS",
+      "Flick it down to off",
+      "Add a 'back on' job for the day you get home"
+     ]
+    },
+    {
+     "room": "Side yard",
+     "title": "Check the tank for leaks before you go",
+     "verdict": "diy_safe"
+    },
+    {
+     "room": "Laundry",
+     "title": "Turn the washing machine taps off",
+     "verdict": "diy_safe"
+    }
+   ]
+  },
+  "end": {
+   "headline": "Home, hot, and safe to use.",
+   "alt": "A white electric storage hot water tank on a concrete slab against a red brick wall in the late afternoon",
+   "jobs": [
+    {
+     "room": "Meter box",
+     "title": "Hot water back on, then wait",
+     "description": "Give it several hours, or overnight, so it's back above 60°C before the first shower.",
+     "timeEstimate": "5 minutes, then a few hours",
+     "verdict": "diy_safe",
+     "directions": [
+      "Flick the hot water switch back on",
+      "Leave the hot taps off for several hours, or overnight",
+      "Once it's hot, run each hot tap for a minute",
+      "No hot water after a day? Call a licensed plumber"
+     ]
+    },
+    {
+     "room": "Kitchen",
+     "title": "Restock the fridge",
+     "verdict": "diy_safe"
+    }
+   ]
+  }
+ }
+]
